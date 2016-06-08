@@ -5,9 +5,9 @@ import {Page, NavController} from 'ionic-angular';
 */
 
 @Page({
-  templateUrl: 'build/pages/help/help.html',
+  templateUrl: 'build/pages/profiles/profiles.html',
 })
 
-export class HelpPage {
+export class ProfilesPage {
   constructor(public nav: NavController) {}
 }

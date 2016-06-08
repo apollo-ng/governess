@@ -1,5 +1,9 @@
 import {IonicApp, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController } from 'ionic-angular';
 
+/*
+
+*/
+
 @Page({
   templateUrl: 'build/pages/appliance/appliance.html',
 })

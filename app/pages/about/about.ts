@@ -1,6 +1,9 @@
 import {Page, NavController} from 'ionic-angular';
 import {$WebSocket} from 'angular2-websocket/angular2-websocket'
 
+/*
+
+*/
 
 @Page({
   templateUrl: 'build/pages/about/about.html',
