@@ -1,0 +1,13 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>About</ion-title>
+</ion-navbar>
+
+<ion-content padding class="about">
+ <button (click)="subscribe($event)"></button>
+
+ <p>{{wsdata.timestamp}} - {{wsdata.data.totalcount}}</p>
+
+</ion-content>

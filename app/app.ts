@@ -1,26 +1,38 @@
 import {Component, ViewChild} from '@angular/core';
-import {App, ionicBootstrap, Platform, Nav} from 'ionic-angular';
+import {App, ionicBootstrap, Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {GettingStartedPage} from './pages/getting-started/getting-started';
-import {ListPage} from './pages/list/list';
-
+import {ProfileListPage} from './pages/profile-list/profile-list';
+import {AppliancePage} from './pages/appliance/appliance';
+import {SettingsPage} from './pages/settings/settings';
+import {HelpPage} from './pages/help/help';
+import {AboutPage} from './pages/about/about';
 
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
+  config: {
+        modalEnter: 'modal-slide-in',
+  modalLeave: 'modal-slide-out',
+  tabbarPlacement: 'top',
+  pageTransition: 'slide-in'
+  } // http://ionicframework.com/docs/v2/api/config/Config/
 })
-class MyApp {
+
+class governess {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = GettingStartedPage;
-  pages: Array<{title: string, component: any}>
+  rootPage: any = AboutPage;
+  pages: Array<{title: string, icon: string, component: any}>
 
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform, private menu: MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Getting Started', component: GettingStartedPage },
-      { title: 'List', component: ListPage }
+      { title: 'Appliance', icon: 'power', component: AppliancePage },
+      { title: 'Profiles', icon: 'navigate', component: ProfileListPage },
+      { title: 'Settings', icon: 'settings', component: SettingsPage },
+      { title: 'Help', icon: 'help-buoy', component: HelpPage },
+      { title: 'About', icon: 'speakerphone', component: AboutPage }
     ];
 
   }
@@ -40,4 +52,4 @@ class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(governess);

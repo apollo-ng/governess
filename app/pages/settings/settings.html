@@ -1,0 +1,71 @@
+
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Settings</ion-title>
+</ion-navbar>
+
+<ion-toolbar dark>
+  <ion-buttons start>
+    <button>
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-segment>
+    <ion-segment-button value="new">
+      New
+    </ion-segment-button>
+    <ion-segment-button value="hot">
+      Hot
+    </ion-segment-button>
+  </ion-segment>
+  <ion-buttons end>
+    <button>
+      <ion-icon name="more"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content class="settings">
+
+<ion-list>
+  <ion-list-header>
+    Action
+  </ion-list-header>
+  <ion-item>
+    <ion-icon name="leaf" item-left></ion-icon>
+      Herbology
+    <ion-icon name="rose" item-right></ion-icon>
+  </ion-item>
+  <ion-item>
+  <ion-label> Allow Push Notifications</ion-label>
+  <ion-toggle checked="false"></ion-toggle>
+</ion-item>
+
+<ion-item>
+  <ion-label> Allow cookies</ion-label>
+  <ion-toggle checked="true"></ion-toggle>
+</ion-item>
+
+ <ion-item>
+    <ion-label>Gaming</ion-label>
+    <ion-select [(ngModel)]="gaming">
+      <ion-option value="nes">NES</ion-option>
+      <ion-option value="n64">Nintendo64</ion-option>
+      <ion-option value="ps">PlayStation</ion-option>
+      <ion-option value="genesis">Sega Genesis</ion-option>
+      <ion-option value="saturn">Sega Saturn</ion-option>
+      <ion-option value="snes">SNES</ion-option>
+    </ion-select>
+  </ion-item>
+
+</ion-list>
+
+
+<button class="button button-full button-assertive" (click)="resetCPD($event)">
+    Reset CPD Set
+  </button>
+
+
+</ion-content>

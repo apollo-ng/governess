@@ -1,0 +1,87 @@
+<!--
+
+-->
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Appliance Configuration</ion-title>
+</ion-navbar>
+
+<ion-toolbar>
+  <ion-title>{{appliance.name}}</ion-title>
+  <ion-buttons end>
+    <button royal>
+      <ion-icon name="person-add"></ion-icon>
+    </button>
+        <button royal>
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content class="appliance action-sheets-basic-page">
+
+  <ion-card *ngFor="let module of appliance.modules; let m = index">
+
+    <ion-toolbar>
+      <ion-title><ion-icon name="{{module.icon}}" item-left></ion-icon>{{module.name}}</ion-title>
+      <ion-buttons end>
+        <button>
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button (click)="openMenu(m)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+
+    <ion-grid>
+      <ion-row class="module-assembly">
+        <ion-col>Input</ion-col>
+        <ion-col width-20>Control</ion-col>
+        <ion-col>Output</ion-col>
+      </ion-row>
+
+      <ion-row>
+
+        <ion-col class="plug-container">
+          <button full *ngIf="!module.inputs">
+              empty
+          </button>
+          <button *ngFor="let input_plug of module.inputs; let i = index"
+                  (click)="editInputPlug(m,i)"
+                  [ngStyle]="{'background-color': input_plug.color}">
+            <ion-icon name="{{input_plug.icon}}"></ion-icon>{{input_plug.name}}
+          </button>
+        </ion-col>
+        <ion-col width-20 class="ctrl-container">
+          <button full [ngStyle]="{'background-color': '#7750b5', 'height': '100%'}">
+            {{module.control.name}}
+          </button>
+        </ion-col>
+        <ion-col class="plug-container">
+          <button *ngFor="let output_plug of module.outputs; let i = index"
+                  (click)="editOutputPlug(m,i)"
+                  [ngStyle]="{'background-color': output_plug.color}">
+            <ion-icon name="{{output_plug.icon}}"></ion-icon>{{output_plug.name}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="conf-container" *ngFor="let opt of appliance.modules[m].control.conf;">
+          <button light small clear item-left>
+            {{opt.name}} {{opt.val}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+
+</ion-content>
