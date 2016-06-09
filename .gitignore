@@ -6,5 +6,6 @@ www/build/
 platforms/
 plugins/
 *.swp
+*.geany
 .DS_Store
 Thumbs.db
