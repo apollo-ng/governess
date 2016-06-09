@@ -1,4 +1,4 @@
-import {IonicApp, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController } from 'ionic-angular';
+import {App, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController } from 'ionic-angular';
 
 /*
 
