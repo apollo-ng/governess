@@ -7,20 +7,32 @@ import {SettingsPage} from './pages/settings/settings';
 import {HelpPage} from './pages/help/help';
 import {AboutPage} from './pages/about/about';
 
+/*
+
+*/
+
 @Component({
-  templateUrl: 'build/app.html',
+  templateUrl: 'build/app.html'
 })
 
 class governess {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = AboutPage;
-  pages: Array<{title: string, icon: string, component: any}>
+  pages: Array<{
+      title: string,
+      icon: string,
+      component: any
+    }
+  >
 
-  constructor(private platform: Platform, private menu: MenuController) {
+  constructor(
+    private platform: Platform,
+    private menu: MenuController
+  ){
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    // Main Menu
     this.pages = [
       { title: 'Appliance', icon: 'power', component: AppliancePage },
       { title: 'Profiles', icon: 'navigate', component: ProfilesPage },
@@ -28,7 +40,6 @@ class governess {
       { title: 'Help', icon: 'help-buoy', component: HelpPage },
       { title: 'About', icon: 'speakerphone', component: AboutPage }
     ];
-
   }
 
   initializeApp() {
@@ -47,5 +58,12 @@ class governess {
 }
 
 ionicBootstrap(
-  governess
+  governess,[],{
+    // Config -> http://ionicframework.com/docs/v2/api/config/Config/
+    modalEnter: 'modal-ease-in',
+    modalLeave: 'modal-slide-out',
+    tabbarPlacement: 'top',
+    pageTransition: 'slide-in',
+    prodMode: 'true'
+  }
 );
