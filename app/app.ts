@@ -64,6 +64,6 @@ ionicBootstrap(
     modalLeave: 'modal-slide-out',
     tabbarPlacement: 'top',
     pageTransition: 'slide-in',
-    prodMode: 'true'
+    prodMode: 'false'
   }
 );

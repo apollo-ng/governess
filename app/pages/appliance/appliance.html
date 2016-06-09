@@ -40,13 +40,13 @@
     <ion-grid>
       <ion-row class="module-assembly">
         <ion-col>Input</ion-col>
-        <ion-col width-20>Control</ion-col>
+        <ion-col width-20 class="ctrl-container">Control</ion-col>
         <ion-col>Output</ion-col>
       </ion-row>
 
       <ion-row>
 
-        <ion-col class="plug-container">
+        <ion-col class="plug-container" [ngStyle]="{'border-bottom-right-radius': '5px'}">
           <button full *ngIf="!module.inputs">
               empty
           </button>
@@ -61,7 +61,7 @@
             {{module.control.name}}
           </button>
         </ion-col>
-        <ion-col class="plug-container">
+        <ion-col class="plug-container" [ngStyle]="{'border-bottom-left-radius': '5px'}">
           <button *ngFor="let output_plug of module.outputs; let i = index"
                   (click)="editOutputPlug(m,i)"
                   [ngStyle]="{'background-color': output_plug.color}">
