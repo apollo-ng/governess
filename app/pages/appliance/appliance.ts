@@ -134,6 +134,7 @@ export class AppliancePage {
           'outputs': [
             {
               'name': 'SSR-Circulator',
+              'color': 'purple',
               'icon': 'nuclear',
               'type': 'binary',
               'driver': 'drv/gpio-out',
@@ -172,6 +173,7 @@ export class AppliancePage {
           'inputs': [
             {
               'name': 'Door-Sensor',
+              'color': 'yellow',
               'icon': 'alert',
               'type': 'Interrupt',
               'driver': 'drv/gpio-in',

@@ -26,10 +26,14 @@
 // are different per mode.
 
 $colors: (
-  primary:    #387ef5,
+  primary:    #75890c,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222,
+  dark:       rgba(27,26,21,0.85),
   favorite:   #69BB7B
 );
+
+$text-color: (#D8D3C5);
+
+

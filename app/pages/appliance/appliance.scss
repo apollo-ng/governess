@@ -12,23 +12,32 @@
 }
 
 .ctrl-container {
-background: rgba(27,26,21,0.6) !important;
+    background: rgba(27,26,21,0.6) !important;
 }
 
 .conf-container {
-background: rgba(27,26,21,0.6);
+    background: rgba(27,26,21,0.6);
+
+    .button-small {
+        height: 1.5em;
+    }
 }
 
 .plug-container {
-   border: 1px solid #444;
+    border: 1px solid #444;
+    border-bottom: 0px;
+}
+
+.bar-button-default {
+    color: #ffffff;
 }
 
 ion-toolbar, ion-toolbar .toolbar-background {
-border-top-left-radius: 7px;
-border-top-right-radius: 7px;
-background: rgba(77,76,71,0.7);
-padding: 0;
-min-height: initial;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background: linear-gradient(to bottom, rgba(77,76,71,0.5) 0%, rgba(27,26,21,0.6) 100%);
+    padding: 0;
+    min-height: initial;
 }
 
 ion-card {
@@ -39,9 +48,8 @@ ion-card {
 }
 
 ion-grid {
-padding: 0;
-background: transparent;
-
+    padding: 0;
+    background: transparent;
 }
 
 ion-grid .module-assembly {

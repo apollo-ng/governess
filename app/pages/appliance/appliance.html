@@ -8,13 +8,13 @@
   <ion-title>Appliance Configuration</ion-title>
 </ion-navbar>
 
-<ion-toolbar>
+<ion-toolbar primary>
   <ion-title>{{appliance.name}}</ion-title>
   <ion-buttons end>
-    <button royal>
+    <button>
       <ion-icon name="person-add"></ion-icon>
     </button>
-        <button royal>
+    <button>
       <ion-icon name="create"></ion-icon>
     </button>
   </ion-buttons>
@@ -25,7 +25,7 @@
   <ion-card *ngFor="let module of appliance.modules; let m = index">
 
     <ion-toolbar>
-      <ion-title><ion-icon name="{{module.icon}}" item-left></ion-icon>{{module.name}}</ion-title>
+      <ion-title><ion-icon name="{{module.icon}}" item-left> {{module.name}}</ion-icon></ion-title>
       <ion-buttons end>
         <button>
           <ion-icon name="create"></ion-icon>
@@ -36,18 +36,17 @@
       </ion-buttons>
     </ion-toolbar>
 
-
     <ion-grid>
       <ion-row class="module-assembly">
-        <ion-col>Input</ion-col>
+        <ion-col [ngStyle]="{'border-top-right-radius': '7px'}">Input</ion-col>
         <ion-col width-20 class="ctrl-container">Control</ion-col>
-        <ion-col>Output</ion-col>
+        <ion-col [ngStyle]="{'border-top-left-radius': '7px'}">Output</ion-col>
       </ion-row>
 
       <ion-row>
 
-        <ion-col class="plug-container" [ngStyle]="{'border-bottom-right-radius': '5px'}">
-          <button full *ngIf="!module.inputs">
+        <ion-col class="plug-container" [ngStyle]="{'border-bottom-left-radius': '7px'}">
+          <button full *ngIf="!module.inputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
               empty
           </button>
           <button *ngFor="let input_plug of module.inputs; let i = index"
@@ -57,11 +56,14 @@
           </button>
         </ion-col>
         <ion-col width-20 class="ctrl-container">
-          <button full [ngStyle]="{'background-color': '#7750b5', 'height': '100%'}">
+          <button full primary [ngStyle]="{'height': '100%'}">
             {{module.control.name}}
           </button>
         </ion-col>
-        <ion-col class="plug-container" [ngStyle]="{'border-bottom-left-radius': '5px'}">
+        <ion-col class="plug-container">
+          <button full *ngIf="!module.outputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
+              empty
+          </button>
           <button *ngFor="let output_plug of module.outputs; let i = index"
                   (click)="editOutputPlug(m,i)"
                   [ngStyle]="{'background-color': output_plug.color}">
@@ -70,8 +72,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-
+<!--
     <ion-grid>
       <ion-row>
         <ion-col class="conf-container" *ngFor="let opt of appliance.modules[m].control.conf;">
@@ -81,7 +82,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
+-->
   </ion-card>
 
 </ion-content>
