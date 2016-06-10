@@ -1,9 +1,12 @@
-Governess - Mobile-First Hybrid-Client
+:construction: Governess - Mobile-First Hybrid-Client WIP :construction:
 ==========
 
-Based on Angular2/Ionic2
+Based on Angular2/Ionic2 but since it's still early beta and many
+upstream angular modules aren't yet ng2/ts ready it will only serve
+as a conceptual kitchensink and client workflow optimizer while waiting
+for ng2 to get more crowd support.
 
-##Install
+## Install
 
 git clone
 cd governess
