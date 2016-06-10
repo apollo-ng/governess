@@ -1,4 +1,5 @@
-import {App, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController } from 'ionic-angular';
+import {App, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController} from 'ionic-angular';
+import {Truncate} from '../../pipes/truncate';
 
 /*
 
@@ -6,6 +7,7 @@ import {App, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewC
 
 @Page({
   templateUrl: 'build/pages/appliance/appliance.html',
+  pipes: [Truncate]
 })
 
 export class AppliancePage {

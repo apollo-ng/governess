@@ -25,7 +25,7 @@
   <ion-card *ngFor="let module of appliance.modules; let m = index">
 
     <ion-toolbar>
-      <ion-title><ion-icon name="{{module.icon}}" item-left> {{module.name}}</ion-icon></ion-title>
+      <ion-title><ion-icon name="{{module.icon}}" item-left> {{module.name | truncate: 25}}</ion-icon></ion-title>
       <ion-buttons end>
         <button>
           <ion-icon name="create"></ion-icon>
@@ -46,7 +46,7 @@
       <ion-row>
 
         <ion-col class="plug-container" [ngStyle]="{'border-bottom-left-radius': '7px'}">
-          <button full *ngIf="!module.inputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
+          <button full disabled *ngIf="!module.inputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
               empty
           </button>
           <button *ngFor="let input_plug of module.inputs; let i = index"
@@ -61,7 +61,7 @@
           </button>
         </ion-col>
         <ion-col class="plug-container">
-          <button full *ngIf="!module.outputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
+          <button full disabled *ngIf="!module.outputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
               empty
           </button>
           <button *ngFor="let output_plug of module.outputs; let i = index"

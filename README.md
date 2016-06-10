@@ -16,7 +16,7 @@ npm install
 
 ionic serve (-l)
 
-## Boostrapping from scratch
+## Bootstrapping from scratch
 
 npm install -g ionic@beta gulp
 ionic start governess sidemenu -s --v2 --ts
