@@ -3,6 +3,7 @@
 
 node_modules/
 www/build/
+www/i18n/
 platforms/
 plugins/
 *.swp

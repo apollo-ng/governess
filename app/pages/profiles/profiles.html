@@ -18,4 +18,13 @@
     </ion-item>
   </ion-list>
 
+
+        <h1>Hello, {{name}}!</h1>
+        Say "<b>{{ 'HELLO' | translate:'{value: "world"}' }}</b>" to: <input [value]="name" (input)="name = $event.target.value">
+        <br/>
+        Change language:
+        <select (change)="translate.use($event.target.value)">
+            <option *ngFor="let lang of ['en','de','fr']" [selected]="lang === translate.currentLang">{{lang}}</option>
+        </select>
+
 </ion-content>

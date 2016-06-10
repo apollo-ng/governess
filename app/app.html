@@ -12,6 +12,10 @@
     </ion-list>
   </ion-content>
 
+        <select (change)="translate.use($event.target.value)">
+            <option *ngFor="let lang of ['en','de','fr']" [selected]="lang === translate.currentLang">{{lang}}</option>
+        </select>
+
 </ion-menu>
 
 <ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

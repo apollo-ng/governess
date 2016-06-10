@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, MenuController, Nav} from 'ionic-angular';
+import {TranslateService, TranslatePipe, TRANSLATE_PROVIDERS} from 'ng2-translate/ng2-translate';
 import {StatusBar} from 'ionic-native';
 import {ProfilesPage} from './pages/profiles/profiles';
 import {AppliancePage} from './pages/appliance/appliance';
@@ -12,7 +13,8 @@ import {AboutPage} from './pages/about/about';
 */
 
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
+  pipes: [TranslatePipe]
 })
 
 class governess {
@@ -28,8 +30,16 @@ class governess {
 
   constructor(
     private platform: Platform,
-    private menu: MenuController
+    private menu: MenuController,
+    public translate: TranslateService
   ){
+
+    //var userLang = navigator.language.split('-')[0];
+      //  this.userLang = /(en|de|fr)/gi.test(userLang) ? userLang : 'en';
+this.userLang ='fr';
+        // this trigger the use of the french or english language after setting the translations
+        translate.use(this.userLang);
+
     this.initializeApp();
 
     // Main Menu
@@ -58,12 +68,14 @@ class governess {
 }
 
 ionicBootstrap(
-  governess,null,{
+  governess,
+  [TRANSLATE_PROVIDERS],
+  {
     // Config -> http://ionicframework.com/docs/v2/api/config/Config/
     modalEnter: 'modal-ease-in',
     modalLeave: 'modal-slide-out',
     tabbarPlacement: 'top',
-    pageTransition: 'slide-in',
+    pageTransition: 'ease-in',
     prodMode: 'false'
   }
 );
