@@ -58,7 +58,7 @@ class governess {
 }
 
 ionicBootstrap(
-  governess,[],{
+  governess,null,{
     // Config -> http://ionicframework.com/docs/v2/api/config/Config/
     modalEnter: 'modal-ease-in',
     modalLeave: 'modal-slide-out',

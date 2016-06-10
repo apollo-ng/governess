@@ -1,4 +1,4 @@
-import {App, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController} from 'ionic-angular';
+import {App, Alert, Platform, Page, ActionSheet, Modal, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Truncate} from '../../pipes/truncate';
 
 /*
@@ -83,7 +83,7 @@ export class AppliancePage {
           ],
           'outputs': [
             {
-              'name': 'SSR-Heater',
+              'name': 'Heater AC-SSR',
               'color': 'rgba(255, 153, 0, 0.7)',
               'icon': 'flame',
               'type': 'binary',
@@ -96,7 +96,7 @@ export class AppliancePage {
               ]
             },
             {
-              'name': 'SSR-Cooler',
+              'name': 'Cooler AC-SSR',
               'color': '#0000c7',
               'icon': 'snow',
               'type': 'binary',
@@ -247,8 +247,32 @@ export class AppliancePage {
     this.nav.present(modal);
   }
 
-  editOutputPlug(modid,plugid)  {
-    console.log('Edit Output-Plug:' + modid + plugid);
+  createModule() {
+    let prompt = Alert.create({
+      title: 'Create a new Module',
+      message: "Enter a name for this new Module to add it to your appliance",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name of Module'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Create',
+          handler: data => {
+            console.log('Create clicked');
+          }
+        }
+      ]
+    });
+    this.nav.present(prompt);
   }
 
 }

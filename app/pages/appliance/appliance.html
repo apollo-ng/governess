@@ -12,20 +12,20 @@
   <ion-title>{{appliance.name}}</ion-title>
   <ion-buttons end>
     <button>
-      <ion-icon name="person-add"></ion-icon>
-    </button>
-    <button>
       <ion-icon name="create"></ion-icon>
+    </button>
+    <button (click)="createModule()">
+      <ion-icon name="add" ></ion-icon>
     </button>
   </ion-buttons>
 </ion-toolbar>
 
-<ion-content class="appliance action-sheets-basic-page">
+<ion-content class="appliance">
 
   <ion-card *ngFor="let module of appliance.modules; let m = index">
 
     <ion-toolbar>
-      <ion-title><ion-icon name="{{module.icon}}" item-left> {{module.name | truncate: 25}}</ion-icon></ion-title>
+      <ion-title><ion-icon name="{{module.icon}}" item-left></ion-icon>{{module.name | truncate: 25}}</ion-title>
       <ion-buttons end>
         <button>
           <ion-icon name="create"></ion-icon>
@@ -47,7 +47,7 @@
 
         <ion-col class="plug-container" [ngStyle]="{'border-bottom-left-radius': '7px'}">
           <button full disabled *ngIf="!module.inputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
-              empty
+            <ion-icon name="lock"></ion-icon>No Socket available
           </button>
           <button *ngFor="let input_plug of module.inputs; let i = index"
                   (click)="editInputPlug(m,i)"
@@ -62,7 +62,7 @@
         </ion-col>
         <ion-col class="plug-container">
           <button full disabled *ngIf="!module.outputs" [ngStyle]="{'background-color': 'rgba(77,76,71,0.5)'}">
-              empty
+            <ion-icon name="lock"></ion-icon>No Socket available
           </button>
           <button *ngFor="let output_plug of module.outputs; let i = index"
                   (click)="editOutputPlug(m,i)"

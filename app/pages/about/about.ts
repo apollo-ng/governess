@@ -16,8 +16,8 @@ export class AboutPage {
   private wsdata;
 
   constructor(public nav: NavController) {
-    this.wsdata = [];
-    this.wsdata.data = [];
+    this.wsdata = new Array();
+    this.wsdata.data = new Array();
     this.wsdata.data.totalcount = '';
   }
 
