@@ -25,11 +25,11 @@
   <ion-card *ngFor="let module of appliance.modules; let m = index">
 
     <ion-toolbar>
-      <ion-title><ion-icon name="{{module.icon}}" item-left></ion-icon>{{module.name | truncate: 25}}</ion-title>
+      <ion-title>
+        <ion-icon name="{{module.icon}}" item-left></ion-icon>
+        {{module.name | truncate: 25}}
+      </ion-title>
       <ion-buttons end>
-        <button>
-          <ion-icon name="create"></ion-icon>
-        </button>
         <button (click)="openMenu(m)">
           <ion-icon name="more"></ion-icon>
         </button>
@@ -45,53 +45,57 @@
 
       <ion-row [ngStyle]="{'min-height': '45px'}">
 
-        <ion-col class="plug-container" [ngStyle]="{'border-bottom-left-radius': '7px'}">
+        <ion-col>
           <button full disabled *ngIf="!module.control.name">
-            <ion-icon name="lock"></ion-icon>No Controller
+            <ion-icon name="lock"></ion-icon>
+            No Controller
           </button>
           <button full disabled *ngIf="!module.inputs">
-            <ion-icon name="lock"></ion-icon>No Input available
+            <ion-icon name="lock"></ion-icon>
+            No Input available
           </button>
-          <button full *ngFor="let input_plug of module.inputs; let i = index"
-                  (click)="editInputPlug(m,i)"
-                  [ngStyle]="{'background-color': input_plug.color}">
-            <ion-icon name="{{input_plug.icon}}"></ion-icon>{{input_plug.name}}
+          <button full
+            *ngFor="let input_plug of module.inputs; let i = index"
+            (click)="editInputPlug(m,i)"
+            [ngStyle]="{'background-color': input_plug.color}">
+            <ion-icon name="{{input_plug.icon}}"></ion-icon>
+            {{input_plug.name}}
           </button>
         </ion-col>
         <ion-col width-20 class="ctrl-container">
-          <button full primary outline (click)="doRadio()" [ngStyle]="{'height': '100%'}" *ngIf="!module.control.name">
-            <ion-icon name="add"></ion-icon>Add new Controller
+          <button full primary outline
+            *ngIf="!module.control.name"
+            (click)="doRadio()"
+            [ngStyle]="{'height': '100%'}">
+            <ion-icon name="add"></ion-icon>
+            Add new Controller
           </button>
-          <button full primary [ngStyle]="{'height': '100%'}" *ngIf="module.control.name">
+          <button full primary
+            *ngIf="module.control.name"
+            [ngStyle]="{'height': '100%'}">
             {{module.control.name}}
           </button>
         </ion-col>
-        <ion-col class="plug-container" [ngStyle]="{'border-bottom-right-radius': '7px'}">
+        <ion-col>
           <button full disabled *ngIf="!module.control.name">
-            <ion-icon name="lock"></ion-icon>No Controller
+            <ion-icon name="lock"></ion-icon>
+            No Controller
           </button>
           <button full disabled *ngIf="!module.outputs">
-            <ion-icon name="lock"></ion-icon>No Output available
+            <ion-icon name="lock"></ion-icon>
+            No Output available
           </button>
-          <button full *ngFor="let output_plug of module.outputs; let i = index"
-                  (click)="editOutputPlug(m,i)"
-                  [ngStyle]="{'background-color': output_plug.color}">
-            <ion-icon name="{{output_plug.icon}}"></ion-icon>{{output_plug.name}}
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-<!--
-    <ion-grid>
-      <ion-row>
-        <ion-col class="conf-container" *ngFor="let opt of appliance.modules[m].control.conf;">
-          <button light small clear item-left>
-            {{opt.name}} {{opt.val}}
+          <button full
+            *ngFor="let output_plug of module.outputs; let i = index"
+            (click)="editOutputPlug(m,i)"
+            [ngStyle]="{'background-color': output_plug.color}">
+            <ion-icon name="{{output_plug.icon}}"></ion-icon>
+            {{output_plug.name}}
           </button>
         </ion-col>
       </ion-row>
     </ion-grid>
--->
+
   </ion-card>
 
 </ion-content>
