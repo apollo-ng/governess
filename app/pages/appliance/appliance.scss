@@ -9,6 +9,10 @@
     font-size: 1.3rem;
     border-width: 1px;
     white-space: normal;
+        text-shadow: 1px 1px 1px #222,
+             -1px -1px 1px #222,
+             -1px 1px 1px #222,
+              1px -1px 1px #222;
   }
 
   .button-disabled {
@@ -18,8 +22,8 @@
 
   .ctrl-container {
     background: rgba(27,26,21,0.6);
-    border-left: 1px solid #444;
-    border-right: 1px solid #444;
+    border-left: 1px solid #555;
+    border-right: 1px solid #555;
   }
 
   .bar-button-default {
@@ -38,7 +42,7 @@
     font-size: 2rem;
 
     ion-icon[item-left] {
-        margin-top: 10px;
+      margin-top: 10px;
     }
   }
 
@@ -54,18 +58,18 @@
     background: transparent;
   }
 
-  ion-grid .module-assembly {
-    background: rgba(27,26,21,0.6) !important;
-  }
-
   ion-grid .module-assembly ion-col {
     color: #d8d3c5;
-    background: rgba(77,76,71,0.5);
+    text-shadow: 1px 1px 5px #222,
+             -1px -1px 5px #222,
+             -1px 1px 5px #222,
+              1px -1px 5px #222;
+background: rgba(123, 123, 95, 0.25);
   }
 
   ion-col {
     text-align: center;
-    border-top: 1px solid #444;
+    border-top: 1px solid #555;
   }
 
 }
