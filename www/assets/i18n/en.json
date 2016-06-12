@@ -1,0 +1,21 @@
+{
+  "app": {
+    "menu": "Menu"
+  },
+  "AppliancePage": {
+      "title": "Appliance"
+  },
+  "ProfilesPage": {
+      "title": "Profiles"
+  },
+  "SettingsPage": {
+      "title": "Settings",
+      "lang": "Language"
+  },
+  "HelpPage": {
+      "title": "Help"
+  },
+  "AboutPage": {
+      "title": "About"
+  }
+}

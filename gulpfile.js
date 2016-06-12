@@ -3,7 +3,6 @@ var gulp = require('gulp'),
     del = require('del'),
     runSequence = require('run-sequence'),
     argv = process.argv;
-    path = require('path');
 
 
 /**
@@ -36,32 +35,28 @@ var copyScripts = require('ionic-gulp-scripts-copy');
 
 var isRelease = argv.indexOf('--release') > -1;
 
-// global error handler
-var errorHandler = function(error) {
-  if (build) {
-    throw error;
-  } else {
-    plugins.util.log(error);
-  }
-};
-
 gulp.task('watch', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts', 'i18n'],
+    ['sass', 'html', 'fonts', 'scripts'],
     function(){
       gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
       gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
-      gulpWatch('app/i18n/*.json', function(){ gulp.start('i18n'); });
-      buildBrowserify({ watch: true }).on('end', done);
+      buildBrowserify(
+        {
+          src: ['./app/app.ts', './typings/index.d.ts'],
+          watch: true
+        }
+      ).on('end', done);
     }
   );
 });
 
 gulp.task('build', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts', 'i18n'],
+    ['sass', 'html', 'fonts', 'scripts'],
     function(){
       buildBrowserify({
+        src: ['./app/app.ts', './typings/index.d.ts'],
         minify: isRelease,
         browserifyOptions: {
           debug: !isRelease
@@ -81,13 +76,6 @@ gulp.task('fonts', function(done){
       'app/theme/fonts/**/*.+(eot|ttf|woff|woff2|svg)'
     ]
   });
-});
-
-gulp.task('i18n', function() {
-  return gulp.src('app/i18n/*.json')
-    .pipe(gulp.dest(path.join('www/', 'i18n')))
-
-    .on('error', errorHandler);
 });
 
 gulp.task('sass', buildSass);

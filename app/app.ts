@@ -1,12 +1,21 @@
-import {Component, ViewChild} from '@angular/core';
-import {App, ionicBootstrap, Platform, MenuController, Nav} from 'ionic-angular';
-import {TranslateService, TranslatePipe, TRANSLATE_PROVIDERS} from 'ng2-translate/ng2-translate';
-import {StatusBar} from 'ionic-native';
-import {ProfilesPage} from './pages/profiles/profiles';
-import {AppliancePage} from './pages/appliance/appliance';
-import {SettingsPage} from './pages/settings/settings';
-import {HelpPage} from './pages/help/help';
-import {AboutPage} from './pages/about/about';
+'use strict';
+
+import { Component,
+         Type,
+         ViewChild }                from '@angular/core';
+
+import { Platform,
+         ionicBootstrap,
+         MenuController,
+         Nav }                      from 'ionic-angular';
+
+import { StatusBar }                from 'ionic-native';
+
+import { ProfilesPage }             from './pages/profiles/profiles';
+import { AppliancePage }            from './pages/appliance/appliance';
+import { SettingsPage }             from './pages/settings/settings';
+import { HelpPage }                 from './pages/help/help';
+import { AboutPage }                from './pages/about/about';
 
 /*
 
@@ -14,45 +23,38 @@ import {AboutPage} from './pages/about/about';
 
 @Component({
   templateUrl: 'build/app.html',
-  pipes: [TranslatePipe]
 })
 
-class governess {
-  @ViewChild(Nav) nav: Nav;
+export class GovernessUIApp {
 
-  rootPage: any = AboutPage;
-  pages: Array<{
-      title: string,
-      icon: string,
-      component: any
-    }
-  >
+  @ViewChild(Nav) private nav: Nav;
 
-  constructor(
-    private platform: Platform,
-    private menu: MenuController,
-    public translate: TranslateService
-  ){
+  private rootPage: Type;
+  private pages: Array<{title: string, component: Type}>;
 
-    //var userLang = navigator.language.split('-')[0];
-      //  this.userLang = /(en|de|fr)/gi.test(userLang) ? userLang : 'en';
-this.userLang ='fr';
-        // this trigger the use of the french or english language after setting the translations
-        translate.use(this.userLang);
+  constructor(  private platform: Platform,
+                private menu: MenuController
+  ) {
+
+    this.platform = platform;
+    //this.menu = menu;
+
+    this.rootPage = HelpPage;
 
     this.initializeApp();
 
-    // Main Menu
+    // set our app's pages
     this.pages = [
-      { title: 'Appliance', icon: 'power', component: AppliancePage },
-      { title: 'Profiles', icon: 'navigate', component: ProfilesPage },
-      { title: 'Settings', icon: 'settings', component: SettingsPage },
-      { title: 'Help', icon: 'help-buoy', component: HelpPage },
-      { title: 'About', icon: 'speakerphone', component: AboutPage }
+      { title: 'Appliance', component: AppliancePage },
+      { title: 'Profiles', component: ProfilesPage },
+      { title: 'Settings', component: SettingsPage },
+      { title: 'Help', component: HelpPage },
+      { title: 'About', component: AboutPage },
     ];
+
   }
 
-  initializeApp() {
+  private initializeApp(): void {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -60,22 +62,26 @@ this.userLang ='fr';
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
+  public openPage(page: any): void {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
+
 }
 
-ionicBootstrap(
-  governess,
-  [TRANSLATE_PROVIDERS],
-  {
+// Pass the main app component as the first argument
+// Pass any providers for your app in the second argument
+// Set any config for your app as the third argument:
+// http://ionicframework.com/docs/v2/api/config/Config/
+
+ionicBootstrap(GovernessUIApp,null,
+   {
     // Config -> http://ionicframework.com/docs/v2/api/config/Config/
     modalEnter: 'modal-ease-in',
     modalLeave: 'modal-slide-out',
     tabbarPlacement: 'top',
     pageTransition: 'ease-in',
-    prodMode: 'false'
-  }
-);
+    prodMode: 'false',
+});

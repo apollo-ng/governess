@@ -1,49 +1,21 @@
-import {Page, NavController} from 'ionic-angular';
-import {$WebSocket} from 'angular2-websocket/angular2-websocket'
+'use strict';
+
+import {NavController, Page} from 'ionic-angular';
 
 /*
 
 */
 
 @Page({
-  templateUrl: 'build/pages/about/about.html',
+  templateUrl: 'build/pages/about/about.html'
 })
 
 export class AboutPage {
 
-  private ws: $WebSocket;
-  private subscription;
-  private wsdata;
+  public nav: NavController;
 
-  constructor(public nav: NavController) {
-    this.wsdata = new Array();
-    this.wsdata.data = new Array();
-    this.wsdata.data.totalcount = '';
-  }
-
-  ngOnInit() {
-    this.subscribe();
-  }
-
-  subscribe() {
-    console.log('Trying to subscribe to WS...');
-    if (!this.subscription) {
-      this.ws = new $WebSocket('ws://localhost:8082/ws_status');
-      this.ws.send('Hello');
-      this.subscription = this.ws.getDataStream().subscribe(
-        res => { this.wsdata = JSON.parse(res.data) },
-        err => console.log('Error: ', err),
-        () => { console.log('Completed') }
-      );
-    } else {
-      console.log('Already subscribed');
-    }
-  }
-
-  ngOnDestroy() {
-    this.subscription.complete();
-    this.subscription.unsubscribe();
+  constructor(nav: NavController) {
+    this.nav = nav;
   }
 
 }
-

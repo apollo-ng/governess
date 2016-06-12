@@ -5,7 +5,7 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Appliance Configuration</ion-title>
+  <ion-title>Appliance</ion-title>
 </ion-navbar>
 
 <ion-toolbar primary>
@@ -27,7 +27,7 @@
     <ion-toolbar>
       <ion-title>
         <ion-icon name="{{module.icon}}" item-left></ion-icon>
-        {{module.name | truncate: 25}}
+        {{module.name}}
       </ion-title>
       <ion-buttons end>
         <button (click)="openMenu(m)">

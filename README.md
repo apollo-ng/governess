@@ -1,4 +1,4 @@
-:construction: Governess - Mobile-First Hybrid-Client WIP :construction:
+:construction: GovernessUI - Mobile-First Hybrid-Client WIP :construction:
 ==========
 
 Based on Angular2/Ionic2 but since it's still early beta and many
@@ -8,19 +8,41 @@ for ng2 to get more crowd support.
 
 ## Install
 
-git clone
-cd governess
-npm install
+### Globals
+
+    $ npm install -g cordova ionic@beta gulp karma-cli
+
+### Clone & Init Repo
+
+    $ git clone
+    $ cd governess
+    $ npm install
 
 ## Run Development Server
 
-ionic serve (-l)
+    $ ionic serve (-l)
+
+## Tests
+
+Contious karma testing during develoment with watcher
+
+    $ karma start test/karma.config.js
+
+One-Shot test runs
+
+    $ npm run test
+    $ npm run e2e
 
 ## Bootstrapping from scratch
 
-npm install -g ionic@beta gulp
-ionic start governess sidemenu -s --v2 --ts
-ionic platform add android
+    $ ionic start governess sidemenu -s --v2 --ts
+    $ ionic platform add android
+
+## Support & Contact
+
+Please use the issue tracker for governess related issues.
+
+More info: FIXME
 
 ## License
 
@@ -36,9 +58,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-## Support & Contact
-
-Please use the issue tracker for governess related issues.
-
-More info: FIXME
