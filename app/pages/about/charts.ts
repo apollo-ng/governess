@@ -265,11 +265,11 @@ export class BaseChart implements OnInit, OnDestroy {
   private refresh() {
     if(this.options.responsive && this.parent.clientHeight == 0){
       return setTimeout(()=>{
-        console.log("Is responsive and height is 0 :3");
+        //console.log("Is responsive and height is 0 :3");
         this.refresh();
       }, 50);
     }else{
-      console.log("Client height isn't 0", this.parent.clientHeight);
+      //console.log("Client height isn't 0", this.parent.clientHeight);
     }
     this.ngOnDestroy();
     let dataset:Array<any> = [];

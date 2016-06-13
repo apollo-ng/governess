@@ -1,35 +1,45 @@
 'use strict';
 
-import {NavController, Page} from 'ionic-angular';
+import {NavController, Page, Toast} from 'ionic-angular';
+import {ConfigService} from '../../providers/config-service/config-service';
 
 /*
 
 */
 
 @Page({
-  templateUrl: 'build/pages/settings/settings.html'
+  templateUrl: 'build/pages/settings/settings.html',
+  providers: [ConfigService]
 })
 
 export class SettingsPage {
 
-  public nav: NavController;
+  public config: any;
 
-  constructor(nav: NavController) {
+  constructor(public nav: NavController,
+              public configService: ConfigService
+  ) {
     this.nav = nav;
+    this.loadConfig();
+  }
+
+  public loadConfig(): void {
+    this.configService.load()
+    .then(data => {
+      this.config = data;
+    });
   }
 
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
-  /*
-  private resetCPD(event) {
+
+  public resetCPD(): void {
 
     let toast = Toast.create({
     message: 'User was added successfully',
-    duration: 3000,
-  });
+    duration: 3000
+    });
 
-      //event.preventDefault();
-      this.nav.present(toast);
+    this.nav.present(toast);
   }
-  * */
 
 }

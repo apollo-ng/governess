@@ -22,7 +22,7 @@ export class AboutPage {
     this.nav = nav;
 
     this.lineChartColours = this.getColours(['#FF9800','#49cd97','#ef2e0a']);
-    console.log(this.getColours(['#FF9800','#49cd97','#ef2e0a']));
+    //console.log(this.getColours(['#FF9800','#49cd97','#ef2e0a']));
 
   }
 
@@ -35,7 +35,7 @@ export class AboutPage {
         r = (bigint >> 16) & 255,
         g = (bigint >> 8) & 255,
         b = bigint & 255;
-    console.log("Hex is " + hex, "Big int is ", bigint);
+    //console.log("Hex is " + hex, "Big int is ", bigint);
 
     return [r, g, b];
   }
