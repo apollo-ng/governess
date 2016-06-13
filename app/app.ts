@@ -32,12 +32,15 @@ export class GovernessUIApp {
   private rootPage: Type;
   private pages: Array<{title: string, component: Type}>;
 
-  constructor(  private platform: Platform,
-                private menu: MenuController
+  public platform: Platform;
+  public menu: MenuController;
+
+  constructor( platform: Platform,
+               menu: MenuController
   ) {
 
     this.platform = platform;
-    //this.menu = menu;
+    this.menu = menu;
 
     this.rootPage = HelpPage;
 
@@ -63,6 +66,8 @@ export class GovernessUIApp {
   }
 
   public openPage(page: any): void {
+    console.log(page);
+    console.log(this.menu);
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
@@ -76,12 +81,10 @@ export class GovernessUIApp {
 // Set any config for your app as the third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
 
-ionicBootstrap(GovernessUIApp,null,
-   {
-    // Config -> http://ionicframework.com/docs/v2/api/config/Config/
-    modalEnter: 'modal-ease-in',
-    modalLeave: 'modal-slide-out',
-    tabbarPlacement: 'top',
-    pageTransition: 'ease-in',
-    prodMode: 'false',
-});
+ionicBootstrap(GovernessUIApp, null, {
+  modalEnter: 'modal-ease-in',
+  modalLeave: 'modal-slide-out',
+  tabbarPlacement: 'top',
+  pageTransition: 'ease-in',
+  prodMode: 'false'}
+);

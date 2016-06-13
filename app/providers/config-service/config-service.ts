@@ -8,13 +8,19 @@ import 'rxjs/add/operator/map';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
 @Injectable()
+
 export class ConfigService {
-  data: any = null;
 
-  constructor(public http: Http) {}
+  private data: any = null;
+  public http: Http;
 
-  load() {
+  constructor(http: Http) {
+      console.log('config service init');
+  }
+
+  public load(): any {
     if (this.data) {
       // already loaded data
       return Promise.resolve(this.data);

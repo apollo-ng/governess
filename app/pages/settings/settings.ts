@@ -9,15 +9,17 @@ import {ConfigService} from '../../providers/config-service/config-service';
 
 @Page({
   templateUrl: 'build/pages/settings/settings.html',
-  providers: [ConfigService]
+  providers: [ConfigService],
 })
 
 export class SettingsPage {
 
   public config: any;
+  public nav: NavController;
+  public configService: ConfigService;
 
-  constructor(public nav: NavController,
-              public configService: ConfigService
+  constructor(nav: NavController,
+              configService: ConfigService
   ) {
     this.nav = nav;
     this.loadConfig();
@@ -34,9 +36,9 @@ export class SettingsPage {
 
   public resetCPD(): void {
 
-    let toast = Toast.create({
+    let toast: any = Toast.create({
     message: 'User was added successfully',
-    duration: 3000
+    duration: 3000,
     });
 
     this.nav.present(toast);

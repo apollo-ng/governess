@@ -36,7 +36,7 @@ describe('GovernessUIApp', () => {
 
   beforeEach(() => {
     let mockClass: any = (<any>new MockClass());
-    governessUIApp = new GovernessUIApp(mockClass,mockClass,mockClass);
+    governessUIApp = new GovernessUIApp(mockClass, mockClass);
   });
 
   it('initializes with 5 possible pages', () => {

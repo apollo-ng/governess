@@ -10,7 +10,7 @@ import {NavController, Page} from 'ionic-angular';
 */
 
 @Page({
-  templateUrl: 'build/pages/appliance/appliance.html'
+  templateUrl: 'build/pages/appliance/appliance.html',
 })
 
 export class AppliancePage {

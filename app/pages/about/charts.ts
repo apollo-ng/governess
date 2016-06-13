@@ -1,5 +1,9 @@
+'use strict';
+
+/* tslint:disable */
+
 import {
-    Component, View,
+    Component,
     Directive, AfterViewChecked, OnDestroy, OnInit,
     EventEmitter, ElementRef, Input
 } from '@angular/core';
@@ -127,7 +131,7 @@ export class BaseChart implements OnInit, OnDestroy {
     this.ctx = this.element.nativeElement.children[0].getContext('2d');
     this.cvs = this.element.nativeElement.children[0];
     this.parent = this.element.nativeElement;
-    //setTimeout(()=>this.refresh(), 100);
+    // setTimeout(()=>this.refresh(), 100);
     this.refresh();
     this.initFlag = true;
   }
@@ -263,14 +267,17 @@ export class BaseChart implements OnInit, OnDestroy {
   }
 
   private refresh() {
-    if(this.options.responsive && this.parent.clientHeight == 0){
-      return setTimeout(()=>{
-        //console.log("Is responsive and height is 0 :3");
+    if (this.options.responsive && this.parent.clientHeight == 0) {
+      return setTimeout( () => {
+        // console.log("Is responsive and height is 0 :3");
         this.refresh();
-      }, 50);
-    }else{
-      //console.log("Client height isn't 0", this.parent.clientHeight);
+      },
+      50
+    );
+    } else {
+      // console.log("Client height isn't 0", this.parent.clientHeight);
     }
+
     this.ngOnDestroy();
     let dataset:Array<any> = [];
 

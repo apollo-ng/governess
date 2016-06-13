@@ -10,16 +10,17 @@ import {NavController, Page} from 'ionic-angular';
  */
 
 @Page({
-  templateUrl: 'build/pages/profiles/profiles.html'
+  templateUrl: 'build/pages/profiles/profiles.html',
 })
 
 export class ProfilesPage {
 
   public nav: NavController;
   private searchQuery: string;
-  private profiles: any;
+  private profiles: Array<any>;
 
   constructor(nav: NavController) {
+
     this.nav = nav;
     this.searchQuery = '';
 
@@ -28,7 +29,7 @@ export class ProfilesPage {
       'dev-id': 'xyz',
       'name': 'Reflow Lead-Free',
       'icon': '',
-      'created': Math.round(new Date().getTime()/1000),
+      'created': Math.round( new Date().getTime() / 1000 ),
       'notes': '',
       'type': 'profile',
       'data': [{
@@ -40,7 +41,7 @@ export class ProfilesPage {
               'color': '#CA8512',
               'drawPoints': true,
               'pointSize': 4,
-              'strokeWidth': 2
+              'strokeWidth': 2,
           },
           'points': [
               [0, 25],
@@ -49,8 +50,8 @@ export class ProfilesPage {
               [197, 225],
               [202, 225],
               [233, 175],
-              [300, 50]
-          ]
+              [300, 50],
+          ],
       }, {
           'control': 'Circulator',
           'active': true,
@@ -61,16 +62,16 @@ export class ProfilesPage {
               'drawPoints': false,
               'pointSize': 4,
               'strokeWidth': 1,
-              'stepPlot': true
+              'stepPlot': true,
           },
           'points': [
               [0, 1],
               [180, 0],
               [215, 1],
-              [300, 0]
-          ]
-      }]
-      }
+              [300, 0],
+          ],
+      }],
+      },
     ];
 
   }
