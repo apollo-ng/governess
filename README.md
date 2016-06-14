@@ -10,7 +10,7 @@ for ng2 to get more crowd support.
 
 ### Globals
 
-    $ npm install -g cordova ionic@beta gulp karma-cli
+    $ npm install -g cordova ionic@beta gulp karma
 
 ### Clone & Init Repo
 

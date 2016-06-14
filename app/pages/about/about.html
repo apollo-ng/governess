@@ -5,26 +5,6 @@
   <ion-title>About</ion-title>
 </ion-navbar>
 
-<ion-toolbar>
-  <button (click)="randomize()" block>
-    Randomize chart
-  </button>
-</ion-toolbar>
-
 <ion-content padding class="about">
-
-  <div class="chart-container">
-    <base-chart class="chart"
-                [data]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [series]="lineChartSeries"
-                [colours]="lineChartColours"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></base-chart>
-  </div>
-
 
 </ion-content>

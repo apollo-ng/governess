@@ -39,8 +39,8 @@ describe('GovernessUIApp', () => {
     governessUIApp = new GovernessUIApp(mockClass, mockClass);
   });
 
-  it('initializes with 5 possible pages', () => {
-    expect(governessUIApp['pages'].length).toEqual(5);
+  it('initializes with 6 possible pages', () => {
+    expect(governessUIApp['pages'].length).toEqual(6);
   });
 
   it('initializes with a root page', () => {
@@ -56,7 +56,7 @@ describe('GovernessUIApp', () => {
     // cant be bothered to set up DOM testing for app.ts to get access to @ViewChild (Nav)
     governessUIApp['nav'] = (<any>governessUIApp['menu']);
     spyOn(governessUIApp['nav'], 'setRoot');
-    governessUIApp.openPage(governessUIApp['pages'][3]);
+    governessUIApp.openPage(governessUIApp['pages'][4]);
     expect(governessUIApp['menu']['close']).toHaveBeenCalled();
     expect(governessUIApp['nav'].setRoot).toHaveBeenCalledWith(HelpPage);
   });

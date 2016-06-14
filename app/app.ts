@@ -11,6 +11,7 @@ import { Platform,
 
 import { StatusBar }                from 'ionic-native';
 
+import { HomePage }                 from './pages/home/home';
 import { ProfilesPage }             from './pages/profiles/profiles';
 import { AppliancePage }            from './pages/appliance/appliance';
 import { SettingsPage }             from './pages/settings/settings';
@@ -54,10 +55,11 @@ export class GovernessUIApp {
     this.menu = menu;
 
     // Define which page the app should show by default
-    this.rootPage = HelpPage;
+    this.rootPage = HomePage;
 
     // Set up pages of side menu
     this.pages = [
+      { title: 'Home', component: HomePage },
       { title: 'Appliance', component: AppliancePage },
       { title: 'Profiles', component: ProfilesPage },
       { title: 'Settings', component: SettingsPage },
