@@ -4,10 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 /*
-  Generated class for the ConfigService provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
 */
 
 let propertiesURL: string = 'https://randomuser.me/api/?results=10',
@@ -44,7 +41,8 @@ export class ConfigService {
     });
   }
 */
-  constructor ( http:Http ) {
+
+  constructor (http: Http) {
       this.http = http;
   }
 

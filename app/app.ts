@@ -17,13 +17,19 @@ import { SettingsPage }             from './pages/settings/settings';
 import { HelpPage }                 from './pages/help/help';
 import { AboutPage }                from './pages/about/about';
 
-/*
+import { NG2_WEBSTORAGE }           from 'ng2-webstorage';
 
-*/
+////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
 
 @Component({
   templateUrl: 'build/app.html',
 })
+
+////////////////////////////////////////////////////////////////////////
+//
+//
 
 export class GovernessUIApp {
 
@@ -35,18 +41,22 @@ export class GovernessUIApp {
   public platform: Platform;
   public menu: MenuController;
 
-  constructor( platform: Platform,
-               menu: MenuController
+  //////////////////////////////////////////////////////////////////////
+
+  constructor (
+
+    platform: Platform,
+    menu: MenuController
+
   ) {
 
     this.platform = platform;
     this.menu = menu;
 
+    // Define which page the app should show by default
     this.rootPage = HelpPage;
 
-    this.initializeApp();
-
-    // set our app's pages
+    // Set up pages of side menu
     this.pages = [
       { title: 'Appliance', component: AppliancePage },
       { title: 'Profiles', component: ProfilesPage },
@@ -55,33 +65,43 @@ export class GovernessUIApp {
       { title: 'About', component: AboutPage },
     ];
 
+    this.initializeApp();
   }
 
+  //////////////////////////////////////////////////////////////////////
+
   private initializeApp(): void {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-    });
+    this.platform.ready().then (
+      () => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here we can do any higher level native things we might need.
+        StatusBar.styleDefault();
+      }
+    );
   }
+
+  //////////////////////////////////////////////////////////////////////
 
   public openPage(page: any): void {
     console.log(page);
     console.log(this.menu);
-    // close the menu when clicking a link from the menu
+    // Close the menu when clicking a link from the menu
     this.menu.close();
-    // navigate to the new page if it is not the current page
+    // Navigate to the new page, if it is not the current page
     this.nav.setRoot(page.component);
   }
 
 }
 
+////////////////////////////////////////////////////////////////////////
+// Bootstrap Governess Main App
+////////////////////////////////////////////////////////////////////////
 // Pass the main app component as the first argument
 // Pass any providers for your app in the second argument
 // Set any config for your app as the third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
 
-ionicBootstrap(GovernessUIApp, null, {
+ionicBootstrap(GovernessUIApp, [ NG2_WEBSTORAGE ], {
   modalEnter: 'modal-ease-in',
   modalLeave: 'modal-slide-out',
   tabbarPlacement: 'top',

@@ -1,4 +1,3 @@
-
 <ion-navbar *navbar>
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
@@ -48,18 +47,7 @@
   <ion-toggle checked="true"></ion-toggle>
 </ion-item>
 
-
 </ion-list>
-
-<ion-list>
-    <ion-item *ngFor="let person of config">
-      <ion-avatar item-left>
-        <img src="{{person.picture.thumbnail}}">
-      </ion-avatar>
-      <h2>{{person.name.first}} {{person.name.last}}</h2>
-      <p>{{person.email}}</p>
-    </ion-item>
-  </ion-list>
 
 <button class="button button-full button-assertive" (click)="resetCPD($event)">
     Reset CPD Set

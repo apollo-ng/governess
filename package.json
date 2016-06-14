@@ -8,7 +8,7 @@
     "url": "https://github.com/apollo-ng/governess.git"
   },
   "bugs": {
-    "url" : "https://github.com/apollo-ng/governess/issues"
+    "url": "https://github.com/apollo-ng/governess/issues"
   },
   "scripts": {
     "build": "gulp --gulpfile test/gulpfile.ts --cwd ./ build-app",
@@ -30,7 +30,7 @@
     "ionic-angular": "2.0.0-beta.8",
     "ionic-native": "1.2.2",
     "ionicons": "3.0.0",
-    "ng2-translate": "^2.1.0",
+    "ng2-webstorage": "^1.0.2",
     "reflect-metadata": "0.1.3",
     "rxjs": "5.0.0-beta.6",
     "zone.js": "0.6.12"
