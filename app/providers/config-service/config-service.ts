@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
+import {Http, Headers, RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 /*
   Generated class for the ConfigService provider.
@@ -9,15 +10,20 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 
+let propertiesURL: string = 'https://randomuser.me/api/?results=10',
+    favoritesURL: string = propertiesURL + '/favorites';
+
 @Injectable()
 
 export class ConfigService {
 
-  private data: any = null;
+  public data: any = null;
   public http: Http;
 
+/*
   constructor(http: Http) {
       console.log('config service init');
+      this.http = http;
   }
 
   public load(): any {
@@ -28,18 +34,39 @@ export class ConfigService {
 
     // don't have the data yet
     return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
+
       this.http.get('https://randomuser.me/api/?results=10')
         .map(res => res.json())
         .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
           this.data = data.results;
           resolve(this.data);
         });
     });
   }
+*/
+  constructor ( http:Http ) {
+      this.http = http;
+  }
+
+  public findAll(): any {
+      return this.http.get(propertiesURL)
+          .map(res => res.json())
+          .catch(this.handleError);
+  }
+
+  public favorite(property: any): any {
+      let body: string = JSON.stringify(property);
+      let headers: any = new Headers({ 'Content-Type': 'application/json' });
+      let options: any = new RequestOptions({ headers: headers });
+      return this.http.post(favoritesURL, body, options)
+          .map(res => res.json())
+          .catch(this.handleError);
+  }
+
+  public handleError(error: any): any {
+      console.error(error);
+      return Observable.throw(error.json().error || 'Server error');
+  }
+
 }
 

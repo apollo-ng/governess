@@ -22,23 +22,31 @@ export class SettingsPage {
               configService: ConfigService
   ) {
     this.nav = nav;
-    this.loadConfig();
+    this.configService = configService;
+    // this.loadConfig();
   }
 
+    ngOnInit() {
+      console.log('Tap config service');
+        this.configService.findAll().subscribe(
+            data => this.config = data.results
+        );
+    }
+/*
   public loadConfig(): void {
-    this.configService.load()
+    this.configService.findAll()
     .then(data => {
       this.config = data;
     });
   }
-
+*/
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
 
   public resetCPD(): void {
 
     let toast: any = Toast.create({
-    message: 'User was added successfully',
-    duration: 3000,
+      message: 'User was added successfully',
+      duration: 3000,
     });
 
     this.nav.present(toast);
