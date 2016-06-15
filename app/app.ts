@@ -11,14 +11,14 @@ import { Platform,
 
 import { StatusBar }                from 'ionic-native';
 
+import { NG2_WEBSTORAGE }           from 'ng2-webstorage';
+
 import { HomePage }                 from './pages/home/home';
 import { ProfilesPage }             from './pages/profiles/profiles';
 import { AppliancePage }            from './pages/appliance/appliance';
 import { SettingsPage }             from './pages/settings/settings';
 import { HelpPage }                 from './pages/help/help';
 import { AboutPage }                from './pages/about/about';
-
-import { NG2_WEBSTORAGE }           from 'ng2-webstorage';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -59,12 +59,12 @@ export class GovernessUIApp {
 
     // Set up pages of side menu
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Appliance', component: AppliancePage },
-      { title: 'Profiles', component: ProfilesPage },
-      { title: 'Settings', component: SettingsPage },
-      { title: 'Help', component: HelpPage },
-      { title: 'About', component: AboutPage },
+      { title: 'Home',      component: HomePage       },
+      { title: 'Appliance', component: AppliancePage  },
+      { title: 'Profiles',  component: ProfilesPage   },
+      { title: 'Settings',  component: SettingsPage   },
+      { title: 'Help',      component: HelpPage       },
+      { title: 'About',     component: AboutPage      },
     ];
 
     this.initializeApp();
@@ -104,9 +104,9 @@ export class GovernessUIApp {
 // http://ionicframework.com/docs/v2/api/config/Config/
 
 ionicBootstrap(GovernessUIApp, [ NG2_WEBSTORAGE ], {
-  modalEnter: 'modal-ease-in',
+  modalEnter: 'modal-slide-in',
   modalLeave: 'modal-slide-out',
   tabbarPlacement: 'top',
-  pageTransition: 'ease-in',
+  pageTransition: 'ease',
   prodMode: 'false'}
 );

@@ -1,24 +1,25 @@
 'use strict';
 
-import {NavController, Page} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {ActionSheet, Modal, NavController, NavParams, Platform, ViewController} from 'ionic-angular';
 
 /*
-  Generated class for the AppliancePage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
 */
 
-@Page({
+@Component({
   templateUrl: 'build/pages/appliance/appliance.html',
 })
 
 export class AppliancePage {
 
   public nav: NavController;
-  private appliance: Object;
+  public appliance: any;
 
-  constructor(nav: NavController) {
+  constructor(
+    nav: NavController
+  ) {
+
     this.nav = nav;
     this.appliance = {
 
@@ -194,4 +195,121 @@ export class AppliancePage {
     };
   }
 
+  public openMenu(modid: any): any {
+    let actionSheet: any = ActionSheet.create({
+      title: this.appliance.modules[modid].name,
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Edit Module',
+          icon: 'create',
+          handler: (): void => {
+            console.log('Edit Module clicked');
+          },
+        },
+        {
+          text: 'Add Input-Plug',
+          icon: 'add-circle',
+          handler: (): void => {
+            console.log('Add Input-Plug clicked');
+          },
+        },
+        {
+          text: 'Add Output-Plug',
+          icon: 'add-circle',
+          handler: (): void => {
+            console.log('Add Output-Plug clicked');
+          },
+        },
+        {
+          text: 'Delete Module',
+          icon: 'trash',
+          role: 'destructive',
+          handler: (): void => {
+            console.log('Delete Module clicked');
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel', // will always sort to be on the bottom
+          icon: 'close',
+          handler: (): void => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
+    });
+
+    this.nav.present(actionSheet);
+  }
+
+  public editInputPlug(modid: any, plugid: any): any {
+    console.log('Edit Input-Plug:' + modid + plugid);
+    let modal: any = Modal.create(ModalsContentPage);
+    this.nav.present(modal);
+  }
+
+  public editOutputPlug(modid: any, plugid: any): any {
+    console.log('Edit Output-Plug:' + modid + plugid);
+  }
+
+}
+
+@Component({
+  templateUrl: 'build/pages/appliance/app-sys-modal.html',
+})
+
+class ModalsContentPage {
+
+  public platform: Platform;
+  public params: NavParams;
+  public viewCtrl: ViewController;
+
+  public character: any;
+
+  constructor(
+      platform: Platform,
+      params: NavParams,
+      viewCtrl: ViewController
+  ) {
+
+    let characters: any = [
+      {
+        name: 'Gollum',
+        quote: 'Sneaky little hobbitses!',
+        image: 'img/avatar-gollum.jpg',
+        items: [
+          { title: 'Race', note: 'Hobbit' },
+          { title: 'Culture', note: 'River Folk' },
+          { title: 'Alter Ego', note: 'Smeagol' },
+        ],
+      },
+      {
+        name: 'Frodo',
+        quote: 'Go back, Sam! I\'m going to Mordor alone!',
+        image: 'img/avatar-frodo.jpg',
+        items: [
+          { title: 'Race', note: 'Hobbit' },
+          { title: 'Culture', note: 'Shire Folk' },
+          { title: 'Weapon', note: 'Sting' },
+        ],
+      },
+      {
+        name: 'Samwise Gamgee',
+        quote: 'What we need is a few good taters.',
+        image: 'img/avatar-samwise.jpg',
+        items: [
+          { title: 'Race', note: 'Hobbit' },
+          { title: 'Culture', note: 'Shire Folk' },
+          { title: 'Nickname', note: 'Sam' },
+        ],
+      },
+    ];
+    this.character = characters[1];
+    this.viewCtrl = viewCtrl;
+  }
+
+  public dismiss(): void {
+    this.viewCtrl.dismiss();
+  }
 }
