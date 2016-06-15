@@ -5,17 +5,38 @@
   <ion-title>FIXME: $ApplianceName Overview</ion-title>
 </ion-navbar>
 
-<ion-toolbar dark>
-
-</ion-toolbar>
-
-<ion-toolbar position="bottom" dark>
-  <button (click)="randomize()" block>
-    Randomize chart
-  </button>
-</ion-toolbar>
-
 <ion-content class="home">
+
+    <ion-grid dark>
+      <ion-row class="module-assembly">
+        <ion-col>
+          <button>
+            <ion-icon name="thermometer"></ion-icon>
+            25 °C
+          </button>
+           <button>
+            <ion-icon name="thermometer"></ion-icon>
+            42 °C
+          </button>
+          <button>
+            <ion-icon name="flame"></ion-icon>
+          </button>
+          <button>
+            <ion-icon name="snow"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button>
+            <ion-icon name="nuclear"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button>
+            <ion-icon name="exit"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   <div class="chart-container">
     <base-chart class="chart"
@@ -32,6 +53,21 @@
 
 </ion-content>
 
-
-
-
+<ion-toolbar position="bottom" dark>
+  <ion-segment [(ngModel)]="config.ctrlMode">
+    <ion-segment-button value="man" (ionSelect)="setMode('man')">
+      Manual
+    </ion-segment-button>
+    <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
+      Auto
+    </ion-segment-button>
+    <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
+      Schedule
+    </ion-segment-button>
+  </ion-segment>
+  <ion-buttons end>
+    <button (click)="randomize()">
+      <ion-icon name="refresh-circle" primary></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-toolbar>
