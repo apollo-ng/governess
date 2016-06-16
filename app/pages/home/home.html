@@ -7,36 +7,28 @@
 
 <ion-content class="home">
 
-    <ion-grid dark>
-      <ion-row class="module-assembly">
-        <ion-col>
-          <button>
-            <ion-icon name="thermometer"></ion-icon>
-            25 °C
-          </button>
-           <button>
-            <ion-icon name="thermometer"></ion-icon>
-            42 °C
-          </button>
-          <button>
-            <ion-icon name="flame"></ion-icon>
-          </button>
-          <button>
-            <ion-icon name="snow"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button>
-            <ion-icon name="nuclear"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button>
-            <ion-icon name="exit"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-grid dark>
+    <ion-row>
+      <ion-col>
+        <ion-icon name="thermometer"> 25 °C</ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="thermometer"> 42 °C</ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="flame"></ion-icon>
+      </ion-col>
+       <ion-col>
+        <ion-icon name="snow"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="nuclear"></ion-icon>
+      </ion-col>
+       <ion-col>
+        <ion-icon name="exit"></ion-icon>
+      </ion-col>
+     </ion-row>
+  </ion-grid>
 
   <div class="chart-container">
     <base-chart class="chart"
@@ -67,7 +59,7 @@
   </ion-segment>
   <ion-buttons end>
     <button (click)="randomize()">
-      <ion-icon name="refresh-circle" primary></ion-icon>
+      <ion-icon name="more"></ion-icon>
     </button>
   </ion-buttons>
 </ion-toolbar>
