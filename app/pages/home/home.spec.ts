@@ -26,6 +26,7 @@ import {
 }                               from 'ionic-angular';
 
 import {CHART_DIRECTIVES} from '../../services/charts';
+import {LocalStorageService} from 'ng2-webstorage';
 
 class MockClass {
 
@@ -57,6 +58,7 @@ describe('HomePage', () => {
     provide(App, {useClass: MockClass}),
     provide(Platform, {useClass: MockClass}),
     provide(CHART_DIRECTIVES, {useClass: MockClass}),
+    provide(LocalStorageService, {useClass: MockClass}),
   ]);
 
   beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
