@@ -41,7 +41,7 @@ export class HomePage {
 
     this.nav = nav;
     this.storage = storage;
-    this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
+    this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
 
   }
 
@@ -56,8 +56,10 @@ export class HomePage {
   private lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   private lineChartSeries: Array<any> = ['Series A', 'Series B', 'Series C'];
   private lineChartOptions: any = {
-    animation: false,
+    animation: true,
     responsive: true,
+    maintainAspectRatio: false,
+    defaultFontColor: '#a23016',
     multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>',
   };
 

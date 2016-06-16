@@ -9,10 +9,10 @@
 
   <ion-grid dark>
     <ion-row>
-      <ion-col>
+      <ion-col [ngStyle]="{'background-color': '#FF9800'}">
         <ion-icon name="thermometer"> 25 °C</ion-icon>
       </ion-col>
-      <ion-col>
+      <ion-col [ngStyle]="{'background-color': '#a23016'}">
         <ion-icon name="thermometer"> 42 °C</ion-icon>
       </ion-col>
       <ion-col>
@@ -21,7 +21,7 @@
        <ion-col>
         <ion-icon name="snow"></ion-icon>
       </ion-col>
-      <ion-col>
+      <ion-col [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
         <ion-icon name="nuclear"></ion-icon>
       </ion-col>
        <ion-col>
@@ -37,10 +37,11 @@
                 [options]="lineChartOptions"
                 [series]="lineChartSeries"
                 [colours]="lineChartColours"
-                [legend]="lineChartLegend"
+                [legend]="none"
                 [chartType]="lineChartType"
                 (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></base-chart>
+                (chartClick)="chartClicked($event)">
+    </base-chart>
   </div>
 
 </ion-content>
