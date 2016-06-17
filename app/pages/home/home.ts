@@ -58,13 +58,13 @@ export class HomePage {
     animation: true,
     responsive: true,
     maintainAspectRatio: false,
-    fontColor: '#a23016',
-    scales: {
-      xAxes: [{
-        type: 'time',
-        color: '#fff',
-      }],
-    },
+    scaleShowHorizontalLines: true,
+    scaleFontColor: '#d8d3c5',
+    scaleGridLineColor: 'rgba(255,255,255,0.15)',
+    scaleLineColor: 'rgba(255,255,255,0.3)',
+    scaleStepWidth: 20,
+    scaleSteps: 6,
+
     multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>',
   };
 
