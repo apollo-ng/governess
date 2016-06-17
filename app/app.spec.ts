@@ -6,7 +6,7 @@ import { HelpPage }                                        from './pages/help/he
 
 resetBaseTestProviders();
 
-setBaseTestProviders(
+setBaseTestProviders (
   TEST_BROWSER_STATIC_PLATFORM_PROVIDERS,
   [
     BROWSER_APP_DYNAMIC_PROVIDERS,
@@ -17,6 +17,7 @@ setBaseTestProviders(
 let governessUIApp: GovernessUIApp = null;
 
 class MockClass {
+
   public ready(): any {
     return new Promise((resolve: Function) => {
       resolve();
@@ -39,8 +40,8 @@ describe('GovernessUIApp', () => {
     governessUIApp = new GovernessUIApp(mockClass, mockClass);
   });
 
-  it('initializes with 6 possible pages', () => {
-    expect(governessUIApp['pages'].length).toEqual(6);
+  it('initializes with 7 possible pages', () => {
+    expect(governessUIApp['pages'].length).toEqual(7);
   });
 
   it('initializes with a root page', () => {
@@ -56,7 +57,7 @@ describe('GovernessUIApp', () => {
     // cant be bothered to set up DOM testing for app.ts to get access to @ViewChild (Nav)
     governessUIApp['nav'] = (<any>governessUIApp['menu']);
     spyOn(governessUIApp['nav'], 'setRoot');
-    governessUIApp.openPage(governessUIApp['pages'][4]);
+    governessUIApp.openPage(governessUIApp['pages'][5]);
     expect(governessUIApp['menu']['close']).toHaveBeenCalled();
     expect(governessUIApp['nav'].setRoot).toHaveBeenCalledWith(HelpPage);
   });

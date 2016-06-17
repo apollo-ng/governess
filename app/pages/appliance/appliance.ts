@@ -3,13 +3,17 @@
 import {Component} from '@angular/core';
 import {ActionSheet, Modal, NavController, NavParams, Platform, ViewController} from 'ionic-angular';
 
-/*
+////////////////////////////////////////////////////////////////////////
 
-*/
+////////////////////////////////////////////////////////////////////////
 
-@Component({
+@Component ({
   templateUrl: 'build/pages/appliance/appliance.html',
 })
+
+////////////////////////////////////////////////////////////////////////
+//
+//
 
 export class AppliancePage {
 
@@ -17,7 +21,9 @@ export class AppliancePage {
   public appliance: any;
 
   constructor(
+
     nav: NavController
+
   ) {
 
     this.nav = nav;

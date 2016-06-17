@@ -24,11 +24,10 @@ import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
 
 export class HomePage {
 
+  @LocalStorage() public config: any;
+
   public nav: NavController;
   private storage: LocalStorageService;
-
-  @LocalStorage()
-  public config: any;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -59,7 +58,13 @@ export class HomePage {
     animation: true,
     responsive: true,
     maintainAspectRatio: false,
-    defaultFontColor: '#a23016',
+    fontColor: '#a23016',
+    scales: {
+      xAxes: [{
+        type: 'time',
+        color: '#fff',
+      }],
+    },
     multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>',
   };
 

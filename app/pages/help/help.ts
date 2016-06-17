@@ -1,20 +1,29 @@
 'use strict';
 
-import {NavController, Page} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
-/*
+////////////////////////////////////////////////////////////////////////
 
-*/
+////////////////////////////////////////////////////////////////////////
 
-@Page({
+@Component ({
   templateUrl: 'build/pages/help/help.html',
 })
+
+////////////////////////////////////////////////////////////////////////
+//
+//
 
 export class HelpPage {
 
   public nav: NavController;
 
-  constructor(nav: NavController) {
+  constructor (
+
+    nav: NavController
+
+  ) {
     this.nav = nav;
   }
 

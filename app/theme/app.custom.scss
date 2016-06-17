@@ -35,3 +35,7 @@ ion-menu ion-toolbar .toolbar-background {
     box-shadow: none;
 }
 
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}

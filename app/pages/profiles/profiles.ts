@@ -1,17 +1,19 @@
 'use strict';
 
-import {NavController, Page} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
-/**
- * @ngdoc function
- * @name governess.controller:listProfiles
- * @description
- * # listProfiles
- */
+////////////////////////////////////////////////////////////////////////
 
-@Page({
+////////////////////////////////////////////////////////////////////////
+
+@Component ({
   templateUrl: 'build/pages/profiles/profiles.html',
 })
+
+////////////////////////////////////////////////////////////////////////
+//
+//
 
 export class ProfilesPage {
 
@@ -19,7 +21,11 @@ export class ProfilesPage {
   private searchQuery: string;
   private profiles: Array<any>;
 
-  constructor(nav: NavController) {
+  constructor (
+
+    nav: NavController
+
+  ) {
 
     this.nav = nav;
     this.searchQuery = '';

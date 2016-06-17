@@ -11,11 +11,14 @@ import { Platform,
 
 import { StatusBar }                from 'ionic-native';
 
-import { NG2_WEBSTORAGE }           from 'ng2-webstorage';
+import { NG2_WEBSTORAGE,
+         LocalStorageService,
+         LocalStorage }             from 'ng2-webstorage';
 
 import { HomePage }                 from './pages/home/home';
 import { ProfilesPage }             from './pages/profiles/profiles';
 import { AppliancePage }            from './pages/appliance/appliance';
+import { LogPage }                  from './pages/log/log';
 import { SettingsPage }             from './pages/settings/settings';
 import { HelpPage }                 from './pages/help/help';
 import { AboutPage }                from './pages/about/about';
@@ -35,6 +38,7 @@ import { AboutPage }                from './pages/about/about';
 export class GovernessUIApp {
 
   @ViewChild(Nav) private nav: Nav;
+  @LocalStorage() public config: Object;
 
   private rootPage: Type;
   private pages: Array<{title: string, component: Type}>;
@@ -54,14 +58,24 @@ export class GovernessUIApp {
     this.platform = platform;
     this.menu = menu;
 
+    if (!this.config) {
+      console.log('Im a Virgin');
+      this.config = [{ 'lastView': HomePage, }];
+    }
+
     // Define which page the app should show by default
-    this.rootPage = HomePage;
+    if (this.config.lastView) {
+      this.rootPage = this.config.lastView;
+    } else {
+      this.rootPage = HomePage;
+    }
 
     // Set up pages of side menu
     this.pages = [
       { title: 'Home',      component: HomePage       },
       { title: 'Appliance', component: AppliancePage  },
       { title: 'Profiles',  component: ProfilesPage   },
+      { title: 'Log',       component: LogPage        },
       { title: 'Settings',  component: SettingsPage   },
       { title: 'Help',      component: HelpPage       },
       { title: 'About',     component: AboutPage      },

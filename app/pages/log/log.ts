@@ -7,15 +7,15 @@ import { NavController } from 'ionic-angular';
 
 ////////////////////////////////////////////////////////////////////////
 
-@Component ({
-  templateUrl: 'build/pages/about/about.html',
+@Component({
+  templateUrl: 'build/pages/log/log.html',
 })
 
 ////////////////////////////////////////////////////////////////////////
 //
 //
 
-export class AboutPage {
+export class LogPage {
 
   public nav: NavController;
 
