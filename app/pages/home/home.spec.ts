@@ -14,7 +14,7 @@ import {
 
 import { provide }              from '@angular/core';
 import { HomePage }                from './home';
-import { Utils }                from '../../services/utils';
+import { Utils }                from '../../components/utils/utils';
 
 import {
   Config,
@@ -25,8 +25,8 @@ import {
   Platform,
 }                               from 'ionic-angular';
 
-import {CHART_DIRECTIVES} from '../../services/charts';
-import {LocalStorageService} from 'ng2-webstorage';
+import { CHART_DIRECTIVES } from '../../components/charts/charts';
+import { LocalStorageService } from 'ng2-webstorage';
 
 class MockClass {
 

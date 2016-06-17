@@ -6,8 +6,10 @@
 
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {CHART_DIRECTIVES} from '../../services/charts';
+
 import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
+
+import {CHART_DIRECTIVES} from '../../components/charts/charts';
 import {ConfigService} from '../../providers/config/config';
 
 ////////////////////////////////////////////////////////////////////////

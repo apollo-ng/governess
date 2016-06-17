@@ -6,13 +6,16 @@ import {
   injectAsync,
   it,
 }                        from '@angular/core/testing';
+
 import {
   ComponentFixture,
   TestComponentBuilder,
 }                        from '@angular/compiler/testing';
+
 import { provide }              from '@angular/core';
 import { AboutPage }                from './about';
-import { Utils }                from '../../services/utils';
+import { Utils }                from '../../components/utils/utils';
+
 import {
   Config,
   Form,

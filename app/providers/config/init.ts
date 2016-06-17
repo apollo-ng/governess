@@ -1,4 +1,5 @@
 export let INITIALCONFIG: Object = {
-    ctrlMode: 'auto',
-    lastView: null,
+    'userLang': 'en',
+    'ctrlMode': 'auto',
+    'lastView': null,
 };
