@@ -1,6 +1,4 @@
-export let INITIALCONFIG: Array<any> = [
-    {
-        ctrlMode: 'auto',
-        lastView: null,
-    },
-];
+export let INITIALCONFIG: Object = {
+    ctrlMode: 'auto',
+    lastView: null,
+};

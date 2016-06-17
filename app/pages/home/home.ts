@@ -143,8 +143,8 @@ export class HomePage {
   public setMode(mode: string): void {
     console.log('pressed ', mode);
     console.log(this.config);
-    this.config[0].ctrlMode = mode;
-    // this.storage.store('config', this.config);
+    this.config.ctrlMode = mode;
+    this.configService.updateConfig(this.config);
   }
 
 }
