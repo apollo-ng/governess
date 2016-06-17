@@ -8,6 +8,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {CHART_DIRECTIVES} from '../../services/charts';
 import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
+import {ConfigService} from '../../providers/config/config';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -16,6 +17,7 @@ import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
 @Component({
   templateUrl: 'build/pages/home/home.html',
   directives: [CHART_DIRECTIVES],
+  providers: [ConfigService],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -27,22 +29,28 @@ export class HomePage {
   @LocalStorage() public config: any;
 
   public nav: NavController;
-  private storage: LocalStorageService;
+  public configService: ConfigService;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
     nav: NavController,
-    storage: LocalStorageService
+    configService: ConfigService
 
   ) {
 
     this.nav = nav;
-    this.storage = storage;
+    this.configService = configService;
     this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
 
   }
+
+    private ngOnInit(): void {
+        this.configService.findAll().subscribe(
+            data => this.config = data
+        );
+    }
 
   //////////////////////////////////////////////////////////////////////
 
@@ -64,7 +72,6 @@ export class HomePage {
     scaleLineColor: 'rgba(255,255,255,0.3)',
     scaleStepWidth: 20,
     scaleSteps: 6,
-
     multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>',
   };
 
@@ -135,8 +142,9 @@ export class HomePage {
 
   public setMode(mode: string): void {
     console.log('pressed ', mode);
-    this.config.ctrlMode = mode;
-    this.storage.store('config', this.config);
+    console.log(this.config);
+    this.config[0].ctrlMode = mode;
+    // this.storage.store('config', this.config);
   }
 
 }

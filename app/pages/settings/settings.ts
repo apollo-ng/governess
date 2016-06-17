@@ -2,7 +2,6 @@
 
 import { Component } from '@angular/core';
 import { NavController, Toast } from 'ionic-angular';
-import { LocalStorageService, LocalStorage} from 'ng2-webstorage';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -18,23 +17,16 @@ import { LocalStorageService, LocalStorage} from 'ng2-webstorage';
 
 export class SettingsPage {
 
-  @LocalStorage() public config: any;
-
   public nav: NavController;
-  private storage: LocalStorageService;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    nav: NavController,
-    storage: LocalStorageService
+    nav: NavController
 
   ) {
     this.nav = nav;
-    this.storage = storage;
-    this.config.lastView = SettingsPage;
-    this.storage.store('config', this.config);
   }
 
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)

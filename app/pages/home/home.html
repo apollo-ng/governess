@@ -47,7 +47,7 @@
 </ion-content>
 
 <ion-toolbar position="bottom" dark>
-  <ion-segment [(ngModel)]="config.ctrlMode">
+  <ion-segment [(ngModel)]="config[0].ctrlMode">
     <ion-segment-button value="man" (ionSelect)="setMode('man')">
       Manual
     </ion-segment-button>
