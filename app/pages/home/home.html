@@ -30,19 +30,37 @@
      </ion-row>
   </ion-grid>
 
-  <div class="chart-container">
-    <base-chart class="chart"
-                [data]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [series]="lineChartSeries"
-                [colours]="lineChartColours"
-                [legend]="none"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
-    </base-chart>
-  </div>
+    <div [ngSwitch]="config.ctrlMode" style="height: 100%">
+
+    <ion-list *ngSwitchWhen="'man'">
+      <ion-item>
+        <ion-label>Temperature</ion-label>
+        <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
+         <ion-icon small range-left name="thermometer"></ion-icon>
+         <ion-icon range-right name="thermometer"></ion-icon>
+        </ion-range>
+      </ion-item>
+
+    </ion-list>
+
+          <div class="chart-container" *ngSwitchWhen="'auto'" >
+            <base-chart class="chart"
+                        [data]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [series]="lineChartSeries"
+                        [colours]="lineChartColours"
+                        [legend]="none"
+                        [chartType]="lineChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">
+            </base-chart>
+          </div>
+        <ion-list *ngSwitchWhen="'cron'">
+           Listing
+        </ion-list>
+    </div>
+
 
 </ion-content>
 
