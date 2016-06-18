@@ -2,8 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
-import { LocalStorageService, LocalStorage } from 'ng2-webstorage';
+import { UUID }       from 'angular2-uuid';
 import { INITIALCONFIG } from './init.ts';
 
 ////////////////////////////////////////////////////////////////////////
@@ -20,40 +19,31 @@ import { INITIALCONFIG } from './init.ts';
 
 export class ConfigService {
 
-  @LocalStorage() public config: any;
-  private storage: LocalStorageService;
+  public config: any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    storage: LocalStorageService
-
   ) {
 
-    this.storage = storage;
-    console.log('ConfigService constructed');
-    console.log('ConfigService in LS: ', this.config);
-
-    if (!this.config) {
-      console.log('Virgin Run - Setting up initial Config');
-      this.storage.store('config', INITIALCONFIG);
-    }
-
+    if (!this.config) { this.init(); }
+    let uuid: string = UUID.UUID();
+    console.log(uuid);
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  public findAll(): any {
+  public init(): any {
+      this.config = INITIALCONFIG;
+      console.log('Setting up initial Config', this.config);
+  };
+
+  public get(): any {
     return Observable.create(observer => {
       observer.next(this.config);
       observer.complete();
     });
-  }
-
-  public updateConfig(data: Object): void {
-    console.log('Updating:', data);
-    this.storage.store('config', data);
   }
 
 }

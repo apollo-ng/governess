@@ -2,6 +2,7 @@
 
 import { Component } from '@angular/core';
 import { NavController, Toast } from 'ionic-angular';
+import { ConfigService } from '../../providers/config/config';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -9,6 +10,7 @@ import { NavController, Toast } from 'ionic-angular';
 
 @Component ({
   templateUrl: 'build/pages/settings/settings.html',
+  providers: [ ConfigService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -18,15 +20,24 @@ import { NavController, Toast } from 'ionic-angular';
 export class SettingsPage {
 
   public nav: NavController;
+  public configService: ConfigService;
+  public config: any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    nav: NavController
+    nav: NavController,
+    configService: ConfigService
 
   ) {
+
     this.nav = nav;
+    this.configService = configService;
+
+    this.configService.get().subscribe(
+      data => this.config = data
+    );
   }
 
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
@@ -37,7 +48,7 @@ export class SettingsPage {
       message: 'User was added successfully',
       duration: 3000,
     });
-
+    this.configService.init();
     this.nav.present(toast);
   }
 

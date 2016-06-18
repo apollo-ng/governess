@@ -7,8 +7,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
-import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
-
 import {CHART_DIRECTIVES} from '../../components/charts/charts';
 import {ConfigService} from '../../providers/config/config';
 
@@ -18,8 +16,8 @@ import {ConfigService} from '../../providers/config/config';
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  directives: [CHART_DIRECTIVES],
-  providers: [ConfigService],
+  directives: [ CHART_DIRECTIVES ],
+  providers: [ ConfigService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -28,7 +26,8 @@ import {ConfigService} from '../../providers/config/config';
 
 export class HomePage {
 
-  @LocalStorage() public config: any;
+  // @LocalStorage() public config: any;
+  public config: any;
 
   public nav: NavController;
   public configService: ConfigService;
@@ -46,13 +45,11 @@ export class HomePage {
     this.configService = configService;
     this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
 
-  }
+    this.configService.get().subscribe(
+      data => this.config = data
+    );
 
-    private ngOnInit(): void {
-        this.configService.findAll().subscribe(
-            data => this.config = data
-        );
-    }
+  }
 
   //////////////////////////////////////////////////////////////////////
 
@@ -146,7 +143,7 @@ export class HomePage {
     console.log('pressed ', mode);
     console.log(this.config);
     this.config.ctrlMode = mode;
-    this.configService.updateConfig(this.config);
+    // this.configService.updateConfig(this.config);
   }
 
 }

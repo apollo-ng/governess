@@ -11,7 +11,9 @@ import { Platform,
 
 import { StatusBar }                from 'ionic-native';
 
-import { NG2_WEBSTORAGE }           from 'ng2-webstorage';
+import { UUID }       from 'angular2-uuid';
+
+import { ConfigService }            from './providers/config/config';
 
 import { HomePage }                 from './pages/home/home';
 import { ProfilesPage }             from './pages/profiles/profiles';
@@ -75,6 +77,7 @@ export class GovernessUIApp {
   //////////////////////////////////////////////////////////////////////
 
   private initializeApp(): void {
+
     this.platform.ready().then (
       () => {
         // Okay, so the platform is ready and our plugins are available.
@@ -82,17 +85,18 @@ export class GovernessUIApp {
         StatusBar.styleDefault();
       }
     );
+
   }
 
   //////////////////////////////////////////////////////////////////////
 
   public openPage(page: any): void {
-    console.log(page);
-    console.log(this.menu);
+
     // Close the menu when clicking a link from the menu
     this.menu.close();
     // Navigate to the new page, if it is not the current page
     this.nav.setRoot(page.component);
+
   }
 
 }
@@ -105,7 +109,7 @@ export class GovernessUIApp {
 // Set any config for your app as the third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
 
-ionicBootstrap(GovernessUIApp, [ NG2_WEBSTORAGE ], {
+ionicBootstrap(GovernessUIApp, [ ConfigService ], {
   modalEnter: 'modal-slide-in',
   modalLeave: 'modal-slide-out',
   tabbarPlacement: 'top',

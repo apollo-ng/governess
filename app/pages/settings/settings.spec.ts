@@ -25,6 +25,8 @@ import {
   Platform,
 }                               from 'ionic-angular';
 
+import {ConfigService} from '../../providers/config/config';
+
 class MockClass {
   public get(): any {
     return {};
@@ -51,6 +53,7 @@ describe('SettingsPage', () => {
     provide(Config, {useClass: MockClass}),
     provide(App, {useClass: MockClass}),
     provide(Platform, {useClass: MockClass}),
+    provide(ConfigService, {useClass: MockClass}),
   ]);
 
   beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
