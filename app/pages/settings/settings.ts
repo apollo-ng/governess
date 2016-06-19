@@ -10,7 +10,6 @@ import { ConfigService } from '../../providers/config/config';
 
 @Component ({
   templateUrl: 'build/pages/settings/settings.html',
-  providers: [ ConfigService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -21,6 +20,7 @@ export class SettingsPage {
 
   public nav: NavController;
   public configService: ConfigService;
+
   public config: any;
 
   //////////////////////////////////////////////////////////////////////
@@ -35,9 +35,16 @@ export class SettingsPage {
     this.nav = nav;
     this.configService = configService;
 
+    this.configService.getConfig().then(config => {
+      this.config = config;
+      console.log('got a config', config);
+    });
+
+/*
     this.configService.get().subscribe(
       data => this.config = data
     );
+  */
   }
 
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
@@ -48,7 +55,7 @@ export class SettingsPage {
       message: 'User was added successfully',
       duration: 3000,
     });
-    this.configService.init();
+    this.configService.reset();
     this.nav.present(toast);
   }
 

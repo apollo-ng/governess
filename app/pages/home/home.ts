@@ -17,7 +17,6 @@ import {ConfigService} from '../../providers/config/config';
 @Component({
   templateUrl: 'build/pages/home/home.html',
   directives: [ CHART_DIRECTIVES ],
-  providers: [ ConfigService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -26,11 +25,10 @@ import {ConfigService} from '../../providers/config/config';
 
 export class HomePage {
 
-  // @LocalStorage() public config: any;
-  public config: any;
-
   public nav: NavController;
   public configService: ConfigService;
+
+  public config: any;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -41,13 +39,16 @@ export class HomePage {
 
   ) {
 
+    this.config = {};
     this.nav = nav;
     this.configService = configService;
-    this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
 
-    this.configService.get().subscribe(
-      data => this.config = data
-    );
+    configService.getConfig().then(config => {
+      // console.log('got a config', config);
+      this.config = config;
+    });
+
+    this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
 
   }
 
@@ -69,7 +70,7 @@ export class HomePage {
     scaleFontColor: '#d8d3c5',
     scaleGridLineColor: 'rgba(255,255,255,0.15)',
     scaleLineColor: 'rgba(255,255,255,0.3)',
-    scaleStepWidth: 20,
+    scaleStepWidth: 2,
     scaleSteps: 6,
     multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>',
   };
@@ -140,10 +141,13 @@ export class HomePage {
   }
 
   public setMode(mode: string): void {
+    console.log('pre-update conf ', this.config);
     console.log('pressed ', mode);
-    console.log(this.config);
-    this.config.ctrlMode = mode;
-    // this.configService.updateConfig(this.config);
+    let cn: any = this.config;
+    cn.ctrlMode = mode;
+    this.config = cn;
+    this.configService.update(this.config);
+    // console.log(this.config);
   }
 
 }

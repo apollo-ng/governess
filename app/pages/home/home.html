@@ -18,19 +18,19 @@
       <ion-col>
         <ion-icon name="flame"></ion-icon>
       </ion-col>
-       <ion-col>
+      <ion-col>
         <ion-icon name="snow"></ion-icon>
       </ion-col>
       <ion-col [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
         <ion-icon name="nuclear"></ion-icon>
       </ion-col>
-       <ion-col>
+      <ion-col>
         <ion-icon name="exit"></ion-icon>
       </ion-col>
-     </ion-row>
+    </ion-row>
   </ion-grid>
 
-    <div [ngSwitch]="config.ctrlMode" style="height: 100%">
+  <div [ngSwitch]="config.ctrlMode" style="height: 100%">
 
     <ion-list *ngSwitchWhen="'man'">
       <ion-item>
@@ -40,27 +40,27 @@
          <ion-icon range-right name="thermometer"></ion-icon>
         </ion-range>
       </ion-item>
-
     </ion-list>
 
-          <div class="chart-container" *ngSwitchWhen="'auto'" >
-            <base-chart class="chart"
-                        [data]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [options]="lineChartOptions"
-                        [series]="lineChartSeries"
-                        [colours]="lineChartColours"
-                        [legend]="none"
-                        [chartType]="lineChartType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)">
-            </base-chart>
-          </div>
-        <ion-list *ngSwitchWhen="'cron'">
-           Listing
-        </ion-list>
+    <div *ngSwitchWhen="'auto'" class="chart-container">
+      <base-chart class="chart"
+                  [data]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [series]="lineChartSeries"
+                  [colours]="lineChartColours"
+                  [legend]="none"
+                  [chartType]="lineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+      </base-chart>
     </div>
 
+    <ion-list *ngSwitchWhen="'cron'">
+       Listing
+    </ion-list>
+
+  </div>
 
 </ion-content>
 

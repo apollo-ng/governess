@@ -11,8 +11,6 @@ import { Platform,
 
 import { StatusBar }                from 'ionic-native';
 
-import { UUID }       from 'angular2-uuid';
-
 import { ConfigService }            from './providers/config/config';
 
 import { HomePage }                 from './pages/home/home';
@@ -35,27 +33,33 @@ import { AboutPage }                from './pages/about/about';
 //
 //
 
-export class GovernessUIApp {
+export class GovernessApp {
 
   @ViewChild(Nav) private nav: Nav;
 
   private rootPage: Type;
   private pages: Array<{title: string, component: Type}>;
+  private menu: MenuController;
 
   public platform: Platform;
-  public menu: MenuController;
+  public configService: ConfigService;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
+    menu: MenuController,
     platform: Platform,
-    menu: MenuController
+    configService: ConfigService
 
   ) {
 
     this.platform = platform;
     this.menu = menu;
+    this.configService = configService;
+
+    // load the config data
+    this.configService.load();
 
     // Define which page the app should show by default
     this.rootPage = HomePage;
@@ -72,6 +76,7 @@ export class GovernessUIApp {
     ];
 
     this.initializeApp();
+
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -109,7 +114,7 @@ export class GovernessUIApp {
 // Set any config for your app as the third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
 
-ionicBootstrap(GovernessUIApp, [ ConfigService ], {
+ionicBootstrap(GovernessApp, [ ConfigService ], {
   modalEnter: 'modal-slide-in',
   modalLeave: 'modal-slide-out',
   tabbarPlacement: 'top',

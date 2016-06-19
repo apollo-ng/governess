@@ -1,9 +1,8 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { UUID }       from 'angular2-uuid';
-import { INITIALCONFIG } from './init.ts';
+import { Storage, SqlStorage }      from 'ionic-angular';
+import { MOCK }                     from './mock.ts';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +18,8 @@ import { INITIALCONFIG } from './init.ts';
 
 export class ConfigService {
 
-  public config: any;
+  private config: any;
+  private storage: Storage;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -27,23 +27,47 @@ export class ConfigService {
 
   ) {
 
-    if (!this.config) { this.init(); }
-    let uuid: string = UUID.UUID();
-    console.log(uuid);
+    this.storage = new Storage (SqlStorage, { name: 'governess'});
+
   }
 
-  //////////////////////////////////////////////////////////////////////
+  public load(): any {
 
-  public init(): any {
-      this.config = INITIALCONFIG;
-      console.log('Setting up initial Config', this.config);
-  };
+    if (this.config) {
+      console.log('Data already loaded');
+      return Promise.resolve(this.config);
+    }
 
-  public get(): any {
-    return Observable.create(observer => {
-      observer.next(this.config);
-      observer.complete();
+    return new Promise(resolve => {
+      this.storage.get('config').then( (config) => {
+        if (!config) {
+          console.log('First use - Initiate DB from Mock', MOCK);
+          this.storage.set('config', JSON.stringify(MOCK));
+          config = MOCK;
+        } else {
+          console.log('Returning user - load config from DB', config);
+          config = JSON.parse(config);
+        }
+        resolve(config);
+      });
     });
+
+  }
+
+  public reset(): any {
+    console.log('resetting...');
+    this.storage.set('config', JSON.stringify(MOCK));
+  }
+
+  public getConfig(): any {
+    return this.load().then(config => {
+      console.log('getConfig called', config);
+      return config;
+    });
+  }
+
+  public update(config: Object): any {
+    this.storage.set('config', JSON.stringify(config));
   }
 
 }

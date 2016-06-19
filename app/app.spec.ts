@@ -1,7 +1,7 @@
 import { ADDITIONAL_TEST_BROWSER_PROVIDERS, TEST_BROWSER_STATIC_PLATFORM_PROVIDERS } from '@angular/platform-browser/testing/browser_static';
 import { BROWSER_APP_DYNAMIC_PROVIDERS }                from '@angular/platform-browser-dynamic';
 import { resetBaseTestProviders, setBaseTestProviders } from '@angular/core/testing';
-import { GovernessUIApp }                                   from './app';
+import { GovernessApp }                                   from './app';
 import { HelpPage }                                        from './pages/help/help';
 
 resetBaseTestProviders();
@@ -14,7 +14,7 @@ setBaseTestProviders (
   ]
 );
 
-let governessUIApp: GovernessUIApp = null;
+let governessApp: GovernessApp = null;
 
 class MockClass {
 
@@ -31,34 +31,38 @@ class MockClass {
   public setRoot(): any {
     return true;
   }
+
+  public load(): any {
+    return true;
+  }
 }
 
-describe('GovernessUIApp', () => {
+describe('GovernessApp', () => {
 
   beforeEach(() => {
     let mockClass: any = (<any>new MockClass());
-    governessUIApp = new GovernessUIApp(mockClass, mockClass);
+    governessApp = new GovernessApp(mockClass, mockClass, mockClass);
   });
 
   it('initializes with 7 possible pages', () => {
-    expect(governessUIApp['pages'].length).toEqual(7);
+    expect(governessApp['pages'].length).toEqual(7);
   });
 
   it('initializes with a root page', () => {
-    expect(governessUIApp['rootPage']).not.toBe(null);
+    expect(governessApp['rootPage']).not.toBe(null);
   });
 
   it('initializes with an app', () => {
-    expect(governessUIApp['app']).not.toBe(null);
+    expect(governessApp['app']).not.toBe(null);
   });
 
   it('opens a page', () => {
-    spyOn(governessUIApp['menu'], 'close');
+    spyOn(governessApp['menu'], 'close');
     // cant be bothered to set up DOM testing for app.ts to get access to @ViewChild (Nav)
-    governessUIApp['nav'] = (<any>governessUIApp['menu']);
-    spyOn(governessUIApp['nav'], 'setRoot');
-    governessUIApp.openPage(governessUIApp['pages'][5]);
-    expect(governessUIApp['menu']['close']).toHaveBeenCalled();
-    expect(governessUIApp['nav'].setRoot).toHaveBeenCalledWith(HelpPage);
+    governessApp['nav'] = (<any>governessApp['menu']);
+    spyOn(governessApp['nav'], 'setRoot');
+    governessApp.openPage(governessApp['pages'][5]);
+    expect(governessApp['menu']['close']).toHaveBeenCalled();
+    expect(governessApp['nav'].setRoot).toHaveBeenCalledWith(HelpPage);
   });
 });
