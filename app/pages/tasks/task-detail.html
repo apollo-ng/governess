@@ -23,6 +23,15 @@
     </base-chart>
   </div>
 
+  <ion-segment>
+    <ion-segment-button value="man" (ionSelect)="setMode('man')">
+      Temperature
+    </ion-segment-button>
+    <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
+      Circulation
+    </ion-segment-button>
+  </ion-segment>
+
   <table class="md-table">
     <thead>
       <tr>
