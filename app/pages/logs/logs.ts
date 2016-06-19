@@ -15,7 +15,7 @@ import { NavController } from 'ionic-angular';
 //
 //
 
-export class LogPage {
+export class LogsPage {
 
   public nav: NavController;
 

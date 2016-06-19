@@ -16,7 +16,7 @@ import { ConfigService }            from './providers/config/config';
 import { HomePage }                 from './pages/home/home';
 import { AppliancePage }            from './pages/appliance/appliance';
 import { TasksPage }                from './pages/tasks/tasks';
-import { LogPage }                  from './pages/log/log';
+import { LogsPage }                 from './pages/logs/logs';
 import { SettingsPage }             from './pages/settings/settings';
 import { HelpPage }                 from './pages/help/help';
 import { AboutPage }                from './pages/about/about';
@@ -57,7 +57,7 @@ export class GovernessApp {
     { title: 'Home',        component: HomePage,        index: 0, icon: 'home' },
     { title: 'Appliance',   component: AppliancePage,   index: 1, icon: 'cube' },
     { title: 'Tasks',       component: TasksPage,       index: 2, icon: 'map' },
-    { title: 'Log',         component: LogPage,         index: 3, icon: 'filing' },
+    { title: 'Logs',        component: LogsPage,        index: 3, icon: 'filing' },
     { title: 'Settings',    component: SettingsPage,    index: 4, icon: 'settings' },
     { title: 'Help',        component: HelpPage,        index: 5, icon: 'help-buoy' },
     { title: 'About',       component: AboutPage,       index: 6, icon: 'information-circle' },

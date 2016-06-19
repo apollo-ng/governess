@@ -1,8 +1,10 @@
+/* tslint:disable:no-unused-variable */
+
 import { ElementFinder } from 'protractor';
 
-let message: ElementFinder = element(by.className('message'));
+let searchField: ElementFinder = element(by.css('.text-input'));
 
-describe('AboutPage', () => {
+describe('LogsPage', () => {
 
   beforeEach(() => {
     browser.get('');
@@ -12,8 +14,8 @@ describe('AboutPage', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(2000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[6].click();
-        expect(browser.getTitle()).toEqual('About');
+        items[3].click();
+        expect(browser.getTitle()).toEqual('Logs');
       });
     });
   });
