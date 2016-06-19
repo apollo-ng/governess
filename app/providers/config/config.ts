@@ -1,8 +1,8 @@
 'use strict';
 
-import { Injectable } from '@angular/core';
-import { Storage, SqlStorage }      from 'ionic-angular';
-import { MOCK }                     from './mock.ts';
+import { Injectable }             from '@angular/core';
+import { Storage, SqlStorage }    from 'ionic-angular';
+import { CONFIGMODEL }            from './config-model.ts';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -41,11 +41,11 @@ export class ConfigService {
     return new Promise(resolve => {
       this.storage.get('config').then( (config) => {
         if (!config) {
-          console.log('First use - Initiate DB from Mock', MOCK);
-          this.storage.set('config', JSON.stringify(MOCK));
-          config = MOCK;
+          console.log('No config in DB - Initiate from CONFIGMODEL', CONFIGMODEL);
+          this.storage.set('config', JSON.stringify(CONFIGMODEL));
+          config = CONFIGMODEL;
         } else {
-          console.log('Returning user - load config from DB', config);
+          console.log('Returning user - Load config from DB', config);
           config = JSON.parse(config);
         }
         resolve(config);
@@ -56,7 +56,7 @@ export class ConfigService {
 
   public reset(): any {
     console.log('resetting...');
-    this.storage.set('config', JSON.stringify(MOCK));
+    this.storage.set('config', JSON.stringify(CONFIGMODEL));
   }
 
   public getConfig(): any {

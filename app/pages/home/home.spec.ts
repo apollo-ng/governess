@@ -26,7 +26,6 @@ import {
 }                               from 'ionic-angular';
 
 import { CHART_DIRECTIVES } from '../../components/charts/charts';
-import {ConfigService} from '../../providers/config/config';
 
 class MockClass {
 
@@ -56,7 +55,7 @@ describe('HomePage', () => {
     provide(App, {useClass: MockClass}),
     provide(Platform, {useClass: MockClass}),
     provide(CHART_DIRECTIVES, {useClass: MockClass}),
-    provide(ConfigService, {useClass: MockClass}),
+
   ]);
 
   beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {

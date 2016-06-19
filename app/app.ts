@@ -23,6 +23,13 @@ import { AboutPage }                from './pages/about/about';
 
 ////////////////////////////////////////////////////////////////////////
 
+interface PageObj {
+  title: string;
+  component: any;
+  icon: string;
+  index?: number;
+}
+
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
@@ -37,12 +44,24 @@ export class GovernessApp {
 
   @ViewChild(Nav) private nav: Nav;
 
-  private rootPage: Type;
-  private pages: Array<{title: string, component: Type}>;
   private menu: MenuController;
 
   public platform: Platform;
   public configService: ConfigService;
+
+  // Define which page the app should show by default
+  public rootPage: Type = HomePage;
+
+  // Set up pages of side menu
+  public pages: PageObj[]= [
+    { title: 'Home',        component: HomePage,        index: 0, icon: 'home' },
+    { title: 'Appliance',   component: AppliancePage,   index: 1, icon: 'cube' },
+    { title: 'Profiles',    component: ProfilesPage,    index: 2, icon: 'map' },
+    { title: 'Log',         component: LogPage,         index: 3, icon: 'filing' },
+    { title: 'Settings',    component: SettingsPage,    index: 4, icon: 'settings' },
+    { title: 'Help',        component: HelpPage,        index: 5, icon: 'help-buoy' },
+    { title: 'About',       component: AboutPage,       index: 6, icon: 'information-circle' },
+  ];
 
   //////////////////////////////////////////////////////////////////////
 
@@ -59,21 +78,7 @@ export class GovernessApp {
     this.configService = configService;
 
     // load the config data
-    this.configService.load();
-
-    // Define which page the app should show by default
-    this.rootPage = HomePage;
-
-    // Set up pages of side menu
-    this.pages = [
-      { title: 'Home',      component: HomePage       },
-      { title: 'Appliance', component: AppliancePage  },
-      { title: 'Profiles',  component: ProfilesPage   },
-      { title: 'Log',       component: LogPage        },
-      { title: 'Settings',  component: SettingsPage   },
-      { title: 'Help',      component: HelpPage       },
-      { title: 'About',     component: AboutPage      },
-    ];
+    configService.load();
 
     this.initializeApp();
 

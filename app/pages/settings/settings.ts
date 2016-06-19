@@ -32,30 +32,33 @@ export class SettingsPage {
 
   ) {
 
+    this.config = {};
     this.nav = nav;
     this.configService = configService;
 
-    this.configService.getConfig().then(config => {
+    configService.getConfig().then(config => {
+      // console.log('got a config', config);
       this.config = config;
-      console.log('got a config', config);
     });
 
-/*
-    this.configService.get().subscribe(
-      data => this.config = data
-    );
-  */
+  }
+
+  public updateConfig(): any {
+    this.configService.update(this.config);
+
   }
 
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
 
   public resetCPD(): void {
 
+    this.configService.reset();
+
     let toast: any = Toast.create({
-      message: 'User was added successfully',
+      message: 'GovernessApp configuration has been reset',
       duration: 3000,
     });
-    this.configService.reset();
+
     this.nav.present(toast);
   }
 

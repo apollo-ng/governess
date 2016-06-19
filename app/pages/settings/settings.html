@@ -28,30 +28,38 @@
 
 <ion-content class="settings">
 
-<ion-list>
-  <ion-list-header>
-    Action
-  </ion-list-header>
-  <ion-item>
-    <ion-icon name="leaf" item-left></ion-icon>
-      Herbology
-    <ion-icon name="rose" item-right></ion-icon>
+  <ion-list>
+    <ion-list-header>
+      Action
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="leaf" item-left></ion-icon>
+        Herbology
+      <ion-icon name="rose" item-right></ion-icon>
+    </ion-item>
+    <ion-item>
+    <ion-label> Allow Push Notifications</ion-label>
+    <ion-toggle checked="false"></ion-toggle>
   </ion-item>
+
   <ion-item>
-  <ion-label> Allow Push Notifications</ion-label>
-  <ion-toggle checked="false"></ion-toggle>
-</ion-item>
+    <ion-label> Allow cookies</ion-label>
+    <ion-toggle checked="true"></ion-toggle>
+  </ion-item>
 
 <ion-item>
-  <ion-label> Allow cookies</ion-label>
-  <ion-toggle checked="true"></ion-toggle>
+  <ion-label>Language</ion-label>
+  <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+    <ion-option value="en">English</ion-option>
+    <ion-option value="de">Deutsch</ion-option>
+    <ion-option value="es">Espanol</ion-option>
+  </ion-select>
 </ion-item>
 
-</ion-list>
+  </ion-list>
 
-<button class="button button-full button-assertive" (click)="resetCPD($event)">
-    Reset CPD Set
+  <button class="button button-full button-assertive" (click)="resetCPD($event)">
+   Reset GovernessApp configuration
   </button>
-
 
 </ion-content>
