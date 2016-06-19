@@ -1,53 +1,83 @@
-<ion-navbar *navbar>
+<ion-navbar *navbar dark class="task-detail-toolbar">
   <ion-title>{{task.name}}</ion-title>
+  <ion-buttons end>
+    <button (click)="openHelp()" primary>
+      <ion-icon name="help"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
 
 <ion-content class="task-detail">
 
-    <div class="chart-container">
-      <base-chart class="chart"
-                  [data]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [series]="lineChartSeries"
-                  [colours]="lineChartColours"
-                  [legend]="none"
-                  [chartType]="lineChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)">
-      </base-chart>
-    </div>
+  <div class="chart-container">
+    <base-chart class="chart"
+                [data]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [series]="lineChartSeries"
+                [colours]="lineChartColours"
+                [legend]="none"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+    </base-chart>
+  </div>
 
-    <table class="md-table">
+  <table class="md-table">
     <thead>
-        <tr>
-            <td style="width: 42px; height: 42px; background-color: rgba(82, 80, 74, 0.49);" ng-click="miniBar = !miniBar" class="index"><i style="font-size: 36px;" class="icon ion-android-more-horizontal"></i></td>
-            <td style="width: 110px">Time</td>
-            <td style="width: 110px;">Target</td>
-            <td>Slope</td>
-            <td>Notes</td>
-            <td style="width: 42px; height: 42px; background-color: rgba(82, 80, 74, 0.49);"><i style="font-size: 24px;" class="icon  ion-toggle" ng-click="pr.active = !pr.active" ng-class="{'button-active': pr.active}"></i></td>
-        </tr>
+      <tr>
+        <td style="width: 42px; height: 42px;"><ion-icon small name="more"></ion-icon></td>
+        <td style="width: 110px">Time</td>
+        <td style="width: 110px;">Target</td>
+        <td>Slope</td>
+        <td>Notes</td>
+        <td style="width: 42px; height: 42px;"><ion-icon small name="switch"></ion-icon></td>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let point of data.points; let i = index">
-            <td class="index">
-                {{i+1}}
-            </td>
-            <td>
-                <input type="number" min="0" ng-min="data.points[i-1][0]" [(ngModel)]="point[0]" required />
-            </td>
-            <td>
-                <input type="number" [(ngModel)]="point[1]" required />
-            </td>
-            <td>
-                <input type="text" [(ngModel)]="data.note" />
-            </td>
-            <td class="action-button-col">
-                <button (click)="dropPoint(data.points, point)"></button>
-            </td>
-        </tr>
+      <tr *ngFor="let point of data.points; let i = index">
+        <td class="index">
+          {{i+1}}
+        </td>
+        <td>
+          <input type="number" min="0" ng-min="data.points[i-1][0]" [(ngModel)]="point[0]" required />
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="point[1]" required />
+        </td>
+        <td>
+           °C/s
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="data.note" />
+        </td>
+        <td class="action-button-col">
+          <button (click)="dropPoint(data.points, point)" danger>
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </td>
+      </tr>
+      <tr style="background: rgba(0,0,0,0.7) !important">
+        <td class="index">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </td>
+        <td>
+          <input type="number" />
+        </td>
+        <td>
+          <input type="number" />
+        </td>
+        <td> °C/s</td>
+        <td>
+          <input type="text" value="" />
+        </td>
+        <td class="action-button-col">
+          <button (click)="dropPoint(data.points, point)" >
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </td>
+      </tr>
     </tbody>
-    </table>
+  </table>
 
 </ion-content>

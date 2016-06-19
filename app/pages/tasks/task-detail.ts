@@ -49,7 +49,7 @@ export class TaskDetailPage {
   private lineChartOptions: any = {
     animation: false,
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     scaleShowHorizontalLines: true,
     scaleFontColor: '#d8d3c5',
     scaleGridLineColor: 'rgba(255,255,255,0.15)',
