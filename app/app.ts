@@ -14,8 +14,8 @@ import { StatusBar }                from 'ionic-native';
 import { ConfigService }            from './providers/config/config';
 
 import { HomePage }                 from './pages/home/home';
-import { ProfilesPage }             from './pages/profiles/profiles';
 import { AppliancePage }            from './pages/appliance/appliance';
+import { TasksPage }                from './pages/tasks/tasks';
 import { LogPage }                  from './pages/log/log';
 import { SettingsPage }             from './pages/settings/settings';
 import { HelpPage }                 from './pages/help/help';
@@ -56,7 +56,7 @@ export class GovernessApp {
   public pages: PageObj[]= [
     { title: 'Home',        component: HomePage,        index: 0, icon: 'home' },
     { title: 'Appliance',   component: AppliancePage,   index: 1, icon: 'cube' },
-    { title: 'Profiles',    component: ProfilesPage,    index: 2, icon: 'map' },
+    { title: 'Tasks',       component: TasksPage,       index: 2, icon: 'map' },
     { title: 'Log',         component: LogPage,         index: 3, icon: 'filing' },
     { title: 'Settings',    component: SettingsPage,    index: 4, icon: 'settings' },
     { title: 'Help',        component: HelpPage,        index: 5, icon: 'help-buoy' },

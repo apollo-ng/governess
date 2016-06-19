@@ -1,36 +1,4 @@
-'use strict';
-
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
-////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////
-
-@Component ({
-  templateUrl: 'build/pages/profiles/profiles.html',
-})
-
-////////////////////////////////////////////////////////////////////////
-//
-//
-
-export class ProfilesPage {
-
-  public nav: NavController;
-  private searchQuery: string;
-  private profiles: Array<any>;
-
-  constructor (
-
-    nav: NavController
-
-  ) {
-
-    this.nav = nav;
-    this.searchQuery = '';
-
-    this.profiles = [{
+export let TASKMODEL: Array<any> = [{
       'id': '123',
       'dev-id': 'xyz',
       'name': 'Reflow Lead-Free',
@@ -79,7 +47,3 @@ export class ProfilesPage {
       }],
       },
     ];
-
-  }
-
-}

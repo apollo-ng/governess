@@ -13,7 +13,7 @@ import {
 }                        from '@angular/compiler/testing';
 
 import { provide }              from '@angular/core';
-import { ProfilesPage }                from './profiles';
+import { TasksPage }                from './tasks';
 import { Utils }                from '../../components/utils/utils';
 
 import {
@@ -39,10 +39,10 @@ class MockClass {
   }
 }
 
-let profilesPage: ProfilesPage = null;
-let profilesPageFixture: ComponentFixture<ProfilesPage> = null;
+let tasksPage: TasksPage = null;
+let tasksPageFixture: ComponentFixture<TasksPage> = null;
 
-describe('ProfilesPage', () => {
+describe('TasksPage', () => {
 
   beforeEachProviders(() => [
     Form,
@@ -55,17 +55,17 @@ describe('ProfilesPage', () => {
 
   beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
     return tcb
-      .createAsync(ProfilesPage)
-      .then((componentFixture: ComponentFixture<ProfilesPage>) => {
-        profilesPageFixture = componentFixture;
-        profilesPage = componentFixture.componentInstance;
-        profilesPageFixture.detectChanges();
+      .createAsync(TasksPage)
+      .then((componentFixture: ComponentFixture<TasksPage>) => {
+        tasksPageFixture = componentFixture;
+        tasksPage = componentFixture.componentInstance;
+        tasksPageFixture.detectChanges();
       })
       .catch(Utils.promiseCatchHandler);
   }));
 
   it('initialises', () => {
-    expect(profilesPage).not.toBeNull();
-    expect(profilesPageFixture).not.toBeNull();
+    expect(tasksPage).not.toBeNull();
+    expect(tasksPageFixture).not.toBeNull();
   });
 });
