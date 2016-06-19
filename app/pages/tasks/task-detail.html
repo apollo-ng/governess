@@ -2,8 +2,52 @@
   <ion-title>{{task.name}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="task-detail">
+<ion-content class="task-detail">
 
-  <p>{{task}}</p>
+    <div class="chart-container">
+      <base-chart class="chart"
+                  [data]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [series]="lineChartSeries"
+                  [colours]="lineChartColours"
+                  [legend]="none"
+                  [chartType]="lineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+      </base-chart>
+    </div>
+
+    <table class="md-table">
+    <thead>
+        <tr>
+            <td style="width: 42px; height: 42px; background-color: rgba(82, 80, 74, 0.49);" ng-click="miniBar = !miniBar" class="index"><i style="font-size: 36px;" class="icon ion-android-more-horizontal"></i></td>
+            <td style="width: 110px">Time</td>
+            <td style="width: 110px;">Target</td>
+            <td>Slope</td>
+            <td>Notes</td>
+            <td style="width: 42px; height: 42px; background-color: rgba(82, 80, 74, 0.49);"><i style="font-size: 24px;" class="icon  ion-toggle" ng-click="pr.active = !pr.active" ng-class="{'button-active': pr.active}"></i></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let point of data.points; let i = index">
+            <td class="index">
+                {{i+1}}
+            </td>
+            <td>
+                <input type="number" min="0" ng-min="data.points[i-1][0]" [(ngModel)]="point[0]" required />
+            </td>
+            <td>
+                <input type="number" [(ngModel)]="point[1]" required />
+            </td>
+            <td>
+                <input type="text" [(ngModel)]="data.note" />
+            </td>
+            <td class="action-button-col">
+                <button (click)="dropPoint(data.points, point)"></button>
+            </td>
+        </tr>
+    </tbody>
+    </table>
 
 </ion-content>

@@ -3,6 +3,11 @@
     <ion-icon name="menu"></ion-icon>
   </button>
   <ion-title>Tasks</ion-title>
+  <ion-buttons end>
+    <button (click)="openHelp()" primary>
+      <ion-icon name="help"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
 
 <ion-toolbar primary>
@@ -11,10 +16,10 @@
 
 <ion-content class="task-list">
 
-<ion-list>
-<ion-item class="task-item" *ngFor="let task of tasks; let p = index" (click)="goToTaskDetail(task)">
-    {{task.name}}
-</ion-item>
-</ion-list>
+  <ion-list>
+    <ion-item class="task-item" *ngFor="let task of tasks; let p = index" (click)="goToTaskDetail(task)">
+      {{task.name}}
+    </ion-item>
+  </ion-list>
 
 </ion-content>

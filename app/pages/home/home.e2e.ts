@@ -38,4 +38,14 @@ describe('HomePage', () => {
     });
   });
 
+  it('has a chart', () => {
+    element(by.css('.bar-button-menutoggle')).click().then(() => {
+      browser.driver.sleep(1000); // wait for the animation
+      element.all(by.className('input-wrapper')).then((items) => {
+        items[0].click();
+        expect(element(by.css('canvas')).isPresent()).toEqual(true);
+      });
+    });
+  });
+
 });

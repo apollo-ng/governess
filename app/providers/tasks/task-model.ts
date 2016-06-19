@@ -6,7 +6,7 @@ export let TASKMODEL: Array<any> = [{
       'created': Math.round( new Date().getTime() / 1000 ),
       'notes': '',
       'type': 'profile',
-      'data': [{
+      'data': {
           'control': 'Temperature',
           'active': true,
           'show': true,
@@ -26,24 +26,6 @@ export let TASKMODEL: Array<any> = [{
               [233, 175],
               [300, 50],
           ],
-      }, {
-          'control': 'Circulator',
-          'active': true,
-          'show': true,
-          'options': {
-              'axis': 1,
-              'color': '#614FCA',
-              'drawPoints': false,
-              'pointSize': 4,
-              'strokeWidth': 1,
-              'stepPlot': true,
-          },
-          'points': [
-              [0, 1],
-              [180, 0],
-              [215, 1],
-              [300, 0],
-          ],
-      }],
-      },
+      }
+    },
     ];

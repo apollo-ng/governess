@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TaskService } from '../../providers/tasks/tasks';
 import { TaskDetailPage } from '../tasks/task-detail';
+import { CHART_DIRECTIVES } from '../../components/charts/charts';
 
 ////////////////////////////////////////////////////////////////////////
 
