@@ -63,7 +63,7 @@ export class HomePage {
   private lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   private lineChartSeries: Array<any> = ['Series A', 'Series B', 'Series C'];
   private lineChartOptions: any = {
-    animation: true,
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     scaleShowHorizontalLines: true,

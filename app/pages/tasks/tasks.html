@@ -12,7 +12,7 @@
 <ion-content class="task-list">
 
 <ion-list>
-<ion-item *ngFor="let task of tasks; let p = index" (click)="goToTaskDetail(task)">
+<ion-item class="task-item" *ngFor="let task of tasks; let p = index" (click)="goToTaskDetail(task)">
     {{task.name}}
 </ion-item>
 </ion-list>
