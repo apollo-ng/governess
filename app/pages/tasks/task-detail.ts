@@ -82,6 +82,11 @@ export class TaskDetailPage {
     console.log('help tapped');
   };
 
+  public setMode(mode: string): void {
+    console.log('pre-update conf ', this.config);
+    console.log('pressed ', mode);
+  }
+
   public rgba (colour: any, alpha: any): any {
     return 'rgba(' + colour.concat(alpha).join(',') + ')';
   }

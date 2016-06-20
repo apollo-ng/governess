@@ -24,11 +24,16 @@ for ng2 to get more crowd support.
 
 ## Tests
 
-Contious karma testing during develoment with watcher
+spec tests with phantomjs are horribly broken at the moment
+since it seems to have problems with the chart and most of all
+the sqlstorage subsystem. e2e tests have been extended to cope,
+since they run in chromium and have no issues with both.
+
+### Continuous karma testing during develoment with watcher
 
     $ karma start test/karma.config.js
 
-One-Shot test runs
+### One-Shot test runs
 
     $ npm run test
     $ npm run e2e
@@ -40,7 +45,10 @@ One-Shot test runs
 
 ## Support & Contact
 
-Please use the issue tracker for governess related issues.
+Please use the [issue tracker](https://github.com/apollo-ng/governess/issues)
+for governess related issues.
+
+Join #apollo on freenode.
 
 More info: FIXME
 
