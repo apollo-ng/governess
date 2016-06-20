@@ -11,16 +11,16 @@ log.txt
 .idea/
 .sass-cache/
 .versions/
-coverage/
+governess-app/coverage/
 dist/
-node_modules/
+governess-app/node_modules/
 tmp/
 temp/
-hooks/
-platforms/
-plugins/
-typings/
-www/build/
+governess-app/hooks/
+governess-app/platforms/
+governess-app/plugins/
+governess-app/typings/
+governess-app/www/build/
 
 $RECYCLE.BIN/
 .io-config.json
