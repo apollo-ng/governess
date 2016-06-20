@@ -43,6 +43,13 @@ export class SettingsPage {
 
   }
 
+  //////////////////////////////////////////////////////////////////////
+
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
+
   public updateConfig(): any {
     this.configService.update(this.config);
 

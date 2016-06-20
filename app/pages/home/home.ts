@@ -54,6 +54,11 @@ export class HomePage {
 
   //////////////////////////////////////////////////////////////////////
 
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
+
   private lineChartData: Array<any> = [
     [65, 59, 80, 81, 56, 55, 40],
     [28, 48, 40, 19, 86, 27, 90],

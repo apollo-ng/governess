@@ -201,6 +201,13 @@ export class AppliancePage {
     };
   }
 
+  //////////////////////////////////////////////////////////////////////
+
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
+
   public openMenu(modid: any): any {
     let actionSheet: any = ActionSheet.create({
       title: this.appliance.modules[modid].name,

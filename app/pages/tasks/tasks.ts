@@ -48,6 +48,11 @@ export class TasksPage {
 
   //////////////////////////////////////////////////////////////////////
 
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
+
   public goToTaskDetail(task: any): any {
     console.log('Go to task detail:', task);
     this.nav.push(TaskDetailPage, task);

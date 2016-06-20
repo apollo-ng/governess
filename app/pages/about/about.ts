@@ -19,6 +19,8 @@ export class AboutPage {
 
   public nav: NavController;
 
+  //////////////////////////////////////////////////////////////////////
+
   constructor (
 
     nav: NavController
@@ -26,5 +28,12 @@ export class AboutPage {
   ) {
     this.nav = nav;
   }
+
+  //////////////////////////////////////////////////////////////////////
+
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
 
 }

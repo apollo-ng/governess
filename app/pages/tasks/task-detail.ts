@@ -77,6 +77,11 @@ export class TaskDetailPage {
 
   //////////////////////////////////////////////////////////////////////
 
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
+
   public rgba (colour: any, alpha: any): any {
     return 'rgba(' + colour.concat(alpha).join(',') + ')';
   }

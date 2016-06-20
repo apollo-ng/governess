@@ -8,7 +8,7 @@ import { NavController } from 'ionic-angular';
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
-  templateUrl: 'build/pages/log/log.html',
+  templateUrl: 'build/pages/logs/logs.html',
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -27,4 +27,12 @@ export class LogsPage {
     this.nav = nav;
   }
 
+  //////////////////////////////////////////////////////////////////////
+
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
+  };
+
 }
+
