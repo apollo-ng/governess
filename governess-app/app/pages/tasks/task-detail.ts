@@ -1,5 +1,9 @@
 'use strict';
 
+/* FIXME */
+/* tslint:disable:no-bitwise */
+/* tslint:disable:no-unused-variable */
+
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CHART_DIRECTIVES } from '../../components/charts/charts';
@@ -36,7 +40,6 @@ export class TaskDetailPage {
     this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
 
   }
-
 
   private lineChartData: Array<any> = [
     [65, 59, 80, 81, 56, 55, 40],
@@ -83,7 +86,6 @@ export class TaskDetailPage {
   };
 
   public setMode(mode: string): void {
-    console.log('pre-update conf ', this.config);
     console.log('pressed ', mode);
   }
 

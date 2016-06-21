@@ -20,7 +20,7 @@ import { TaskDetailPage } from '../tasks/task-detail';
 
 export class TasksPage {
 
-  @Input() searchTasks: string;
+  @Input() public searchTasks: string;
 
   private nav: NavController;
   private searchQuery: string;

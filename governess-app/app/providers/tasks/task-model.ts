@@ -1,3 +1,10 @@
+export interface Task {
+  name: string;
+  userLang: string;
+  ctrlMode: string;
+  lastView?: string;
+}
+
 export let TASKMODEL: Array<any> = [{
       'id': '123',
       'dev-id': 'xyz',
@@ -26,6 +33,6 @@ export let TASKMODEL: Array<any> = [{
               [233, 175],
               [300, 50],
           ],
-      }
+      },
     },
     ];
