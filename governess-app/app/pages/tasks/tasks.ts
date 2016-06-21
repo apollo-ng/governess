@@ -1,10 +1,9 @@
 'use strict';
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TaskService } from '../../providers/tasks/tasks';
 import { TaskDetailPage } from '../tasks/task-detail';
-import { CHART_DIRECTIVES } from '../../components/charts/charts';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -20,6 +19,8 @@ import { CHART_DIRECTIVES } from '../../components/charts/charts';
 //
 
 export class TasksPage {
+
+  @Input() searchTasks: string;
 
   private nav: NavController;
   private searchQuery: string;
