@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 1052.3622 744.09448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="architecture.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.88092036"
+     inkscape:cx="585.9464"
+     inkscape:cy="245.31952"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1105"
+     inkscape:window-x="1600"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="448.39468,357.01297"
+       orientation="1,0"
+       id="guide4340" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-308.26772)">
+    <rect
+       style="opacity:1;fill:#96ac62;fill-opacity:1;stroke:#000000;stroke-width:0.92674518;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4136"
+       width="475.74039"
+       height="568.82562"
+       x="27.216244"
+       y="458.59445" />
+    <rect
+       style="opacity:1;fill:#bababa;fill-opacity:0.74074073;stroke:#000000;stroke-width:1.25993824;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4138"
+       width="446.03619"
+       height="276.66843"
+       x="41.982327"
+       y="570.62177" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:-1.36000001px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="185.78586"
+       y="524.40588"
+       id="text4140"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142"
+         x="185.78586"
+         y="524.40588">Appliance (1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="225.2019"
+       y="619.61627"
+       id="text4140-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5"
+         x="225.2019"
+         y="619.61627"
+         style="font-size:27.5px">Module (N)</tspan></text>
+    <rect
+       style="opacity:1;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162"
+       width="134.04938"
+       height="177.3947"
+       x="57.103466"
+       y="655.57703" />
+    <rect
+       style="opacity:1;fill:#e6e6e6;fill-opacity:0.74074073;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-5"
+       width="134.04938"
+       height="177.3947"
+       x="200.38379"
+       y="655.17566" />
+    <rect
+       style="opacity:1;fill:#eeeeee;fill-opacity:0.74074073;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-6"
+       width="134.04938"
+       height="177.3947"
+       x="343.26282"
+       y="655.17566" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="83.935234"
+       y="689.71356"
+       id="text4140-8-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5"
+         x="83.935234"
+         y="689.71356"
+         style="font-size:20px">Inputs (N)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="217.0618"
+       y="691.50073"
+       id="text4140-8-0-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-4"
+         x="217.0618"
+         y="691.50073"
+         style="font-size:20px">Controller (1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="366.22916"
+       y="690.34558"
+       id="text4140-8-0-6-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-4-9"
+         x="366.22916"
+         y="690.34558"
+         style="font-size:20px">Outputs (N)</tspan></text>
+    <rect
+       style="opacity:1;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.68768412;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-9"
+       width="106.46913"
+       height="105.62332"
+       x="70.743126"
+       y="714.33752" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="103.49331"
+       y="761.13489"
+       id="text4140-8-0-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-8"
+         x="103.49331"
+         y="761.13489"
+         style="font-size:15px">Driver</tspan><tspan
+         sodipodi:role="line"
+         x="103.49331"
+         y="779.88489"
+         style="font-size:15px"
+         id="tspan4278">Plugin</tspan></text>
+    <rect
+       style="opacity:1;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.68768412;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-9-1"
+       width="106.46913"
+       height="105.62332"
+       x="214.66708"
+       y="714.05365" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="247.41727"
+       y="760.85101"
+       id="text4140-8-0-2-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-8-3"
+         x="247.41727"
+         y="760.85101"
+         style="font-size:15px">Driver</tspan><tspan
+         sodipodi:role="line"
+         x="247.41727"
+         y="779.60101"
+         style="font-size:15px"
+         id="tspan4278-2">Plugin</tspan></text>
+    <rect
+       style="opacity:1;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.68768412;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-9-4"
+       width="106.46913"
+       height="105.62332"
+       x="357.69928"
+       y="714.05365" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="390.44946"
+       y="760.85101"
+       id="text4140-8-0-2-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-8-31"
+         x="390.44946"
+         y="760.85101"
+         style="font-size:15px">Driver</tspan><tspan
+         sodipodi:role="line"
+         x="390.44946"
+         y="779.60101"
+         style="font-size:15px"
+         id="tspan4278-6">Plugin</tspan></text>
+    <rect
+       style="opacity:0.606;fill:#bababa;fill-opacity:0.74074073;stroke:#000000;stroke-width:0.97538632;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4138-4"
+       width="446.32074"
+       height="165.70569"
+       x="41.335728"
+       y="861.6676" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.606;"
+       x="224.69757"
+       y="910.80438"
+       id="text4140-8-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-4"
+         x="224.69757"
+         y="910.80438"
+         style="font-size:27.5px;">Module (N)</tspan></text>
+    <rect
+       style="opacity:0.606;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.67748904;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-93"
+       width="134.37189"
+       height="81.227219"
+       x="56.437889"
+       y="946.60382" />
+    <rect
+       style="opacity:0.606;fill:#e6e6e6;fill-opacity:0.74074073;stroke:#000000;stroke-width:0.67748904;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-5-3"
+       width="134.37189"
+       height="81.227219"
+       x="199.7182"
+       y="946.20245" />
+    <rect
+       style="opacity:0.606;fill:#eeeeee;fill-opacity:0.74074073;stroke:#000000;stroke-width:0.67748904;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-6-1"
+       width="134.37189"
+       height="81.227219"
+       x="342.59723"
+       y="946.20245" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.606;"
+       x="83.430908"
+       y="980.90167"
+       id="text4140-8-0-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-9"
+         x="83.430908"
+         y="980.90167"
+         style="font-size:20px;">Inputs (N)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.606;"
+       x="216.55746"
+       y="982.68878"
+       id="text4140-8-0-6-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-4-5"
+         x="216.55746"
+         y="982.68878"
+         style="font-size:20px;">Controller (1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:AlteDIN1451Mittelschrift;-inkscape-font-specification:AlteDIN1451Mittelschrift;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.606;"
+       x="377.0766"
+       y="981.53363"
+       id="text4140-8-0-6-4-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142-5-5-4-9-5"
+         x="377.0766"
+         y="981.53363"
+         style="font-size:20px;">Outputs</tspan></text>
+    <rect
+       style="opacity:0.606;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.31435281;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-9-17"
+       width="106.84246"
+       height="21.993599"
+       x="70.052132"
+       y="1005.3391" />
+    <rect
+       style="opacity:0.606;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.31435281;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-9-1-4"
+       width="106.84246"
+       height="21.993599"
+       x="213.97609"
+       y="1005.0552" />
+    <rect
+       style="opacity:0.606;fill:#dfdfdf;fill-opacity:1;stroke:#000000;stroke-width:0.30620429;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4162-9-4-3"
+       width="106.85061"
+       height="20.866571"
+       x="357.00421"
+       y="1005.0511" />
+  </g>
+</svg>
