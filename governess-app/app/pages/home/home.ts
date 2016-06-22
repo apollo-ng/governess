@@ -4,12 +4,12 @@
 /* tslint:disable:no-bitwise */
 /* tslint:disable:no-unused-variable */
 
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import { Component}             from '@angular/core';
+import { NavController }        from 'ionic-angular';
 
-import {CHART_DIRECTIVES} from 'ng2-charts';
+import { CHART_DIRECTIVES }     from 'ng2-charts';
 
-import {ConfigService} from '../../providers/config/config';
+import { ConfigService }        from '../../providers/config/config';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -59,9 +59,9 @@ export class HomePage {
   };
 
   public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension: '0' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B', lineTension: '0' },
-    { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C', lineTension: '0' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension: '0', yAxisID: 'y-axis-1' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B', lineTension: '0', yAxisID: 'y-axis-1' },
+    { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C', lineTension: '0', yAxisID: 'y-axis-2' },
   ];
 
   public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -71,27 +71,46 @@ export class HomePage {
     responsive: true,
     maintainAspectRatio: false,
     legend: { display: false },
-    lineTension: '0.1',
     scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'rgba(255,255,255,0.15)',
+      xAxes: [
+        {
+          gridLines: {
+            color: 'rgba(255,255,255,0.15)',
+          },
+          ticks: {
+            beginAtZero: false,
+            fontColor: '#FFFFFF',
+          },
         },
-        ticks: {
-          beginAtZero: false,
-          fontColor: '#FFFFFF',
+      ],
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          position: 'left',
+          gridLines: {
+            color: 'rgba(255,255,255,0.15)',
+          },
+          ticks: {
+            beginAtZero: false,
+            fontColor: '#FFFFFF',
+            maxTicksLimit: 8,
+          },
         },
-      }],
-      yAxes: [{
-        gridLines: {
-          color: 'rgba(255,255,255,0.15)',
+        {
+          id: 'y-axis-2',
+          type: 'linear',
+          position: 'right',
+          gridLines: {
+            color: 'rgba(255,255,255,0.15)',
+          },
+          ticks: {
+            beginAtZero: false,
+            fontColor: '#FFFFFF',
+            maxTicksLimit: 8,
+          },
         },
-        ticks: {
-          beginAtZero: false,
-          fontColor: '#FFFFFF',
-          maxTicksLimit: 8,
-        },
-      }],
+      ],
     },
   };
 
