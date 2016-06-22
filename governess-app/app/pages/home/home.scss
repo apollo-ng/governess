@@ -47,14 +47,47 @@
   ion-row {
     background: #1f1e1a;
     padding: 5px;
+    border-radius: 5px;
   }
 
   ion-col {
     border: 1px solid #444;
     text-align: center;
+    font-size: 1.8rem;
     margin-right: 5px;
     vertical-align: middle;
+    padding: 0;
+    border-radius: 3px;
+
   }
+
+  .icon-display {
+    text-align: left;
+    border-left-width: 3px;
+  }
+
+    .icon-display ion-icon {
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .icon-display .value {
+      font-size: 2.5rem;
+      display: inline-block;
+      line-height: 1.4em;
+    }
+    .icon-display .unit {
+      font-size: 1.6rem;
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 5px;
+    }
+
+    .icon-status ion-icon {
+      text-align: center;
+      font-size: 1.4em;
+      line-height: 1.4em;
+    }
 
 }
 

@@ -14,22 +14,26 @@
 
   <ion-grid dark>
     <ion-row>
-      <ion-col [ngStyle]="{'background-color': '#FF9800'}">
-        <ion-icon name="thermometer"> 25 °C</ion-icon>
+      <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
+        <ion-icon name="thermometer"></ion-icon>
+        <span class="value">23</span>
+        <span class="unit">°C</span>
       </ion-col>
-      <ion-col [ngStyle]="{'background-color': '#a23016'}">
-        <ion-icon name="thermometer"> 42 °C</ion-icon>
+      <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
+        <ion-icon name="thermometer"></ion-icon>
+        <span class="value">42</span>
+        <span class="unit">°C</span>
       </ion-col>
-      <ion-col>
+      <ion-col width-10 class="icon-status">
         <ion-icon name="flame"></ion-icon>
       </ion-col>
-      <ion-col>
+      <ion-col width-10 class="icon-status">
         <ion-icon name="snow"></ion-icon>
       </ion-col>
-      <ion-col [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
+      <ion-col width-10 class="icon-status" [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
         <ion-icon name="nuclear"></ion-icon>
       </ion-col>
-      <ion-col>
+      <ion-col width-10 class="icon-status">
         <ion-icon name="exit"></ion-icon>
       </ion-col>
     </ion-row>
@@ -41,26 +45,26 @@
       <ion-item>
         <ion-label>Temperature</ion-label>
         <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
-         <ion-icon small range-left name="thermometer"></ion-icon>
-         <ion-icon range-right name="thermometer"></ion-icon>
+          <ion-icon small range-left name="thermometer"></ion-icon>
+          <ion-icon range-right name="thermometer"></ion-icon>
         </ion-range>
       </ion-item>
     </ion-list>
 
     <div *ngSwitchWhen="'auto'" class="chart-container">
     <base-chart class="chart"
-       [datasets]="lineChartData"
-       [labels]="lineChartLabels"
-       [options]="lineChartOptions"
-       [colors]="lineChartColours"
-       [chartType]="lineChartType"
-       (chartHover)="chartHovered()"
-       (chartClick)="chartClicked()">
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColours"
+      [chartType]="lineChartType"
+      (chartHover)="chartHovered()"
+      (chartClick)="chartClicked()">
     </base-chart>
     </div>
 
     <ion-list *ngSwitchWhen="'cron'">
-       Listing
+      Listing
     </ion-list>
 
   </div>
