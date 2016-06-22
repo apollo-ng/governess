@@ -7,7 +7,8 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
-import {CHART_DIRECTIVES} from '../../components/charts/charts';
+import {CHART_DIRECTIVES} from 'ng2-charts';
+
 import {ConfigService} from '../../providers/config/config';
 
 ////////////////////////////////////////////////////////////////////////
@@ -39,16 +40,14 @@ export class HomePage {
 
   ) {
 
-    this.config = {};
     this.nav = nav;
+
+    this.config = {};
     this.configService = configService;
 
-    configService.getConfig().then(config => {
-      // console.log('got a config', config);
-      this.config = config;
-    });
-
-    this.lineChartColours = this.getColours(['#FF9800', '#a23016', '#6d8006']);
+    configService.getConfig().then (
+      config => this.config = config
+    );
 
   }
 
@@ -59,82 +58,87 @@ export class HomePage {
     console.log('help tapped');
   };
 
-  private lineChartData: Array<any> = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90],
-    [18, 48, 77, 9, 100, 27, 40],
+  public lineChartData: Array<any> = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension: '0' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B', lineTension: '0' },
+    { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C', lineTension: '0' },
   ];
 
-  private lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  private lineChartSeries: Array<any> = ['Series A', 'Series B', 'Series C'];
-  private lineChartOptions: any = {
+  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+  public lineChartOptions: any = {
     animation: false,
     responsive: true,
     maintainAspectRatio: false,
-    scaleShowHorizontalLines: true,
-    scaleFontColor: '#d8d3c5',
-    scaleGridLineColor: 'rgba(255,255,255,0.15)',
-    scaleLineColor: 'rgba(255,255,255,0.3)',
-    scaleStepWidth: 2,
-    scaleSteps: 6,
-    multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>',
+    legend: { display: false },
+    lineTension: '0.1',
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: 'rgba(255,255,255,0.15)',
+        },
+        ticks: {
+          beginAtZero: false,
+          fontColor: '#FFFFFF',
+        },
+      }],
+      yAxes: [{
+        gridLines: {
+          color: 'rgba(255,255,255,0.15)',
+        },
+        ticks: {
+          beginAtZero: false,
+          fontColor: '#FFFFFF',
+          maxTicksLimit: 8,
+        },
+      }],
+    },
   };
 
-  private lineChartColours: Array<any>;
-  private lineChartLegend: boolean = true;
-  private lineChartType: string = 'Line';
+  public lineChartColours: Array<any> = [
+    {
+      backgroundColor: 'rgba(255, 152, 0, 0.2)',
+      borderColor: 'rgb(255, 152, 0)',
+      pointRadius: '3',
+      pointBorderWidth: '2',
+      pointBackgroundColor: '#fff',
+      pointBorderColor: 'rgb(255, 152, 0)',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+    },
+    {
+      backgroundColor: 'rgba(162, 48, 22, 0.2)',
+      borderColor: 'rgb(162, 48, 22)',
+      pointRadius: '3',
+      pointBorderWidth: '2',
+      pointBackgroundColor: '#fff',
+      pointBorderColor:  'rgb(162, 48, 22)',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)',
+    },
+    {
+      backgroundColor: 'rgba(109, 128, 6, 0.2)',
+      borderColor: 'rgb(109, 128, 6)',
+      pointRadius: '3',
+      pointBorderWidth: '2',
+      pointBackgroundColor: '#fff',
+      pointBorderColor: 'rgb(109, 128, 6)',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+    },
+  ];
 
-  private randomize(): any {
-    let _lineChartData: Array<any> = [];
-    for (let i: any = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = [];
-      for (let j: any = 0; j < this.lineChartData[i].length; j++) {
-        _lineChartData[i].push(Math.floor((Math.random() * 100) + 1));
+  public lineChartType: string = 'line';
 
+  public randomize(): void {
+    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
+    for (let i: number = 0; i < this.lineChartData.length; i++) {
+      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
+      for (let j: number = 0; j < this.lineChartData[i].data.length; j++) {
+        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
       }
     }
     this.lineChartData = _lineChartData;
-  }
-
-  //////////////////////////////////////////////////////////////////////
-
-  public rgba (colour: any, alpha: any): any {
-    return 'rgba(' + colour.concat(alpha).join(',') + ')';
-  }
-
-  public hexToRgb (hex: any): Array<any> {
-    let bigint: any = parseInt(hex.substr(1), 16),
-    r: any = (bigint >> 16) & 255,
-    g: any = (bigint >> 8) & 255,
-    b: any = bigint & 255;
-    return [r, g, b];
-  }
-
-  public convertColour (colour: any): any {
-    if (typeof colour === 'object' && colour !== null) return colour;
-    if (typeof colour === 'string' && colour[0] === '#')
-      return this.getColour(this.hexToRgb(colour.substr(1)));
-  }
-
-  public getColour (colour: any): any {
-    return {
-      fillColor: this.rgba(colour, 0.2),
-      strokeColor: this.rgba(colour, 1),
-      pointColor: this.rgba(colour, 1),
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: this.rgba(colour, 0.8),
-    };
-  }
-
-  public getColours (colours: any): any {
-    let _clrs: Array<any> = [];
-    colours.forEach(
-      color => {
-        _clrs.push(this.getColour(this.hexToRgb(color)));
-      }
-    );
-    return _clrs;
   }
 
   public chartClicked(e: any): void {
@@ -152,7 +156,6 @@ export class HomePage {
     cn.ctrlMode = mode;
     this.config = cn;
     this.configService.update(this.config);
-    // console.log(this.config);
   }
 
 }

@@ -37,7 +37,7 @@
 
   <div [ngSwitch]="config.ctrlMode" style="height: 100%">
 
-    <ion-list *ngSwitchCase="'man'">
+    <ion-list *ngSwitchWhen="'man'">
       <ion-item>
         <ion-label>Temperature</ion-label>
         <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
@@ -47,21 +47,19 @@
       </ion-item>
     </ion-list>
 
-    <div *ngSwitchCase="'auto'" class="chart-container">
-      <base-chart class="chart"
-                  [data]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [series]="lineChartSeries"
-                  [colours]="lineChartColours"
-                  [legend]="none"
-                  [chartType]="lineChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)">
-      </base-chart>
+    <div *ngSwitchWhen="'auto'" class="chart-container">
+    <base-chart class="chart"
+       [datasets]="lineChartData"
+       [labels]="lineChartLabels"
+       [options]="lineChartOptions"
+       [colors]="lineChartColours"
+       [chartType]="lineChartType"
+       (chartHover)="chartHovered()"
+       (chartClick)="chartClicked()">
+    </base-chart>
     </div>
 
-    <ion-list *ngSwitchCase="'cron'">
+    <ion-list *ngSwitchWhen="'cron'">
        Listing
     </ion-list>
 

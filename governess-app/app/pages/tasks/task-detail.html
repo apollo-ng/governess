@@ -11,15 +11,13 @@
 
   <div class="chart-container">
     <base-chart class="chart"
-                [data]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [series]="lineChartSeries"
-                [colours]="lineChartColours"
-                [legend]="none"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
+       [datasets]="lineChartData"
+       [labels]="lineChartLabels"
+       [options]="lineChartOptions"
+       [colors]="lineChartColours"
+       [chartType]="lineChartType"
+       (chartHover)="chartHovered()"
+       (chartClick)="chartClicked()">
     </base-chart>
   </div>
 

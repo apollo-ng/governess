@@ -69,17 +69,9 @@ gulp.task('build', ['clean'], function(done){
   );
 });
 
-gulp.task('fonts', function(done){
-  return copyFonts({
-    src: [
-      'node_modules/ionic-angular/fonts/**/*.+(ttf|woff|woff2)',
-      'app/theme/fonts/**/*.+(eot|ttf|woff|woff2|svg)'
-    ]
-  });
-});
-
 gulp.task('sass', buildSass);
 gulp.task('html', copyHTML);
+gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
 gulp.task('clean', function(){
   return del('www/build');

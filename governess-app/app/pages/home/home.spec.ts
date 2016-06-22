@@ -25,7 +25,7 @@ import {
   Platform,
 }                               from 'ionic-angular';
 
-import { CHART_DIRECTIVES } from '../../components/charts/charts';
+import {CHART_DIRECTIVES} from 'ng2-charts';
 
 class MockClass {
 
