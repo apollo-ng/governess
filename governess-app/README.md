@@ -3,10 +3,13 @@
 
 :construction: Mobile-First Hybrid-Client WIP :construction:
 
-Based on Angular2/Ionic2 but since it's still early beta and many
-upstream angular modules aren't yet ng2/ts ready it will only serve
-as a conceptual kitchensink and client workflow optimizer while waiting
-for ng2 to get more crowd support.
+Based on Angular2/Ionic2, but since it's still early beta and many
+upstream angular modules aren't yet ng2/ts ready, it will serve
+as angular2/ionic learning ground, conceptual kitchensink and client
+workflow optimizer while waiting for ng2 release to settle for now.
+
+Many features have already been mocked and are currently in the
+process of implementation.
 
 ## Install
 
