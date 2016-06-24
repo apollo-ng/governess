@@ -41,7 +41,7 @@ interface PageObj {
 //
 //
 
-export class GovernessApp {
+export class GovernessApp implements OnInit {
 
   @ViewChild(Nav) private nav: Nav;
 
@@ -82,29 +82,40 @@ export class GovernessApp {
 
   //////////////////////////////////////////////////////////////////////
 
-  private ngOnInit(): void {
+  public ngOnInit(): void {
 
     // load the config data
     this.configService.load();
 
+    // get config data returned into this.config
     this.configService.getConfig().then( data => {
 
       // populate this.config with configService data
       this.config = data;
 
       // Define which page the app should show by default
-      if (this.config.viewPref !== 'last') {
+      if (this.config.viewPref === 'last') {
+
+        if (this.config.lastView) {
+
+          // Set last viewed page, if not null
+          this.rootPage = this.pages.filter (
+            page => page.title.includes(this.config.lastView)
+          )[0].component;
+
+        } else {
+
+          // Fallback to HomePage
+          this.rootPage = this.pages.filter (
+            page => page.title.includes('Home')
+          )[0].component;
+        }
+
+      } else {
 
         // Set selected value from config
         this.rootPage = this.pages.filter(
           page => page.title.includes(this.config.viewPref)
-        )[0].component;
-
-      } else {
-
-        // Set last viewed page
-        this.rootPage = this.pages.filter(
-          page => page.title.includes(this.config.lastView)
         )[0].component;
 
       }
@@ -155,10 +166,14 @@ export class GovernessApp {
 // Set any config for your app as the third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
 
-ionicBootstrap(GovernessApp, [ ConfigService ], {
-  modalEnter: 'modal-slide-in',
-  modalLeave: 'modal-slide-out',
-  tabbarPlacement: 'top',
-  pageTransition: 'ease',
-  prodMode: 'false'}
+ionicBootstrap(
+  GovernessApp,
+  [ ConfigService ],
+  {
+    modalEnter: 'modal-slide-in',
+    modalLeave: 'modal-slide-out',
+    tabbarPlacement: 'top',
+    pageTransition: 'ease',
+    prodMode: 'false',
+  }
 );

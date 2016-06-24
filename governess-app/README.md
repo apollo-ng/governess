@@ -18,9 +18,9 @@ process of implementation.
 Known to work NodeJS & NPM versions:
 
   * NodeJS
-    * 4.4.1 (official gentoo-portage)
+    * 4.4.1 (gentoo-portage stable)
   * NPM
-    * 2.15.6 (official gentoo-portage)
+    * 2.15.6 (gentoo-portage stable)
 
 ### Globals
 

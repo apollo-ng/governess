@@ -13,6 +13,6 @@ export let CONFIGMODEL: Object = {
   'theme'   : 'default-dark',
   'ctrlMode': 'auto',
   'viewPref': 'last',
-  'lastView': null,
+  'lastView': 'Home',
   'manOverr': false,
 };
