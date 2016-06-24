@@ -28,7 +28,7 @@ describe('GovernessApp', () => {
     element(by.css('.bar-button-menutoggle')).click()
       .then(() => {
         browser.driver.sleep(1000); // wait for the animation
-        expect(element.all(by.css('ion-label')).first().getText()).toEqual('Home');
+        expect(element(by.css('ion-menu')).all(by.css('ion-label')).first().getText()).toEqual('Home');
       });
   });
 
@@ -36,7 +36,7 @@ describe('GovernessApp', () => {
     element(by.css('.bar-button-menutoggle')).click()
       .then(() => {
         browser.driver.sleep(1000); // wait for the animation
-        expect(element.all(by.css('ion-label')).last().getText()).toEqual('About');
+        expect(element(by.css('ion-menu')).all(by.css('ion-label')).last().getText()).toEqual('About');
       });
   });
 });
