@@ -11,7 +11,16 @@ workflow optimizer while waiting for ng2 release to settle for now.
 Many features have already been mocked and are currently in the
 process of implementation.
 
-## Install
+## Full Developer Installation
+
+### System-Requirements
+
+Known to work NodeJS & NPM versions:
+
+  * NodeJS
+    * 4.4.1 (official gentoo-portage)
+  * NPM
+    * 2.15.6 (official gentoo-portage)
 
 ### Globals
 

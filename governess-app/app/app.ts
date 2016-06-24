@@ -50,10 +50,9 @@ export class GovernessApp {
 
   public platform:          Platform;
   public config:            any;
-
   public rootPage:          Type;
 
-  // Set up pages of side menu
+  // Populate side menu
   public pages: PageObj[]= [
     { title: 'Home',        component: HomePage,        index: 0, icon: 'home' },
     { title: 'Appliance',   component: AppliancePage,   index: 1, icon: 'cube' },
@@ -68,22 +67,22 @@ export class GovernessApp {
 
   constructor (
 
-    menu: MenuController,
-    platform: Platform,
-    configService: ConfigService
+    menu:                   MenuController,
+    platform:               Platform,
+    configService:          ConfigService
 
   ) {
 
-    this.platform = platform;
-    this.menu = menu;
-    this.configService = configService;
+    this.platform =         platform;
+    this.menu =             menu;
+    this.configService =    configService;
     this.initializeApp();
 
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  ngOnInit() {
+  private ngOnInit(): void {
 
     // load the config data
     this.configService.load();
@@ -93,14 +92,25 @@ export class GovernessApp {
       // populate this.config with configService data
       this.config = data;
 
-      // get and filter page component by title from config
-      let viewPref: any = this.pages.filter( page =>
-        page.title.includes(this.config.viewPref)
-      );
-
       // Define which page the app should show by default
-      this.rootPage = viewPref[0].component;
+      if (this.config.viewPref !== 'last') {
+
+        // Set selected value from config
+        this.rootPage = this.pages.filter(
+          page => page.title.includes(this.config.viewPref)
+        )[0].component;
+
+      } else {
+
+        // Set last viewed page
+        this.rootPage = this.pages.filter(
+          page => page.title.includes(this.config.lastView)
+        )[0].component;
+
+      }
+
     });
+
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -123,6 +133,13 @@ export class GovernessApp {
 
     // Close the menu when clicking a link from the menu
     this.menu.close();
+
+    // Store as lastView in config, if enabled
+    if (this.config.viewPref === 'last') {
+      this.config.lastView = page.title;
+      this.configService.update(this.config);
+    }
+
     // Navigate to the new page, if it is not the current page
     this.nav.setRoot(page.component);
 
