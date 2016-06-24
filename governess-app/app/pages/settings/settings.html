@@ -21,7 +21,9 @@
         <p>Select your preferred entry behaviour</p>
       </ion-label>
       <ion-select [(ngModel)]="config.viewPref" (ngModelChange)="updateConfig()">
-        <ion-option value="home">Home</ion-option>
+        <ion-option value="Home">Home</ion-option>
+        <ion-option value="Appliance">Appliance</ion-option>
+        <ion-option value="Tasks">Tasks</ion-option>
         <ion-option value="last">Last Viewed Page</ion-option>
       </ion-select>
     </ion-item>
@@ -37,7 +39,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="text" item-left></ion-icon>
+      <ion-icon name="bowtie" item-left></ion-icon>
       <ion-label><h2>Theme</h2></ion-label>
       <ion-select [(ngModel)]="config.theme" (ngModelChange)="updateConfig()">
         <ion-option value="default-dark">Default-Dark</ion-option>
@@ -54,7 +56,7 @@
     </ion-item>
 
     <ion-item>
-      <button class="button button-full button-assertive" (click)="resetCPD($event)">
+      <button class="button-full" (click)="resetCPD($event)">
         Reset GovernessApp configuration
       </button>
     </ion-item>

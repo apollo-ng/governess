@@ -18,17 +18,17 @@ import { ConfigService }        from '../../providers/config/config';
 
 export class SettingsPage {
 
-  private nav:          NavController;
+  private nav:              NavController;
+  private configService:    ConfigService;
 
-  public config:        any;
-  public configService: ConfigService;
+  public config:            any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    nav:                NavController,
-    configService:      ConfigService
+    nav:                    NavController,
+    configService:          ConfigService
 
   ) {
 
@@ -44,8 +44,7 @@ export class SettingsPage {
   //////////////////////////////////////////////////////////////////////
 
   public openHelp(): void {
-    // FIXME: Add proper help
-    console.log('help tapped');
+    console.log('help tapped - FIXME: Add proper help');
   }
 
   public updateConfig(): any {

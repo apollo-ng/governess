@@ -2,6 +2,7 @@
 
 import { Component,
          Type,
+         OnInit,
          ViewChild }                from '@angular/core';
 
 import { Platform,
@@ -44,13 +45,13 @@ export class GovernessApp {
 
   @ViewChild(Nav) private nav: Nav;
 
-  private menu: MenuController;
+  private menu:             MenuController;
+  private configService:    ConfigService;
 
-  public platform: Platform;
-  public configService: ConfigService;
+  public platform:          Platform;
+  public config:            any;
 
-  // Define which page the app should show by default
-  public rootPage: Type = HomePage;
+  public rootPage:          Type;
 
   // Set up pages of side menu
   public pages: PageObj[]= [
@@ -76,12 +77,30 @@ export class GovernessApp {
     this.platform = platform;
     this.menu = menu;
     this.configService = configService;
-
-    // load the config data
-    configService.load();
-
     this.initializeApp();
 
+  }
+
+  //////////////////////////////////////////////////////////////////////
+
+  ngOnInit() {
+
+    // load the config data
+    this.configService.load();
+
+    this.configService.getConfig().then( data => {
+
+      // populate this.config with configService data
+      this.config = data;
+
+      // get and filter page component by title from config
+      let viewPref: any = this.pages.filter( page =>
+        page.title.includes(this.config.viewPref)
+      );
+
+      // Define which page the app should show by default
+      this.rootPage = viewPref[0].component;
+    });
   }
 
   //////////////////////////////////////////////////////////////////////
