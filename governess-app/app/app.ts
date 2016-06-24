@@ -27,7 +27,7 @@ import { AboutPage }                from './pages/about/about';
 interface PageObj {
   title: string;
   component: any;
-  index?: number;
+  idx?: number;
   icon: string;
 }
 
@@ -45,22 +45,22 @@ export class GovernessApp implements OnInit {
 
   @ViewChild(Nav) private nav: Nav;
 
-  private menu:             MenuController;
-  private configService:    ConfigService;
+  private menu:           MenuController;
+  private configService:  ConfigService;
 
-  public platform:          Platform;
-  public config:            any;
-  public rootPage:          Type;
+  public platform:        Platform;
+  public config:          any;
+  public rootPage:        Type;
 
   // Populate side menu
   public pages: PageObj[]= [
-    { title: 'Home',        component: HomePage,        index: 0, icon: 'home' },
-    { title: 'Appliance',   component: AppliancePage,   index: 1, icon: 'cube' },
-    { title: 'Tasks',       component: TasksPage,       index: 2, icon: 'map' },
-    { title: 'Logs',        component: LogsPage,        index: 3, icon: 'filing' },
-    { title: 'Settings',    component: SettingsPage,    index: 4, icon: 'settings' },
-    { title: 'Help',        component: HelpPage,        index: 5, icon: 'help-buoy' },
-    { title: 'About',       component: AboutPage,       index: 6, icon: 'information-circle' },
+    { title: 'Home',      component: HomePage,      idx: 0, icon: 'home' },
+    { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'cube' },
+    { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'map' },
+    { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
+    { title: 'Settings',  component: SettingsPage,  idx: 4, icon: 'settings' },
+    { title: 'Help',      component: HelpPage,      idx: 5, icon: 'help-buoy' },
+    { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
   ];
 
   //////////////////////////////////////////////////////////////////////
@@ -159,11 +159,11 @@ export class GovernessApp implements OnInit {
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Bootstrap Governess Main App
+// Bootstrap GovernessApp Main
 ////////////////////////////////////////////////////////////////////////
 // Pass the main app component as the first argument
-// Pass any providers for your app in the second argument
-// Set any config for your app as the third argument:
+// Pass any provider for app in the second argument
+// Set app config in third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
 
 ionicBootstrap(

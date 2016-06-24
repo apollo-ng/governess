@@ -1,9 +1,9 @@
 {
-  "name": "governess-ui",
-  "description": "Angular/Ionic2 hybrid user interface for governess",
+  "name": "governess-app",
+  "description": "Angular2/Ionic2 hybrid user interface for governess",
   "version": "1.0.0",
   "license": "GPL-3.0",
-  "homepage": "https://apollo.open-resource.org/lab:governess",
+  "homepage": "https://apollo.open-resource.org/lab:governess:app",
   "repository": {
     "type": "git",
     "url": "https://github.com/apollo-ng/governess.git"

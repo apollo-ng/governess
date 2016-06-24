@@ -1,8 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
-import { ElementFinder } from 'protractor';
-
-let searchField: ElementFinder = element(by.css('.text-input'));
 
 describe('TasksPage', () => {
 

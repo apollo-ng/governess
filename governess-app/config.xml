@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.apollong.governessui" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>governess</name>
-  <description>Angular/Ionic2 hybrid user interface for governess</description>
-  <author email="talk@apollo.open-resource.org" href="https://apollo.open-resource.org">Apollo-NG Mobile Hackbase</author>
+<widget id="com.apollong.governessapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>governess-app</name>
+  <description>Angular2/Ionic2 hybrid user interface for governess</description>
+  <author email="talk@apollo.open-resource.org" href="https://apollo.open-resource.org/lab:governess:app">Apollo-NG Mobile Hackbase</author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>

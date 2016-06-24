@@ -1,7 +1,7 @@
- governess-app
+governess-app
 ==========
 
-:construction: Mobile-First Hybrid-Client WIP :construction:
+:construction: WIP :construction: Mobile-First Hybrid-Client Client for governess :construction: WIP :construction:
 
 Based on Angular2/Ionic2, but since it's still early beta and many
 upstream angular modules aren't yet ng2/ts ready, it will serve
@@ -22,7 +22,7 @@ Known to work NodeJS & NPM versions:
   * NPM
     * 2.15.6 (gentoo-portage stable)
 
-### Globals
+### Global NodeJS-Requirements
 
     $ npm install -g cordova ionic@beta gulp karma typings
 
@@ -54,7 +54,7 @@ since they run in chromium and have no issues with both.
 
 ## Bootstrapping from scratch
 
-    $ ionic start governess sidemenu -s --v2 --ts
+    $ ionic start governess-app sidemenu -s --v2 --ts
     $ ionic platform add android
 
 ## Support & Contact

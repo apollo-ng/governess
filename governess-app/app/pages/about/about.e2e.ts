@@ -1,6 +1,3 @@
-import { ElementFinder } from 'protractor';
-
-let message: ElementFinder = element(by.className('message'));
 
 describe('AboutPage', () => {
 

@@ -42,39 +42,53 @@
     </ion-row>
   </ion-grid>
 
-  <div *ngIf="config.ctrlMode != 'cron'" class="chart-container">
-    <base-chart class="chart"
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [colors]="lineChartColours"
-      [chartType]="lineChartType"
-      (chartHover)="chartHovered()"
-      (chartClick)="chartClicked()">
-    </base-chart>
-  </div>
+  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 120px)">
 
-  <div [ngSwitch]="config.ctrlMode" style="height: 100%">
+    <div *ngSwitchWhen="'man'" style="height: 100%">
+      <div class="chart-container" style="height: 50%">
+        <base-chart class="chart"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColours"
+          [chartType]="lineChartType"
+          (chartHover)="chartHovered()"
+          (chartClick)="chartClicked()">
+        </base-chart>
+      </div>
+      <ion-list style="height: 50%">
+        <ion-item>
+          <ion-label>Temperature</ion-label>
+          <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
+            <ion-icon small range-left name="thermometer"></ion-icon>
+            <ion-icon range-right name="thermometer"></ion-icon>
+          </ion-range>
+        </ion-item>
+      </ion-list>
+    </div>
 
-    <ion-list *ngSwitchWhen="'man'">
-      <ion-item>
-        <ion-label>Temperature</ion-label>
-        <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
-          <ion-icon small range-left name="thermometer"></ion-icon>
-          <ion-icon range-right name="thermometer"></ion-icon>
-        </ion-range>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngSwitchWhen="'auto'">
-    <ion-item>
-      <ion-icon name="text" item-left></ion-icon>
-      <ion-label>Task</ion-label>
-      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
-        <ion-option value="en">Reflow (Lead-Free)</ion-option>
-      </ion-select>
-    </ion-item>
-    </ion-list>
+    <div *ngSwitchWhen="'auto'" style="height: 100%">
+      <div class="chart-container" style="height: 90%">
+        <base-chart class="chart"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColours"
+          [chartType]="lineChartType"
+          (chartHover)="chartHovered()"
+          (chartClick)="chartClicked()">
+        </base-chart>
+      </div>
+      <ion-list style="height: 10%">
+        <ion-item>
+          <ion-icon name="text" item-left></ion-icon>
+          <ion-label>Task</ion-label>
+          <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+            <ion-option value="en">Reflow (Lead-Free)</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
 
     <ion-list *ngSwitchWhen="'cron'">
       Listing
