@@ -2,6 +2,7 @@
 
 import { Component,
          Type,
+         OnInit,
          ViewChild }                from '@angular/core';
 
 import { Platform,
@@ -40,7 +41,7 @@ interface PageObj {
 //
 //
 
-export class GovernessApp {
+export class GovernessApp implements OnInit {
 
   @ViewChild(Nav) private nav: Nav;
 
@@ -83,6 +84,7 @@ export class GovernessApp {
   //////////////////////////////////////////////////////////////////////
 
   public ngOnInit(): void {
+
     console.log('App ngOnInit');
     this.config = this.configService.get();
 
@@ -112,6 +114,7 @@ export class GovernessApp {
       )[0].component;
 
     }
+
   }
 
   //////////////////////////////////////////////////////////////////////

@@ -1,6 +1,11 @@
+
 import { ADDITIONAL_TEST_BROWSER_PROVIDERS, TEST_BROWSER_STATIC_PLATFORM_PROVIDERS } from '@angular/platform-browser/testing/browser_static';
 import { BROWSER_APP_DYNAMIC_PROVIDERS }                from '@angular/platform-browser-dynamic';
-import { resetBaseTestProviders, setBaseTestProviders } from '@angular/core/testing';
+import { resetBaseTestProviders,
+         setBaseTestProviders,
+         beforeEachProviders } from '@angular/core/testing';
+import { provide }              from '@angular/core';
+import { ConfigService }            from './providers/config/config';
 import { GovernessApp }                                   from './app';
 import { HelpPage }                                        from './pages/help/help';
 
@@ -38,6 +43,10 @@ class MockClass {
 }
 
 describe('GovernessApp', () => {
+
+  beforeEachProviders(() => [
+    provide(ConfigService, {useClass: MockClass}),
+  ]);
 
   beforeEach(() => {
     let mockClass: any = (<any>new MockClass());
