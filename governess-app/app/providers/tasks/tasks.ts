@@ -1,7 +1,6 @@
 'use strict';
 
 import { Injectable }             from '@angular/core';
-import { Storage, SqlStorage }    from 'ionic-angular';
 import { TASKMODEL }              from './task-model.ts';
 
 ////////////////////////////////////////////////////////////////////////
@@ -19,7 +18,6 @@ import { TASKMODEL }              from './task-model.ts';
 export class TaskService {
 
   private tasks: any;
-  private storage: Storage;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -27,47 +25,28 @@ export class TaskService {
 
   ) {
 
-    this.storage = new Storage (SqlStorage, { name: 'governess'});
+    let tasks: string = localStorage.getItem('tasks');
 
-  }
-
-  public load(): any {
-
-    if (this.tasks) {
-      console.log('Tasks already loaded');
-      return Promise.resolve(this.tasks);
+    if (!tasks) {
+      console.log('No tasks in DB - Initiate from TASKMODEL', TASKMODEL);
+      localStorage.setItem('tasks', JSON.stringify(TASKMODEL));
+      this.tasks = TASKMODEL;
+    } else {
+      console.log('Returning user - Load tasks from DB', tasks);
+      this.tasks = JSON.parse(tasks);
     }
 
-    return new Promise(resolve => {
-      this.storage.get('tasks').then( (tasks) => {
-        if (!tasks) {
-          console.log('No tasks in DB - Initiate from TASKMODEL', TASKMODEL);
-          this.storage.set('tasks', JSON.stringify(TASKMODEL));
-          tasks = TASKMODEL;
-        } else {
-          console.log('Returning user - Load tasks from DB', tasks);
-          tasks = JSON.parse(tasks);
-        }
-        resolve(tasks);
-      });
-    });
-
   }
 
-  public reset(): any {
-    console.log('resetting...');
-    this.storage.set('config', JSON.stringify(TASKMODEL));
+  //////////////////////////////////////////////////////////////////////
+
+  public get(): any {
+    return this.tasks;
   }
 
-  public getTasks(): any {
-    return this.load().then(tasks => {
-      console.log('getTasks called', tasks);
-      return tasks;
-    });
-  }
-
-  public update(config: Object): any {
-    this.storage.set('config', JSON.stringify(config));
+  public update(tasks: Object): any {
+    console.log('Updating tasks...');
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
 }

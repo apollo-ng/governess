@@ -45,9 +45,7 @@ export class HomePage {
     this.config = {};
     this.configService = configService;
 
-    configService.getConfig().then (
-      config => this.config = config
-    );
+    this.config = this.configService.get();
 
   }
 

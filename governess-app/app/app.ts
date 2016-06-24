@@ -2,7 +2,6 @@
 
 import { Component,
          Type,
-         OnInit,
          ViewChild }                from '@angular/core';
 
 import { Platform,
@@ -41,14 +40,14 @@ interface PageObj {
 //
 //
 
-export class GovernessApp implements OnInit {
+export class GovernessApp {
 
   @ViewChild(Nav) private nav: Nav;
 
   private menu:           MenuController;
-  private configService:  ConfigService;
 
   public platform:        Platform;
+  public configService:   ConfigService;
   public config:          any;
   public rootPage:        Type;
 
@@ -76,6 +75,7 @@ export class GovernessApp implements OnInit {
     this.platform =         platform;
     this.menu =             menu;
     this.configService =    configService;
+
     this.initializeApp();
 
   }
@@ -83,45 +83,35 @@ export class GovernessApp implements OnInit {
   //////////////////////////////////////////////////////////////////////
 
   public ngOnInit(): void {
+    console.log('App ngOnInit');
+    this.config = this.configService.get();
 
-    // load the config data
-    this.configService.load();
+    // Define which page the app should show by default
+    if (this.config.viewPref === 'last') {
 
-    // get config data returned into this.config
-    this.configService.getConfig().then( data => {
+      if (this.config.lastView) {
 
-      // populate this.config with configService data
-      this.config = data;
-
-      // Define which page the app should show by default
-      if (this.config.viewPref === 'last') {
-
-        if (this.config.lastView) {
-
-          // Set last viewed page, if not null
-          this.rootPage = this.pages.filter (
-            page => page.title.includes(this.config.lastView)
-          )[0].component;
-
-        } else {
-
-          // Fallback to HomePage
-          this.rootPage = this.pages.filter (
-            page => page.title.includes('Home')
-          )[0].component;
-        }
+        // Set last viewed page, if not null
+        this.rootPage = this.pages.filter (
+          page => page.title.includes(this.config.lastView)
+        )[0].component;
 
       } else {
 
-        // Set selected value from config
-        this.rootPage = this.pages.filter(
-          page => page.title.includes(this.config.viewPref)
+        // Fallback to HomePage
+        this.rootPage = this.pages.filter (
+          page => page.title.includes('Home')
         )[0].component;
-
       }
 
-    });
+    } else {
 
+      // Set selected value from config
+      this.rootPage = this.pages.filter(
+        page => page.title.includes(this.config.viewPref)
+      )[0].component;
+
+    }
   }
 
   //////////////////////////////////////////////////////////////////////

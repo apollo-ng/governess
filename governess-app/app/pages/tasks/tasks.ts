@@ -40,10 +40,8 @@ export class TasksPage {
     this.nav = nav;
     this.searchQuery = '';
 
-    taskService.getTasks().then( tasks => {
-      // console.log('got a config', config);
-      this.tasks = tasks;
-    });
+    this.taskService = taskService;
+    this.tasks = this.taskService.get();
 
   }
 

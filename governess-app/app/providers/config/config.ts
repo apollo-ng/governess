@@ -1,7 +1,6 @@
 'use strict';
 
 import { Injectable }             from '@angular/core';
-import { Storage, SqlStorage }    from 'ionic-angular';
 import { CONFIGMODEL }            from './config-model.ts';
 
 ////////////////////////////////////////////////////////////////////////
@@ -18,58 +17,39 @@ import { CONFIGMODEL }            from './config-model.ts';
 
 export class ConfigService {
 
-  private config:   any;
-  private storage:  Storage;
+  public config:   any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
   ) {
+    let config: string = localStorage.getItem('config');
 
-    this.storage = new Storage (SqlStorage, { name: 'governess'});
-
+    if (!config) {
+      console.log('No config in DB - Initiate from CONFIGMODEL', CONFIGMODEL);
+      localStorage.setItem('config', JSON.stringify(CONFIGMODEL));
+      this.config = CONFIGMODEL;
+    } else {
+      console.log('Returning user - Load config from DB', config);
+      this.config = JSON.parse(config);
+    }
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  public load(): any {
-
-    if (this.config) {
-      console.log('Data already loaded');
-      return Promise.resolve(this.config);
-    }
-
-    return new Promise(resolve => {
-      this.storage.get('config').then( (config) => {
-        if (!config) {
-          console.log('No config in DB - Initiate from CONFIGMODEL', CONFIGMODEL);
-          this.storage.set('config', JSON.stringify(CONFIGMODEL));
-          config = CONFIGMODEL;
-        } else {
-          console.log('Returning user - Load config from DB', config);
-          config = JSON.parse(config);
-        }
-        resolve(config);
-      });
-    });
-
+  public get(): any {
+    return this.config;
   }
 
   public reset(): any {
-    console.log('resetting...');
-    this.storage.set('config', JSON.stringify(CONFIGMODEL));
-  }
-
-  public getConfig(): any {
-    return this.load().then(config => {
-      console.log('getConfig called', config);
-      return config;
-    });
+    console.log('Resetting config...');
+    localStorage.setItem('config', JSON.stringify(CONFIGMODEL));
   }
 
   public update(config: Object): any {
-    this.storage.set('config', JSON.stringify(config));
+    console.log('Updating config...');
+    localStorage.setItem('config', JSON.stringify(config));
   }
 
 }

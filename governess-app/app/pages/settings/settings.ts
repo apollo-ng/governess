@@ -34,10 +34,9 @@ export class SettingsPage {
 
     this.nav = nav;
 
-    this.config = {};
+    // this.config = {};
     this.configService = configService;
-
-    configService.getConfig().then( data => this.config = data );
+    this.config = this.configService.get();
 
   }
 
