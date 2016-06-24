@@ -12,7 +12,7 @@
 
 <ion-content class="home" scroll="false">
 
-  <ion-grid dark>
+  <ion-grid dark class="home-display">
     <ion-row>
       <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
         <ion-icon name="thermometer"></ion-icon>
@@ -42,10 +42,10 @@
     </ion-row>
   </ion-grid>
 
-  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 120px)">
+  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 80px)">
 
     <div *ngSwitchWhen="'man'" style="height: 100%">
-      <div class="chart-container" style="height: 50%">
+      <div class="chart-container" style="height: 60%">
         <base-chart class="chart"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
@@ -56,7 +56,7 @@
           (chartClick)="chartClicked()">
         </base-chart>
       </div>
-      <ion-list style="height: 50%">
+      <ion-list style="height: 40%">
         <ion-item>
           <ion-label>Temperature</ion-label>
           <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
@@ -68,7 +68,7 @@
     </div>
 
     <div *ngSwitchWhen="'auto'" style="height: 100%">
-      <div class="chart-container" style="height: 90%">
+      <div class="chart-container" style="height: calc(100% - 50px)">
         <base-chart class="chart"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
@@ -79,15 +79,30 @@
           (chartClick)="chartClicked()">
         </base-chart>
       </div>
-      <ion-list style="height: 10%">
-        <ion-item>
-          <ion-icon name="text" item-left></ion-icon>
-          <ion-label>Task</ion-label>
-          <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
-            <ion-option value="en">Reflow (Lead-Free)</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+      <ion-grid dark class="home-control">
+        <ion-row>
+          <ion-col>
+            <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+              <ion-option value="en">Reflow (Lead-Free)</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col width-10>
+          <button small (click)="randomize()">
+      <ion-icon name="play"></ion-icon>
+    </button>
+          </ion-col>
+                    <ion-col width-10>
+          <button small (click)="randomize()">
+      <ion-icon name="pause"></ion-icon>
+    </button>
+          </ion-col>
+                    <ion-col width-10>
+          <button small (click)="randomize()">
+      <ion-icon name="square"></ion-icon>
+    </button>
+          </ion-col>
+          </ion-row>
+ </ion-grid>
     </div>
 
     <ion-list *ngSwitchWhen="'cron'">

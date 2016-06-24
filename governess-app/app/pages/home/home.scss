@@ -44,6 +44,8 @@
     }
   }
 
+ .home-display {
+
   ion-row {
     background: #1f1e1a;
     padding: 5px;
@@ -87,6 +89,14 @@
       text-align: center;
       font-size: 1.4em;
       line-height: 1.4em;
+    }
+}
+
+.home-control {
+  ion-col {
+    height: 50px;
+    padding: 0;
+    }
     }
 
 }
