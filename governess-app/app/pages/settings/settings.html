@@ -36,13 +36,20 @@
   <ion-list>
 
     <ion-item>
-      <ion-label> Allow cookies</ion-label>
-      <ion-toggle checked="true"></ion-toggle>
+      <ion-icon name="return-right" item-left></ion-icon>
+      <ion-label>
+        <h2>Entry Point</h2>
+        <p>Select your preferred entry behaviour</p>
+      </ion-label>
+      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+        <ion-option value="en">Home</ion-option>
+        <ion-option value="de">Last Viewed Page</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-icon name="text" item-left></ion-icon>
-      <ion-label>Language</ion-label>
+      <ion-label><h2>Language</h2></ion-label>
       <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
         <ion-option value="en">English</ion-option>
         <ion-option value="de">Deutsch</ion-option>
@@ -50,10 +57,30 @@
       </ion-select>
     </ion-item>
 
-  </ion-list>
+    <ion-item>
+      <ion-icon name="text" item-left></ion-icon>
+      <ion-label><h2>Theme</h2></ion-label>
+      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+        <ion-option value="en">Default-Dark</ion-option>
+        <ion-option value="de">Default-Bright</ion-option>
+      </ion-select>
+    </ion-item>
 
-  <button class="button button-full button-assertive" (click)="resetCPD($event)">
-   Reset GovernessApp configuration
-  </button>
+    <ion-item>
+      <ion-icon name="hand" item-left></ion-icon>
+      <ion-label>
+        <h2>Manual override</h2>
+        <p>Allow manual override during task run</p>
+      </ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <button class="button button-full button-assertive" (click)="resetCPD($event)">
+        Reset GovernessApp configuration
+      </button>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>

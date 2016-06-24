@@ -18,8 +18,8 @@ import { CONFIGMODEL }            from './config-model.ts';
 
 export class ConfigService {
 
-  private config: any;
-  private storage: Storage;
+  private config:   any;
+  private storage:  Storage;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -30,6 +30,8 @@ export class ConfigService {
     this.storage = new Storage (SqlStorage, { name: 'governess'});
 
   }
+
+  //////////////////////////////////////////////////////////////////////
 
   public load(): any {
 

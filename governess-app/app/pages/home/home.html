@@ -42,6 +42,18 @@
     </ion-row>
   </ion-grid>
 
+  <div *ngIf="config.ctrlMode != 'cron'" class="chart-container">
+    <base-chart class="chart"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColours"
+      [chartType]="lineChartType"
+      (chartHover)="chartHovered()"
+      (chartClick)="chartClicked()">
+    </base-chart>
+  </div>
+
   <div [ngSwitch]="config.ctrlMode" style="height: 100%">
 
     <ion-list *ngSwitchWhen="'man'">
@@ -54,17 +66,15 @@
       </ion-item>
     </ion-list>
 
-    <div *ngSwitchWhen="'auto'" class="chart-container">
-    <base-chart class="chart"
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [colors]="lineChartColours"
-      [chartType]="lineChartType"
-      (chartHover)="chartHovered()"
-      (chartClick)="chartClicked()">
-    </base-chart>
-    </div>
+    <ion-list *ngSwitchWhen="'auto'">
+    <ion-item>
+      <ion-icon name="text" item-left></ion-icon>
+      <ion-label>Task</ion-label>
+      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+        <ion-option value="en">Reflow (Lead-Free)</ion-option>
+      </ion-select>
+    </ion-item>
+    </ion-list>
 
     <ion-list *ngSwitchWhen="'cron'">
       Listing

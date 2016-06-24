@@ -1,8 +1,8 @@
 'use strict';
 
-import { Component } from '@angular/core';
+import { Component }            from '@angular/core';
 import { NavController, Toast } from 'ionic-angular';
-import { ConfigService } from '../../providers/config/config';
+import { ConfigService }        from '../../providers/config/config';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -18,17 +18,17 @@ import { ConfigService } from '../../providers/config/config';
 
 export class SettingsPage {
 
-  private nav: NavController;
-  public configService: ConfigService;
+  private nav:          NavController;
 
-  public config: any;
+  public configService: ConfigService;
+  public config:        any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    nav: NavController,
-    configService: ConfigService
+    nav:                NavController,
+    configService:      ConfigService
 
   ) {
 
@@ -36,10 +36,7 @@ export class SettingsPage {
     this.nav = nav;
     this.configService = configService;
 
-    configService.getConfig().then(config => {
-      // console.log('got a config', config);
-      this.config = config;
-    });
+    configService.getConfig().then( config => this.config = config );
 
   }
 
@@ -48,16 +45,15 @@ export class SettingsPage {
   public openHelp(): void {
     // FIXME: Add proper help
     console.log('help tapped');
-  };
+  }
 
   public updateConfig(): any {
     this.configService.update(this.config);
-
   }
 
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
 
-  public resetCPD(): void {
+  public resetCPD(e: any): void {
 
     this.configService.reset();
 

@@ -26,8 +26,8 @@ import { AboutPage }                from './pages/about/about';
 interface PageObj {
   title: string;
   component: any;
-  icon: string;
   index?: number;
+  icon: string;
 }
 
 ////////////////////////////////////////////////////////////////////////

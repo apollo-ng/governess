@@ -6,7 +6,7 @@ export interface AppConfig {
 }
 
 export let CONFIGMODEL: Object = {
-    'userLang': 'en',
-    'ctrlMode': 'auto',
-    'lastView': null,
+  'userLang': 'en',
+  'ctrlMode': 'auto',
+  'lastView': null,
 };
