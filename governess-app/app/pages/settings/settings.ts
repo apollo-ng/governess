@@ -20,8 +20,8 @@ export class SettingsPage {
 
   private nav:          NavController;
 
-  public configService: ConfigService;
   public config:        any;
+  public configService: ConfigService;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -32,11 +32,12 @@ export class SettingsPage {
 
   ) {
 
-    this.config = {};
     this.nav = nav;
+
+    this.config = {};
     this.configService = configService;
 
-    configService.getConfig().then( config => this.config = config );
+    configService.getConfig().then( data => this.config = data );
 
   }
 

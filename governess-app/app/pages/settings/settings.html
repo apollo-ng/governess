@@ -10,27 +10,6 @@
   </ion-buttons>
 </ion-navbar>
 
-<ion-toolbar dark>
-  <ion-buttons start>
-    <button>
-      <ion-icon name="create"></ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-segment>
-    <ion-segment-button value="new">
-      New
-    </ion-segment-button>
-    <ion-segment-button value="hot">
-      Hot
-    </ion-segment-button>
-  </ion-segment>
-  <ion-buttons end>
-    <button>
-      <ion-icon name="more"></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-toolbar>
-
 <ion-content class="settings">
 
   <ion-list>
@@ -41,9 +20,9 @@
         <h2>Entry Point</h2>
         <p>Select your preferred entry behaviour</p>
       </ion-label>
-      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
-        <ion-option value="en">Home</ion-option>
-        <ion-option value="de">Last Viewed Page</ion-option>
+      <ion-select [(ngModel)]="config.viewPref" (ngModelChange)="updateConfig()">
+        <ion-option value="home">Home</ion-option>
+        <ion-option value="last">Last Viewed Page</ion-option>
       </ion-select>
     </ion-item>
 
@@ -60,9 +39,8 @@
     <ion-item>
       <ion-icon name="text" item-left></ion-icon>
       <ion-label><h2>Theme</h2></ion-label>
-      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
-        <ion-option value="en">Default-Dark</ion-option>
-        <ion-option value="de">Default-Bright</ion-option>
+      <ion-select [(ngModel)]="config.theme" (ngModelChange)="updateConfig()">
+        <ion-option value="default-dark">Default-Dark</ion-option>
       </ion-select>
     </ion-item>
 
@@ -72,7 +50,7 @@
         <h2>Manual override</h2>
         <p>Allow manual override during task run</p>
       </ion-label>
-      <ion-toggle></ion-toggle>
+      <ion-toggle [(ngModel)]="config.manOverr" (ngModelChange)="updateConfig()"></ion-toggle>
     </ion-item>
 
     <ion-item>
