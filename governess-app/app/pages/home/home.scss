@@ -4,7 +4,7 @@
     height: calc(100% - 25px);
   }
 
-  .chart  {
+  .chart {
     display: block;
     height: 100%;
     background: #2f2e2a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6IHVybCgjc3RyaXBlcyk7Ii8+PC9zdmc+") repeat !important;
@@ -43,13 +43,19 @@
       }
     }
   }
+}
 
- .home-display {
+ion-grid.home-display {
+
+  padding: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
 
   ion-row {
     background: #1f1e1a;
-    padding: 5px;
-    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
   }
 
   ion-col {
@@ -59,8 +65,6 @@
     margin-right: 5px;
     vertical-align: middle;
     padding: 0;
-    border-radius: 3px;
-
   }
 
   .icon-display {
@@ -68,36 +72,92 @@
     border-left-width: 3px;
   }
 
-    .icon-display ion-icon {
-      min-width: 24px;
-      text-align: center;
-    }
+  .icon-display ion-icon {
+    min-width: 24px;
+    text-align: center;
+  }
 
-    .icon-display .value {
-      font-size: 2.5rem;
-      display: inline-block;
-      line-height: 1.4em;
-    }
-    .icon-display .unit {
-      font-size: 1.6rem;
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 5px;
-    }
+  .icon-display .value {
+    font-size: 2.5rem;
+    display: inline-block;
+    line-height: 1.4em;
+  }
 
-    .icon-status ion-icon {
-      text-align: center;
-      font-size: 1.4em;
-      line-height: 1.4em;
-    }
+  .icon-display .unit {
+    font-size: 1.6rem;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+  }
+
+  .icon-status ion-icon {
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 1.4em;
+  }
 }
 
-.home-control {
-  ion-col {
-    height: 50px;
+ion-grid.home-control {
     padding: 0;
-    }
-    }
+    border-top: 1px solid #d8d3c5;
+
+  ion-row {
+    background: rgba(117, 137, 12, 0.75);
+    padding-right: 5px;
+    height: 50px;
+  }
+
+  ion-col {
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 5px;
+    background: #2f2e2a;
+  }
+
+  /*Variables for colours*/
+  $progressBarColour: #F2F2F2;
+  $progressValueColour: #17BAB3;
+  /*The progress element*/
+  .Progress-main {
+      background-color: $progressBarColour; /*This could be any colour*/
+      width: 100%;
+      height: 30px;
+      margin-top: 0;
+  }
+
+  .Progress-main::-moz-progress-bar {
+      background: $progressValueColour;
+  }
+  /*For webkit browsers*/
+  .Progress-main::-webkit-progress-bar {
+      background: $progressBarColour;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+  }
+  .Progress-main::-webkit-progress-value {
+      background: $progressValueColour;
+  }
+  /*For IE*/
+  .Progress-main::-ms-fill {
+      background: $progressValueColour;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+  }
+
+  .Progress-bar {
+      margin-top: 0.95em;
+      background-color: $progressBarColour;
+      height: 1em;
+  }
+
+  .Progress-value {
+      background-color: $progressValueColour;
+      display: block;
+      height: 0.3em;
+  }
+
+  button {
+    margin: 0;
+    height: 30px;
+  }
 
 }
 
@@ -107,4 +167,13 @@ ion-segment-button.segment-button {
 
 ion-toolbar.home {
   border-top: 1px solid #444;
+}
+
+ion-segment-button.segment-button.segment-activated {
+  border-color: rgba(117, 137, 12, 0.75);
+  background: rgba(117, 137, 12, 0.75);
+  opacity: 1;
+  height: 56px;
+  line-height: 56px;
+  color: #d8d3c5;
 }

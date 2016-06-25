@@ -40,6 +40,10 @@ class MockClass {
   public load(): any {
     return true;
   }
+
+  public openPage(): any {
+    return true;
+  }
 }
 
 describe('GovernessApp', () => {

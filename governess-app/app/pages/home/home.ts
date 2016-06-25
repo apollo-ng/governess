@@ -30,6 +30,7 @@ export class HomePage {
   public configService: ConfigService;
 
   public config: any;
+  public status: string;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -42,10 +43,9 @@ export class HomePage {
 
     this.nav = nav;
 
-    this.config = {};
     this.configService = configService;
-
     this.config = this.configService.get();
+    this.status = 'idle';
 
   }
 
@@ -173,6 +173,26 @@ export class HomePage {
     cn.ctrlMode = mode;
     this.config = cn;
     this.configService.update(this.config);
+  }
+
+  public startTask(): void {
+    console.log('Start Task');
+    this.status = 'running';
+  }
+
+  public pauseTask(): void {
+    console.log('Pause Task');
+    this.status = 'paused';
+  }
+
+  public restartTask(): void {
+    console.log('Restart Task');
+    this.status = 'running';
+  }
+
+  public stopTask(): void {
+    console.log('Stop Task');
+    this.status = 'idle';
   }
 
 }

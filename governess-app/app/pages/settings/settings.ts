@@ -19,7 +19,7 @@ import { ConfigService }        from '../../providers/config/config';
 export class SettingsPage {
 
   private nav:              NavController;
-  private configService:    ConfigService;
+  public configService:    ConfigService;
 
   public config:            any;
 

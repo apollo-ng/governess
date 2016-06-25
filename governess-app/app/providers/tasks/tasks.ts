@@ -17,7 +17,7 @@ import { TASKMODEL }              from './task-model.ts';
 
 export class TaskService {
 
-  private tasks: any;
+  public tasks: any;
 
   //////////////////////////////////////////////////////////////////////
 

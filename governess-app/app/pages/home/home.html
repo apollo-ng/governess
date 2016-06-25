@@ -10,39 +10,36 @@
   </ion-buttons>
 </ion-navbar>
 
+<ion-grid dark class="home-display">
+  <ion-row>
+    <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
+      <ion-icon name="thermometer"></ion-icon>
+      <span class="value">23</span>
+      <span class="unit">°C</span>
+    </ion-col>
+    <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
+      <ion-icon name="thermometer"></ion-icon>
+      <span class="value">42</span>
+      <span class="unit">°C</span>
+    </ion-col>
+    <ion-col width-10 class="icon-status">
+      <ion-icon name="flame"></ion-icon>
+    </ion-col>
+    <ion-col width-10 class="icon-status">
+      <ion-icon name="snow"></ion-icon>
+    </ion-col>
+    <ion-col width-10 class="icon-status" [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
+      <ion-icon name="nuclear"></ion-icon>
+    </ion-col>
+    <ion-col width-10 class="icon-status">
+      <ion-icon name="exit"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
 <ion-content class="home" scroll="false">
 
-  <ion-grid dark class="home-display">
-    <ion-row>
-      <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
-        <ion-icon name="thermometer"></ion-icon>
-        <span class="value">23</span>
-        <span class="unit">°C</span>
-      </ion-col>
-      <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
-        <ion-icon name="thermometer"></ion-icon>
-        <span class="value">42</span>
-        <span class="unit">°C</span>
-      </ion-col>
-      <ion-col width-10 class="icon-status">
-        <ion-icon name="flame"></ion-icon>
-      </ion-col>
-      <ion-col width-10 class="icon-status">
-        <ion-icon name="snow"></ion-icon>
-      </ion-col>
-      <ion-col width-10 class="icon-status" [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
-        <ion-icon name="nuclear"></ion-icon>
-      </ion-col>
-      <ion-col width-10 class="icon-status">
-        <ion-icon name="exit"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <progress max="100" value="80" style="width: 100%; color: rgba(117, 137, 12, 0.75)"></progress>
-    </ion-row>
-  </ion-grid>
-
-  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 80px)">
+  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 51px)">
 
     <div *ngSwitchWhen="'man'" style="height: 100%">
       <div class="chart-container" style="height: 60%">
@@ -67,8 +64,8 @@
       </ion-list>
     </div>
 
-    <div *ngSwitchWhen="'auto'" style="height: 100%">
-      <div class="chart-container" style="height: calc(100% - 50px)">
+    <div *ngSwitchWhen="'auto'" style="height: 100%; padding: 0">
+      <div class="chart-container" style="height: calc(100%)">
         <base-chart class="chart"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
@@ -80,29 +77,51 @@
         </base-chart>
       </div>
       <ion-grid dark class="home-control">
-        <ion-row>
+        <ion-row *ngIf="status === 'running' || status === 'paused'">
+          <ion-col width-20>
+            12:48
+          </ion-col>
           <ion-col>
-            <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
-              <ion-option value="en">Reflow (Lead-Free)</ion-option>
-            </ion-select>
+            <div class="Progress">
+              <progress max="100" value="80" class="Progress-main">
+                <div class="Progress-bar" role="presentation">
+                  <span class="Progress-value" style="width: 80%;"> </span>
+                </div>
+              </progress>
+            </div>
           </ion-col>
-          <ion-col width-10>
-          <button small (click)="randomize()">
-      <ion-icon name="play"></ion-icon>
-    </button>
+          <ion-col width-10 *ngIf="status === 'running'">
+            <button favorite small full (click)="pauseTask()">
+              <ion-icon name="pause"></ion-icon>
+            </button>
           </ion-col>
-                    <ion-col width-10>
-          <button small (click)="randomize()">
-      <ion-icon name="pause"></ion-icon>
-    </button>
+          <ion-col width-10 *ngIf="status === 'paused'">
+            <button small full (click)="restartTask()">
+              <ion-icon name="skip-forward"></ion-icon>
+            </button>
           </ion-col>
-                    <ion-col width-10>
-          <button small (click)="randomize()">
-      <ion-icon name="square"></ion-icon>
-    </button>
+          <ion-col width-10 *ngIf="status === 'running' || status === 'paused'">
+            <button danger small full (click)="stopTask()">
+              <ion-icon name="square"></ion-icon>
+            </button>
           </ion-col>
-          </ion-row>
- </ion-grid>
+        </ion-row>
+        <ion-row *ngIf="status === 'idle'">
+          <ion-col width-20>
+            <ion-icon dark name="map"></ion-icon>
+          </ion-col>
+          <ion-col style="padding-right: 5px;">
+            <button full small dark (click)="randomize()">
+              Reflow Lead-Free
+            </button>
+          </ion-col>
+          <ion-col width-20>
+            <button small full (click)="startTask()">
+              <ion-icon name="play"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
 
     <ion-list *ngSwitchWhen="'cron'">
@@ -124,10 +143,8 @@
     <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
       Schedule
     </ion-segment-button>
+    <ion-segment-button value="cam" (ionSelect)="setMode('cam')">
+      Live
+    </ion-segment-button>
   </ion-segment>
-  <ion-buttons end>
-    <button (click)="randomize()">
-      <ion-icon name="more"></ion-icon>
-    </button>
-  </ion-buttons>
 </ion-toolbar>
