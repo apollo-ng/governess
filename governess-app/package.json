@@ -12,12 +12,12 @@
     "url": "https://github.com/apollo-ng/governess/issues"
   },
   "scripts": {
-    "build": "gulp --gulpfile test/gulpfile.ts --cwd ./ build-app",
-    "e2e": "gulp --gulpfile test/gulpfile.ts --cwd ./ build-e2e && protractor test/protractor.conf.js",
-    "karma": "gulp --gulpfile test/gulpfile.ts --cwd ./ karma-debug",
-    "postinstall": "ionic state restore && typings install && webdriver-manager update && cp test/karma-static/*.html node_modules/karma/static",
+    "build": "gulp --gulpfile tests/gulpfile.ts --cwd ./ build-app",
+    "e2e": "gulp --gulpfile tests/gulpfile.ts --cwd ./ build-e2e && protractor tests/protractor.conf.js",
+    "karma": "gulp --gulpfile tests/gulpfile.ts --cwd ./ karma-debug",
+    "postinstall": "ionic state restore && typings install && webdriver-manager update && cp tests/karma-static/*.html node_modules/karma/static",
     "start": "ionic serve",
-    "test": "gulp --gulpfile test/gulpfile.ts --cwd ./ unit-test"
+    "test": "gulp --gulpfile tests/gulpfile.ts --cwd ./ unit-test"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
