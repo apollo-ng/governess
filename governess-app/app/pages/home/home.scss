@@ -161,19 +161,22 @@ ion-grid.home-control {
 
 }
 
-ion-segment-button.segment-button {
-  font-size: 1.5rem;
+.home-segment {
+
+  ion-segment-button.segment-button {
+    font-size: 1.5rem;
+  }
+
+  ion-segment-button.segment-button.segment-activated {
+    border-color: rgba(117, 137, 12, 0.75);
+    background: rgba(117, 137, 12, 0.75);
+    opacity: 1;
+    height: 56px;
+    line-height: 56px;
+    color: #d8d3c5;
+  }
 }
 
 ion-toolbar.home {
   border-top: 1px solid #444;
-}
-
-ion-segment-button.segment-button.segment-activated {
-  border-color: rgba(117, 137, 12, 0.75);
-  background: rgba(117, 137, 12, 0.75);
-  opacity: 1;
-  height: 56px;
-  line-height: 56px;
-  color: #d8d3c5;
 }

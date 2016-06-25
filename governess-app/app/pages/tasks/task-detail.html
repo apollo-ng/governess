@@ -21,11 +21,13 @@
     </base-chart>
   </div>
 
+  <div class="segment-splitbar">...</div>
+
   <ion-segment>
-    <ion-segment-button value="man" (ionSelect)="setMode('man')">
+    <ion-segment-button value="man" (ionSelect)="setMode('man')" style="color: rgb(255, 152, 0); border-color: rgb(255, 152, 0)">
       Temperature
     </ion-segment-button>
-    <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
+    <ion-segment-button value="auto" (ionSelect)="setMode('auto')" style="color: rgb(109, 128, 6); border-color: rgb(109, 128, 6)">
       Circulation
     </ion-segment-button>
   </ion-segment>
