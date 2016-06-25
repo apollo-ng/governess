@@ -62,7 +62,15 @@ export class HomePage {
     { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C', lineTension: '0', yAxisID: 'y-axis-2' },
   ];
 
-  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Array<any> = [
+    new Date(1466888585 * 1000).toISOString(),
+    new Date(1466888590 * 1000).toISOString(),
+    new Date(1466888595 * 1000).toISOString(),
+    new Date(1466888600 * 1000).toISOString(),
+    new Date(1466888605 * 1000).toISOString(),
+    new Date(1466888610 * 1000).toISOString(),
+    new Date(1466888615 * 1000).toISOString(),
+  ];
 
   public lineChartOptions: any = {
     animation: false,
@@ -72,8 +80,17 @@ export class HomePage {
     scales: {
       xAxes: [
         {
+          type: 'time',
+          time: {
+            unit: 'second',
+            unitStepSize: 5,
+            displayFormats: {
+              second: 'ss',
+            },
+          },
           gridLines: {
             color: 'rgba(255,255,255,0.15)',
+            drawTicks: false,
           },
           ticks: {
             beginAtZero: false,
@@ -88,6 +105,7 @@ export class HomePage {
           position: 'left',
           gridLines: {
             color: 'rgba(255,255,255,0.15)',
+            drawTicks: false,
           },
           ticks: {
             beginAtZero: false,
@@ -101,6 +119,7 @@ export class HomePage {
           position: 'right',
           gridLines: {
             color: 'rgba(255,255,255,0.15)',
+            drawTicks: false,
           },
           ticks: {
             beginAtZero: false,
