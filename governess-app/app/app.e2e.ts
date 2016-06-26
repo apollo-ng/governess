@@ -6,7 +6,7 @@ describe('GovernessApp', () => {
   });
 
   it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('OPS');
+    expect(browser.getTitle()).toEqual('EKA KF412');
   });
 
   it('should have <nav>', () => {
@@ -14,7 +14,7 @@ describe('GovernessApp', () => {
   });
 
   it('should have correct nav text for Home', () => {
-    expect(element(by.css('ion-navbar:first-child')).getText()).toContain('OPS');
+    expect(element(by.css('ion-navbar:first-child')).getText()).toContain('EKA KF412');
   });
 
   it('has a menu button that displays the left menu', () => {

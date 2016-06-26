@@ -10,7 +10,7 @@ describe('HomePage', () => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
         items[0].click();
-        expect(browser.getTitle()).toEqual('OPS');
+        expect(browser.getTitle()).toEqual('EKA KF412');
       });
     });
   });
