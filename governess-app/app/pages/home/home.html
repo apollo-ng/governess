@@ -10,6 +10,7 @@
   </ion-buttons>
 </ion-navbar>
 
+<div class="home-splitbar"></div>
 <ion-grid dark class="home-display">
   <ion-row>
     <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
@@ -36,6 +37,7 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+<div class="home-splitbar"></div>
 
 <ion-content class="home" scroll="false">
 
@@ -108,12 +110,16 @@
         </ion-row>
         <ion-row *ngIf="status === 'idle'">
           <ion-col width-20>
-            <ion-icon dark name="map"></ion-icon>
+            idle
           </ion-col>
           <ion-col style="padding-right: 5px;">
-            <button full small dark (click)="randomize()">
-              Reflow Lead-Free
-            </button>
+      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+        <ion-option value="en">SMD Lead-Free Soldering</ion-option>
+        <ion-option value="de">SMD Leaded Soldering</ion-option>
+      </ion-select>
+          </ion-col>
+          <ion-col width-10 class="icon-edit">
+            <ion-icon name="pen"></ion-icon>
           </ion-col>
           <ion-col width-20>
             <button small full (click)="startTask()">

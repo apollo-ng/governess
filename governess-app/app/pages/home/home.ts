@@ -133,7 +133,7 @@ export class HomePage {
 
   public lineChartColours: Array<any> = [
     {
-      backgroundColor: 'rgba(255, 152, 0, 0.2)',
+      backgroundColor: 'rgba(255, 152, 0, 0.15)',
       borderColor: 'rgb(255, 152, 0)',
       pointRadius: '3',
       pointBorderWidth: '2',
@@ -143,7 +143,7 @@ export class HomePage {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)',
     },
     {
-      backgroundColor: 'rgba(162, 48, 22, 0.2)',
+      backgroundColor: 'rgba(162, 48, 22, 0.15)',
       borderColor: 'rgb(162, 48, 22)',
       pointRadius: '3',
       pointBorderWidth: '2',
@@ -153,7 +153,7 @@ export class HomePage {
       pointHoverBorderColor: 'rgba(77,83,96,1)',
     },
     {
-      backgroundColor: 'rgba(109, 128, 6, 0.2)',
+      backgroundColor: 'rgba(109, 128, 6, 0.15)',
       borderColor: 'rgb(109, 128, 6)',
       pointRadius: '3',
       pointBorderWidth: '2',
