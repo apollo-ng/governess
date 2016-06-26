@@ -1,9 +1,9 @@
 .task-list {
-background: rgb(40, 39, 35);
+  background: rgb(40, 39, 35);
 }
 
 .task-detail-toolbar {
-    border-bottom: 1px solid #2f2e2a;
+  border-bottom: 1px solid #2f2e2a;
 }
 
 .task-detail {
@@ -78,6 +78,39 @@ background: rgb(40, 39, 35);
     text-shadow: -1px -1px 0 #1f1e1a, 1px -1px 0 #1f1e1a, -1px 1px 0 #1f1e1a, 1px 1px 0 #1f1e1a;
   }
 
+  .mini-bar {
+
+    padding-left: 0;
+
+    button {
+      border-radius: 0;
+      height: 34px;
+      margin: 0;
+    }
+
+    ion-col {
+      padding: 0;
+      padding-left: 4px;
+    }
+
+    .mb-input {
+      padding: 0;
+    }
+
+    input {
+      height: 34px;
+      width: 32px;
+      text-align: center;
+      padding: 0 !important;
+      background: rgba(117, 137, 12, 0.25);
+      border: 1px solid rgba(117, 137, 12, 0.75);
+      border-left: none;
+      width: 100%;
+    }
+
+  }
+
+
   .action-button-col {
     width: 42px;
   }
@@ -103,7 +136,6 @@ background: rgb(40, 39, 35);
     font-size: 25px !important;
     width: 100%;
     padding-right: 10px !important;
-    font-family: "DIN";
   }
 
   .md-table .button {

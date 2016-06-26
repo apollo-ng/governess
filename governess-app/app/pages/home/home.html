@@ -2,7 +2,10 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>OPS</ion-title>
+  <ion-title>
+    <h1>EKA KF412</h1>
+    <p *ngIf="status === 'running'">Reflow Lead-Free</p>
+  </ion-title>
   <ion-buttons end>
     <button (click)="openHelp()" primary>
       <ion-icon name="help"></ion-icon>
@@ -11,6 +14,7 @@
 </ion-navbar>
 
 <div class="home-splitbar"></div>
+
 <ion-grid dark class="home-display">
   <ion-row>
     <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
@@ -37,11 +41,12 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+
 <div class="home-splitbar"></div>
 
 <ion-content class="home" scroll="false">
 
-  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 51px)">
+  <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 47px)">
 
     <div *ngSwitchWhen="'man'" style="height: 100%">
       <div class="chart-container" style="height: 60%">
@@ -55,6 +60,7 @@
           (chartClick)="chartClicked()">
         </base-chart>
       </div>
+      <div class="home-splitbar"></div>
       <ion-list style="height: 40%">
         <ion-item>
           <ion-label>Temperature</ion-label>
@@ -78,51 +84,55 @@
           (chartClick)="chartClicked()">
         </base-chart>
       </div>
+      <div class="home-splitbar"></div>
       <ion-grid dark class="home-control">
         <ion-row *ngIf="status === 'running' || status === 'paused'">
-          <ion-col width-20>
-            {{status}}
+          <ion-col width-25 class="progress-status">
+            -04:20
           </ion-col>
-          <ion-col>
-            <div class="Progress">
-              <progress max="100" value="80" class="Progress-main">
-                <div class="Progress-bar" role="presentation">
-                  <span class="Progress-value" style="width: 80%;"> </span>
-                </div>
-              </progress>
+          <ion-col style="padding-left: 0; padding-right: 2px;">
+            <div class="progress">
+              <div class="progress-bar" role="presentation">
+                <span class="progress-value" style="width: 65%;">65%</span>
+              </div>
             </div>
           </ion-col>
           <ion-col width-10 *ngIf="status === 'running'">
-            <button favorite small full (click)="pauseTask()">
+            <button small full (click)="pauseTask()" class="rb-yellow">
               <ion-icon name="pause"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-10 *ngIf="status === 'paused'">
-            <button small full (click)="restartTask()">
+            <button small full (click)="restartTask()" class="rb-green">
               <ion-icon name="skip-forward"></ion-icon>
             </button>
           </ion-col>
-          <ion-col width-10 *ngIf="status === 'running' || status === 'paused'">
-            <button danger small full (click)="stopTask()">
+          <ion-col width-20 *ngIf="status === 'running' || status === 'paused'">
+            <button small full (click)="stopTask()" class="rb-red">
               <ion-icon name="square"></ion-icon>
             </button>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="status === 'idle'">
-          <ion-col width-20>
+          <ion-col width-25 style="text-transform: uppercase; text-align:center;" class="progress-status">
             idle
           </ion-col>
-          <ion-col style="padding-right: 5px;">
-      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
-        <ion-option value="en">SMD Lead-Free Soldering</ion-option>
-        <ion-option value="de">SMD Leaded Soldering</ion-option>
-      </ion-select>
+          <ion-col style="padding-right: 2px;">
+            <ion-select [(ngModel)]="config.taskActive"
+                        class="rb-glass"
+                        cancelText="Cancel"
+                        okText="Select"
+            >
+              <ion-option *ngFor="let task of tasks">{{task.name}}</ion-option>
+            </ion-select>
           </ion-col>
           <ion-col width-10 class="icon-edit">
-            <ion-icon name="pen"></ion-icon>
+            <button small full (click)="editTask()" class="rb-glass">
+              <ion-icon name="create"></ion-icon>
+            </button>
           </ion-col>
           <ion-col width-20>
-            <button small full (click)="startTask()">
+            <button small full (click)="startTask()" class="rb-green">
               <ion-icon name="play"></ion-icon>
             </button>
           </ion-col>
@@ -138,19 +148,24 @@
 
 </ion-content>
 
+<div class="home-splitbar"></div>
+
 <ion-toolbar position="bottom" dark class="home-segment">
   <ion-segment [(ngModel)]="config.ctrlMode">
-    <ion-segment-button value="man" (ionSelect)="setMode('man')">
+    <ion-segment-button small value="man" (ionSelect)="setMode('man')">
+      <ion-icon small name="hand"></ion-icon>
       Manual
     </ion-segment-button>
     <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
+      <ion-icon name="pulse"></ion-icon>
       Auto
     </ion-segment-button>
     <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
+      <ion-icon name="timer"></ion-icon>
       Schedule
     </ion-segment-button>
     <ion-segment-button value="cam" (ionSelect)="setMode('cam')">
-      Live
+      <ion-icon name="videocam"></ion-icon> Live
     </ion-segment-button>
   </ion-segment>
 </ion-toolbar>

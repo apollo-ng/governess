@@ -18,7 +18,7 @@ export let TASKMODEL: Array<any> = [{
           'active': true,
           'show': true,
           'options': {
-              'axis': 0,
+              'axis': 'y-axis-1',
               'color': '#CA8512',
               'drawPoints': true,
               'pointSize': 4,

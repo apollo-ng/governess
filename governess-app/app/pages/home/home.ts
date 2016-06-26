@@ -5,11 +5,15 @@
 /* tslint:disable:no-unused-variable */
 
 import { Component}             from '@angular/core';
+import { NgClass }              from '@angular/common';
 import { NavController }        from 'ionic-angular';
 
 import { CHART_DIRECTIVES }     from 'ng2-charts';
 
 import { ConfigService }        from '../../providers/config/config';
+import { TaskService }          from '../../providers/tasks/tasks';
+
+import { TaskDetailPage }       from '../tasks/task-detail';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -18,6 +22,7 @@ import { ConfigService }        from '../../providers/config/config';
 @Component({
   templateUrl: 'build/pages/home/home.html',
   directives: [ CHART_DIRECTIVES ],
+  providers: [ TaskService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -27,9 +32,13 @@ import { ConfigService }        from '../../providers/config/config';
 export class HomePage {
 
   public nav: NavController;
-  public configService: ConfigService;
 
+  public configService: ConfigService;
   public config: any;
+
+  public taskService: TaskService;
+  public tasks: any;
+
   public status: string;
 
   //////////////////////////////////////////////////////////////////////
@@ -37,7 +46,8 @@ export class HomePage {
   constructor (
 
     nav: NavController,
-    configService: ConfigService
+    configService: ConfigService,
+    taskService: TaskService
 
   ) {
 
@@ -45,6 +55,10 @@ export class HomePage {
 
     this.configService = configService;
     this.config = this.configService.get();
+
+    this.taskService = taskService;
+    this.tasks = this.taskService.get();
+
     this.status = 'idle';
 
   }
@@ -95,6 +109,7 @@ export class HomePage {
           ticks: {
             beginAtZero: false,
             fontColor: '#FFFFFF',
+            fontFamily: 'DIN',
           },
         },
       ],
@@ -110,6 +125,7 @@ export class HomePage {
           ticks: {
             beginAtZero: false,
             fontColor: '#FFFFFF',
+            fontFamily: 'DIN',
             maxTicksLimit: 8,
           },
         },
@@ -124,6 +140,7 @@ export class HomePage {
           ticks: {
             beginAtZero: false,
             fontColor: '#FFFFFF',
+            fontFamily: 'DIN',
             maxTicksLimit: 8,
           },
         },
@@ -192,6 +209,14 @@ export class HomePage {
     cn.ctrlMode = mode;
     this.config = cn;
     this.configService.update(this.config);
+  }
+
+  public editTask() {
+    console.log('run task editor');
+    let atask: any = this.tasks.filter(
+    task => task.name.includes(this.config.taskActive)
+    )[0];
+    this.nav.push(TaskDetailPage, atask);
   }
 
   public startTask(): void {

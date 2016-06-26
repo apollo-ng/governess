@@ -1,3 +1,21 @@
+ion-toolbar.home {
+  border-top: 1px solid #444;
+}
+
+.home-splitbar {
+  height: 5px;
+  line-height: 1px;
+  background-color: #282723;
+  border-bottom: 1px solid #0f0e0a;
+  border-top: 1px solid #3f3e3a;
+  cursor: row-resize;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+/// Home Content
+
 .home {
 
   background: #1f1e1a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+IDxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj4gPC9kZWZzPiA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgcng9IjAiIHJ5PSIwIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBmaWxsOiB1cmwoI3N0cmlwZXMpOyBvcGFjaXR5OiAwLjYiLz4gPC9zdmc+") repeat !important;
@@ -48,26 +66,15 @@
 
 }
 
-  .home-splitbar {
-    height: 5px;
-    line-height: 1px;
-    background-color: #282723;
-    border-bottom: 1px solid #0f0e0a;
-    border-top: 1px solid #3f3e3a;
-    cursor: row-resize;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-  }
+/// Home Display
 
 ion-grid.home-display {
 
   padding: 0;
 
-
   ion-row {
-    background: #1f1e1a;
-    padding-top: 5px;
+    background: #2f2e2a;
+    padding-top: 4px;
     padding-bottom: 5px;
     padding-left: 5px;
   }
@@ -111,77 +118,74 @@ ion-grid.home-display {
   }
 }
 
+/// HomeControl
+
 ion-grid.home-control {
-    padding: 0;
-    border-top: 1px solid #d8d3c5;
+
+  padding: 0;
 
   ion-row {
-    background: rgba(117, 137, 12, 0.75);
-    padding-right: 5px;
-    height: 50px;
+    background-color: rgba(25, 24, 20, 0.7);
+    padding-right: 2px;
+    height: 48px;
   }
 
   ion-col {
-    height: 40px;
-    margin-top: 5px;
-    margin-left: 5px;
-    background: #2f2e2a;
+    height: 38px;
+    margin-top: 0;
+    padding: 3px;
   }
 
   ion-select {
-    padding: 6px 12px 6px 12px;
-    background: rgba(117, 137, 12, 0.75);
+    padding: 8px 14px 3px 9px;
     max-width: initial;
-  }
-
-  /*Variables for colours*/
-  $progressBarColour: #F2F2F2;
-  $progressValueColour: #17BAB3;
-  /*The progress element*/
-  .Progress-main {
-      background-color: $progressBarColour; /*This could be any colour*/
-      width: 100%;
-      height: 30px;
-      margin-top: 0;
-  }
-
-  .Progress-main::-moz-progress-bar {
-      background: $progressValueColour;
-  }
-  /*For webkit browsers*/
-  .Progress-main::-webkit-progress-bar {
-      background: $progressBarColour;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
-  }
-  .Progress-main::-webkit-progress-value {
-      background: $progressValueColour;
-  }
-  /*For IE*/
-  .Progress-main::-ms-fill {
-      background: $progressValueColour;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
-  }
-
-  .Progress-bar {
-      margin-top: 0.95em;
-      background-color: $progressBarColour;
-      height: 1em;
-  }
-
-  .Progress-value {
-      background-color: $progressValueColour;
-      display: block;
-      height: 0.3em;
+    height: 35px;
   }
 
   button {
     margin: 0;
-    height: 30px;
+    height: 35px;
+  }
+
+  .progress-status {
+    background-color: rgba(25, 24, 20, 0.7);
+    border: 1px solid #3f3e3a;
+    border-right: 0;
+    margin-top: 3px;
+    margin-left: 5px;
+    padding-right: 0;
+    height: 35px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #75890c;
+  }
+
+  // ProgressBar
+
+  .progress-bar {
+    background-color: rgba(25, 24, 20, 0.7);
+    height: 35px;
+    padding: 2px;
+    border: 1px solid #3f3e3a;
+  }
+
+  .progress-value {
+    background: -moz-linear-gradient(top, rgba(140,168,0,0.6) 0%, rgba(109,128,6,0.7) 100%);
+    background: -webkit-linear-gradient(top, rgba(140,168,0,0.6) 0%,rgba(109,128,6,0.7) 100%);
+    background: linear-gradient(to bottom, rgba(140,168,0,0.6) 0%,rgba(109,128,6,0.7) 100%);
+    display: block;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    border: 1px solid rgba(213, 255, 95, 0.2);
   }
 
 }
 
-.home-segment {
+/// Home Bottom Segment Bar
+
+.home-sgment {
 
   ion-segment-button.segment-button {
     font-size: 1.5rem;
@@ -195,8 +199,5 @@ ion-grid.home-control {
     line-height: 56px;
     color: #d8d3c5;
   }
-}
 
-ion-toolbar.home {
-  border-top: 1px solid #444;
 }

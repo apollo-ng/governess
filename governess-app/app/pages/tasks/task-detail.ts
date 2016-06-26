@@ -5,6 +5,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { Component } from '@angular/core';
+import { NgClass }              from '@angular/common';
 import { NavController, NavParams } from 'ionic-angular';
 import { CHART_DIRECTIVES } from 'ng2-charts';
 

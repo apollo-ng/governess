@@ -29,8 +29,8 @@ export class AppliancePage {
     this.nav = nav;
     this.appliance = {
 
-      'name': 'Reflow-Oven',
-      'desc': 'A full Reflow-Oven Implementation',
+      'name': 'EKA KF412',
+      'desc': 'Small convection-heat lab-oven',
       'modules': [
         {
           'name': 'PID Temperature Governor',

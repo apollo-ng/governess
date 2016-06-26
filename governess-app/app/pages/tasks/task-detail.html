@@ -32,15 +32,72 @@
     </ion-segment-button>
   </ion-segment>
 
+  <ion-grid *ngIf="!showMiniBar" class="mini-bar">
+    <ion-row>
+      <ion-col>
+    <button (click)="data.options.fillGraph = !data.options.fillGraph"
+            [ngClass]="{'rb-white': data.options.fillGraph}" full small dark>
+      <ion-icon name="color-fill"></ion-icon>
+    </button>
+    </ion-col>
+    <ion-col>
+    <button (click)="data.show = !data.show"
+            [ngClass]="{'rb-white': data.show}" full small dark>
+      <ion-icon name="eye"></ion-icon>
+    </button>
+        </ion-col>
+    <ion-col>
+    <button (click)="data.options.axis = data.options.axis == 0 ? 1 : 0"
+            [ngClass]="{'rb-white': data.options.axis == 1}" full small dark>
+      <b>y2</b>
+    </button>
+        </ion-col>
+    <ion-col>
+    <button (click)="editStrokeWidth = !editStrokeWidth"
+            [ngClass]="{'rb-green': editStrokeWidth}" full small dark>
+      <ion-icon name="brush"></ion-icon>
+    </button>
+    </ion-col>
+    <ion-col *ngIf="editStrokeWidth" class="mb-input">
+    <input type="number" min="0" max="25" autocomplete="off" [(ngModel)]="data.options.strokeWidth" />
+    </ion-col>
+    <ion-col>
+      <button (click)="editPointSize = !editPointSize"
+            [ngClass]="{'rb-green': editPointSize}" full small dark>
+      <ion-icon name="disc"></ion-icon>
+    </button>
+     </ion-col>
+     <ion-col *ngIf="editPointSize" class="mb-input">
+        <input  type="number" min="0" max="25" autocomplete="off" [(ngModel)]="data.options.pointSize" />
+        </ion-col>
+    <ion-col>
+    <button (click)="editTimeScope = !editTimeScope"
+            [ngClass]="{'rb-green': editTimeScope}" full small dark>
+      <ion-icon name="watch"></ion-icon>
+    </button>
+    </ion-col>
+    <ion-col *ngIf="editTimeScope" class="mb-input">
+      <input  type="number" min="0" max="25" autocomplete="off" [(ngModel)]="data.options.pointSize" />
+     </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
   <table class="md-table">
     <thead>
       <tr>
-        <td style="width: 42px; height: 42px;"><ion-icon small name="more"></ion-icon></td>
+        <td style="width: 42px; height: 42px;">
+          <ion-icon small name="color-palette" style="color: rgb(255, 152, 0);"></ion-icon>
+        </td>
         <td style="width: 110px">Time</td>
         <td style="width: 110px;">Target</td>
         <td>Slope</td>
         <td>Notes</td>
-        <td style="width: 42px; height: 42px;"><ion-icon small name="switch"></ion-icon></td>
+        <td style="width: 42px; height: 42px;">
+          <ion-icon small name="switch"
+                    (click)="showMiniBar = !showMiniBar">
+          </ion-icon>
+        </td>
       </tr>
     </thead>
     <tbody>
@@ -61,7 +118,7 @@
           <input type="text" [(ngModel)]="data.note" />
         </td>
         <td class="action-button-col">
-          <button (click)="dropPoint(data.points, point)" danger>
+          <button (click)="dropPoint(data.points, point)" class="rb-red">
             <ion-icon name="trash"></ion-icon>
           </button>
         </td>
