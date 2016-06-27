@@ -181,36 +181,6 @@ ion-grid.home-control {
     border: 1px solid rgba(213, 255, 95, 0.2);
   }
 
-@-webkit-keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-}
-
-@-moz-keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-}
-
-@keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-}
-
-.pulse-green {
-  -webkit-animation-name: greenPulse;
-  -webkit-animation-duration: 1.5s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-name: greenPulse;
-  -moz-animation-duration: 1.5s;
-  -moz-animation-iteration-count: infinite;
-  animation-name: greenPulse;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-}
-
 }
 
 /// Home Bottom Segment Bar

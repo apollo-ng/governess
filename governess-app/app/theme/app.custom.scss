@@ -46,6 +46,40 @@ ion-menu ion-toolbar .toolbar-background {
   display: none;
 }
 
+// Rubber Buttons
+
+// Green
+
+@-webkit-keyframes pulse-green {
+  from { background-color: #749a02; box-shadow: 0 0 9px #333; }
+  50% { background-color: #91bd09; box-shadow: 0 0 18px #91bd09; }
+  to { background-color: #749a02; box-shadow: 0 0 9px #333; }
+}
+
+@-moz-keyframes pulse-green {
+  from { background-color: #749a02; box-shadow: 0 0 9px #333; }
+  50% { background-color: #2f2e2a; box-shadow: 0 0 18px #91bd09; }
+  to { background-color: #749a02; box-shadow: 0 0 9px #333; }
+}
+
+@keyframes pulse-green {
+  from {
+    background-color: #2f2e2a;
+    box-shadow: inset 0 0 14px 0 #3f3e3a, 0 0 8px 0 #000;
+    border: 1px solid rgb(65, 65, 65);
+  }
+  50% {
+    background-color: #91bd09;
+    box-shadow: inset 0 0 14px 0 #9db134, 0 0 8px 0 #9db134;
+    border: 1px solid rgba(213, 255, 95, 0.3);
+  }
+  to {
+    background-color: #2f2e2a;
+    box-shadow: inset 0 0 14px 0 #3f3e3a, 0 0 8px 0 #000;
+    border: 1px solid rgb(65, 65, 65);
+  }
+}
+
 .rb-green {
   color: #fafafa;
   box-shadow: inset 0 0 14px 0 #9db134, 0 0 8px 0 #9db134;
@@ -55,6 +89,21 @@ ion-menu ion-toolbar .toolbar-background {
   background: -webkit-radial-gradient(center, ellipse cover, #79a30e 0%,#75890c 90%,#75890c 90%);
   background: radial-gradient(ellipse at center, #79a30e 0%,#75890c 90%,#75890c 90%);
 }
+
+.rb-green-pulse {
+  -webkit-animation-name: pulse-green;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: pulse-green;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: infinite;
+  animation-name: pulse-green;
+  animation-duration: 2s;
+  transition: ease;
+  animation-iteration-count: infinite;
+}
+
+// Red
 
 .rb-red {
   color: #fff;
