@@ -3,8 +3,8 @@ import { join } from 'path';
 const config: any = {
   gulp: require('gulp'),
   appDir: 'app',
-  testDir: 'test',
-  testDest: 'www/build/test',
+  testDir: 'tests',
+  testDest: 'www/build/tests',
   typingsDir: 'typings',
 };
 

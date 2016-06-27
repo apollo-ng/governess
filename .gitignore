@@ -8,6 +8,11 @@
 log.txt
 *.sublime-project
 *.sublime-workspace
+
+__pycache__/
+*.py[cod]
+*$py.class
+
 .idea/
 .sass-cache/
 .versions/

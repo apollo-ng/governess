@@ -7,9 +7,9 @@
   </ion-buttons>
 </ion-navbar>
 
-<ion-content class="task-detail">
+<ion-content class="task-detail" >
 
-  <div class="chart-container">
+  <div class="chart-container" [ngStyle]="{'height': chartHeightAct+'px'}">
     <base-chart class="chart"
        [datasets]="lineChartData"
        [labels]="lineChartLabels"
@@ -21,7 +21,9 @@
     </base-chart>
   </div>
 
-  <div class="segment-splitbar"><span class="dragHandler">...</span></div>
+  <div class="segment-splitbar"><span (pan)="dragSplitbar($event)" class="dragHandler">...</span></div>
+
+<div scrollY="true">
 
   <ion-segment>
     <ion-segment-button value="man" (ionSelect)="setMode('man')" style="color: rgb(255, 152, 0); border-color: rgb(255, 152, 0)">
@@ -145,5 +147,5 @@
       </tr>
     </tbody>
   </table>
-
+</div>
 </ion-content>

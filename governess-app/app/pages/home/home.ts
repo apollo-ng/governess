@@ -211,12 +211,17 @@ export class HomePage {
     this.configService.update(this.config);
   }
 
-  public editTask() {
-    console.log('run task editor');
+  public editTask(): void {
+
     let atask: any = this.tasks.filter(
     task => task.name.includes(this.config.taskActive)
     )[0];
-    this.nav.push(TaskDetailPage, atask);
+
+    if (atask) {
+      console.log('run task editor');
+      this.nav.push(TaskDetailPage, atask);
+    }
+
   }
 
   public startTask(): void {

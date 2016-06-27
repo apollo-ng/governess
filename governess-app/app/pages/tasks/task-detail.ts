@@ -4,10 +4,11 @@
 /* tslint:disable:no-bitwise */
 /* tslint:disable:no-unused-variable */
 
-import { Component } from '@angular/core';
-import { NgClass }              from '@angular/common';
-import { NavController, NavParams } from 'ionic-angular';
-import { CHART_DIRECTIVES } from 'ng2-charts';
+import { Component }                from '@angular/core';
+import { NgClass }                  from '@angular/common';
+import { NavController,
+         NavParams }                from 'ionic-angular';
+import { CHART_DIRECTIVES }         from 'ng2-charts';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +26,8 @@ export class TaskDetailPage {
 
   public task: any;
   public data: any;
+  public chartHeight: number;
+  public chartHeightAct: number;
 
   constructor(
 
@@ -37,6 +40,8 @@ export class TaskDetailPage {
     this.navParams = navParams;
     this.task = this.navParams.data;
     this.data = this.task.data;
+    this.chartHeight = 200;
+
   }
 
   public lineChartData: Array<any> = [
@@ -120,6 +125,13 @@ export class TaskDetailPage {
 
   public chartHovered(e: any): void {
     console.log(e);
+  }
+
+  public dragSplitbar(e: any): void {
+    this.chartHeightAct = this.chartHeight + e.deltaY;
+    if (e.isFinal) {
+      this.chartHeight = this.chartHeightAct;
+    }
   }
 
 }

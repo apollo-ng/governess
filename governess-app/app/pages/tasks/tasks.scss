@@ -60,6 +60,15 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+  }
+
+  .dragHandler {
+    display: inline-block;
+      height: 30px;
+      width: 30px;
+      position: relative;
+      z-index: 999;
   }
 
   ion-segment {

@@ -120,6 +120,8 @@
           <ion-col style="padding-right: 2px;">
             <ion-select [(ngModel)]="config.taskActive"
                         class="rb-glass"
+                        placeholder="Select a Task"
+                        [alertOptions]="{ title: 'EKA KF412 Tasks', subTitle: 'Please select a Task'}"
                         cancelText="Cancel"
                         okText="Select"
             >
@@ -127,7 +129,7 @@
             </ion-select>
           </ion-col>
           <ion-col width-10 class="icon-edit">
-            <button small full (click)="editTask()" class="rb-glass">
+            <button small full [disabled]="config.taskActive ? false : null" (click)="editTask()" class="rb-glass">
               <ion-icon name="create"></ion-icon>
             </button>
           </ion-col>
