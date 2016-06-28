@@ -28,16 +28,16 @@
         <span class="value">42</span>
         <span class="unit">°C</span>
       </ion-col>
-      <ion-col width-10 class="icon-status">
+      <ion-col width-10 class="icon-led">
         <ion-icon name="flame"></ion-icon>
       </ion-col>
-      <ion-col width-10 class="icon-status">
+      <ion-col width-10 class="icon-led">
         <ion-icon name="snow"></ion-icon>
       </ion-col>
-      <ion-col width-10 class="icon-status" [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
-        <ion-icon name="nuclear"></ion-icon>
+      <ion-col width-10 class="icon-led" [ngStyle]="{'border-color': 'rgb(109, 128, 6)'}">
+        <ion-icon name="nuclear" [ngStyle]="{'color': 'rgb(109, 128, 6)', 'text-shadow': '0px 0px 25px rgba(109, 128, 6, 0.5), 0px 0px 25px rgba(109, 128, 6, 0.5)'}"></ion-icon>
       </ion-col>
-      <ion-col width-10 class="icon-status">
+      <ion-col width-10 class="icon-led">
         <ion-icon name="exit"></ion-icon>
       </ion-col>
     </ion-row>

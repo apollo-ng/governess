@@ -91,6 +91,7 @@ ion-grid.home-display {
   .icon-display {
     text-align: left;
     border-left-width: 3px;
+    background: rgba(11, 10, 6, 0.6);
   }
 
   .icon-display ion-icon {
@@ -111,10 +112,16 @@ ion-grid.home-display {
     margin-top: 5px;
   }
 
-  .icon-status ion-icon {
+  .icon-led {
+    background: rgba(11, 10, 6, 0.6);
+  }
+
+  .icon-led ion-icon {
     text-align: center;
     font-size: 1.4em;
     line-height: 1.4em;
+    color: #1F1E1A;
+    text-shadow: 0px 0px 5px #000, 0px 0px 5px #000;
   }
 }
 
@@ -189,9 +196,6 @@ ion-grid.home-control {
 .home-segment {
 
   background: rgb(40,39,35);
-  background: -moz-linear-gradient(top, rgba(40,39,35,1) 0%, rgba(159,158,154,1) 100%);
-  background: -webkit-linear-gradient(top, rgba(40,39,35,1) 0%,rgba(159,158,154,1) 100%);
-  background: linear-gradient(to bottom, rgba(40,39,35,1) 0%,rgba(159,158,154,1) 100%);
 
   ion-segment-button.segment-button {
     font-size: 1.4rem;
