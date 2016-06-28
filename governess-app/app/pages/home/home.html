@@ -151,6 +151,10 @@
 
 <ion-toolbar position="bottom" dark class="home-segment">
   <ion-segment [(ngModel)]="config.ctrlMode">
+    <ion-segment-button value="cam" (ionSelect)="setMode('cam')">
+      <ion-icon name="videocam"></ion-icon>
+      <span class="segment-button-text">HUD</span>
+    </ion-segment-button>
     <ion-segment-button small value="man" (ionSelect)="setMode('man')">
       <ion-icon small name="hand"></ion-icon>
       <span class="segment-button-text">Manual</span>
@@ -162,10 +166,6 @@
     <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
       <ion-icon name="timer"></ion-icon>
       <span class="segment-button-text">Schedule</span>
-    </ion-segment-button>
-    <ion-segment-button value="cam" (ionSelect)="setMode('cam')">
-      <ion-icon name="videocam"></ion-icon>
-      <span class="segment-button-text">Live</span>
     </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
