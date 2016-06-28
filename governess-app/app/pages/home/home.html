@@ -114,10 +114,7 @@
           </ion-col>
         </ion-row>
         <ion-row *ngIf="status === 'idle'">
-          <ion-col width-25 style="text-transform: uppercase; text-align:center;" class="progress-status">
-            idle
-          </ion-col>
-          <ion-col style="padding-right: 2px;">
+          <ion-col style="padding-right: 3px;">
             <ion-select [(ngModel)]="config.taskActive"
                         class="rb-glass"
                         placeholder="Select a Task"
@@ -156,18 +153,19 @@
   <ion-segment [(ngModel)]="config.ctrlMode">
     <ion-segment-button small value="man" (ionSelect)="setMode('man')">
       <ion-icon small name="hand"></ion-icon>
-      Manual
+      <span class="segment-button-text">Manual</span>
     </ion-segment-button>
     <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
       <ion-icon name="pulse"></ion-icon>
-      Auto
+      <span class="segment-button-text">Auto</span>
     </ion-segment-button>
     <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
       <ion-icon name="timer"></ion-icon>
-      Schedule
+      <span class="segment-button-text">Schedule</span>
     </ion-segment-button>
     <ion-segment-button value="cam" (ionSelect)="setMode('cam')">
-      <ion-icon name="videocam"></ion-icon> Live
+      <ion-icon name="videocam"></ion-icon>
+      <span class="segment-button-text">Live</span>
     </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
