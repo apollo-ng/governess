@@ -1,29 +1,30 @@
-<!--
+<ion-header>
 
--->
-<ion-navbar *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>Appliance</ion-title>
-  <ion-buttons end>
-    <button (click)="openHelp()" primary>
-      <ion-icon name="help"></ion-icon>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
     </button>
-  </ion-buttons>
-</ion-navbar>
+    <ion-title>Appliance</ion-title>
+    <ion-buttons end>
+      <button (click)="openHelp()" primary>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
-<ion-toolbar primary>
-  <ion-title>{{appliance.name}}</ion-title>
-  <ion-buttons end>
-    <button>
-      <ion-icon name="create"></ion-icon>
-    </button>
-    <button (click)="createModule()">
-      <ion-icon name="add" ></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-toolbar>
+  <ion-toolbar primary>
+    <ion-title>{{appliance.name}}</ion-title>
+    <ion-buttons end>
+      <button>
+        <ion-icon name="create"></ion-icon>
+      </button>
+      <button (click)="createModule()">
+        <ion-icon name="add" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
 
 <ion-content class="appliance">
 

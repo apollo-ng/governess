@@ -1,4 +1,5 @@
-<ion-navbar *navbar>
+<ion-header>
+  <ion-navbar>
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
@@ -13,6 +14,8 @@
 <ion-toolbar primary>
   <ion-searchbar [(ngModel)]="searchTasks"></ion-searchbar>
 </ion-toolbar>
+
+</ion-header>
 
 <ion-content class="task-list">
 

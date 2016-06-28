@@ -1,11 +1,13 @@
-<ion-navbar *navbar dark class="task-detail-toolbar">
-  <ion-title>{{task.name}}</ion-title>
-  <ion-buttons end>
-    <button (click)="openHelp()" primary>
-      <ion-icon name="help"></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar dark class="task-detail-toolbar">
+    <ion-title>{{task.name}}</ion-title>
+    <ion-buttons end>
+      <button (click)="openHelp()" primary>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="task-detail" >
 

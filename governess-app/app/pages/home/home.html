@@ -1,54 +1,57 @@
-<ion-navbar *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>
-    <h1>EKA KF412</h1>
-    <p *ngIf="status === 'running'">Reflow Lead-Free</p>
-  </ion-title>
-  <ion-buttons end>
-    <button (click)="openHelp()" primary>
-      <ion-icon name="help"></ion-icon>
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
     </button>
-  </ion-buttons>
-</ion-navbar>
+    <ion-title>
+      <h1>EKA KF412</h1>
+      <p *ngIf="status === 'running'">Reflow Lead-Free</p>
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="openHelp()" primary>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
-<div class="home-splitbar"></div>
+  <div class="home-splitbar"></div>
 
-<ion-grid dark class="home-display">
-  <ion-row>
-    <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
-      <ion-icon name="thermometer"></ion-icon>
-      <span class="value">23</span>
-      <span class="unit">°C</span>
-    </ion-col>
-    <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
-      <ion-icon name="thermometer"></ion-icon>
-      <span class="value">42</span>
-      <span class="unit">°C</span>
-    </ion-col>
-    <ion-col width-10 class="icon-status">
-      <ion-icon name="flame"></ion-icon>
-    </ion-col>
-    <ion-col width-10 class="icon-status">
-      <ion-icon name="snow"></ion-icon>
-    </ion-col>
-    <ion-col width-10 class="icon-status" [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
-      <ion-icon name="nuclear"></ion-icon>
-    </ion-col>
-    <ion-col width-10 class="icon-status">
-      <ion-icon name="exit"></ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+  <ion-grid dark class="home-display">
+    <ion-row>
+      <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
+        <ion-icon name="thermometer"></ion-icon>
+        <span class="value">23</span>
+        <span class="unit">°C</span>
+      </ion-col>
+      <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
+        <ion-icon name="thermometer"></ion-icon>
+        <span class="value">42</span>
+        <span class="unit">°C</span>
+      </ion-col>
+      <ion-col width-10 class="icon-status">
+        <ion-icon name="flame"></ion-icon>
+      </ion-col>
+      <ion-col width-10 class="icon-status">
+        <ion-icon name="snow"></ion-icon>
+      </ion-col>
+      <ion-col width-10 class="icon-status" [ngStyle]="{'background-color': 'rgb(109, 128, 6)'}">
+        <ion-icon name="nuclear"></ion-icon>
+      </ion-col>
+      <ion-col width-10 class="icon-status">
+        <ion-icon name="exit"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-<div class="home-splitbar"></div>
+  <div class="home-splitbar"></div>
+
+</ion-header>
 
 <ion-content class="home" scroll="false">
 
   <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 47px)">
 
-    <div *ngSwitchWhen="'man'" style="height: 100%">
+    <div *ngSwitchCase="'man'" style="height: 100%">
       <div class="chart-container" style="height: 60%">
         <base-chart class="chart"
           [datasets]="lineChartData"
@@ -72,7 +75,7 @@
       </ion-list>
     </div>
 
-    <div *ngSwitchWhen="'auto'" style="height: 100%; padding: 0">
+    <div *ngSwitchCase="'auto'" style="height: 100%; padding: 0">
       <div class="chart-container" style="height: calc(100%)">
         <base-chart class="chart"
           [datasets]="lineChartData"
@@ -139,7 +142,7 @@
       </ion-grid>
     </div>
 
-    <ion-list *ngSwitchWhen="'cron'">
+    <ion-list *ngSwitchCase="'cron'">
       Listing
     </ion-list>
 
@@ -147,6 +150,7 @@
 
 </ion-content>
 
+<ion-footer>
 <div class="home-splitbar"></div>
 
 <ion-toolbar position="bottom" dark class="home-segment">
@@ -169,3 +173,4 @@
     </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
+</ion-footer>
