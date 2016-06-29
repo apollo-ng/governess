@@ -4,8 +4,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      <h1>EKA KF412</h1>
-      <p *ngIf="status === 'running'">Reflow Lead-Free</p>
+      <h1 [ngClass]="{'title-reduced' : status === 'running' || status === 'paused'}">EKA KF412 {{status}}</h1>
+      <p *ngIf="status === 'running' || status === 'paused'">{{config.taskActive}}</p>
     </ion-title>
     <ion-buttons end>
       <button (click)="openHelp()" primary>
