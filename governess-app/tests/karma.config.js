@@ -20,7 +20,6 @@ module.exports = function(config) {
       'app/**/*.spec.ts',
       {pattern: 'node_modules/reflect-metadata/Reflect.js.map', included: false, served: true}, // 404 on the same
       {pattern: 'www/build/**/*.html', included: false},
-      {pattern: 'www/assets/i18n/*.json', included: false},
     ],
 
     // list of files to exclude
@@ -40,7 +39,7 @@ module.exports = function(config) {
       transform: [
         ['browserify-istanbul', {
           instrumenter: require('isparta'),
-          ignore: ['**/*.spec.ts','**/*.d.ts'],
+          ignore: ['**/*.spec.ts','**/*.d.ts', '**/index.ts', '**/mocks.ts', '**/*.mock.ts'],
         }]
       ],
       plugin: [
@@ -70,8 +69,7 @@ module.exports = function(config) {
     // GOTCHA -- Karma proxies _everything_ through base first..
     //           Also any files you want to serve need to be in the files array above with serverd: true
     proxies: {
-      '/build': '/base/www/build',
-      '/assets/i18n': '/base/www/assets/i18n'
+      '/build': '/base/www/build'
     },
 
     // level of logging

@@ -5,7 +5,6 @@ import {
     expect,
     it,
 }                        from '@angular/core/testing';
-
 describe('Utils', () => {
 
   it('resets a control', () => {

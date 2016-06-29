@@ -1,22 +1,16 @@
 
-import { ADDITIONAL_TEST_BROWSER_PROVIDERS, TEST_BROWSER_STATIC_PLATFORM_PROVIDERS } from '@angular/platform-browser/testing/browser_static';
-import { BROWSER_APP_DYNAMIC_PROVIDERS }                from '@angular/platform-browser-dynamic';
-import { resetBaseTestProviders,
-         setBaseTestProviders,
-         beforeEachProviders } from '@angular/core/testing';
-import { provide }              from '@angular/core';
-import { ConfigService }            from './providers/config/config';
-import { GovernessApp }                                   from './app';
-import { HelpPage }                                        from './pages/help/help';
+import  {
+          TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS,
+          TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+        }                        from '@angular/platform-browser-dynamic/testing';
+import  { setBaseTestProviders } from '@angular/core/testing';
 
-resetBaseTestProviders();
+import  { GovernessApp }         from './app';
+import  { HelpPage }             from './pages/help/help';
 
 setBaseTestProviders (
-  TEST_BROWSER_STATIC_PLATFORM_PROVIDERS,
-  [
-    BROWSER_APP_DYNAMIC_PROVIDERS,
-    ADDITIONAL_TEST_BROWSER_PROVIDERS,
-  ]
+  TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+  TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
 );
 
 let governessApp: GovernessApp = null;
@@ -47,10 +41,6 @@ class MockClass {
 }
 
 describe('GovernessApp', () => {
-
-  beforeEachProviders(() => [
-    provide(ConfigService, {useClass: MockClass}),
-  ]);
 
   beforeEach(() => {
     let mockClass: any = (<any>new MockClass());
