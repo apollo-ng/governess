@@ -19,9 +19,8 @@ import { ConfigService }        from '../../providers/config/config';
 export class SettingsPage {
 
   private nav:              NavController;
-  public configService:    ConfigService;
-
-  public config:            any;
+  public configService:     ConfigService;
+  public config:            Object;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -33,8 +32,6 @@ export class SettingsPage {
   ) {
 
     this.nav = nav;
-
-    // this.config = {};
     this.configService = configService;
     this.config = this.configService.get();
 
