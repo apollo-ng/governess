@@ -108,7 +108,7 @@ export class HomePage {
           },
           ticks: {
             beginAtZero: false,
-            fontColor: '#FFFFFF',
+            fontColor: '#d8d3c5',
             fontFamily: 'DIN',
           },
         },
@@ -124,7 +124,7 @@ export class HomePage {
           },
           ticks: {
             beginAtZero: false,
-            fontColor: '#FFFFFF',
+            fontColor: '#d8d3c5',
             fontFamily: 'DIN',
             maxTicksLimit: 8,
           },
@@ -139,7 +139,7 @@ export class HomePage {
           },
           ticks: {
             beginAtZero: false,
-            fontColor: '#FFFFFF',
+            fontColor: '#d8d3c5',
             fontFamily: 'DIN',
             maxTicksLimit: 8,
           },
@@ -203,11 +203,9 @@ export class HomePage {
   }
 
   public setMode(mode: string): void {
-    console.log('pre-update conf ', this.config);
-    console.log('pressed ', mode);
-    let cn: any = this.config;
-    cn.ctrlMode = mode;
-    this.config = cn;
+    // console.log('pre-update conf ', this.config);
+    // console.log('pressed ', mode);
+    this.config.ctrlMode = mode;
     this.configService.update(this.config);
   }
 

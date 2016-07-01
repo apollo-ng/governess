@@ -81,12 +81,20 @@ ion-menu ion-toolbar .toolbar-background {
 
 .rb-green {
   color: #fafafa;
-  box-shadow: inset 0 0 14px 0 #9db134, 0 0 8px 0 #9db134;
-  border: 1px solid rgba(213, 255, 95, 0.5);
-  background: #79a30e;
-  background: -moz-radial-gradient(center, ellipse cover, #79a30e 0%, #75890c 90%, #75890c 90%);
-  background: -webkit-radial-gradient(center, ellipse cover, #79a30e 0%,#75890c 90%,#75890c 90%);
-  background: radial-gradient(ellipse at center, #79a30e 0%,#75890c 90%,#75890c 90%);
+  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4);
+  box-shadow: inset 0 0 24px 0 #606f11, 0 0 8px 0 #9db134;
+  border: 1px solid rgb(121, 144, 55);
+  background: #7eaa0f;
+  background: -webkit-radial-gradient(center, ellipse cover, #7eaa0f 0%, #6d8006 100%);
+  background: -webkit-radial-gradient(center ellipse, #7eaa0f 0%, #6d8006 100%);
+  background: radial-gradient(ellipse at center, #7eaa0f 0%, #6d8006 100%);
+}
+
+
+button[disabled].rb-green {
+    color: #c5dc80;
+    box-shadow: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .rb-green-pulse {
@@ -128,11 +136,19 @@ ion-menu ion-toolbar .toolbar-background {
 
 .rb-white {
   color: #2f2e2a;
-  box-shadow: inset 0 0 14px 0 rgba(88, 88, 88, 0.7), 0 0 8px 0 rgba(253, 253, 253, 0.4);
-  border: 1px solid rgb(173, 171, 171);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,0.6) 0%, rgba(209,209,209,0.7) 100%);
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0.6) 0%,rgba(209,209,209,0.7) 100%);
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%,rgba(209,209,209,0.7) 100%);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 24px 0 rgba(62, 62, 62, 0.77), 0 0 8px 0 rgba(236, 232, 219, 0.75);
+  border: 1px solid #969696;
+  background: #dbb013;
+  background: -webkit-radial-gradient(center, ellipse cover, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
+  background: -webkit-radial-gradient(center ellipse, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
+  background: radial-gradient(ellipse at center, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
+}
+
+button[disabled].rb-white {
+    color: #fff;
+    box-shadow: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .rb-glass {
@@ -142,6 +158,4 @@ ion-menu ion-toolbar .toolbar-background {
   box-shadow: inset 0 0 14px 0 #3f3e3a, 0 0 8px 0 rgba(255, 255, 255, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: #2f2e2a;
-  background-color: #2f2e2a;
-
 }

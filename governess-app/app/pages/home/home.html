@@ -78,6 +78,7 @@
     <div *ngSwitchCase="'auto'" style="height: 100%; padding: 0">
       <div class="chart-container" style="height: calc(100%)">
         <base-chart class="chart"
+          *ngIf="config.taskActive"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
           [options]="lineChartOptions"
@@ -86,6 +87,9 @@
           (chartHover)="chartHovered()"
           (chartClick)="chartClicked()">
         </base-chart>
+        <div *ngIf="!config.taskActive" class="chart-empty">
+          <p>Please select a Task to run</p>
+        </div>
       </div>
       <div class="home-splitbar"></div>
       <ion-grid dark class="home-control">
@@ -101,17 +105,17 @@
             </div>
           </ion-col>
           <ion-col width-10 *ngIf="status === 'running'">
-            <button small full (click)="pauseTask()" class="rb-yellow">
+            <button full (click)="pauseTask()" class="rb-yellow">
               <ion-icon name="pause"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-10 *ngIf="status === 'paused'">
-            <button small dark full (click)="restartTask()" class="rb-green-pulse">
+            <button dark full (click)="restartTask()" class="rb-green-pulse">
               <ion-icon name="skip-forward"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20 *ngIf="status === 'running' || status === 'paused'">
-            <button small full (click)="stopTask()" class="rb-red">
+            <button full (click)="stopTask()" class="rb-red">
               <ion-icon name="square"></ion-icon>
             </button>
           </ion-col>
@@ -119,7 +123,7 @@
         <ion-row *ngIf="status === 'idle'">
           <ion-col style="padding-right: 3px;">
             <ion-select [(ngModel)]="config.taskActive"
-                        class="rb-glass"
+                        class="rb-white"
                         placeholder="Select a Task"
                         [alertOptions]="{ title: 'EKA KF412 Tasks', subTitle: 'Please select a Task'}"
                         cancelText="Cancel"
@@ -129,12 +133,12 @@
             </ion-select>
           </ion-col>
           <ion-col width-10 class="icon-edit">
-            <button small full [disabled]="config.taskActive ? false : null" (click)="editTask()" class="rb-glass">
+            <button full [disabled]="!config.taskActive ? true : false" (click)="editTask()" class="rb-white">
               <ion-icon name="create"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20>
-            <button small full (click)="startTask()" class="rb-green">
+            <button full [disabled]="!config.taskActive ? true : false" (click)="startTask()" class="rb-green">
               <ion-icon name="play"></ion-icon>
             </button>
           </ion-col>
@@ -151,11 +155,12 @@
 </ion-content>
 
 <ion-footer>
+
 <div class="home-splitbar"></div>
 
 <ion-toolbar position="bottom" dark class="home-segment">
   <ion-segment [(ngModel)]="config.ctrlMode">
-    <ion-segment-button value="cam" (ionSelect)="setMode('cam')">
+    <ion-segment-button value="cam" (ionSelect)="setMode('hud')">
       <ion-icon name="videocam"></ion-icon>
       <span class="segment-button-text">HUD</span>
     </ion-segment-button>
