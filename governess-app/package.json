@@ -17,7 +17,9 @@
     "karma": "gulp --gulpfile tests/gulpfile.ts --cwd ./ karma-debug",
     "postinstall": "ionic state restore && typings install && webdriver-manager update && cp tests/karma-static/*.html node_modules/karma/static",
     "start": "ionic serve",
-    "test": "gulp --gulpfile tests/gulpfile.ts --cwd ./ unit-test"
+    "test": "gulp --gulpfile tests/gulpfile.ts --cwd ./ unit-test",
+    "electron": "electron .",
+    "package": "electron-packager . governess-app --app-version=1.0.0 --platform=linux --arch=x64 --prune --asar --overwrite --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=app --ignore=typings --ignore=hooks"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.3",
@@ -37,10 +39,13 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
+    "asar": "^0.11.0",
     "browserify": "13.0.1",
     "browserify-istanbul": "2.0.0",
     "codecov.io": "0.1.6",
     "del": "2.2.1",
+    "electron-packager": "^7.1.0",
+    "electron-prebuilt": "1.2.5",
     "gulp": "3.9.1",
     "gulp-tslint": "5.0.0",
     "gulp-typescript": "2.13.6",
@@ -79,5 +84,6 @@
   ],
   "cordovaPlatforms": [
     "android"
-  ]
+  ],
+  "main": "electron.js"
 }
