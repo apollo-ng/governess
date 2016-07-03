@@ -67,10 +67,19 @@
       <ion-list style="height: 40%">
         <ion-item>
           <ion-label>Temperature</ion-label>
-          <ion-range min="-200" max="200" [(ngModel)]="singleValue" pin="true">
+          <ion-range min="25" max="250" [(ngModel)]="singleValue" pin="true">
             <ion-icon small range-left name="thermometer"></ion-icon>
             <ion-icon range-right name="thermometer"></ion-icon>
           </ion-range>
+          <ion-toggle></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="hand" item-left></ion-icon>
+          <ion-label>
+            <h2>Circulation</h2>
+            <p></p>
+          </ion-label>
+          <ion-toggle></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
@@ -165,7 +174,7 @@
       <span class="segment-button-text">HUD</span>
     </ion-segment-button>
     <ion-segment-button small value="man" (ionSelect)="setMode('man')">
-      <ion-icon small name="hand"></ion-icon>
+      <ion-icon name="hand"></ion-icon>
       <span class="segment-button-text">Manual</span>
     </ion-segment-button>
     <ion-segment-button value="auto" (ionSelect)="setMode('auto')">

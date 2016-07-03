@@ -68,4 +68,5 @@ describe('GovernessApp', () => {
     expect(governessApp['menu']['close']).toHaveBeenCalled();
     expect(governessApp['nav'].setRoot).toHaveBeenCalledWith(HelpPage);
   });
+
 });

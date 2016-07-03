@@ -49,14 +49,14 @@ export class GovernessApp implements OnInit {
 
   public platform:        Platform;
   public configService:   ConfigService;
-  public config:          any;
-  public rootPage:        Type;
+  private config:         any;
+  private rootPage:       Type;
 
   // Populate side menu
-  public pages: PageObj[]= [
+  private pages: PageObj[]= [
     { title: 'Home',      component: HomePage,      idx: 0, icon: 'home' },
-    { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'cube' },
-    { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'map' },
+    { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
+    { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
     { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
     { title: 'Settings',  component: SettingsPage,  idx: 4, icon: 'settings' },
     { title: 'Help',      component: HelpPage,      idx: 5, icon: 'help-buoy' },
@@ -76,6 +76,7 @@ export class GovernessApp implements OnInit {
     this.platform =         platform;
     this.menu =             menu;
     this.configService =    configService;
+    this.config =           {};
 
     this.initializeApp();
 
@@ -85,7 +86,7 @@ export class GovernessApp implements OnInit {
 
   public ngOnInit(): void {
 
-    console.log('App ngOnInit');
+    // console.log('App ngOnInit');
     this.config = this.configService.get();
 
     // Define which page the app should show by default
@@ -163,10 +164,7 @@ ionicBootstrap(
   GovernessApp,
   [ ConfigService ],
   {
-    modalEnter: 'modal-slide-in',
-    modalLeave: 'modal-slide-out',
     tabbarPlacement: 'top',
-    pageTransition: 'ease',
     prodMode: 'false',
   }
 );

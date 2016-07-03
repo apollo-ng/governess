@@ -9,8 +9,10 @@ describe('AboutPage', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[6].click();
-        expect(browser.getTitle()).toEqual('About');
+        items[6].click().then(() => {
+          browser.driver.sleep(1000);
+          expect(browser.getTitle()).toEqual('About');
+        });
       });
     });
   });
@@ -19,8 +21,10 @@ describe('AboutPage', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[6].click();
-        expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
+        items[6].click().then(() => {
+          browser.driver.sleep(1000);
+          expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
+        });
       });
     });
   });

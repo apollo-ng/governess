@@ -39,6 +39,7 @@
         <ion-option value="es">Espanol</ion-option>
         <ion-option value="it">Italiana</ion-option>
         <ion-option value="ru">Pусский</ion-option>
+        <ion-option value="fr">Francais</ion-option>
       </ion-select>
     </ion-item>
 
@@ -57,6 +58,15 @@
         <p>Allow manual override during task run</p>
       </ion-label>
       <ion-toggle [(ngModel)]="config.manOverr" (ngModelChange)="updateConfig()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="headset" item-left></ion-icon>
+      <ion-label>
+        <h2>Audio</h2>
+        <p>Enable Sounds and Audio Feedback</p>
+      </ion-label>
+      <ion-toggle [(ngModel)]="config.audio" (ngModelChange)="updateConfig()"></ion-toggle>
     </ion-item>
 
     <ion-item>

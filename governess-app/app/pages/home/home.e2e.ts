@@ -9,8 +9,10 @@ describe('HomePage', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[0].click();
-        expect(browser.getTitle()).toEqual('EKA KF412');
+        items[0].click().then(() => {
+          browser.driver.sleep(1000);
+          expect(browser.getTitle()).toEqual('EKA KF412 idle');
+        });
       });
     });
   });
@@ -19,8 +21,10 @@ describe('HomePage', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[0].click();
-        expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
+        items[0].click().then(() => {
+          browser.driver.sleep(1000);
+          expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
+        });
       });
     });
   });
@@ -29,18 +33,22 @@ describe('HomePage', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[0].click();
-        expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('Governess');
+        items[0].click().then(() => {
+          browser.driver.sleep(1000);
+          expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('Governess');
+        });
       });
     });
   });
 
-  it('has a chart', () => {
+  it('has segment buttons', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
-        items[0].click();
-        expect(element(by.css('canvas')).isPresent()).toEqual(true);
+        items[0].click().then(() => {
+          browser.driver.sleep(1000);
+          expect(element(by.css('.home-segment')).isPresent()).toEqual(true);
+        });
       });
     });
   });

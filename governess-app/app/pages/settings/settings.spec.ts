@@ -11,6 +11,8 @@ describe('SettingsPage', () => {
   beforeEach(injectAsyncWrapper(asyncCallbackFactory(SettingsPage, this, true)));
 
   it('initialises', () => {
+    this.instance.config.viewPref = 'last';
+    this.fixture.detectChanges();
     expect(this.instance).not.toBeNull();
     expect(this.fixture).not.toBeNull();
   });

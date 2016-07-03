@@ -11,6 +11,8 @@ describe('HomePage', () => {
   beforeEach(injectAsyncWrapper(asyncCallbackFactory(HomePage, this, true)));
 
   it('initialises', () => {
+    this.instance.config.ctrlMode = '';
+    this.fixture.detectChanges();
     expect(this.instance).not.toBeNull();
     expect(this.fixture).not.toBeNull();
   });

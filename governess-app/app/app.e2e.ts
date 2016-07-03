@@ -6,7 +6,7 @@ describe('GovernessApp', () => {
   });
 
   it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('EKA KF412');
+    expect(browser.getTitle()).toEqual('EKA KF412 idle');
   });
 
   it('should have <nav>', () => {

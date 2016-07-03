@@ -1,8 +1,10 @@
 'use strict';
 
-import { Component }            from '@angular/core';
-import { NavController, Toast } from 'ionic-angular';
-import { ConfigService }        from '../../providers/config/config';
+import { Component }        from '@angular/core';
+import { NavController,
+         Toast }            from 'ionic-angular';
+import { ConfigService }    from '../../providers/config/config';
+import { TaskService }    from '../../providers/tasks/tasks';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -10,6 +12,7 @@ import { ConfigService }        from '../../providers/config/config';
 
 @Component ({
   templateUrl: 'build/pages/settings/settings.html',
+  providers: [ TaskService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -19,22 +22,21 @@ import { ConfigService }        from '../../providers/config/config';
 export class SettingsPage {
 
   private nav:              NavController;
+  public taskService:       TaskService;
   public configService:     ConfigService;
   public config:            Object;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
-
     nav:                    NavController,
-    configService:          ConfigService
-
+    configService:          ConfigService,
+    taskService:            TaskService
   ) {
-
-    this.nav = nav;
-    this.configService = configService;
-    this.config = this.configService.get();
-
+    this.nav =              nav;
+    this.configService =    configService;
+    this.taskService =      taskService;
+    this.config =           this.configService.get();
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -52,6 +54,7 @@ export class SettingsPage {
   public resetCPD(e: any): void {
 
     this.configService.reset();
+    this.taskService.reset();
 
     let toast: any = Toast.create({
       message: 'GovernessApp configuration has been reset',

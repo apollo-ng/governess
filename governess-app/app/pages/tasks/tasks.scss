@@ -76,15 +76,17 @@
     box-shadow: inset 0 0 12px 0 #000;
   }
 
+  .segment-button {
+    border-bottom-width: 3px;
+  }
+
   .segment-activated {
     border-color: rgba(117, 137, 12, 0.75);
-    background: rgba(117, 137, 12, 0.75);
     opacity: 1;
     height: 42px;
     color: #d8d3c5;
-    background-color: rgba(177, 170, 149, 0.1);
     font-size: 16px;
-    text-shadow: -1px -1px 0 #1f1e1a, 1px -1px 0 #1f1e1a, -1px 1px 0 #1f1e1a, 1px 1px 0 #1f1e1a;
+    text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
   }
 
   .mini-bar {
@@ -165,37 +167,30 @@
   .md-table thead th {
     height: 30px;
     line-height: 25px;
-    font-weight: 400 !important;
     color: #efeeea;
     text-shadow: #3f3e3a 0 -1px 0;
-    border-top: 1px solid #999;
-    border-right: 1px solid #515151;
-    border-bottom: 1px solid #5f5e5a;
   }
+
   .md-table thead td {
     height: 27px;
     line-height: 23px;
-    font-weight: 400 !important;
-    background: rgba(82, 80, 74, 0.49);
     border-top: 1px solid #777;
-    border-right: 1px solid #515151;
-    border-bottom: 1px solid #5f5e5a;
-    color: #fafafa;
+    border-right: 1px solid #313131;
+    border-bottom: 1px solid #3f3e3a;
     vertical-align: middle;
     font-size: 16px;
   }
 
   .md-table thead tr td:first-child {
-
   }
   .md-table thead tr td:last-child {
     border-right: none;
   }
-  .md-table thead td:nth-child(even) {
-    /* background: rgba(89, 87, 81, 0.5); */
+  .md-table tbody tr:nth-child(even) {
+    background: rgba(29, 27, 21, 0.9);
   }
-  .md-table thead td:nth-child(odd) {
-    /* background: rgba(89, 87, 81, 0.5); */
+  .md-table tbody tr:nth-child(odd) {
+    background: rgba(19, 17, 11, 0.9);
   }
   .md-table thead td:last-child {
     border-right: none;
@@ -204,19 +199,17 @@
     font-size: 14px;
   }
   .md-table tbody th {
-    font-weight: 400 !important;
     text-align: left;
     padding-left: 8px;
-    border-right: 1px solid #5f5e5a;
-    border-bottom: 1px solid #5f5e5a;
+    border-right: 1px solid #3f3e3a;
+    border-bottom: 1px solid #3f3e3a;
   }
   .md-table tbody td {
     height: 20px;
     line-height: 20px;
     color: #efeeea;
-    background: rgba(11, 10, 6, 0.7);
-    border-right: 1px solid #5f5e5a;
-    border-bottom: 1px solid #5f5e5a;
+    border-right: 1px solid #3f3e3a;
+    border-bottom: 1px solid #3f3e3a;
     vertical-align: middle;
   }
   .md-table tbody td:last-child {
@@ -228,14 +221,13 @@
   }
   .md-table tfoot th {
     height: 21px;
-    font-weight: 400 !important;
     text-align: left;
     padding-left: 8px;
-    border-right: 1px solid #5f5e5a;
+    border-right: 1px solid #3f3e3a;
   }
   .md-table tfoot td {
     height: 21px;
-    border-right: 1px solid #5f5e5a;
+    border-right: 1px solid #3f3e3a;
     color: #efeaee;
   }
   .md-table tfoot td:last-child {

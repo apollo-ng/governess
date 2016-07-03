@@ -1,12 +1,14 @@
 'use strict';
 
-/* FIXME */
+/* FIXME? */
 /* tslint:disable:no-bitwise */
 /* tslint:disable:no-unused-variable */
 
 import { Component}             from '@angular/core';
 import { NgClass }              from '@angular/common';
-import { NavController }        from 'ionic-angular';
+import { NavController,
+         ViewController,
+         Modal }                from 'ionic-angular';
 
 import { CHART_DIRECTIVES }     from 'ng2-charts';
 
@@ -61,19 +63,30 @@ export class HomePage {
 
     this.status = 'idle';
 
+    // console.log(this.config.taskActive);
+
   }
 
   //////////////////////////////////////////////////////////////////////
 
   public openHelp(): void {
-    // FIXME: Add proper help
-    console.log('help tapped');
+    let modal: any = Modal.create(HelpModal);
+    this.nav.present(modal);
   };
 
   public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension: '0', yAxisID: 'y-axis-1' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B', lineTension: '0', yAxisID: 'y-axis-1' },
-    { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C', lineTension: '0', yAxisID: 'y-axis-2' },
+    { data: [65, 59, 80, 81, 56, 55, 40],
+      label: 'Series A',
+      lineTension: 0,
+      yAxisID: 'y-axis-1' },
+    { data: [28, 48, 40, 19, 86, 27, 90],
+      label: 'Series B',
+      lineTension: 0,
+      yAxisID: 'y-axis-1' },
+    { data: [18, 48, 77, 9, 100, 27, 40],
+      label: 'Series C',
+      lineTension: 0,
+      yAxisID: 'y-axis-2' },
   ];
 
   public lineChartLabels: Array<any> = [
@@ -152,6 +165,7 @@ export class HomePage {
     {
       backgroundColor: 'rgba(255, 152, 0, 0.15)',
       borderColor: 'rgb(255, 152, 0)',
+      borderWidth: 2,
       pointRadius: '3',
       pointBorderWidth: '2',
       pointBackgroundColor: '#fff',
@@ -162,6 +176,7 @@ export class HomePage {
     {
       backgroundColor: 'rgba(162, 48, 22, 0.15)',
       borderColor: 'rgb(162, 48, 22)',
+      borderWidth: 2,
       pointRadius: '3',
       pointBorderWidth: '2',
       pointBackgroundColor: '#fff',
@@ -172,6 +187,7 @@ export class HomePage {
     {
       backgroundColor: 'rgba(109, 128, 6, 0.15)',
       borderColor: 'rgb(109, 128, 6)',
+      borderWidth: 2,
       pointRadius: '3',
       pointBorderWidth: '2',
       pointBackgroundColor: '#fff',
@@ -183,17 +199,6 @@ export class HomePage {
 
   public lineChartType: string = 'line';
 
-  public randomize(): void {
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i: number = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j: number = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
-  }
-
   public chartClicked(e: any): void {
     console.log(e);
   }
@@ -202,9 +207,14 @@ export class HomePage {
     console.log(e);
   }
 
+  public playSound(file: string): void {
+    let audio: any = new Audio();
+    audio.src = 'assets/audio/' + file;
+    audio.load();
+    audio.play();
+  }
+
   public setMode(mode: string): void {
-    // console.log('pre-update conf ', this.config);
-    // console.log('pressed ', mode);
     this.config.ctrlMode = mode;
     this.configService.update(this.config);
   }
@@ -212,34 +222,71 @@ export class HomePage {
   public editTask(): void {
 
     let atask: any = this.tasks.filter(
-    task => task.name.includes(this.config.taskActive)
+      task => task.name.includes(this.config.taskActive)
     )[0];
 
-    if (atask) {
-      console.log('run task editor');
-      this.nav.push(TaskDetailPage, atask);
-    }
+    if (atask) this.nav.push(TaskDetailPage, atask);
 
   }
 
   public startTask(): void {
+    if (this.config.audio) this.playSound('run.mp3');
     console.log('Start Task');
     this.status = 'running';
   }
 
   public pauseTask(): void {
+    if (this.config.audio) this.playSound('float.mp3');
     console.log('Pause Task');
     this.status = 'paused';
   }
 
   public restartTask(): void {
+    if (this.config.audio) this.playSound('float.mp3');
     console.log('Restart Task');
     this.status = 'running';
   }
 
   public stopTask(): void {
+    if (this.config.audio) this.playSound('stop.mp3');
     console.log('Stop Task');
     this.status = 'idle';
   }
 
+}
+
+////////////////////////////////////////////////////////////////////////
+// HELP
+////////////////////////////////////////////////////////////////////////
+
+@Component({
+  template: `
+  <ion-header>
+    <ion-navbar dark>
+      <ion-title>Home Help</ion-title>
+      <ion-buttons end>
+        <button primary (click)="dismissModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+    <div class="help-content">
+      FIXME and add some more helping text here...
+    </div>
+  </ion-content>`,
+})
+
+class HelpModal {
+
+  private viewCtrl: ViewController;
+
+  constructor( viewCtrl: ViewController ) {
+    this.viewCtrl = viewCtrl;
+  }
+
+  private dismissModal(): void {
+    this.viewCtrl.dismiss();
+  }
 }

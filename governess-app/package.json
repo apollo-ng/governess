@@ -44,7 +44,7 @@
     "browserify-istanbul": "2.0.0",
     "codecov.io": "0.1.6",
     "del": "2.2.1",
-    "electron-packager": "^7.1.0",
+    "electron-packager": "7.1.0",
     "electron-prebuilt": "1.2.5",
     "gulp": "3.9.1",
     "gulp-tslint": "5.0.0",

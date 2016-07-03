@@ -141,6 +141,7 @@ ion-grid.home-display {
     color: #1F1E1A;
     text-shadow: 0px 0px 5px #000, 0px 0px 5px #000;
   }
+
 }
 
 /// HomeControl
@@ -171,8 +172,12 @@ ion-grid.home-control {
     margin-left: 2px;
   }
 
-  .select-placeholder {
+  .select-placeholder, .select-icon, .select-icon-inner {
     color: #2f2e2a;
+  }
+
+  .item-cover {
+    width: 0 !important;
   }
 
   button {

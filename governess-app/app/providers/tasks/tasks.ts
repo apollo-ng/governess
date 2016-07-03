@@ -44,6 +44,11 @@ export class TaskService {
     return this.tasks;
   }
 
+  public reset(): any {
+    console.log('Resetting tasks...');
+    localStorage.setItem('tasks', JSON.stringify(TASKMODEL));
+  }
+
   public update(tasks: Object): any {
     console.log('Updating tasks...');
     localStorage.setItem('tasks', JSON.stringify(tasks));
