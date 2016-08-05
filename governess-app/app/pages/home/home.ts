@@ -6,10 +6,10 @@
 
 import { Component}             from '@angular/core';
 import { NgClass }              from '@angular/common';
-import { NavController,
-         ViewController,
+import { ActionSheetController,
          ModalController,
-         ActionSheetController} from 'ionic-angular';
+         ViewController,
+         NavController }        from 'ionic-angular';
 
 import { CHART_DIRECTIVES }     from 'ng2-charts';
 
@@ -225,11 +225,11 @@ export class HomePage {
 
   public editTask(): void {
 
-    let atask: any = this.tasks.filter(
+    let activeTask: any = this.tasks.filter(
       task => task.name.includes(this.config.taskActive)
     )[0];
 
-    if (atask) this.nav.push(TaskDetailPage, atask);
+    if (activeTask) this.nav.push(TaskDetailPage, activeTask);
 
   }
 
@@ -260,26 +260,11 @@ export class HomePage {
 }
 
 ////////////////////////////////////////////////////////////////////////
-// HELP
+// Help
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
-  template: `
-  <ion-header>
-    <ion-navbar dark>
-      <ion-title>Home Help</ion-title>
-      <ion-buttons end>
-        <button primary (click)="dismissModal()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
-  <ion-content>
-    <div class="help-content">
-      FIXME and add some more helping text here...
-    </div>
-  </ion-content>`,
+  templateUrl: 'build/pages/home/home.help.html',
 })
 
 class HelpModal {
