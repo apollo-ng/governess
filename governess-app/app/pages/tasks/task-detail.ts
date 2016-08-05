@@ -7,9 +7,9 @@
 import { Component, Input }         from '@angular/core';
 import { NgClass }                  from '@angular/common';
 import { ViewController,
+         ModalController,
          NavController,
-         NavParams,
-         Modal }                    from 'ionic-angular';
+         NavParams }                from 'ionic-angular';
 import { TaskService }              from '../../providers/tasks/tasks';
 import { CHART_DIRECTIVES }         from 'ng2-charts';
 
@@ -26,6 +26,7 @@ import { CHART_DIRECTIVES }         from 'ng2-charts';
 export class TaskDetailPage {
 
   private nav: NavController;
+  public modalCtrl: ModalController;
   public navParams: NavParams;
 
   public task: any;
@@ -38,6 +39,7 @@ export class TaskDetailPage {
 
   constructor(
 
+    modalCtrl: ModalController,
     nav: NavController,
     navParams: NavParams
 
@@ -188,8 +190,8 @@ export class TaskDetailPage {
   }
 
   public openHelp(): void {
-    let modal: any = Modal.create(HelpModal);
-    this.nav.present(modal);
+    let modal: any = this.modalCtrl.create(HelpModal);
+    modal.present(modal);
   }
 
 }

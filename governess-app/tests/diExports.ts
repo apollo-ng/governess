@@ -11,10 +11,10 @@ export { TestUtils }                                  from './testUtils';
 export let providers: Array<any> = [
   Form,
   provide(Config, {useClass: ConfigMock}),
-  provide(App, {useClass: ConfigMock}),        // required by ClickerList
-  provide(NavController, {useClass: NavMock}), // required by ClickerList
-  provide(ConfigService, {useClass: ConfigMock}), // required by ClickerList
-  provide(Platform, {useClass: ConfigMock}),   // -> IonicApp
+  provide(App, {useClass: ConfigMock}),
+  provide(NavController, {useClass: NavMock}),
+  provide(ConfigService, {useClass: ConfigMock}),
+  provide(Platform, {useClass: ConfigMock}),
 ];
 
 export let injectAsyncWrapper: Function = ((callback) => injectAsync([TestComponentBuilder], callback));

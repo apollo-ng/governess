@@ -1,7 +1,12 @@
 'use strict';
 
-import {Component} from '@angular/core';
-import {ActionSheet, Modal, NavController, NavParams, Platform, ViewController} from 'ionic-angular';
+import { Component }                from '@angular/core';
+import { ActionSheetController,
+         ModalController,
+         ViewController,
+         NavController,
+         NavParams,
+         Platform }                 from 'ionic-angular';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -18,15 +23,22 @@ import {ActionSheet, Modal, NavController, NavParams, Platform, ViewController} 
 export class AppliancePage {
 
   public nav: NavController;
+  public modalCtrl: ModalController;
+  public actionSheetCtrl: ActionSheetController;
   public appliance: any;
 
   constructor(
 
-    nav: NavController
+    nav: NavController,
+    modalCtrl: ModalController,
+    actionSheetCtrl: ActionSheetController
 
   ) {
 
     this.nav = nav;
+    this.actionSheetCtrl = actionSheetCtrl;
+    this.modalCtrl = modalCtrl;
+
     this.appliance = {
 
       'name': 'EKA KF412',
@@ -209,7 +221,7 @@ export class AppliancePage {
   };
 
   public openMenu(modid: any): any {
-    let actionSheet: any = ActionSheet.create({
+    let actionSheet: any = this.actionSheetCtrl.create({
       title: this.appliance.modules[modid].name,
       cssClass: 'action-sheets-basic-page',
       buttons: [
@@ -253,13 +265,13 @@ export class AppliancePage {
       ],
     });
 
-    this.nav.present(actionSheet);
+    actionSheet.present(actionSheet);
   }
 
   public editInputPlug(modid: any, plugid: any): any {
     console.log('Edit Input-Plug:' + modid + plugid);
-    let modal: any = Modal.create(ModalsContentPage);
-    this.nav.present(modal);
+    let modal: any = this.modalCtrl.create(ModalsContentPage);
+    modal.present(modal);
   }
 
   public editOutputPlug(modid: any, plugid: any): any {

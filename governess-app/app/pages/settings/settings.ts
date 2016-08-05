@@ -2,7 +2,7 @@
 
 import { Component }        from '@angular/core';
 import { NavController,
-         Toast }            from 'ionic-angular';
+         ToastController }  from 'ionic-angular';
 import { ConfigService }    from '../../providers/config/config';
 import { TaskService }    from '../../providers/tasks/tasks';
 
@@ -22,6 +22,7 @@ import { TaskService }    from '../../providers/tasks/tasks';
 export class SettingsPage {
 
   private nav:              NavController;
+  public toastCtrl:         ToastController;
   public taskService:       TaskService;
   public configService:     ConfigService;
   public config:            Object;
@@ -30,10 +31,12 @@ export class SettingsPage {
 
   constructor (
     nav:                    NavController,
+    toastCtrl:              ToastController,
     configService:          ConfigService,
     taskService:            TaskService
   ) {
     this.nav =              nav;
+    this.toastCtrl =        toastCtrl;
     this.configService =    configService;
     this.taskService =      taskService;
     this.config =           this.configService.get();
@@ -56,12 +59,12 @@ export class SettingsPage {
     this.configService.reset();
     this.taskService.reset();
 
-    let toast: any = Toast.create({
+    let toast: any = this.toastCtrl.create({
       message: 'GovernessApp configuration has been reset',
       duration: 3000,
     });
 
-    this.nav.present(toast);
+    toast.present(toast);
   }
 
 }

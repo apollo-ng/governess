@@ -8,7 +8,8 @@ import { Component}             from '@angular/core';
 import { NgClass }              from '@angular/common';
 import { NavController,
          ViewController,
-         Modal }                from 'ionic-angular';
+         ModalController,
+         ActionSheetController} from 'ionic-angular';
 
 import { CHART_DIRECTIVES }     from 'ng2-charts';
 
@@ -34,6 +35,7 @@ import { TaskDetailPage }       from '../tasks/task-detail';
 export class HomePage {
 
   public nav: NavController;
+  public modalCtrl: ModalController;
 
   public configService: ConfigService;
   public config: any;
@@ -48,12 +50,14 @@ export class HomePage {
   constructor (
 
     nav: NavController,
+    modalCtrl: ModalController,
     configService: ConfigService,
     taskService: TaskService
 
   ) {
 
     this.nav = nav;
+    this.modalCtrl = modalCtrl;
 
     this.configService = configService;
     this.config = this.configService.get();
@@ -70,8 +74,8 @@ export class HomePage {
   //////////////////////////////////////////////////////////////////////
 
   public openHelp(): void {
-    let modal: any = Modal.create(HelpModal);
-    this.nav.present(modal);
+    let modal: any = this.modalCtrl.create(HelpModal);
+    modal.present(modal);
   };
 
   public lineChartData: Array<any> = [
