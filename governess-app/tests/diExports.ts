@@ -1,6 +1,6 @@
 import { provide, Type }                              from '@angular/core';
 import { ComponentFixture, TestComponentBuilder }     from '@angular/compiler/testing';
-import { injectAsync }                                from '@angular/core/testing';
+import { inject, async }                              from '@angular/core/testing';
 import { Control }                                    from '@angular/common';
 import { App, Config, Form, NavController, Platform } from 'ionic-angular';
 import { ConfigMock, NavMock }                        from './mocks';
@@ -17,7 +17,7 @@ export let providers: Array<any> = [
   provide(Platform, {useClass: ConfigMock}),
 ];
 
-export let injectAsyncWrapper: Function = ((callback) => injectAsync([TestComponentBuilder], callback));
+export let injectAsyncWrapper: Function = ((callback) => async(inject([TestComponentBuilder], callback)));
 
 export let asyncCallbackFactory: Function = ((component, testSpec, detectChanges, beforeEachFn) => {
   return ((tcb: TestComponentBuilder) => {

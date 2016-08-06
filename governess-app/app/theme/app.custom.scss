@@ -1,12 +1,20 @@
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
 ion-app {
   font-family: "DIN" !important;
-  background: #2f2e2a;
   color: #d8d3c5;
 }
 
-ion-navbar .toolbar-background, ion-menu .toolbar-background {
+ion-navbar .toolbar-background {
   background: #1f1e1a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+IDxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj4gPC9kZWZzPiA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgcng9IjAiIHJ5PSIwIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBmaWxsOiB1cmwoI3N0cmlwZXMpOyBvcGFjaXR5OiAwLjYiLz4gPC9zdmc+") repeat;
   box-shadow: inset 0 0 42px 0 #000;
+}
+
+.bar-button-menutoggle {
+  color: #7e7b73;
 }
 
 .toolbar-title {
@@ -23,27 +31,21 @@ ion-navbar .toolbar-background, ion-menu .toolbar-background {
   margin: 0;
 }
 
-ion-content {
-  background-color: transparent !important;
-  background: transparent;
+ion-icon[item-left] + .item-inner, ion-icon[item-left] + .item-input {
+  margin-left: 8px;
 }
 
-ion-menu {
-  background: #3f3e3a;
+.menu-inner ion-content {
+  background: #2f2e2a;
 }
 
 ion-menu button {
   background-color: transparent !important;
 }
 
-ion-menu ion-toolbar .toolbar-background {
-    background: rgba(117, 137, 12, 0.75);
-    box-shadow: none;
-}
-
-::-webkit-scrollbar,
-*::-webkit-scrollbar {
-  display: none;
+.toolbar[primary] .toolbar-background {
+  background: #75880c;
+  box-shadow: none;
 }
 
 .alert-wrapper {
@@ -138,10 +140,15 @@ button[disabled].rb-green {
   background: radial-gradient(ellipse at center, #db4213 0%,#c93612 100%);
 }
 
+.rb-red.activated {
+  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 20px 0 #db4213;
+  border: 1px solid #cc2413;
+}
+
 .rb-yellow {
   color: #fff;
   text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4);
-  box-shadow: inset 0 0 14px 0 #db4213, 0 0 8px 0 #db4213;
+  box-shadow: inset 0 0 14px 0 #db4213, 0 0 8px 0 #db6113;
   border: 1px solid rgba(255, 129, 92, 0.65);
   background: #dbb013;
   background: -moz-radial-gradient(center, ellipse cover, #dbb013 0%, #c69611 100%);
@@ -149,8 +156,13 @@ button[disabled].rb-green {
   background: radial-gradient(ellipse at center, #dbb013 0%,#c69611 100%);
 }
 
+.rb-yellow.activated {
+  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 26px 0 #db6113;
+  border: 1px solid rgba(255, 129, 92, 0.85);
+}
+
 .rb-white {
-  color: #2f2e2a;
+  color: #24231e;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
   box-shadow: inset 0 0 24px 0 rgba(62, 62, 62, 0.77), 0 0 8px 0 rgba(236, 232, 219, 0.75);
   border: 1px solid #969696;
@@ -158,6 +170,11 @@ button[disabled].rb-green {
   background: -webkit-radial-gradient(center, ellipse cover, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
   background: -webkit-radial-gradient(center ellipse, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
   background: radial-gradient(ellipse at center, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
+}
+
+.rb-white.activated {
+  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 16px 0 rgba(236, 232, 219, 0.75);
+  border: 1px solid #e9e1e1;
 }
 
 button[disabled].rb-white {
@@ -175,15 +192,18 @@ button[disabled].rb-white {
   background: #2f2e2a;
 }
 
-// FIXME: Might be broken temp by ionic upstream in beta10, but modal has no bg
 .modal-wrapper {
-  background: #1f1e1a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+IDxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj4gPC9kZWZzPiA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgcng9IjAiIHJ5PSIwIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBmaWxsOiB1cmwoI3N0cmlwZXMpOyBvcGFjaXR5OiAwLjYiLz4gPC9zdmc+") repeat;
   border: 1px solid #3f3e3a;
+
+  .toolbar[dark] .toolbar-background {
+    background: #1f1e1a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+IDxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj4gPC9kZWZzPiA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgcng9IjAiIHJ5PSIwIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBmaWxsOiB1cmwoI3N0cmlwZXMpOyBvcGFjaXR5OiAwLjYiLz4gPC9zdmc+") repeat;
+    box-shadow: inset 0 0 42px 0 #000;
+  }
+
   .help-content {
     background: #2f2e2a;
     padding: 15px;
     height: 100%;
     border-top: 1px solid #4f4e4a;
   }
-
 }

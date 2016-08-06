@@ -7,16 +7,25 @@ Multi-Platform Hybrid-Client to monitor and control governess, based on
 Angular2/Ionic2. Since it's still early beta and many upstream angular
 modules aren't yet ng2/ts ready, it will serve as angular2/ionic learning
 ground, conceptual kitchen-sink and client workflow optimizer while waiting
-for ng2 release to settle for now.
-
-Many features have already been mocked and are currently in the
-process of implementation.
+for ng2 release to settle for now. Many features have already been mocked
+and are currently in the process of implementation.
 
 ## Available Platforms
 
-  * Web (HTML5 client delivered to any browser by governess-server)
-  * Android (using ionic's android APK build feature)
-  * Desktop (electron bundle)
+### Web
+
+Client delivered to any modern HTML5 browser by governess-server.
+
+### Mobile - Ionic2 build/bundle
+
+  * Android 5.0+
+  * IOS (not tested due to IP restrictions)
+
+### Desktop - Electron build/bundle
+
+  * GNU/Linux (x86_64)
+  * Windows (not tested due to IP restrictions)
+  * MacOSX (not tested due to IP restrictions)
 
 ## Full Developer Installation
 
@@ -73,7 +82,7 @@ since they run in chromium and have no issues with both.
 
 ### Continuous karma testing during develoment with watcher
 
-    $ karma start test/karma.config.js
+    $ karma start tests/karma.config.js
 
 ### One-Shot test runs
 

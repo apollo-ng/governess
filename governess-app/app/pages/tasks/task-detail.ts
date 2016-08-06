@@ -47,13 +47,14 @@ export class TaskDetailPage {
 
     this.nav = nav;
     this.navParams = navParams;
+    this.modalCtrl = modalCtrl;
     this.task = this.navParams.data;
     this.data = this.task.data;
     this.moduleView = 0;
     this.chartHeight = 200;
     this.lineChartData = [{ data: [], label: 'Data' }];
     this.updateChart();
-    console.log(this.task);
+    // console.log(this.task);
   }
 
   public lineChartOptions: any = {
@@ -201,22 +202,7 @@ export class TaskDetailPage {
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
-  template: `
-  <ion-header>
-    <ion-navbar dark>
-      <ion-title>Task Editor Help</ion-title>
-      <ion-buttons end>
-        <button primary (click)="dismissModal()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
-  <ion-content>
-    <div class="help-content">
-      FIXME and add some more helping text here...
-    </div>
-  </ion-content>`,
+  templateUrl: 'build/pages/tasks/task-detail.help.html',
 })
 
 class HelpModal {
