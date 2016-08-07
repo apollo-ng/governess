@@ -1,6 +1,7 @@
 'use strict';
 
 import { Component,
+         provide,
          Type,
          OnInit,
          ViewChild }                from '@angular/core';
@@ -14,7 +15,7 @@ import { StatusBar }                from 'ionic-native';
 
 import { ConfigService }            from './providers/config/config';
 
-import { HomePage }                 from './pages/home/home';
+import { ControlPage }              from './pages/control/control';
 import { AppliancePage }            from './pages/appliance/appliance';
 import { TasksPage }                from './pages/tasks/tasks';
 import { LogsPage }                 from './pages/logs/logs';
@@ -46,15 +47,15 @@ export class GovernessApp implements OnInit {
   @ViewChild(Nav) private nav: Nav;
 
   private menu:           MenuController;
-
-  public platform:        Platform;
-  public configService:   ConfigService;
+  private platform:       Platform;
   private config:         any;
   private rootPage:       Type;
 
+  public configService:   ConfigService;
+
   // Populate side menu
   private pages: PageObj[]= [
-    { title: 'Home',      component: HomePage,      idx: 0, icon: 'home' },
+    { title: 'Control',   component: ControlPage,   idx: 0, icon: 'speedometer' },
     { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
     { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
     { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
@@ -103,7 +104,7 @@ export class GovernessApp implements OnInit {
 
         // Fallback to HomePage
         this.rootPage = this.pages.filter (
-          page => page.title.includes('Home')
+          page => page.title.includes('Control')
         )[0].component;
       }
 

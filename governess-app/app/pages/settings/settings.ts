@@ -1,10 +1,15 @@
 'use strict';
 
+/* FIXME? */
+/* tslint:disable:no-unused-variable */
+
 import { Component }        from '@angular/core';
 import { NavController,
+         ViewController,
+         ModalController,
          ToastController }  from 'ionic-angular';
 import { ConfigService }    from '../../providers/config/config';
-import { TaskService }    from '../../providers/tasks/tasks';
+import { TaskService }      from '../../providers/tasks/tasks';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -23,6 +28,7 @@ export class SettingsPage {
 
   private nav:              NavController;
   public toastCtrl:         ToastController;
+  public modalCtrl:         ModalController;
   public taskService:       TaskService;
   public configService:     ConfigService;
   public config:            Object;
@@ -32,11 +38,13 @@ export class SettingsPage {
   constructor (
     nav:                    NavController,
     toastCtrl:              ToastController,
+    modalCtrl:              ModalController,
     configService:          ConfigService,
     taskService:            TaskService
   ) {
     this.nav =              nav;
     this.toastCtrl =        toastCtrl;
+    this.modalCtrl =        modalCtrl;
     this.configService =    configService;
     this.taskService =      taskService;
     this.config =           this.configService.get();
@@ -45,7 +53,8 @@ export class SettingsPage {
   //////////////////////////////////////////////////////////////////////
 
   public openHelp(): void {
-    console.log('help tapped - FIXME: Add proper help');
+    let modal: any = this.modalCtrl.create(HelpModal);
+    modal.present(modal);
   }
 
   public updateConfig(): any {
@@ -67,4 +76,25 @@ export class SettingsPage {
     toast.present(toast);
   }
 
+}
+
+////////////////////////////////////////////////////////////////////////
+// Help
+////////////////////////////////////////////////////////////////////////
+
+@Component({
+  templateUrl: 'build/pages/settings/settings.help.html',
+})
+
+class HelpModal {
+
+  private viewCtrl: ViewController;
+
+  constructor( viewCtrl: ViewController ) {
+    this.viewCtrl = viewCtrl;
+  }
+
+  private dismissModal(): void {
+    this.viewCtrl.dismiss();
+  }
 }

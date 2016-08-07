@@ -13,7 +13,15 @@
   </ion-navbar>
 
   <ion-toolbar primary>
-    <ion-title>{{appliance.name}}</ion-title>
+    <ion-select [(ngModel)]="appliance.name"
+                class="rb-white"
+                placeholder="{{appliance.name}}"
+                [alertOptions]="{ title: 'Available Appliances', subTitle: 'Please select an Appliance'}"
+                cancelText="Cancel"
+                okText="Select"
+    >
+      <ion-option *ngFor="let task of tasks">{{task.name}}</ion-option>
+    </ion-select>
     <ion-buttons end>
       <button>
         <ion-icon name="create"></ion-icon>

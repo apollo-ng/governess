@@ -15,6 +15,6 @@ export let CONFIGMODEL: Object = {
   'audio'   : true,
   'ctrlMode': 'auto',
   'viewPref': 'last',
-  'lastView': 'Home',
+  'lastView': 'Control',
   'manOverr': false,
 };

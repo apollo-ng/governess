@@ -13,13 +13,43 @@ ion-navbar .toolbar-background {
   box-shadow: inset 0 0 42px 0 #000;
 }
 
+ion-content {
+  background-color: #2f2e2a;
+  background: #2f2e2a;
+  background: linear-gradient(to bottom, #2f2e2a 0%,#1f1e1a 100%);
+  background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%);
+  background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%);
+}
+
 .bar-button-menutoggle {
   color: #7e7b73;
 }
 
 .toolbar-title {
+  padding: 0;
   color: #d8d3c5;
   font-weight: normal !important;
+  font-size: 2.2rem;
+  text-shadow: -1px 0 #1f1e1a,
+                0 1px #1f1e1a,
+                1px 0 #1f1e1a,
+                0 -1px #1f1e1a,
+                0 0 5px #1f1e1a;
+}
+
+.toolbar[primary] .toolbar-background {
+  background: #75880c;
+  box-shadow: none;
+}
+
+.toolbar[primary] .toolbar-title {
+  text-shadow: none;
+    color: #1f1e1a;
+    font-size: 2.2rem;
+    text-shadow: -1px 0 #d8d3c5,
+                  0 1px #d8d3c5,
+                  1px 0 #d8d3c5,
+                  0 -1px #d8d3c5,
 }
 
 .toolbar-title h1 {
@@ -31,21 +61,16 @@ ion-navbar .toolbar-background {
   margin: 0;
 }
 
-ion-icon[item-left] + .item-inner, ion-icon[item-left] + .item-input {
+ion-icon[item-left] + .item-inner, ion-i con[item-left] + .item-input {
   margin-left: 8px;
 }
 
 .menu-inner ion-content {
-  background: #2f2e2a;
+  background: #1f1e1a;
 }
 
 ion-menu button {
   background-color: transparent !important;
-}
-
-.toolbar[primary] .toolbar-background {
-  background: #75880c;
-  box-shadow: none;
 }
 
 .alert-wrapper {

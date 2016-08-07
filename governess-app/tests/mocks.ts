@@ -3,16 +3,19 @@
 
 export class ConfigMock {
 
+  public config: Object = {
+    'userLang': 'en',
+    'theme'   : 'default-dark',
+    'ctrlMode': 'auto',
+    'viewPref': 'last',
+    'lastView': 'Home',
+    'manOverr': false,
+  };
+
   public get(): any {
-    let mockConfig: Object = {
-      'userLang': 'en',
-      'theme'   : 'default-dark',
-      'ctrlMode': 'auto',
-      'viewPref': 'last',
-      'lastView': 'Home',
-      'manOverr': false,
-    };
-    return mockConfig;
+    return new Promise((resolve: Function) => {
+       resolve(this.config);
+     });
   }
 
   public getBoolean(): boolean {

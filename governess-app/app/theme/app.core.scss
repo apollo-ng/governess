@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/v2/theming/
 
-
 // App Shared Imports
 // --------------------------------------------------
 // These are the imports which make up the design of this app.
@@ -9,8 +8,8 @@
 
 @import "app.custom";
 @import "app.fonts";
-@import "../pages/home/home.scss";
+@import "../pages/control/control.scss";
 @import "../pages/appliance/appliance.scss";
 @import "../pages/tasks/tasks.scss";
+@import "../pages/settings/settings.scss";
 @import "../pages/about/about.scss";
-

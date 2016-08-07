@@ -1,6 +1,6 @@
 import { beforeEach, beforeEachProviders, describe, expect, it } from '@angular/core/testing';
 import { asyncCallbackFactory, injectAsyncWrapper, providers }   from '../../../tests/diExports';
-import { SettingsPage }                                              from './settings';
+import { SettingsPage }                                          from './settings';
 
 this.fixture = null;
 this.instance = null;
@@ -11,7 +11,6 @@ describe('SettingsPage', () => {
   beforeEach(injectAsyncWrapper(asyncCallbackFactory(SettingsPage, this, true)));
 
   it('initialises', () => {
-    this.instance.config.viewPref = 'last';
     this.fixture.detectChanges();
     expect(this.instance).not.toBeNull();
     expect(this.fixture).not.toBeNull();

@@ -38,7 +38,7 @@ export class ConfigService {
 
   //////////////////////////////////////////////////////////////////////
 
-  public get(): any {
+  public get(): Promise<{}> {
     return this.config;
   }
 
