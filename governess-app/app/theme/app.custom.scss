@@ -44,7 +44,7 @@ ion-content {
 
 .toolbar[primary] .toolbar-title {
   text-shadow: none;
-    color: #1f1e1a;
+    color: #2f2e2a;
     font-size: 2.2rem;
     text-shadow: -1px 0 #d8d3c5,
                   0 1px #d8d3c5,
@@ -65,6 +65,11 @@ ion-icon[item-left] + .item-inner, ion-i con[item-left] + .item-input {
   margin-left: 8px;
 }
 
+.menu-inner .toolbar[primary] .toolbar-title {
+  padding: 0 12px;
+  text-shadow: none;
+}
+
 .menu-inner ion-content {
   background: #1f1e1a;
 }
@@ -76,6 +81,10 @@ ion-menu button {
 .alert-wrapper {
   background: #2f2e2a;
   color: #d8d3c5;
+
+  .alert-radio-label {
+    color: #d8d3c5;
+  }
 }
 
 .action-sheet-group {

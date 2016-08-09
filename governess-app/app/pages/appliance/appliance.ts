@@ -1,6 +1,8 @@
 'use strict';
 
-import { Component }                from '@angular/core';
+import { Component,
+         ViewChild,
+         AfterViewInit }            from '@angular/core';
 import { ActionSheetController,
          ModalController,
          ViewController,
@@ -8,12 +10,18 @@ import { ActionSheetController,
          NavParams,
          Platform }                 from 'ionic-angular';
 
+
+import { FriendComponent } from '../../components/friend.component';
+import { FriendService } from '../../providers/friend.service';
+
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
 
 @Component ({
   templateUrl: 'build/pages/appliance/appliance.html',
+  providers : [FriendService],
+  directives: [FriendComponent],
 })
 
 ////////////////////////////////////////////////////////////////////////

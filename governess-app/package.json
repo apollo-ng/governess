@@ -83,7 +83,9 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "cordova-plugin-vibration",
+    "ionic-plugin-keyboard",
+    "phonegap-plugin-barcodescanner"
   ],
   "cordovaPlatforms": [
     "android"
