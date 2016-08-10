@@ -8,6 +8,7 @@ import { Component, Input }         from '@angular/core';
 import { NgClass }                  from '@angular/common';
 import { ViewController,
          ModalController,
+         PopoverController,
          NavController,
          NavParams }                from 'ionic-angular';
 import { TaskService }              from '../../providers/tasks/tasks';
@@ -27,6 +28,7 @@ export class TaskDetailPage {
 
   private nav: NavController;
   public modalCtrl: ModalController;
+  public popoverCtrl: PopoverController;
   public navParams: NavParams;
 
   public task: any;
@@ -40,6 +42,7 @@ export class TaskDetailPage {
   constructor(
 
     modalCtrl: ModalController,
+    popoverCtrl: PopoverController,
     nav: NavController,
     navParams: NavParams
 
@@ -48,6 +51,7 @@ export class TaskDetailPage {
     this.nav = nav;
     this.navParams = navParams;
     this.modalCtrl = modalCtrl;
+    this.popoverCtrl = popoverCtrl;
     this.task = this.navParams.data;
     this.data = this.task.data;
     this.moduleView = 0;
@@ -190,11 +194,45 @@ export class TaskDetailPage {
     console.log('modview', this.moduleView);
   }
 
-  public openHelp(): void {
+  public openHelp(event: any): void {
     let modal: any = this.modalCtrl.create(HelpModal);
     modal.present(modal);
   }
 
+  public taskActionPopover(event: any): void {
+    let popover: any = this.popoverCtrl.create(PopoverPage);
+    popover.present({
+      ev: event
+    });
+  }
+
+}
+
+@Component({
+  template: `
+    <ion-list>
+      <ion-list-header>Task Actions</ion-list-header>
+      <ion-item (click)="close()">
+       <ion-icon name="copy" item-left></ion-icon>
+       Duplicate
+      </ion-item>
+      <ion-item (click)="close()">
+       <ion-icon name="trash" item-left></ion-icon>
+       Delete
+      </ion-item>
+      <ion-item (click)="close()">
+       <ion-icon name="book" item-left></ion-icon>
+       Notes
+      </ion-item>
+    </ion-list>
+  `
+})
+class PopoverPage {
+  constructor(private viewCtrl: ViewController) {}
+
+  close() {
+    this.viewCtrl.dismiss();
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////
