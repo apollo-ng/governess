@@ -13,6 +13,11 @@
 
   <ion-toolbar primary>
     <ion-searchbar [(ngModel)]="searchTasks"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="addTask()">
+        <ion-icon big name="add" ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
@@ -20,11 +25,21 @@
 <ion-content class="task-list">
 
   <ion-list>
-    <ion-item class="task-item"
-    *ngFor="let task of tasks; let p = index" 
-    (click)="goToTaskDetail(task)">
-      {{task.name}}
-    </ion-item>
+    <ion-item-sliding>
+      <ion-item class="task-item"
+      *ngFor="let task of tasks; let p = index"
+      (click)="goToTaskDetail(task)">
+        {{task.name}}
+      </ion-item>
+      <ion-item-options side="right">
+        <button primary>
+          <ion-icon name="copy"></ion-icon>
+        </button>
+        <button danger>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
 </ion-content>

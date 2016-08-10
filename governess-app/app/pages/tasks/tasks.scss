@@ -1,5 +1,14 @@
-.task-list {
-  background: rgb(40, 39, 35);
+.tasks-page {
+  .searchbar-input {
+    background-color: #3f3e3a;
+  }
+
+  .task-list {
+    background: rgb(40, 39, 35);
+    ion-item-sliding, .item {
+      background-color: transparent;
+    }
+  }
 }
 
 .task-detail-toolbar {
