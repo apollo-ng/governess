@@ -78,7 +78,7 @@ export class SettingsPage {
           role: 'cancel',
           handler: () => {
             // console.log('resetCPD aborted');
-          }
+          },
         },
         {
           text: 'Yes',
@@ -92,9 +92,9 @@ export class SettingsPage {
             });
 
             toast.present(toast);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     confirm.present();
   }

@@ -5,7 +5,8 @@ Fully autonomous, multi-module governing/monitoring bot for any DIY appliance.
 
 ## App
 
-Angular2/Ionic2 Mobile-First Hybrid Client
+Multi-Platform Hybrid-Client to monitor and control governess,
+based on Angular2/Ionic2.
 
 ## Server
 

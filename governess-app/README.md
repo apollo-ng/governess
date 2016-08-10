@@ -41,20 +41,22 @@ Known to work NodeJS & NPM versions:
 
   * NodeJS
     * 4.4.1 (tested with gentoo-portage stable)
+    * 4.4.6 (tested with gentoo-portage stable)
   * NPM
     * 2.15.6 (tested with gentoo-portage stable)
+    * 3.10.5 (tested with gentoo-portage stable + npm update)
 
 ### Global NodeJS-Requirements
 
-    $ npm install -g cordova ionic@beta gulp karma typings
+    $ npm install -g cordova ionic@beta
 
 ### Cloning the Repo
 
     $ git clone https://github.com/apollo-ng/governess.git
-    $ cd governess/governess-app
 
 ### Bootstrapping
 
+    $ cd governess/governess-app
     $ npm install
 
 This will install the rest of the frameworks and components which
@@ -64,15 +66,13 @@ connection bandwidth and your host's compiling performance.
 
 ## Development with live reload
 
-
-
 ### Start local server
 
     $ ionic serve (-l)
 
 ### Run in Electron wrapper
 
-    $ npm electron
+    $ npm run electron
 
 ### Run on Android via ADB
 
@@ -92,7 +92,7 @@ since they run in chromium and require less effort to build.
 
     $ npm run e2e
 
-### Continuous karma testing during develoment with watcher
+### Continuous karma testing during development with watcher
 
     $ karma start tests/karma.config.js
 
@@ -104,8 +104,11 @@ since they run in chromium and require less effort to build.
 
 ### Electron
 
-    $ npm electron-package
+    $ ionic build browser
 
+#### Linux
+
+    $ npm run electron dist-linux-x64
 
 ## Bootstrapping from scratch
 

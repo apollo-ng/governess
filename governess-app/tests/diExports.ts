@@ -9,6 +9,7 @@ import { App,
          NavController,
          ModalController,
          ToastController,
+         AlertController,
          ActionSheetController,
          Platform }               from 'ionic-angular';
 import { ConfigMock, NavMock }    from './mocks';
@@ -23,6 +24,7 @@ export let providers: Array<any> = [
   provide(NavController, {useClass: NavMock}),
   provide(ModalController, {useClass: NavMock}),
   provide(ToastController, {useClass: NavMock}),
+  provide(AlertController, {useClass: NavMock}),
   provide(ActionSheetController, {useClass: NavMock}),
   provide(ConfigService, {useClass: ConfigMock}),
   provide(Platform, {useClass: ConfigMock}),

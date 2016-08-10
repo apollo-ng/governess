@@ -1,7 +1,6 @@
 'use strict';
 
 import { Component,
-         provide,
          Type,
          OnInit,
          ViewChild }                from '@angular/core';
