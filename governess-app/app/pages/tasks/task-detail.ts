@@ -202,35 +202,58 @@ export class TaskDetailPage {
   public taskActionPopover(event: any): void {
     let popover: any = this.popoverCtrl.create(PopoverPage);
     popover.present({
-      ev: event
+      ev: event,
     });
   }
 
+  public duplicateTask(event: any): void {
+    console.log('FIXME: duplicateTask action');
+  }
+
+  public deleteTask(event: any): void {
+    console.log('FIXME: deleteTask action');
+  }
+
+  public commentTask(event: any): void {
+    console.log('FIXME: commentTask action');
+  }
+
 }
+
+////////////////////////////////////////////////////////////////////////
+// Popover
+////////////////////////////////////////////////////////////////////////
 
 @Component({
   template: `
     <ion-list>
       <ion-list-header>Task Actions</ion-list-header>
-      <ion-item (click)="close()">
+      <ion-item (click)="close('FIXME: duplicateTask')">
        <ion-icon name="copy" item-left></ion-icon>
        Duplicate
       </ion-item>
-      <ion-item (click)="close()">
+      <ion-item (click)="close('FIXME: deleteTask')">
        <ion-icon name="trash" item-left></ion-icon>
        Delete
       </ion-item>
-      <ion-item (click)="close()">
+      <ion-item (click)="close('FIXME: commentTask')">
        <ion-icon name="book" item-left></ion-icon>
        Notes
       </ion-item>
     </ion-list>
-  `
+  `,
 })
-class PopoverPage {
-  constructor(private viewCtrl: ViewController) {}
 
-  close() {
+class PopoverPage {
+
+  private viewCtrl: ViewController;
+
+  constructor( viewCtrl: ViewController ) {
+    this.viewCtrl = viewCtrl;
+  }
+
+  private close(enote: string): void {
+    console.log(enote);
     this.viewCtrl.dismiss();
   }
 }
