@@ -21,6 +21,10 @@ ion-content {
   background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%);
 }
 
+ion-list .item .item-inner {
+  border-bottom: 1px solid #484544;
+}
+
 .bar-button-menutoggle {
   color: #7e7b73;
 }
@@ -75,6 +79,10 @@ ion-menu button {
 
 .alert-wrapper {
   background: #2f2e2a;
+  color: #d8d3c5;
+}
+
+.alert-radio-label, .alert-message {
   color: #d8d3c5;
 }
 
