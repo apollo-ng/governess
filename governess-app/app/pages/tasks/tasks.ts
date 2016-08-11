@@ -22,7 +22,7 @@ export class TasksPage {
 
   @Input() public searchTasks: string;
 
-  private nav: NavController;
+  private navCtrl: NavController;
   private searchQuery: string;
 
   public taskService: TaskService;
@@ -32,12 +32,12 @@ export class TasksPage {
 
   constructor (
 
-    nav: NavController,
+    navCtrl: NavController,
     taskService: TaskService
 
   ) {
 
-    this.nav = nav;
+    this.navCtrl = navCtrl;
     this.searchQuery = '';
 
     this.taskService = taskService;
@@ -54,7 +54,7 @@ export class TasksPage {
 
   public goToTaskDetail(task: any): any {
     console.log('Go to task detail:', task);
-    this.nav.push(TaskDetailPage, task);
+    this.navCtrl.push(TaskDetailPage, task);
   }
 
 }

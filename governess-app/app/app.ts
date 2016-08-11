@@ -46,11 +46,11 @@ export class GovernessApp implements OnInit {
   @ViewChild(Nav) private nav: Nav;
 
   private menu:           MenuController;
-  private platform:       Platform;
   private config:         any;
   private rootPage:       Type;
 
   public configService:   ConfigService;
+  public platform:        Platform;
 
   // Populate side menu
   private pages: PageObj[]= [
