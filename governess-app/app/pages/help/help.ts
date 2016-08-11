@@ -17,14 +17,14 @@ import { NavController } from 'ionic-angular';
 
 export class HelpPage {
 
-  public nav: NavController;
+  public navCtrl: NavController;
 
   constructor (
 
-    nav: NavController
+    navCtrl: NavController
 
   ) {
-    this.nav = nav;
+    this.navCtrl = navCtrl;
   }
 
 }

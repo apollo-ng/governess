@@ -27,7 +27,7 @@ import { TaskService }      from '../../providers/tasks/tasks';
 
 export class SettingsPage {
 
-  private nav:              NavController;
+  public navCtrl:              NavController;
   public toastCtrl:         ToastController;
   public modalCtrl:         ModalController;
   public alertCtrl:         AlertController;
@@ -38,14 +38,14 @@ export class SettingsPage {
   //////////////////////////////////////////////////////////////////////
 
   constructor (
-    nav:                    NavController,
+    navCtrl:                NavController,
     toastCtrl:              ToastController,
     modalCtrl:              ModalController,
     alertCtrl:              AlertController,
     configService:          ConfigService,
     taskService:            TaskService
   ) {
-    this.nav =              nav;
+    this.navCtrl =          navCtrl;
     this.toastCtrl =        toastCtrl;
     this.modalCtrl =        modalCtrl;
     this.alertCtrl =        alertCtrl;

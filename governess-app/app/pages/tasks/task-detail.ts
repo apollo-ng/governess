@@ -6,11 +6,11 @@
 
 import { Component, Input }         from '@angular/core';
 import { NgClass }                  from '@angular/common';
-import { ViewController,
-         ModalController,
-         PopoverController,
+import { NavParams,
          NavController,
-         NavParams }                from 'ionic-angular';
+         ViewController,
+         ModalController,
+         PopoverController }        from 'ionic-angular';
 import { TaskService }              from '../../providers/tasks/tasks';
 import { CHART_DIRECTIVES }         from 'ng2-charts';
 
@@ -26,7 +26,7 @@ import { CHART_DIRECTIVES }         from 'ng2-charts';
 
 export class TaskDetailPage {
 
-  private nav: NavController;
+  public navCtrl: NavController;
   public modalCtrl: ModalController;
   public popoverCtrl: PopoverController;
   public navParams: NavParams;
@@ -43,12 +43,12 @@ export class TaskDetailPage {
 
     modalCtrl: ModalController,
     popoverCtrl: PopoverController,
-    nav: NavController,
+    navCtrl: NavController,
     navParams: NavParams
 
   ) {
 
-    this.nav = nav;
+    this.navCtrl = navCtrl;
     this.navParams = navParams;
     this.modalCtrl = modalCtrl;
     this.popoverCtrl = popoverCtrl;
@@ -206,18 +206,6 @@ export class TaskDetailPage {
     });
   }
 
-  public duplicateTask(event: any): void {
-    console.log('FIXME: duplicateTask action');
-  }
-
-  public deleteTask(event: any): void {
-    console.log('FIXME: deleteTask action');
-  }
-
-  public commentTask(event: any): void {
-    console.log('FIXME: commentTask action');
-  }
-
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -256,6 +244,19 @@ class PopoverPage {
     console.log(enote);
     this.viewCtrl.dismiss();
   }
+
+  public duplicateTask(event: any): void {
+    console.log('FIXME: duplicateTask action');
+  }
+
+  public deleteTask(event: any): void {
+    console.log('FIXME: deleteTask action');
+  }
+
+  public commentTask(event: any): void {
+    console.log('FIXME: commentTask action');
+  }
+
 }
 
 ////////////////////////////////////////////////////////////////////////

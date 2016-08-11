@@ -22,20 +22,20 @@ import { ActionSheetController,
 
 export class AppliancePage {
 
-  public nav: NavController;
+  public navCtrl: NavController;
   public modalCtrl: ModalController;
   public actionSheetCtrl: ActionSheetController;
   public appliance: any;
 
   constructor(
 
-    nav: NavController,
+    navCtrl: NavController,
     modalCtrl: ModalController,
     actionSheetCtrl: ActionSheetController
 
   ) {
 
-    this.nav = nav;
+    this.navCtrl = navCtrl;
     this.actionSheetCtrl = actionSheetCtrl;
     this.modalCtrl = modalCtrl;
 

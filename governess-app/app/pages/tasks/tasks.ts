@@ -22,11 +22,11 @@ export class TasksPage {
 
   @Input() public searchTasks: string;
 
-  private navCtrl: NavController;
-  private searchQuery: string;
-
+  public navCtrl: NavController;
   public taskService: TaskService;
   public tasks: any;
+
+  private searchQuery: string;
 
   //////////////////////////////////////////////////////////////////////
 

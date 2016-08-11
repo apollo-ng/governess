@@ -34,7 +34,7 @@ import { TaskDetailPage }       from '../tasks/task-detail';
 
 export class ControlPage {
 
-  public nav: NavController;
+  public navCtrl: NavController;
   public modalCtrl: ModalController;
 
   public configService: ConfigService;
@@ -49,14 +49,14 @@ export class ControlPage {
 
   constructor (
 
-    nav: NavController,
+    navCtrl: NavController,
     modalCtrl: ModalController,
     configService: ConfigService,
     taskService: TaskService
 
   ) {
 
-    this.nav = nav;
+    this.navCtrl = navCtrl;
     this.modalCtrl = modalCtrl;
 
     this.configService = configService;
@@ -229,7 +229,7 @@ export class ControlPage {
       task => task.name.includes(this.config.taskActive)
     )[0];
 
-    if (activeTask) this.nav.push(TaskDetailPage, activeTask);
+    if (activeTask) this.navCtrl.push(TaskDetailPage, activeTask);
 
   }
 

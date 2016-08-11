@@ -17,23 +17,18 @@ import { NavController } from 'ionic-angular';
 
 export class AboutPage {
 
-  public nav: NavController;
+  public navCtrl: NavController;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    nav: NavController
+    navCtrl: NavController
 
   ) {
-    this.nav = nav;
+    this.navCtrl = navCtrl;
   }
 
   //////////////////////////////////////////////////////////////////////
-
-  public openHelp(): void {
-    // FIXME: Add proper help
-    console.log('help tapped');
-  };
 
 }
