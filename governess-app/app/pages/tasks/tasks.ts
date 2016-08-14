@@ -1,7 +1,9 @@
 'use strict';
 
 import { Component, Input } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ItemSliding,
+         NavController,
+         AlertController } from 'ionic-angular';
 import { TaskService } from '../../providers/tasks/tasks';
 import { TaskDetailPage } from '../tasks/task-detail';
 
@@ -23,6 +25,7 @@ export class TasksPage {
   @Input() public searchTasks: string;
 
   public navCtrl: NavController;
+  public alertCtrl: AlertController;
   public taskService: TaskService;
   public tasks: any;
 
@@ -33,11 +36,13 @@ export class TasksPage {
   constructor (
 
     navCtrl: NavController,
+    alertCtrl: AlertController,
     taskService: TaskService
 
   ) {
 
     this.navCtrl = navCtrl;
+    this.alertCtrl = alertCtrl;
     this.searchQuery = '';
 
     this.taskService = taskService;
@@ -52,9 +57,32 @@ export class TasksPage {
     console.log('help tapped');
   };
 
-  public goToTaskDetail(task: any): any {
+  public goToTaskDetail(task: any): void {
     console.log('Go to task detail:', task);
     this.navCtrl.push(TaskDetailPage, task);
   }
+
+  public removeTask(slidingItem: ItemSliding, task: any): void {
+      let confirm: any = this.alertCtrl.create({
+        title: 'Please confirm:',
+        message: 'Would you like to remove this task?',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+              // 
+            },
+          },
+          {
+            text: 'Remove',
+            handler: () => {
+              console.log('FIXME: Delete task via TaskService', task);
+            },
+          },
+        ],
+      });
+      confirm.present();
+    }
 
 }

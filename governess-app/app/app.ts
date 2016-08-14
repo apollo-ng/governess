@@ -10,7 +10,8 @@ import { Platform,
          MenuController,
          Nav }                      from 'ionic-angular';
 
-import { StatusBar }                from 'ionic-native';
+import { Splashscreen,
+         StatusBar }                from 'ionic-native';
 
 import { ConfigService }            from './providers/config/config';
 
@@ -86,7 +87,7 @@ export class GovernessApp implements OnInit {
 
   public ngOnInit(): void {
 
-    // console.log('App ngOnInit');
+    console.log('App ngOnInit');
     this.config = this.configService.get();
 
     // Define which page the app should show by default
@@ -101,7 +102,7 @@ export class GovernessApp implements OnInit {
 
       } else {
 
-        // Fallback to HomePage
+        // Fallback to ControlPage
         this.rootPage = this.pages.filter (
           page => page.title.includes('Control')
         )[0].component;
@@ -126,7 +127,8 @@ export class GovernessApp implements OnInit {
       () => {
         // Okay, so the platform is ready and our plugins are available.
         // Here we can do any higher level native things we might need.
-        StatusBar.styleDefault();
+        StatusBar.hide();
+        Splashscreen.hide();
       }
     );
 
@@ -147,7 +149,6 @@ export class GovernessApp implements OnInit {
 
     // Navigate to the new page, if it is not the current page
     this.nav.setRoot(page.component);
-
   }
 
 }
@@ -165,6 +166,6 @@ ionicBootstrap(
   [ ConfigService ],
   {
     tabbarPlacement: 'top',
-    prodMode: 'false',
+    prodMode: true,
   }
 );

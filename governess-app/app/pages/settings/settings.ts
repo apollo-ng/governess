@@ -9,6 +9,7 @@ import { NavController,
          ModalController,
          ToastController,
          AlertController }  from 'ionic-angular';
+import { Vibration }        from 'ionic-native';
 import { ConfigService }    from '../../providers/config/config';
 import { TaskService }      from '../../providers/tasks/tasks';
 
@@ -68,7 +69,7 @@ export class SettingsPage {
   // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
 
   public resetCPD(e: any): void {
-
+    Vibration.vibrate(400);
     let confirm: any = this.alertCtrl.create({
       title: 'Please confirm:',
       message: 'Do you really want me to wipe all of your custom settings?',

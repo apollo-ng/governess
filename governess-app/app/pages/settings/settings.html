@@ -70,6 +70,15 @@
     </ion-item>
 
     <ion-item>
+      <ion-icon name="tablet-landscape" item-left></ion-icon>
+      <ion-label>
+        <h2>Keep Display on</h2>
+        <p>Prevent app from going to sleep</p>
+      </ion-label>
+      <ion-toggle [(ngModel)]="config.keepon" (ngModelChange)="updateConfig()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
       <button class="button-full" (click)="resetCPD($event)">
         Reset GovernessApp configuration
       </button>

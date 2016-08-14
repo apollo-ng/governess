@@ -1,4 +1,3 @@
-
 export interface AppConfig {
   userLang:   string;
   theme:      string;
@@ -7,9 +6,10 @@ export interface AppConfig {
   viewPref:   string;
   lastView?:  string;
   manOverr:   boolean;
+  keepOn:     boolean;
 }
 
-export let CONFIGMODEL: Object = {
+export let CONFIGMODEL: AppConfig = {
   'userLang': 'en',
   'theme'   : 'default-dark',
   'audio'   : true,
@@ -17,4 +17,5 @@ export let CONFIGMODEL: Object = {
   'viewPref': 'last',
   'lastView': 'Control',
   'manOverr': false,
+  'keepOn'  : false,
 };

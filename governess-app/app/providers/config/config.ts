@@ -1,7 +1,7 @@
 'use strict';
 
 import { Injectable }             from '@angular/core';
-import { CONFIGMODEL }            from './config-model.ts';
+import { CONFIGMODEL }            from './config.mock.ts';
 
 ////////////////////////////////////////////////////////////////////////
 
