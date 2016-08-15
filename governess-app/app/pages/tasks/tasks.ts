@@ -62,7 +62,12 @@ export class TasksPage {
     this.navCtrl.push(TaskDetailPage, task);
   }
 
-  public removeTask(slidingItem: ItemSliding, task: any): void {
+  public copyTask(index: number): void {
+    console.log('Duplicate task:', index);
+    this.taskService.copy(index);
+  }
+
+  public removeTask(slidingItem: ItemSliding, index: number): void {
       let confirm: any = this.alertCtrl.create({
         title: 'Please confirm:',
         message: 'Would you like to remove this task?',
@@ -71,13 +76,13 @@ export class TasksPage {
             text: 'No',
             role: 'cancel',
             handler: () => {
-              // 
+              //
             },
           },
           {
-            text: 'Remove',
+            text: 'Yes',
             handler: () => {
-              console.log('FIXME: Delete task via TaskService', task);
+              this.taskService.delete(index);
             },
           },
         ],

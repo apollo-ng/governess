@@ -23,19 +23,20 @@
 </ion-header>
 
 <ion-content class="task-list">
-
   <ion-list>
-    <ion-item-sliding>
-      <ion-item class="task-item"
-      *ngFor="let task of tasks; let p = index"
-      (click)="goToTaskDetail(task)">
-        {{task.name}}
-      </ion-item>
+    <ion-item-sliding *ngFor="let task of tasks; let p = index">
+      <button ion-item (click)="goToTaskDetail(task)">
+        <h3>{{p}} - {{task.name}}</h3>
+        <p>
+          Last changed: {{task.created}}
+          ID: {{task.id}}
+        </p>
+      </button>
       <ion-item-options side="right">
-        <button primary>
+        <button primary (click)="copyTask(p)">
           <ion-icon name="copy"></ion-icon>
         </button>
-        <button danger (click)="removeTask(slidingItem, task)">
+        <button danger (click)="removeTask(slidingItem, p)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>

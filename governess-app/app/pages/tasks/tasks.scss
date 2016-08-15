@@ -6,7 +6,10 @@
   .task-list {
     background: rgb(40, 39, 35);
     ion-item-sliding, .item {
-      background-color: transparent;
+      background-color: #3f3e3a;
+    }
+    ion-list ion-item-options {
+      border-bottom: none;
     }
   }
 }
