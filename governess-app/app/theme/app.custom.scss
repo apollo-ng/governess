@@ -51,13 +51,21 @@ ion-list .item .item-inner {
 }
 
 .toolbar[primary] .toolbar-title {
-  text-shadow: none;
     color: #1f1e1a;
     font-size: 2.2rem;
-    text-shadow: -1px 0 #d8d3c5,
-                  0 1px #d8d3c5,
-                  1px 0 #d8d3c5,
-                  0 -1px #d8d3c5,
+}
+
+.toolbar[primary] .toolbar-title {
+    color: #1f1e1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-style: italic;
+    /* text-decoration: blink; */
+    font-size: 4rem;
+    text-rendering: optimizeLegibility;
+    /* text-align: right; */
+    margin-left: 8px;
+    /* text-shadow: -1px 0 #d8d3c5, 0 1px #d8d3c5, 1px 0 #d8d3c5, 0 -1px #d8d3c5; */
 }
 
 .toolbar-title h1 {

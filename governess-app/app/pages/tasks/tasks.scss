@@ -11,6 +11,9 @@
     ion-list ion-item-options {
       border-bottom: none;
     }
+    ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
+      border-top: none;
+    }
   }
 }
 

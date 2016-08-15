@@ -9,7 +9,7 @@ export let TASKMODEL: Array<any> = [{
     'id': '123',
     'dev-id': 'xyz',
     'name': 'Reflow Lead-Free',
-    'icon': '',
+    'icon': 'star-outline',
     'created': Math.round( new Date().getTime() / 1000 ),
     'notes': '',
     'type': 'profile',

@@ -1,8 +1,9 @@
 'use strict';
 
 import { Injectable }             from '@angular/core';
-import { TASKMODEL }              from './task-model.ts';
 import { UUID }                   from 'angular2-uuid';
+import { cloneDeep }              from 'lodash';
+import { TASKMODEL }              from './task-model.ts';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -46,11 +47,10 @@ export class TaskService {
   }
 
   public copy(index: number): void {
-    let copy: any = this.tasks[index];
+    let copy: any = cloneDeep(this.tasks[index]);
     copy.name = copy.name + ' Copy';
     copy.id = UUID.UUID();
     copy.created = Math.round(new Date().getTime());
-    console.log('New task', copy);
     this.tasks.push(copy);
     this.update(this.tasks);
   }
@@ -69,7 +69,5 @@ export class TaskService {
     console.log('Resetting tasks...');
     localStorage.setItem('tasks', JSON.stringify(TASKMODEL));
   }
-
-
 
 }
