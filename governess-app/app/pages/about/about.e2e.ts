@@ -7,10 +7,10 @@ describe('AboutPage', () => {
 
   it('has correct title', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
-      browser.driver.sleep(1000); // wait for the animation
+      browser.driver.sleep(1500); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
         items[6].click().then(() => {
-          browser.driver.sleep(1000);
+          browser.driver.sleep(1500);
           expect(browser.getTitle()).toEqual('About');
         });
       });
@@ -19,10 +19,10 @@ describe('AboutPage', () => {
 
   it('has <nav>', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
-      browser.driver.sleep(1000); // wait for the animation
+      browser.driver.sleep(1500); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
         items[6].click().then(() => {
-          browser.driver.sleep(1000);
+          browser.driver.sleep(1500);
           expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
         });
       });
@@ -31,10 +31,10 @@ describe('AboutPage', () => {
 
   it('has a menu button that displays the left menu', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
-      browser.driver.sleep(1000); // wait for the animation
+      browser.driver.sleep(1500); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
         items[6].click();
-        expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('Governess');
+        expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('GOVERNESS');
       });
     });
   });

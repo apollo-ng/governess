@@ -156,16 +156,14 @@ export class GovernessApp implements OnInit {
 ////////////////////////////////////////////////////////////////////////
 // Bootstrap GovernessApp Main
 ////////////////////////////////////////////////////////////////////////
-// Pass the main app component as the first argument
-// Pass any provider for app in the second argument
-// Set app config in third argument:
-// http://ionicframework.com/docs/v2/api/config/Config/
 
 ionicBootstrap(
   GovernessApp,
   [ ConfigService ],
   {
     tabbarPlacement: 'top',
+    mode: 'md',     // override ios/wd platform style with MD
+    iconMode: 'md', // override ios/wd platform icons with MD
     prodMode: true,
   }
 );

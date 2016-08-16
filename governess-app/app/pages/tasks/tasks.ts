@@ -1,8 +1,7 @@
 'use strict';
 
-import { Component, Input }   from '@angular/core';
-import { ItemSliding,
-         reorderArray,
+import { Component }          from '@angular/core';
+import { reorderArray,
          NavController,
          AlertController }    from 'ionic-angular';
 import { TaskService }        from '../../providers/tasks/tasks';
@@ -66,12 +65,12 @@ export class TasksPage {
   public removeTask(index: number, name: string): void {
     let confirm: any = this.alertCtrl.create({
       title: 'Please confirm',
-      message: 'Do you really want to remove the task<br/>'+ name +'?',
+      message: 'Do you really want to remove the task<br/>' + name + '?',
       buttons: [
         {
           text: 'No',
           role: 'cancel',
-          handler: () => {},
+          handler: () => { /* */ },
         },
         {
           text: 'Yes',
@@ -84,9 +83,8 @@ export class TasksPage {
     confirm.present();
   }
 
-  public reorderTasks(index: any): void {
-    console.log('index', index);
-    this.tasks = reorderArray(this.tasks, index);
+  public reorderTasks(move: any): void {
+    this.tasks = reorderArray(this.tasks, move);
     this.taskService.update(this.tasks);
   }
 
@@ -97,14 +95,14 @@ export class TasksPage {
 
   public searchInput(event: any): void {
     this.tasks = this.taskService.get();
-    let val = event.target.value;
-    if (val && val.trim() != '') {
+    let val: string = event.target.value;
+    if (val && val.trim() !== '') {
       this.tasks = this.tasks.filter((task) => {
         return (
           task.name.toLowerCase().
           indexOf(val.toLowerCase()) > -1
         );
-      })
+      });
     }
   }
 

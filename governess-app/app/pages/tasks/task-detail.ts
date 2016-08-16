@@ -194,15 +194,10 @@ export class TaskDetailPage {
     console.log('modview', this.moduleView);
   }
 
-  public openHelp(event: any): void {
-    let modal: any = this.modalCtrl.create(HelpModal);
-    modal.present(modal);
-  }
-
-  public taskActionPopover(event: any): void {
+  public taskActionPopover(ev: any): void {
     let popover: any = this.popoverCtrl.create(PopoverPage);
     popover.present({
-      ev: event,
+      ev: ev,
     });
   }
 
@@ -228,16 +223,25 @@ export class TaskDetailPage {
        <ion-icon name="book" item-left></ion-icon>
        Notes
       </ion-item>
+      <ion-item (click)="openHelp()">
+       <ion-icon name="help-buoy" item-left></ion-icon>
+       Help
+      </ion-item>
     </ion-list>
   `,
 })
 
-class PopoverPage {
+export class PopoverPage {
 
   private viewCtrl: ViewController;
+  private modalCtrl: ModalController;
 
-  constructor( viewCtrl: ViewController ) {
+  constructor(
+    viewCtrl: ViewController,
+    modalCtrl: ModalController
+  ) {
     this.viewCtrl = viewCtrl;
+    this.modalCtrl = modalCtrl;
   }
 
   private close(enote: string): void {
@@ -257,6 +261,11 @@ class PopoverPage {
     console.log('FIXME: commentTask action');
   }
 
+  public openHelp(event: any): void {
+    let modal: any = this.modalCtrl.create(HelpModal);
+    modal.present(modal);
+  }
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -267,7 +276,7 @@ class PopoverPage {
   templateUrl: 'build/pages/tasks/task-detail.help.html',
 })
 
-class HelpModal {
+export class HelpModal {
 
   private viewCtrl: ViewController;
 

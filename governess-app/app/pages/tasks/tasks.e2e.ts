@@ -8,8 +8,9 @@ describe('TasksPage', () => {
   it('has correct title', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[2].click();
+        browser.driver.sleep(1000); // wait for the animation
         expect(browser.getTitle()).toEqual('Tasks');
       });
     });
@@ -18,19 +19,21 @@ describe('TasksPage', () => {
   it('has <nav>', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[2].click();
+        browser.driver.sleep(1000); // wait for the animation
         expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
       });
     });
   });
 
-  it('has a menu button that displays the left menu', () => {
+  it('has a menu button that opens the left menu', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[2].click();
-        expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('Governess');
+        browser.driver.sleep(1000); // wait for the animation
+        expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('GOVERNESS');
       });
     });
   });
@@ -38,8 +41,9 @@ describe('TasksPage', () => {
   it('has search element for tasks', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[2].click();
+        browser.driver.sleep(1000); // wait for the animation
         expect(element(by.css('ion-searchbar')).isPresent()).toEqual(true);
       });
     });
@@ -48,9 +52,10 @@ describe('TasksPage', () => {
   it('has at least one task in the list', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
       browser.driver.sleep(1000); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[2].click();
-        expect(element.all(by.css('.task-item')).first().getText()).toEqual('Reflow Lead-Free');
+        browser.driver.sleep(1000); // wait for the animation
+        expect(element(by.tagName('ion-list')).all(by.tagName('h2')).first().getText()).toEqual('Reflow Lead-Free');
       });
     });
   });

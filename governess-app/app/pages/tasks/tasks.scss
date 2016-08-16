@@ -4,15 +4,35 @@
   }
 
   .task-list {
+
     background: rgb(40, 39, 35);
-    ion-item-sliding, .item {
-      background-color: #3f3e3a;
-    }
+
     ion-list ion-item-options {
       border-bottom: none;
     }
-    ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
-      border-top: none;
+
+    ion-item-sliding, .item {
+      border: 0 !important;
+      text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
+      background: #2f2e2a;
+      background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%);
+      background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%);
+      background: linear-gradient(to bottom, #2f2e2a 0%,#1f1e1a 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f2e2a', endColorstr='#1f1e1a',GradientType=0 );
+    }
+
+    .item {
+      border-top: 1px solid #484544 !important;
+    }
+    .item-inner {
+      border-bottom: 0 !important;
+    }
+
+    .item p {
+      text-shadow: none;
+      font-size: 1.2rem;
+      line-height: 1.1rem;
+      color: #5f5e5a;
     }
   }
 }
