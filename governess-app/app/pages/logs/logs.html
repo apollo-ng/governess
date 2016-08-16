@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar dark>
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -11,12 +11,15 @@
     </ion-buttons>
   </ion-navbar>
 
-  <ion-toolbar dark>
-    <ion-segment>
-      <ion-segment-button value="new">
+  <ion-toolbar primary>
+    <ion-segment dark [(ngModel)]="view">
+      <ion-segment-button value="tasks" (ionSelect)="setLogView('tasks')">
         Tasks
       </ion-segment-button>
-      <ion-segment-button value="hot">
+      <ion-segment-button value="server" (ionSelect)="setLogView('server')">
+        Server
+      </ion-segment-button>
+      <ion-segment-button value="sys" (ionSelect)="setLogView('sys')">
         System
       </ion-segment-button>
     </ion-segment>
@@ -24,6 +27,30 @@
 
 </ion-header>
 
-<ion-content padding class="about">
+<ion-content class="logs">
+
+  <div [ngSwitch]="view" style="height: 100%">
+    <div *ngSwitchCase="'tasks'" style="height: 100%">
+      <ion-list>
+  <ion-item>
+    Reflow Lead-Free
+  </ion-item>
+  <ion-item>
+    Reflow Lead-Free
+  </ion-item>
+  <ion-item>
+    Reflow Lead-Free
+  </ion-item>
+</ion-list>
+    </div>
+    <div *ngSwitchCase="'server'" style="height: 100%">
+     <ion-textarea [(ngModel)]="syslog"  style="height: 100%">
+     </ion-textarea>
+    </div>
+    <div *ngSwitchCase="'sys'" style="height: 100%">
+     <ion-textarea [(ngModel)]="syslog"  style="height: 100%">
+     </ion-textarea>
+    </div>
+  </div>
 
 </ion-content>

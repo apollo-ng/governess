@@ -9,12 +9,25 @@ ion-app {
 }
 
 ion-navbar .toolbar-background,
+ion-navbar[dark],
 .popover-content {
   background: #1f1e1a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+IDxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj4gPC9kZWZzPiA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgcng9IjAiIHJ5PSIwIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBmaWxsOiB1cmwoI3N0cmlwZXMpOyBvcGFjaXR5OiAwLjYiLz4gPC9zdmc+") repeat;
 }
 
 ion-navbar .toolbar-background {
   box-shadow: inset 0 0 42px 0 #000;
+}
+
+ion-navbar ion-buttons[end] {
+  margin-right: .45em;
+  button {
+    font-size: 1.8rem;
+    text-shadow: -1px 0 #1f1e1a,
+                  0 1px #0f0e0a,
+                  1px 0 #1f1e1a,
+                  0 -1px #2f2e2a,
+                  0 0 10px #000;
+  }
 }
 
 ion-content {
@@ -27,6 +40,10 @@ ion-content {
 
 ion-list .item .item-inner {
   border-bottom: 1px solid #484544;
+}
+
+ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
+    border-top: 1px solid #4f4e4a;
 }
 
 .bar-button-menutoggle {
@@ -60,12 +77,9 @@ ion-list .item .item-inner {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-style: italic;
-    /* text-decoration: blink; */
     font-size: 4rem;
     text-rendering: optimizeLegibility;
-    /* text-align: right; */
     margin-left: 8px;
-    /* text-shadow: -1px 0 #d8d3c5, 0 1px #d8d3c5, 1px 0 #d8d3c5, 0 -1px #d8d3c5; */
 }
 
 .toolbar-title h1 {
@@ -101,7 +115,6 @@ ion-menu button {
 .action-sheet-button {
   color: #d8d3c5;
 }
-
 
 // Rubber Buttons
 
