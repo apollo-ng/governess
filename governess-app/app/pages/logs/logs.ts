@@ -84,7 +84,7 @@ export class LogsPage {
     [    9.706244] device vlan1br entered promiscuous mode
     [   10.875730] device vlan10br left promiscuous mode
     [   12.778803] bnx2 0000:03:00.0 enp3s0f0: NIC Copper Link is Up, 1000 Mbps full duplex
-    `
+    `;
 
   }
 

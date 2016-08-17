@@ -1,8 +1,15 @@
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
+
+var reporter = new HtmlScreenshotReporter({
+  dest: 'coverage/screenshots',
+  filename: 'my-report.html'
+});
+
 exports.config = {
     baseUrl: 'http://localhost:8100',
 
     specs: [
-        '../www/build/tests/**/*.e2e.js'
+      '../www/build/tests/**/*.e2e.js'
     ],
 
     exclude: [],
@@ -12,27 +19,42 @@ exports.config = {
     allScriptsTimeout: 110000,
 
     jasmineNodeOpts: {
-        showTiming: true,
-        showColors: true,
-        isVerbose: false,
-        includeStackTrace: false,
-        defaultTimeoutInterval: 400000
+      showTiming: true,
+      showColors: true,
+      isVerbose: false,
+      includeStackTrace: false,
+      defaultTimeoutInterval: 400000
     },
 
     directConnect: true,
 
     capabilities: {
-        'browserName': 'chrome'
+      'browserName': 'chrome'
+    },
+
+    beforeLaunch: function() {
+      return new Promise(function(resolve){
+        reporter.beforeLaunch(resolve);
+      });
     },
 
     onPrepare: function() {
-        var SpecReporter = require('jasmine-spec-reporter');
-        // add jasmine spec reporter
-        jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
-
-        browser.ignoreSynchronization = false;
+      jasmine.getEnv().addReporter(reporter);
+      var SpecReporter = require('jasmine-spec-reporter');
+      // add jasmine spec reporter
+      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+      var width = 360;
+      var height = 640;
+      browser.driver.manage().window().setSize(width, height);
+      browser.ignoreSynchronization = false;
     },
 
+    // Close the report after all tests finish
+    afterLaunch: function(exitCode) {
+      return new Promise(function(resolve){
+        reporter.afterLaunch(resolve.bind(this, exitCode));
+      });
+    },
 
     /**
      * Angular 2 configuration
