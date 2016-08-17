@@ -7,10 +7,10 @@ describe('AboutPage', () => {
 
   it('has correct title', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
-      browser.driver.sleep(1500); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      browser.driver.sleep(500); // wait for the animation
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[6].click().then(() => {
-          browser.driver.sleep(1500);
+          browser.driver.sleep(250);
           expect(browser.getTitle()).toEqual('About');
         });
       });
@@ -19,22 +19,27 @@ describe('AboutPage', () => {
 
   it('has <nav>', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
-      browser.driver.sleep(1500); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
+      browser.driver.sleep(500); // wait for the animation
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
         items[6].click().then(() => {
-          browser.driver.sleep(1500);
+          browser.driver.sleep(250);
           expect(element(by.css('ion-navbar')).isPresent()).toEqual(true);
         });
       });
     });
   });
 
-  it('has a menu button that displays the left menu', () => {
+  it('has a menu button which opens the left menu', () => {
     element(by.css('.bar-button-menutoggle')).click().then(() => {
-      browser.driver.sleep(1500); // wait for the animation
-      element.all(by.className('input-wrapper')).then((items) => {
-        items[6].click();
-        expect(element.all(by.css('.toolbar-title')).first().getText()).toEqual('GOVERNESS');
+      browser.driver.sleep(500); // wait for the animation
+      element(by.tagName('ion-menu')).all(by.css('.item')).then((items) => {
+        items[6].click().then(() => {
+          browser.driver.sleep(500);
+          element(by.css('.bar-button-menutoggle')).click().then(() => {
+            browser.driver.sleep(500); // wait for the animation
+            expect(element(by.tagName('ion-menu')).all(by.css('.toolbar-title')).first().getText()).toEqual('GOVERNESS');
+          });
+        });
       });
     });
   });
