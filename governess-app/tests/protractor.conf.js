@@ -2,7 +2,10 @@ var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 var reporter = new HtmlScreenshotReporter({
   dest: 'coverage/screenshots',
-  filename: 'my-report.html'
+  filename: 'my-report.html',
+  pathBuilder: function(currentSpec, suites, browserCapabilities) {
+    return browserCapabilities.get('browserName') + '/' + currentSpec.fullName;
+  }
 });
 
 exports.config = {
