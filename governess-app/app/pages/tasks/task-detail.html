@@ -103,7 +103,10 @@
         <tr>
           <td style="width: 42px; height: 42px;"
           [ngStyle]="{'color': data[moduleView].options.color}">
-            <ion-icon name="color-palette"></ion-icon>
+            <!-- <ion-icon name="color-palette"></ion-icon> -->
+            <input type="color"
+            [(ngModel)]="data[moduleView].options.color"
+            (ngModelChange)="updateChart()"/>
           </td>
           <td style="width: 110px">Time</td>
           <td style="width: 110px;">Target</td>

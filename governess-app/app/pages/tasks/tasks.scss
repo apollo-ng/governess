@@ -43,6 +43,7 @@
 
 .task-detail {
 
+
   .chart  {
     display: block;
     height: inherit;
@@ -151,6 +152,11 @@
       border-left: none;
       width: 100%;
     }
+
+
+        input[color] {
+          border: 1px solid red;
+        }
 
   }
 

@@ -84,7 +84,7 @@ export class SettingsPage {
         {
           text: 'Yes',
           handler: () => {
-            this.configService.reset();
+            this.configService.init();
             this.taskService.reset();
 
             let toast: any = this.toastCtrl.create({

@@ -1,4 +1,5 @@
 export interface AppConfig {
+  clientID:   string;
   userLang:   string;
   theme:      string;
   audio:      boolean;
@@ -10,6 +11,7 @@ export interface AppConfig {
 }
 
 export let CONFIGMODEL: AppConfig = {
+  'clientID': '',
   'userLang': 'en',
   'theme'   : 'default-dark',
   'audio'   : true,

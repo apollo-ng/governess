@@ -1,9 +1,22 @@
 'use strict';
 
 import { Injectable }             from '@angular/core';
+import { UUID }                   from 'angular2-uuid';
 import { CONFIGMODEL }            from './config.mock.ts';
 
 ////////////////////////////////////////////////////////////////////////
+
+export interface AppConfig {
+  clientID:   string;
+  userLang:   string;
+  theme:      string;
+  audio:      boolean;
+  ctrlMode:   string;
+  viewPref:   string;
+  lastView?:  string;
+  manOverr:   boolean;
+  keepOn:     boolean;
+}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -28,8 +41,7 @@ export class ConfigService {
 
     if (!config) {
       console.log('No config in DB - Initiate from CONFIGMODEL', CONFIGMODEL);
-      localStorage.setItem('config', JSON.stringify(CONFIGMODEL));
-      this.config = CONFIGMODEL;
+      this.init();
     } else {
       console.log('Returning user - Load config from DB', config);
       this.config = JSON.parse(config);
@@ -38,13 +50,16 @@ export class ConfigService {
 
   //////////////////////////////////////////////////////////////////////
 
-  public get(): Promise<{}> {
-    return this.config;
+  public init(): any {
+    console.log('Initializing config...');
+    let configMock: AppConfig = CONFIGMODEL;
+    configMock.clientID = UUID.UUID();
+    localStorage.setItem('config', JSON.stringify(configMock));
+    this.config = configMock;
   }
 
-  public reset(): any {
-    console.log('Resetting config...');
-    localStorage.setItem('config', JSON.stringify(CONFIGMODEL));
+  public get(): Promise<{}> {
+    return this.config;
   }
 
   public update(config: Object): any {
