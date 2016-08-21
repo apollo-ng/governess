@@ -129,6 +129,12 @@ export class GovernessApp implements OnInit {
         // Here we can do any higher level native things we might need.
         StatusBar.hide();
         Splashscreen.hide();
+        if (Splashscreen) {
+          setTimeout(() => {
+          console.log('Hiding Splash');
+          Splashscreen.hide();
+          }, 100);
+        }
       }
     );
 
@@ -164,6 +170,6 @@ ionicBootstrap(
     tabbarPlacement: 'top',
     mode: 'md',     // override ios/wd platform style with MD
     iconMode: 'md', // override ios/wd platform icons with MD
-    prodMode: true,
+    prodMode: false,
   }
 );

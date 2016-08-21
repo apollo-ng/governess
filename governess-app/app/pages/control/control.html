@@ -4,8 +4,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      <h1 [ngClass]="{'title-reduced' : status === 'running' || status === 'paused'}">EKA KF412 {{status}}</h1>
-      <p *ngIf="status === 'running' || status === 'paused'">{{config.taskActive}}</p>
+      <h1 [ngClass]="{'title-reduced' : status.status === 'running' || status.status === 'paused'}">EKA KF412 {{status.status}}</h1>
+      <p *ngIf="status.status === 'running' || status.status === 'paused'">{{config.taskActive}}</p>
     </ion-title>
     <ion-buttons end>
       <button (click)="openHelp()" primary>
@@ -20,7 +20,7 @@
     <ion-row>
       <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
         <ion-icon name="thermometer"></ion-icon>
-        <span class="value">23</span>
+        <span class="value">{{status.temperature}}</span>
         <span class="unit">°C</span>
       </ion-col>
       <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
@@ -102,7 +102,7 @@
       </div>
       <div class="home-splitbar"></div>
       <ion-grid dark class="home-control">
-        <ion-row *ngIf="status === 'running' || status === 'paused'">
+        <ion-row *ngIf="status.status === 'running' || status.status === 'paused'">
           <ion-col width-25 class="progress-status">
             -04:20
           </ion-col>
@@ -113,23 +113,23 @@
               </div>
             </div>
           </ion-col>
-          <ion-col width-10 *ngIf="status === 'running'">
+          <ion-col width-10 *ngIf="status.status === 'running'">
             <button full (click)="pauseTask()" class="rb-yellow">
               <ion-icon name="pause"></ion-icon>
             </button>
           </ion-col>
-          <ion-col width-10 *ngIf="status === 'paused'">
+          <ion-col width-10 *ngIf="status.status === 'paused'">
             <button dark full (click)="restartTask()" class="rb-green-pulse">
               <ion-icon name="skip-forward"></ion-icon>
             </button>
           </ion-col>
-          <ion-col width-20 *ngIf="status === 'running' || status === 'paused'">
+          <ion-col width-20 *ngIf="status.status === 'running' || status === 'paused'">
             <button full (click)="stopTask()" class="rb-red">
               <ion-icon name="square"></ion-icon>
             </button>
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="status === 'idle'">
+        <ion-row *ngIf="status.status === 'idle'">
           <ion-col style="padding-right: 3px;">
             <ion-select [(ngModel)]="config.taskActive"
                         class="rb-white"

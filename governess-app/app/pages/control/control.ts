@@ -15,6 +15,7 @@ import { CHART_DIRECTIVES }     from 'ng2-charts';
 
 import { ConfigService }        from '../../providers/config/config';
 import { TaskService }          from '../../providers/tasks/tasks';
+import { StatusService }        from '../../providers/status/status';
 
 import { TaskDetailPage }       from '../tasks/task-detail';
 
@@ -25,7 +26,7 @@ import { TaskDetailPage }       from '../tasks/task-detail';
 @Component({
   templateUrl: 'build/pages/control/control.html',
   directives: [ CHART_DIRECTIVES ],
-  providers: [ TaskService ],
+  providers: [ TaskService, StatusService ],
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -43,7 +44,9 @@ export class ControlPage {
   public taskService: TaskService;
   public tasks: any;
 
-  public status: string;
+  public statusService: StatusService;
+  public status: any;
+  private statusSub: any;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -52,7 +55,8 @@ export class ControlPage {
     navCtrl: NavController,
     modalCtrl: ModalController,
     configService: ConfigService,
-    taskService: TaskService
+    taskService: TaskService,
+    statusService: StatusService
 
   ) {
 
@@ -65,13 +69,29 @@ export class ControlPage {
     this.taskService = taskService;
     this.tasks = this.taskService.get();
 
-    this.status = 'idle';
-
-    // console.log(this.config.taskActive);
+    this.statusService = statusService;
+    this.status = {
+      status: 'offline',
+      temperature: '-',
+    };
 
   }
 
   //////////////////////////////////////////////////////////////////////
+
+  public ngOnInit(): void {
+    console.log('statusService subscribe');
+    this.statusSub = this.statusService.Ticker().subscribe((result) => {
+      this.status = JSON.parse(result.data);
+      console.log('GIS:', this.status);
+    });
+  }
+
+  public onPageWillLeave(): void {
+    console.log('WillLeave');
+    this.statusSub.unsubscribe();
+    this.statusService.disconnect();
+  }
 
   public openHelp(): void {
     let modal: any = this.modalCtrl.create(HelpModal);
