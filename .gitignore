@@ -1,13 +1,17 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
 *~
 *.sw[mnpcod]
-*.geany
 *.log
 *.tmp
 *.tmp.*
-*.map
 log.txt
 *.sublime-project
 *.sublime-workspace
+*.geany
+.vscode/
+npm-debug.log*
 
 __pycache__/
 *.py[cod]
@@ -15,17 +19,19 @@ __pycache__/
 
 .idea/
 .sass-cache/
+.tmp/
 .versions/
-governess-app/coverage/
+coverage/
 dist/
-governess-app/node_modules/
+node_modules/
 tmp/
 temp/
-governess-app/hooks/
-governess-app/platforms/
-governess-app/plugins/
-governess-app/typings/
-governess-app/www/build/
+hooks/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+www/
 
 $RECYCLE.BIN/
 .io-config.json
