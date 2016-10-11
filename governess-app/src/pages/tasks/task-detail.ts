@@ -6,16 +6,13 @@ import { NavParams,
          ModalController,
          PopoverController }        from 'ionic-angular';
 import { TaskService }              from '../../providers/tasks/tasks';
-//import { CHART_DIRECTIVES }         from 'ng2-charts';
 
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
-  templateUrl: 'task-detail.html',
-  //directives: [ CHART_DIRECTIVES ],
-  //providers: [ TaskService ],
+  templateUrl: 'task-detail.html'
 })
 
 export class TaskDetailPage {

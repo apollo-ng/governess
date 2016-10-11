@@ -2,7 +2,7 @@
   <ion-navbar dark class="task-detail-toolbar">
     <ion-title>{{task.name}}</ion-title>
     <ion-buttons end>
-      <button primary big (click)="taskActionPopover($event)">
+      <button  ion-button icon-only (click)="taskActionPopover($event)">
         <ion-icon name="cube"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,14 +12,14 @@
 <ion-content class="task-detail" >
 
   <div class="chart-container" [ngStyle]="{'height': chartHeightAct+'px'}">
-    <base-chart class="chart"
+    <canvas baseChart class="chart"
     [datasets]="lineChartData"
     [options]="lineChartOptions"
     [colors]="lineChartColours"
     [chartType]="'line'"
     (chartHover)="chartHovered()"
     (chartClick)="chartClicked()">
-    </base-chart>
+    </canvas>
   </div>
 
   <div class="segment-splitbar">

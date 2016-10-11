@@ -13,10 +13,12 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { AboutPage } from '../pages/about/about';
 import { AppliancePage } from '../pages/appliance/appliance';
+import { ControlPage } from '../pages/control/control';
 import { HelpPage } from '../pages/help/help';
 import { LogsPage } from '../pages/logs/logs';
 import { SettingsPage } from '../pages/settings/settings';
 import { TasksPage } from '../pages/tasks/tasks';
+import { TaskDetailPage } from '../pages/tasks/task-detail';
 
 import { ConfigService }            from '../providers/config/config';
 import { TaskService }            from '../providers/tasks/tasks';
@@ -52,7 +54,7 @@ export class GovernessApp implements OnInit {
 
   // Populate side menu
   private pages: PageObj[]= [
-    { title: 'Control',   component: Page1,   idx: 0, icon: 'speedometer' },
+    { title: 'Control',   component: ControlPage,   idx: 0, icon: 'speedometer' },
     { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
     { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
     { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
