@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar dark>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tasks</ion-title>
+    <ion-buttons end>
+      <button (click)="openHelp()" primary>
+        <ion-icon name="cube"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar primary>
+    <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="addTask()">
+        <ion-icon big name="add" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="task-list">
+  <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
+    <ion-item-sliding *ngFor="let task of tasks; let p = index">
+      <button ion-item (click)="goToTaskDetail(task)">
+        <ion-icon name="{{task.icon}}" item-left></ion-icon>
+        <h2>{{task.name}}</h2>
+        <p>Runtime: ~5 Minutes</p>
+        <p>Last changed: {{task.created | date: 'yyyy-MM-dd HH:mm'}}</p>
+      </button>
+      <ion-item-options side="right">
+        <button dark (click)="copyTask(p)">
+          <ion-icon name="copy"></ion-icon>
+        </button>
+        <button danger (click)="removeTask(p,task.name)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
