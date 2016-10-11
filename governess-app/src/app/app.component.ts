@@ -12,8 +12,12 @@ import { Splashscreen,
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { AboutPage } from '../pages/about/about';
+import { HelpPage } from '../pages/help/help';
+import { LogsPage } from '../pages/logs/logs';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { ConfigService }            from '../providers/config/config';
+import { TaskService }            from '../providers/tasks/tasks';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -49,9 +53,9 @@ export class GovernessApp implements OnInit {
     { title: 'Control',   component: Page1,   idx: 0, icon: 'speedometer' },
     { title: 'Appliance', component: Page1, idx: 1, icon: 'logo-buffer' },
     { title: 'Tasks',     component: Page1,     idx: 2, icon: 'cube' },
-    { title: 'Logs',      component: Page1,      idx: 3, icon: 'filing' },
-    { title: 'Settings',  component: Page1,  idx: 4, icon: 'settings' },
-    { title: 'Help',      component: Page2,      idx: 5, icon: 'help-buoy' },
+    { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
+    { title: 'Settings',  component: SettingsPage,  idx: 4, icon: 'settings' },
+    { title: 'Help',      component: HelpPage,      idx: 5, icon: 'help-buoy' },
     { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
   ];
 

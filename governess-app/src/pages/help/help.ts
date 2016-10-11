@@ -1,5 +1,3 @@
-'use strict';
-
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -8,7 +6,7 @@ import { NavController } from 'ionic-angular';
 ////////////////////////////////////////////////////////////////////////
 
 @Component ({
-  templateUrl: 'build/pages/help/help.html',
+  templateUrl: 'help.html',
 })
 
 ////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar dark>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+    <ion-buttons end>
+      <button (click)="openHelp()" primary>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="settings">
+
+  <ion-list>
+
+    <ion-item>
+      <ion-icon name="return-right" item-left></ion-icon>
+      <ion-label>
+        <h2>Entry Point</h2>
+        <p>Select your preferred entry behaviour</p>
+      </ion-label>
+      <ion-select [(ngModel)]="config.viewPref" (ngModelChange)="updateConfig()">
+        <ion-option value="Control">Control</ion-option>
+        <ion-option value="Appliance">Appliance</ion-option>
+        <ion-option value="Tasks">Tasks</ion-option>
+        <ion-option value="last">Last Viewed Page</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="text" item-left></ion-icon>
+      <ion-label><h2>Language</h2></ion-label>
+      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+        <ion-option value="en">English</ion-option>
+        <ion-option value="de">Deutsch</ion-option>
+        <ion-option value="es">Espanol</ion-option>
+        <ion-option value="it">Italiana</ion-option>
+        <ion-option value="ru">Pусский</ion-option>
+        <ion-option value="fr">Francais</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="bowtie" item-left></ion-icon>
+      <ion-label><h2>Theme</h2></ion-label>
+      <ion-select [(ngModel)]="config.theme" (ngModelChange)="updateConfig()">
+        <ion-option value="default-dark">Default-Dark</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="hand" item-left></ion-icon>
+      <ion-label>
+        <h2>Manual override</h2>
+        <p>Allow manual override during task run</p>
+      </ion-label>
+      <ion-toggle [(ngModel)]="config.manOverr" (ngModelChange)="updateConfig()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="headset" item-left></ion-icon>
+      <ion-label>
+        <h2>Audio</h2>
+        <p>Enable Sounds and Audio Feedback</p>
+      </ion-label>
+      <ion-toggle [(ngModel)]="config.audio" (ngModelChange)="updateConfig()"></ion-toggle>
+    </ion-item>
+
+    <ion-item hideWhen="core">
+      <ion-icon name="tablet-landscape" item-left></ion-icon>
+      <ion-label>
+        <h2>Keep Display on</h2>
+        <p>Prevent app from going to sleep</p>
+      </ion-label>
+      <ion-toggle [(ngModel)]="config.keepon" (ngModelChange)="updateConfig()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <button class="button-full" (click)="resetCPD($event)">
+        Reset GovernessApp configuration
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
