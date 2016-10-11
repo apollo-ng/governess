@@ -1,8 +1,0 @@
-{
-  "key" : "Traducción Key",
-  "nested": {
-    "user": "Usuario",
-    "signIn": "Entrar",
-    "signUp": "Registrarse"
-  }
-}
