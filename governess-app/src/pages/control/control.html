@@ -67,7 +67,7 @@
       <ion-list style="height: 40%">
         <ion-item>
           <ion-label>Temperature</ion-label>
-          <ion-range min="25" max="250" [(ngModel)]="singleValue" pin="true">
+          <ion-range min="-273" max="2500" [(ngModel)]="singleValue" pin="true">
             <ion-icon small range-left name="thermometer"></ion-icon>
             <ion-icon range-right name="thermometer"></ion-icon>
           </ion-range>
@@ -114,17 +114,17 @@
             </div>
           </ion-col>
           <ion-col width-10 *ngIf="status.status === 'running'">
-            <button full (click)="pauseTask()" class="rb-yellow">
+            <button ion-button full (click)="pauseTask()" class="rb-yellow">
               <ion-icon name="pause"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-10 *ngIf="status.status === 'paused'">
-            <button dark full (click)="restartTask()" class="rb-green-pulse">
+            <button ion-button full color="dark" (click)="restartTask()" class="rb-green-pulse">
               <ion-icon name="skip-forward"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20 *ngIf="status.status === 'running' || status === 'paused'">
-            <button full (click)="stopTask()" class="rb-red">
+            <button ion-button full (click)="stopTask()" class="rb-red">
               <ion-icon name="square"></ion-icon>
             </button>
           </ion-col>
@@ -142,12 +142,12 @@
             </ion-select>
           </ion-col>
           <ion-col width-10 class="icon-edit">
-            <button full [disabled]="!config.taskActive ? true : false" (click)="editTask()" class="rb-white">
+            <button ion-button full [disabled]="!config.taskActive ? true : false" (click)="editTask()" class="rb-white">
               <ion-icon name="create"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20>
-            <button full [disabled]="!config.taskActive ? true : false" (click)="startTask()" class="rb-green">
+            <button ion-button full [disabled]="!config.taskActive ? true : false" (click)="startTask()" class="rb-green">
               <ion-icon name="play"></ion-icon>
             </button>
           </ion-col>

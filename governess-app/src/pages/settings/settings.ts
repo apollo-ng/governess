@@ -8,6 +8,8 @@ import { Vibration }        from 'ionic-native';
 import { ConfigService }    from '../../providers/config/config';
 import { TaskService }      from '../../providers/tasks/tasks';
 
+import { SettingsHelp }     from './settings.help';
+
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
@@ -52,7 +54,7 @@ export class SettingsPage {
   //////////////////////////////////////////////////////////////////////
 
   public openHelp(): void {
-    let modal: any = this.modalCtrl.create(HelpModal);
+    let modal: any = this.modalCtrl.create(SettingsHelp);
     modal.present(modal);
   }
 
@@ -94,25 +96,4 @@ export class SettingsPage {
     confirm.present();
   }
 
-}
-
-////////////////////////////////////////////////////////////////////////
-// Help
-////////////////////////////////////////////////////////////////////////
-
-@Component({
-  templateUrl: 'settings.help.html',
-})
-
-class HelpModal {
-
-  private viewCtrl: ViewController;
-
-  constructor( viewCtrl: ViewController ) {
-    this.viewCtrl = viewCtrl;
-  }
-
-  private dismissModal(): void {
-    this.viewCtrl.dismiss();
-  }
 }

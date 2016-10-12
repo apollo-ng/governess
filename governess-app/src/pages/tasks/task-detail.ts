@@ -264,7 +264,7 @@ export class PopoverPage {
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
-  templateUrl: 'build/pages/tasks/task-detail.help.html',
+  templateUrl: 'task-detail.help.html',
 })
 
 export class HelpModal {

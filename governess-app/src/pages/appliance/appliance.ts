@@ -14,6 +14,7 @@ import { ActionSheetController,
 
 @Component ({
   templateUrl: 'appliance.html',
+  selector: 'appliance'
 })
 
 ////////////////////////////////////////////////////////////////////////

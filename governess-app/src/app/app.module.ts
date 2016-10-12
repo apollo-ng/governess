@@ -12,6 +12,8 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TasksPage } from '../pages/tasks/tasks';
 import { TaskDetailPage } from '../pages/tasks/task-detail';
 
+import { SettingsHelp } from '../pages/settings/settings.help';
+
 import { ConfigService }            from '../providers/config/config';
 import { StatusService }            from '../providers/status/status';
 import { TaskService }            from '../providers/tasks/tasks';
@@ -29,6 +31,7 @@ import { ChartsModule } from 'ng2-charts/components/charts/charts';
     HelpPage,
     LogsPage,
     SettingsPage,
+    SettingsHelp,
     TasksPage,
     TaskDetailPage
   ],
@@ -47,6 +50,7 @@ import { ChartsModule } from 'ng2-charts/components/charts/charts';
     HelpPage,
     LogsPage,
     SettingsPage,
+    SettingsHelp,
     TasksPage,
     TaskDetailPage
   ],

@@ -14,7 +14,7 @@
   <ion-toolbar primary>
     <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
     <ion-buttons end>
-      <button (click)="addTask()">
+      <button ion-button icon-only (click)="addTask()">
         <ion-icon big name="add" ></ion-icon>
       </button>
     </ion-buttons>
@@ -32,10 +32,10 @@
         <p>Last changed: {{task.created | date: 'yyyy-MM-dd HH:mm'}}</p>
       </button>
       <ion-item-options side="right">
-        <button dark (click)="copyTask(p)">
+        <button ion-button icon-only color="dark" (click)="copyTask(p)">
           <ion-icon name="copy"></ion-icon>
         </button>
-        <button danger (click)="removeTask(p,task.name)">
+        <button ion-button icon-only color="danger" (click)="removeTask(p,task.name)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
