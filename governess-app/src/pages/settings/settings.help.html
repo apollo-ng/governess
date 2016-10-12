@@ -2,14 +2,23 @@
   <ion-navbar dark>
     <ion-title>Settings Help</ion-title>
     <ion-buttons end>
-      <button primary (click)="dismissModal()">
+      <button ion-button icon-only color="primary" (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <ion-content>
   <div class="help-content">
-    FIXME and add some more helping text here...
+
+    <h3>
+      <ion-icon small name="return-right" item-left></ion-icon>
+      Entry Point
+    </h3>
+    <p>This adjusts how the client behaves when you open it again, you can pick
+    either a specific page or select "Last Viewed Page" to have the client return
+    to the last page your opened in a prior session.</p>
+
   </div>
 </ion-content>

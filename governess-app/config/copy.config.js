@@ -24,7 +24,7 @@ module.exports = {
       dest: 'www/assets/fonts/'
     },
     {
-      src: 'node_modules/chart.js/dist/Chart.js',
+      src: 'node_modules/chart.js/dist/Chart.bundle.min.js',
       dest: 'www/build/chart.js'
     },
   ]

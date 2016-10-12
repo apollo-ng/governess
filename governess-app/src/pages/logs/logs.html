@@ -1,18 +1,18 @@
 <ion-header>
   <ion-navbar dark>
-    <button ion-button menuToggle>
+    <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Logs</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openHelp()" primary>
-        <ion-icon name="filing"></ion-icon>
+      <button ion-button icon-only color="primary" (click)="openHelp()">
+      <ion-icon name="filing"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
-  <ion-toolbar primary>
-    <ion-segment dark [(ngModel)]="view">
+  <ion-toolbar color="primary">
+    <ion-segment color="dark" [(ngModel)]="view">
       <ion-segment-button value="tasks" (ionSelect)="setLogView('tasks')">
         Tasks
       </ion-segment-button>

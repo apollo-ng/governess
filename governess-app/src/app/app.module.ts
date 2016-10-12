@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { GovernessApp } from './app.component';
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
+
 import { AboutPage } from '../pages/about/about';
 import { AppliancePage } from '../pages/appliance/appliance';
 import { ControlPage } from '../pages/control/control';
@@ -23,8 +22,6 @@ import { ChartsModule } from 'ng2-charts/components/charts/charts';
 @NgModule({
   declarations: [
     GovernessApp,
-    Page1,
-    Page2,
     AboutPage,
     AppliancePage,
     ControlPage,
@@ -42,8 +39,6 @@ import { ChartsModule } from 'ng2-charts/components/charts/charts';
   bootstrap: [IonicApp],
   entryComponents: [
     GovernessApp,
-    Page1,
-    Page2,
     AboutPage,
     AppliancePage,
     ControlPage,
