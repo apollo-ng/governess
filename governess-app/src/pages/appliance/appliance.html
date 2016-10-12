@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-navbar>
 
-  <ion-toolbar primary>
+  <ion-toolbar color="primary">
     <ion-select [(ngModel)]="appliance.name"
                 class="rb-glass"
                 placeholder="{{appliance.name}}"
@@ -22,10 +22,10 @@
       <ion-option *ngFor="let task of tasks">{{task.name}}</ion-option>
     </ion-select>
     <ion-buttons end>
-      <button>
+      <button ion-button icon-only >
         <ion-icon name="create"></ion-icon>
       </button>
-      <button (click)="createModule()">
+      <button ion-button icon-only (click)="createModule()">
         <ion-icon name="add" ></ion-icon>
       </button>
     </ion-buttons>
@@ -76,14 +76,14 @@
           </button>
         </ion-col>
         <ion-col width-20 class="ctrl-container">
-          <button full primary outline
+          <button full color="primary" outline
             *ngIf="!module.control.name"
             (click)="doRadio()"
             [ngStyle]="{'height': '100%'}">
             <ion-icon name="add"></ion-icon>
             Add new Controller
           </button>
-          <button full primary
+          <button full color="primary"
             *ngIf="module.control.name"
             [ngStyle]="{'height': '100%'}">
             {{module.control.name}}

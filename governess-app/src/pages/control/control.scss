@@ -108,26 +108,62 @@ ion-grid.home-display {
 
   .icon-display {
     text-align: left;
-    border-left-width: 3px;
-    background: rgba(11, 10, 6, 0.6);
+    margin:0;
   }
+
+  ion-grid.icon-display {
+    padding: 0;
+  }
+
+  ion-grid.icon-display ion-row {
+    padding: 0;
+    background: #1f1e1a;
+  }
+
+  ion-grid.icon-display ion-col {
+    border: none;
+    background: transparent;
+    margin-right: 0;
+  }
+
 
   .icon-display ion-icon {
-    min-width: 24px;
+    min-width: 20px;
+    display: inline-block;
     text-align: center;
+    margin: 0;
+    line-height: 35px;
+    vertical-align: top;
+    background: rgba(255, 125, 18, 0.32);
   }
 
-  .icon-display .value {
+  .icon-display .value_major {
     font-size: 2.5rem;
     display: inline-block;
     line-height: 1.4em;
+  }
+
+  .icon-display .value_minor {
+    font-size: 1.65rem;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+    margin-top: 6px;
+    margin-left: -5px;
   }
 
   .icon-display .unit {
     font-size: 1.6rem;
     display: inline-block;
     vertical-align: top;
+    text-align: right;
     margin-top: 5px;
+    min-width: 20px;
+    text-align: center;
+    margin: 0;
+    line-height: 35px;
+    vertical-align: top;
+    background: rgba(255, 125, 18, 0.32);
   }
 
   .icon-led {

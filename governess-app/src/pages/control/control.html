@@ -18,15 +18,45 @@
 
   <ion-grid dark class="home-display">
     <ion-row>
-      <ion-col class="icon-display" [ngStyle]="{'border-color': '#FF9800', 'color': '#FF9800', 'box-shadow': 'inset 0 0 32px 0 rgba(255, 152, 0, 0.27)'}">
-        <ion-icon name="thermometer"></ion-icon>
-        <span class="value">{{status.temperature}}</span>
-        <span class="unit">°C</span>
+      <ion-col [ngStyle]="{'border-color': '#c97819', 'color': '#c97819'}">
+        <ion-grid class="icon-display">
+          <ion-row>
+            <ion-col width-10>
+              <ion-icon name="thermometer"></ion-icon>
+            </ion-col>
+            <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px'}">
+              <span class="value_major">
+              {{status.temperature_major}}.
+            </span>
+            <span class="value_minor">
+              {{status.temperature_minor}}
+            </span>
+            </ion-col>
+            <ion-col width-10 class="unit">
+              °C
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
-      <ion-col class="icon-display" [ngStyle]="{'border-color': '#a23016', 'color': '#a23016', 'box-shadow': 'inset 0 0 32px 0 rgba(162, 48, 22, 0.26)'}">
-        <ion-icon name="thermometer"></ion-icon>
-        <span class="value">42</span>
-        <span class="unit">°C</span>
+      <ion-col [ngStyle]="{'border-color': '#a23016', 'color': '#a23016'}">
+        <ion-grid class="icon-display">
+          <ion-row>
+            <ion-col width-10>
+              <ion-icon name="thermometer"></ion-icon>
+            </ion-col>
+            <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px'}">
+              <span class="value_major">
+              {{status.temperature_major}}.
+            </span>
+            <span class="value_minor">
+              {{status.temperature_minor}}
+            </span>
+            </ion-col>
+            <ion-col width-10 class="unit">
+              °C
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
       <ion-col width-10 class="icon-led">
         <ion-icon name="flame"></ion-icon>

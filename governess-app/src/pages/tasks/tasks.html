@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar dark>
-    <button ion-button menuToggle>
+    <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Tasks</ion-title>
@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-navbar>
 
-  <ion-toolbar primary>
+  <ion-toolbar color="primary">
     <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="addTask()">

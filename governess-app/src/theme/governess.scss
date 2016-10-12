@@ -85,7 +85,7 @@ ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
   color: #7e7b73;
 }
 
-.toolbar-title {
+.toolbar-title h1, div.toolbar-title {
   padding: 0;
   color: #d8d3c5;
   font-weight: normal !important;
@@ -141,7 +141,7 @@ ion-menu button {
 .alert-wrapper,
 .action-sheet-group,
 .popover-content .item {
-  background: #2f2e2a;
+  background-color: #2f2e2a !important;
   color: #d8d3c5;
 }
 

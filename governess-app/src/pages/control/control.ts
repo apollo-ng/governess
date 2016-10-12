@@ -71,6 +71,8 @@ export class ControlPage {
     this.status = {
       status: 'offline',
       temperature: '-',
+      temperature_major: '0',
+      temperature_minor: '0'
     };
 
   }
@@ -81,7 +83,16 @@ export class ControlPage {
     console.log('statusService subscribe');
     this.statusSub = this.statusService.Ticker().subscribe((result) => {
       this.status = JSON.parse(result.data);
-      console.log('GIS:', this.status);
+
+      // Split Temperature and hack the ghost zero - wtf??
+      let temp: Array<any> = this.status.temperature.toString().split('.');
+      this.status.temperature_major = temp[0];
+      if (temp[1] > 1) {
+        this.status.temperature_minor = temp[1];
+      } else {
+        this.status.temperature_minor = "0";
+      }
+      //console.log('GIS:', this.status);
     });
   }
 
