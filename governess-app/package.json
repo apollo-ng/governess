@@ -22,7 +22,10 @@
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
-    "run:before": "build"
+    "run:before": "build",
+    "electron": "electron .",
+    "electron dist-linux-x64": "electron-packager . governess-app --app-version=1.0.0 --platform=linux --arch=x64 --prune --asar --overwrite --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=app --ignore=typings --ignore=hooks"
+
   },
   "dependencies": {
     "@angular/common": "^2.0.0",
@@ -46,7 +49,9 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "latest",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.3",
+    "electron-packager": "7.6.0",
+    "electron": "1.3.3"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

@@ -1,8 +1,8 @@
-ion-toolbar.home {
+ion-toolbar.control {
   border-top: 1px solid #444;
 }
 
-.home-splitbar {
+.control-splitbar {
   height: 5px;
   line-height: 1px;
   background-color: #282723;
@@ -18,9 +18,9 @@ ion-toolbar.home {
   font-size: 1.2rem;
 }
 
-/// Home Content
+/// Control Content
 
-.home {
+.control {
 
   background: #1f1e1a url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+IDxkZWZzPiA8cGF0dGVybiBpZD0ic3RyaXBlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4gPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjIwIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJzdHJva2U6IG5vbmU7IGZpbGw6ICMyZjJlMmE7Ii8+IDxyZWN0IHg9IjEwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIwIiByeT0iMCIgc3R5bGU9InN0cm9rZTogbm9uZTsgZmlsbDogIzFmMWUxYTsiLz4gPHBhdGggZD0iTTIwLDAgTDIwLDIwIiBzdHlsZT0ic3Ryb2tlOiM1ZjVlNWE7IHN0cm9rZS13aWR0aDogMXB4OyBmaWxsOm5vbmU7IiAvPiA8cGF0aCBkPSJNMTAsMCBMMTAsMjAiIHN0eWxlPSJzdHJva2U6IzBmMGUwYTsgc3Ryb2tlLXdpZHRoOiAxcHg7IGZpbGw6bm9uZTsiIC8+IDwvcGF0dGVybj4gPC9kZWZzPiA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTA5IiBoZWlnaHQ9IjUwOSIgcng9IjAiIHJ5PSIwIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBmaWxsOiB1cmwoI3N0cmlwZXMpOyBvcGFjaXR5OiAwLjYiLz4gPC9zdmc+") repeat !important;
 
@@ -84,9 +84,9 @@ ion-toolbar.home {
   }
 }
 
-/// Home Display
+/// Control Display
 
-ion-grid.home-display {
+ion-grid.control-display {
 
   padding: 0;
 
@@ -125,7 +125,6 @@ ion-grid.home-display {
     background: transparent;
     margin-right: 0;
   }
-
 
   .icon-display ion-icon {
     min-width: 20px;
@@ -180,9 +179,9 @@ ion-grid.home-display {
 
 }
 
-/// HomeControl
+/// Control Actions
 
-ion-grid.home-control {
+ion-grid.control-actions {
 
   padding: 0;
   height: 43px;
@@ -257,9 +256,9 @@ ion-grid.home-control {
 
 }
 
-/// Home Bottom Segment Bar
+/// Control Bottombar
 
-ion-toolbar.home-segment {
+ion-toolbar.control-bottombar {
 
   min-height: 5rem;
   padding-top: 0;
@@ -289,6 +288,11 @@ ion-toolbar.home-segment {
     padding-left: 5px;
   }
 
+}
+
+.alert-md .alert-radio-group, .alert-md .alert-checkbox-group {
+    border-top: 1px solid #7f7e7a;
+    border-bottom: 1px solid #7f7e7a;
 }
 
 @media (max-width: 420px) {

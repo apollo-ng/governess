@@ -14,9 +14,9 @@
     </ion-buttons>
   </ion-navbar>
 
-  <div class="home-splitbar"></div>
+  <div class="control-splitbar"></div>
 
-  <ion-grid dark class="home-display">
+  <ion-grid dark class="control-display">
     <ion-row>
       <ion-col [ngStyle]="{'border-color': '#c97819', 'color': '#c97819'}">
         <ion-grid class="icon-display">
@@ -73,11 +73,11 @@
     </ion-row>
   </ion-grid>
 
-  <div class="home-splitbar"></div>
+  <div class="control-splitbar"></div>
 
 </ion-header>
 
-<ion-content class="home" scroll="false">
+<ion-content class="control" scroll="false">
 
   <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 48px)">
 
@@ -93,7 +93,7 @@
           (chartClick)="chartClicked()">
         </canvas>
       </div>
-      <div class="home-splitbar"></div>
+      <div class="control-splitbar"></div>
       <ion-list style="height: 40%">
         <ion-item>
           <ion-label>Temperature</ion-label>
@@ -130,8 +130,8 @@
           <p>Please select a Task to run</p>
         </div>
       </div>
-      <div class="home-splitbar"></div>
-      <ion-grid dark class="home-control">
+      <div class="control-splitbar"></div>
+      <ion-grid dark class="control-actions">
         <ion-row *ngIf="status.status === 'running' || status.status === 'paused'">
           <ion-col width-25 class="progress-status">
             -04:20
@@ -194,27 +194,25 @@
 </ion-content>
 
 <ion-footer>
-
-<div class="home-splitbar"></div>
-
-<ion-toolbar position="bottom" dark class="home-segment">
-  <ion-segment [(ngModel)]="config.ctrlMode">
-    <ion-segment-button value="cam" (ionSelect)="setMode('hud')">
-      <ion-icon name="videocam"></ion-icon>
-      <span class="segment-button-text">HUD</span>
-    </ion-segment-button>
-    <ion-segment-button small value="man" (ionSelect)="setMode('man')">
-      <ion-icon name="hand"></ion-icon>
-      <span class="segment-button-text">Manual</span>
-    </ion-segment-button>
-    <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
-      <ion-icon name="pulse"></ion-icon>
-      <span class="segment-button-text">Auto</span>
-    </ion-segment-button>
-    <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
-      <ion-icon name="timer"></ion-icon>
-      <span class="segment-button-text">Schedule</span>
-    </ion-segment-button>
-  </ion-segment>
-</ion-toolbar>
+  <div class="control-splitbar"></div>
+  <ion-toolbar position="bottom" dark class="control-bottombar">
+    <ion-segment [(ngModel)]="config.ctrlMode">
+      <ion-segment-button value="cam" (ionSelect)="setMode('hud')">
+        <ion-icon name="videocam"></ion-icon>
+        <span class="segment-button-text">HUD</span>
+      </ion-segment-button>
+      <ion-segment-button small value="man" (ionSelect)="setMode('man')">
+        <ion-icon name="hand"></ion-icon>
+        <span class="segment-button-text">Manual</span>
+      </ion-segment-button>
+      <ion-segment-button value="auto" (ionSelect)="setMode('auto')">
+        <ion-icon name="pulse"></ion-icon>
+        <span class="segment-button-text">Auto</span>
+      </ion-segment-button>
+      <ion-segment-button value="cron" (ionSelect)="setMode('cron')">
+        <ion-icon name="timer"></ion-icon>
+        <span class="segment-button-text">Schedule</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-footer>
