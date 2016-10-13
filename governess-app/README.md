@@ -4,19 +4,19 @@ governess-app
 :construction: WIP (Work In Progress) :construction:
 
 Multi-Platform Hybrid-Client to monitor and control governess,
-based on Angular2/Ionic2. Since it's still early beta and many
+based on Angular2/Ionic2. Since it's still early RC and many
 upstream angular modules aren't yet ng2/ts ready, it will serve
 as angular2/ionic learning ground, conceptual kitchen-sink and
-client work-flow optimizer while waiting for ng2 release to
-settle for now. Many features have already been mocked and are
-currently in the process of implementation.
+client work-flow optimizer while waiting for ng2/ionic2 release
+to settle for now. Many features have already been mocked and
+are currently in the process of implementation.
 
 ## Available Platforms
 
 ### Web
 
-HTML5 Web-client delivered by governess-server to any modern
-browser on any platform.
+HTML5/Progressive Web-client delivered by governess-server to
+any modern browser on any platform.
 
 ### Mobile - Ionic2 build/bundle
 
@@ -40,15 +40,13 @@ extend and coherently test the client.
 Known to work NodeJS & NPM versions:
 
   * NodeJS
-    * 4.4.1 (tested with gentoo-portage stable)
-    * 4.4.6 (tested with gentoo-portage stable)
+    * >= 4.4.1 (tested with gentoo-portage stable)
   * NPM
-    * 2.15.6 (tested with gentoo-portage stable)
-    * 3.10.5 (tested with gentoo-portage stable + npm update)
+    * >= 3.10.5 (tested with gentoo-portage stable + npm update)
 
 ### Global NodeJS-Requirements
 
-    $ npm install -g cordova ionic@beta
+    $ npm install -g cordova ionic
 
 ### Cloning the Repo
 
@@ -80,21 +78,9 @@ connection bandwidth and your host's compiling performance.
 
 ## Tests
 
-Unit-Tests with Karma/PhantomJS are available again but the
-coverage is still bad. E2E tests have been extended to cope,
-since they run in chromium and require less effort to build.
-
-### One-Shot Unit-Test
-
-    $ npm run test
-
-### One-Shot End-to-End Test
-
-    $ npm run e2e
-
-### Continuous karma testing during development with watcher
-
-    $ karma start tests/karma.config.js
+Tests are not available anymore for RC0+, since the whole structure
+has changed and the clicker crowd needs time to catch up first how
+to proceed further.
 
 ## Building
 
