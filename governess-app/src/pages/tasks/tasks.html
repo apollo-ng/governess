@@ -14,8 +14,8 @@
   <ion-toolbar color="primary">
     <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addTask()">
-        <ion-icon big name="add" ></ion-icon>
+      <button ion-button (click)="addTask()">
+        <ion-icon name="add" ></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -25,14 +25,20 @@
 <ion-content class="task-list">
   <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks; let p = index">
-      <button ion-item (click)="goToTaskDetail(task)">
-        <ion-icon name="{{task.icon}}" item-left></ion-icon>
-        <h2>{{task.name}}</h2>
-        <p>Runtime: ~5 Minutes</p>
-        <p>Last changed: {{task.created | date: 'yyyy-MM-dd HH:mm'}}</p>
-      </button>
+      <div ion-item>
+        <ion-icon item-left name="{{task.icon}}"
+          (click)="activateTask(task)"
+          [ngStyle]="{ 'background': task === config.taskActive ? 'rgba(117, 137, 12, 0.75)' : 'transparent',
+                       'color': task === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
+        </ion-icon>
+        <div (click)="goToTaskDetail(task)">
+          <h2>{{task.name}}</h2>
+          <p>Runtime: ~5 Minutes</p>
+          <p>Last changed: {{task.created | date: 'yyyy-MM-dd HH:mm'}}</p>
+        </div>
+      </div>
       <ion-item-options side="right">
-        <button ion-button icon-only color="dark" (click)="copyTask(p)">
+        <button ion-button icon-only color="secondary" (click)="copyTask(p)">
           <ion-icon name="copy"></ion-icon>
         </button>
         <button ion-button icon-only color="danger" (click)="removeTask(p,task.name)">

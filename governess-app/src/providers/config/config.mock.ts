@@ -1,16 +1,4 @@
-export interface AppConfig {
-  clientID:   string;
-  userLang:   string;
-  theme:      string;
-  audio:      boolean;
-  ctrlMode:   string;
-  viewPref:   string;
-  lastView?:  string;
-  manOverr:   boolean;
-  keepOn:     boolean;
-}
-
-export let CONFIGMODEL: AppConfig = {
+export let AppConfigMock = {
   'clientID': '',
   'userLang': 'en',
   'theme'   : 'default-dark',

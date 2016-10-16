@@ -1,9 +1,8 @@
-'use strict';
-
 import { Component }          from '@angular/core';
 import { reorderArray,
          NavController,
          AlertController }    from 'ionic-angular';
+import { ConfigService }      from '../../providers/config/config';
 import { TaskService }        from '../../providers/tasks/tasks';
 import { TaskDetailPage }     from '../tasks/task-detail';
 
@@ -12,8 +11,8 @@ import { TaskDetailPage }     from '../tasks/task-detail';
 ////////////////////////////////////////////////////////////////////////
 
 @Component ({
-  templateUrl: 'tasks.html',
-  providers: [ TaskService ],
+  selector: 'tasks-page',
+  templateUrl: 'tasks.html'
 })
 
 ////////////////////////////////////////////////////////////////////////
@@ -26,6 +25,8 @@ export class TasksPage {
   public alertCtrl: AlertController;
   public taskService: TaskService;
   public tasks: any;
+  public configService: ConfigService;
+  public config: any;
 
   //////////////////////////////////////////////////////////////////////
 
@@ -33,7 +34,8 @@ export class TasksPage {
 
     navCtrl: NavController,
     alertCtrl: AlertController,
-    taskService: TaskService
+    taskService: TaskService,
+    configService: ConfigService
 
   ) {
 
@@ -43,13 +45,39 @@ export class TasksPage {
     this.taskService = taskService;
     this.tasks = this.taskService.get();
 
+    this.configService = configService;
+    this.config = {};
+
+    this.init().then(data => {
+      //console.log('I seem to be needed to get the promise')
+    });
+
   }
 
   //////////////////////////////////////////////////////////////////////
 
+  // as init is async separate logic here so it's testable
+  public init(): Promise<void> {
+    return this.configService.get().then((data: string) => {
+      //console.log('settings ngoninit configdata', data);
+      this.config = JSON.parse(data);
+      //console.log(this.config);
+    });
+  }
+
   public openHelp(): void {
-    // FIXME: Add proper help
-    console.log('help tapped');
+    console.log('FIXME: Add proper help');
+  }
+
+  public activateTask(task: any): void {
+    console.log('Activate task:', task);
+    this.config.taskActive = task;
+    this.configService.update(this.config);
+    console.log(this.config);
+  }
+
+  public addTask(): void {
+    console.log('FIXME: Add a new empty task');
   }
 
   public goToTaskDetail(task: any): void {

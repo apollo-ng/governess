@@ -15,6 +15,7 @@ import { SettingsHelp }     from './settings.help';
 ////////////////////////////////////////////////////////////////////////
 
 @Component ({
+  selector: 'settings-page',
   templateUrl: 'settings.html'
 })
 
@@ -24,34 +25,51 @@ import { SettingsHelp }     from './settings.help';
 
 export class SettingsPage {
 
-  public navCtrl:              NavController;
+  public navCtrl:           NavController;
   public toastCtrl:         ToastController;
   public modalCtrl:         ModalController;
   public alertCtrl:         AlertController;
   public taskService:       TaskService;
   public configService:     ConfigService;
-  public config:            Object;
+  public config:            any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
+
     navCtrl:                NavController,
     toastCtrl:              ToastController,
     modalCtrl:              ModalController,
     alertCtrl:              AlertController,
     configService:          ConfigService,
     taskService:            TaskService
-  ) {
+
+  ) { /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
     this.navCtrl =          navCtrl;
     this.toastCtrl =        toastCtrl;
     this.modalCtrl =        modalCtrl;
     this.alertCtrl =        alertCtrl;
     this.configService =    configService;
     this.taskService =      taskService;
-    this.config =           this.configService.get();
+    this.config = {};
+
+    this.init().then(data => {
+      //console.log('I seem to be needed to get the promise')
+    });
+
   }
 
   //////////////////////////////////////////////////////////////////////
+
+  // as init is async separate logic here so it's testable
+  public init(): Promise<void> {
+    return this.configService.get().then((data: string) => {
+      //console.log('settings ngoninit configdata', data);
+      this.config = JSON.parse(data);
+      //console.log(this.config);
+    });
+  }
 
   public openHelp(): void {
     let modal: any = this.modalCtrl.create(SettingsHelp);
@@ -80,7 +98,7 @@ export class SettingsPage {
         {
           text: 'Yes',
           handler: () => {
-            this.configService.init();
+            //this.config = this.configService.init();
             this.taskService.reset();
 
             let toast: any = this.toastCtrl.create({

@@ -1,7 +1,6 @@
-'use strict';
-
 import { Injectable }             from '@angular/core';
-import { Observable }             from 'rxjs/Rx';
+import { Observable, Subject }    from 'rxjs/Rx';
+import { $WebSocket }             from '../websocket/websocket';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -17,22 +16,31 @@ import { Observable }             from 'rxjs/Rx';
 
 export class StatusService {
 
-  private ws: WebSocket;
-  private readyStates: any = {
+  private ws: any;
+
+/*  private readyStates: any = {
           'CONNECTING': 0,
           'OPEN': 1,
           'CLOSING': 2,
           'CLOSED': 3,
           'RECONNECT_ABORTED': 4,
-      };
+  };
+*/
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
   ) {
+    this.connect();
+  }
 
-    if (!this.ws || this.ws.readyState !== this.readyStates.OPEN) {
-      this.ws = new WebSocket('ws://localhost:8765');
+  //////////////////////////////////////////////////////////////////////
+
+  public connect(): void {
+      this.ws = new $WebSocket('ws://localhost:8765');
+      this.ws.connect();
+      this.ws.send('Hello World');
+/*
       this.ws.onopen = (evt) => {
         this.ws.send('Hello World');
         console.log('StatusService Connection Opened');
@@ -46,18 +54,17 @@ export class StatusService {
     } else {
       console.log('StatusService WS already open');
     }
+*/
   }
-
-  //////////////////////////////////////////////////////////////////////
 
   public sendMessage(text: string): void {
     this.ws.send(text);
   }
 
-  public Ticker(): Observable<any> {
-    return Observable.fromEvent(this.ws, 'message')
-    .map( res => res )
-    .share();
+  public socketData(): Observable<any> {
+    return Observable.fromEvent(this.ws.getDataStream(), 'message')
+      .map( res => res )
+      .share();
   }
 
   public disconnect(): void {

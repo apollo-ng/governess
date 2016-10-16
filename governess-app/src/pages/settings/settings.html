@@ -75,15 +75,13 @@
         <h2>Keep Display on</h2>
         <p>Prevent app from going to sleep</p>
       </ion-label>
-      <ion-toggle [(ngModel)]="config.keepon" (ngModelChange)="updateConfig()"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <button ion-button class="button-full" (click)="resetCPD($event)">
-        Reset GovernessApp configuration
-      </button>
+      <ion-toggle [(ngModel)]="config.keepOn" (ngModelChange)="updateConfig()"></ion-toggle>
     </ion-item>
 
   </ion-list>
+
+  <button ion-button block (click)="resetCPD($event)">
+    Reset GovernessApp configuration
+  </button>
 
 </ion-content>

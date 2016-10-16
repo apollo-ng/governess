@@ -3,8 +3,9 @@ import { NgClass }                  from '@angular/common';
 import { NavParams,
          NavController,
          ViewController,
+         AlertController,
          ModalController,
-         PopoverController }        from 'ionic-angular';
+         ActionSheetController }    from 'ionic-angular';
 import { TaskService }              from '../../providers/tasks/tasks';
 
 ////////////////////////////////////////////////////////////////////////
@@ -12,15 +13,18 @@ import { TaskService }              from '../../providers/tasks/tasks';
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
+  selector: 'task-detail-page',
   templateUrl: 'task-detail.html'
 })
 
 export class TaskDetailPage {
 
   public navCtrl: NavController;
+  public alertCtrl: AlertController;
   public modalCtrl: ModalController;
-  public popoverCtrl: PopoverController;
+  public actionSheetCtrl: ActionSheetController;
   public navParams: NavParams;
+  public taskService: TaskService;
 
   public task: any;
   public data: any;
@@ -32,17 +36,21 @@ export class TaskDetailPage {
 
   constructor(
 
+    alertCtrl: AlertController,
     modalCtrl: ModalController,
-    popoverCtrl: PopoverController,
     navCtrl: NavController,
-    navParams: NavParams
+    actionSheetCtrl: ActionSheetController,
+    navParams: NavParams,
+    taskService: TaskService
 
   ) {
 
     this.navCtrl = navCtrl;
     this.navParams = navParams;
+    this.alertCtrl = alertCtrl;
     this.modalCtrl = modalCtrl;
-    this.popoverCtrl = popoverCtrl;
+    this.actionSheetCtrl = actionSheetCtrl;
+    this.taskService = taskService;
     this.task = this.navParams.data;
     this.data = this.task.data;
     this.moduleView = 0;
@@ -185,8 +193,64 @@ export class TaskDetailPage {
     console.log('modview', this.moduleView);
   }
 
-  public taskActionPopover(ev: any): void {
-    console.log("FIXME: Present a Popover with further Task Options");
+  public taskActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'More Task options',
+      buttons: [
+        {
+          text: 'Rename',
+          icon: 'create',
+          handler: () => {
+           console.log('Rename clicked');
+          }
+        },
+        {
+          text: 'Clone',
+          icon: 'copy',
+          handler: () => {
+           console.log('Clone clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          icon: 'trash',
+          handler: () => {
+           console.log('Delete clicked');
+           this.removeTask(this.task,'fo');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+           console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  public removeTask(index: number, name: string): void {
+    let confirm: any = this.alertCtrl.create({
+      title: 'Please confirm',
+      message: 'Do you really want to remove the task<br/>' + name + '?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => { /* */ },
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.taskService.delete(index);
+            this.navCtrl.pop();
+          },
+        },
+      ],
+    });
+    confirm.present();
   }
 
 }

@@ -1,20 +1,10 @@
 import { Injectable }             from '@angular/core';
 import { UUID }                   from 'angular2-uuid';
-import { CONFIGMODEL }            from './config.mock.ts';
+import { StorageService }         from '../storage/storage';
+import { AppConfigModel }         from './config.model';
+import { AppConfigMock }          from './config.mock';
 
 ////////////////////////////////////////////////////////////////////////
-
-export interface AppConfig {
-  clientID:   string;
-  userLang:   string;
-  theme:      string;
-  audio:      boolean;
-  ctrlMode:   string;
-  viewPref:   string;
-  lastView?:  string;
-  manOverr:   boolean;
-  keepOn:     boolean;
-}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -28,41 +18,46 @@ export interface AppConfig {
 
 export class ConfigService {
 
-  public config:   any;
+  public storage: StorageService;
+  public config:  any;
 
   //////////////////////////////////////////////////////////////////////
 
-  constructor (
-
+  constructor(
+    storage: StorageService
   ) {
-    let config: string = localStorage.getItem('config');
 
-    if (!config) {
-      console.log('No config in DB - Initiate from CONFIGMODEL', CONFIGMODEL);
-      this.init();
-    } else {
-      console.log('Returning user - Load config from DB', config);
-      this.config = JSON.parse(config);
-    }
+    //console.log('ConfigService Provider is being constructed');
+    this.storage = storage;
+    this.init().then(data => {
+      //console.log('All promises returned', data)
+      //this.config = data;
+    });
   }
 
-  //////////////////////////////////////////////////////////////////////
+  public init(): Promise<{}> {
+    console.log('Initializing Storage');
 
-  public init(): any {
-    console.log('Initializing config...');
-    let configMock: AppConfig = CONFIGMODEL;
-    configMock.clientID = UUID.UUID();
-    localStorage.setItem('config', JSON.stringify(configMock));
-    this.config = configMock;
+    return this.storage.get('config').then((data: any) => {
+      if (!data) {
+        console.log('Got NO Storage Data - creating from Mock:');
+        let initAppConfig: AppConfigModel = AppConfigMock;
+        initAppConfig.clientID = UUID.UUID();
+        this.storage.set('config', JSON.stringify(initAppConfig));
+        return initAppConfig;
+      }
+      //console.log('Got Storage Data:', data);
+      return JSON.parse(data);
+    });
   }
 
   public get(): Promise<{}> {
-    return this.config;
+    return this.storage.get('config')
   }
 
-  public update(config: Object): any {
+  public update(config: Object): void {
     console.log('Updating config...');
-    localStorage.setItem('config', JSON.stringify(config));
+    this.storage.set('config', JSON.stringify(config));
   }
 
 }

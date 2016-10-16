@@ -18,8 +18,10 @@ import { SettingsPage }             from '../pages/settings/settings';
 import { TasksPage }                from '../pages/tasks/tasks';
 import { TaskDetailPage }           from '../pages/tasks/task-detail';
 
-import { ConfigService }            from '../providers/config/config';
-import { TaskService }              from '../providers/tasks/tasks';
+import { ConfigService }           from '../providers/config/config';
+import { AppConfigModel }           from '../providers/config/config.model';
+
+import { environment }                   from '../environments/environment';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -44,14 +46,13 @@ export class GovernessApp implements OnInit {
 
   @ViewChild(Nav) nav: Nav;
 
-  private config:         any;
-
+  public config:          any;
   public platform:        Platform;
   public configService:   ConfigService;
   public rootPage:        any;
 
   // Populate the side menu
-  public pages: PageObj[]= [
+  public pages: PageObj[] = [
     { title: 'Control',   component: ControlPage,   idx: 0, icon: 'speedometer' },
     { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
     { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
@@ -70,7 +71,7 @@ export class GovernessApp implements OnInit {
 
     this.platform =         platform;
     this.configService =    configService;
-    this.config =           {};
+    this.config = {};
 
     this.initializeApp();
 
@@ -79,45 +80,49 @@ export class GovernessApp implements OnInit {
   //////////////////////////////////////////////////////////////////////
 
   public ngOnInit(): void {
-    console.log('App ngOnInit');
-    this.config = this.configService.get();
+    //console.log('App ngOnInit');
+    StatusBar.styleDefault();
+
+    this.configService.init().then((data) => {
+      //console.log('ngoninit configdata', data);
+      this.config = data;
+    // Define which page the app should show by default
+    if (this.config.viewPref === 'last') {
+
+      if (this.config.lastView) {
+
+        // Set last viewed page, if not null
+        this.rootPage = this.pages.filter (
+          page => page.title.includes(this.config.lastView)
+        )[0].component;
+
+      } else {
+
+        // Fallback to ControlPage
+        this.rootPage = this.pages.filter (
+          page => page.title.includes('Control')
+        )[0].component;
+      }
+
+    } else {
+
+      // Set selected value from config
+      this.rootPage = this.pages.filter(
+        page => page.title.includes(this.config.viewPref)
+      )[0].component;
+
+    }
+});
   }
 
   //////////////////////////////////////////////////////////////////////
 
   private initializeApp(): void {
     this.platform.ready().then(() => {
+      //console.log('initializeApp called');
+      //console.log('environment ', environment);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-
-      // Define which page the app should show by default
-      if (this.config.viewPref === 'last') {
-
-        if (this.config.lastView) {
-
-          // Set last viewed page, if not null
-          this.rootPage = this.pages.filter (
-            page => page.title.includes(this.config.lastView)
-          )[0].component;
-
-        } else {
-
-          // Fallback to ControlPage
-          this.rootPage = this.pages.filter (
-            page => page.title.includes('Control')
-          )[0].component;
-        }
-
-      } else {
-
-        // Set selected value from config
-        this.rootPage = this.pages.filter(
-          page => page.title.includes(this.config.viewPref)
-        )[0].component;
-
-      }
-
     });
   }
 

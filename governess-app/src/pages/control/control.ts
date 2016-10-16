@@ -1,17 +1,9 @@
-'use strict';
-
-/* FIXME? */
-/* tslint:disable:no-bitwise */
-/* tslint:disable:no-unused-variable */
-
 import { Component}             from '@angular/core';
 import { NgClass }              from '@angular/common';
 import { ActionSheetController,
          ModalController,
          ViewController,
          NavController }        from 'ionic-angular';
-
-//import { CHART_DIRECTIVES }     from 'ng2-charts';
 
 import { ConfigService }        from '../../providers/config/config';
 import { TaskService }          from '../../providers/tasks/tasks';
@@ -24,6 +16,7 @@ import { TaskDetailPage }       from '../tasks/task-detail';
 ////////////////////////////////////////////////////////////////////////
 
 @Component({
+  selector: 'control-page',
   templateUrl: 'control.html'
 })
 
@@ -62,7 +55,8 @@ export class ControlPage {
     this.modalCtrl = modalCtrl;
 
     this.configService = configService;
-    this.config = this.configService.get();
+    this.config = {};
+    //this.config = this.configService.get();
 
     this.taskService = taskService;
     this.tasks = this.taskService.get();
@@ -75,13 +69,25 @@ export class ControlPage {
       temperature_minor: '0'
     };
 
+    this.init().then(data => {
+      //console.log('I seem to be needed to get the promise')
+    });
+
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  public ngOnInit(): void {
-    console.log('statusService subscribe');
-    this.statusSub = this.statusService.Ticker().subscribe((result) => {
+  public init(): Promise<void> {
+    return this.configService.get().then((data: string) => {
+      //console.log('settings ngoninit configdata', data);
+      this.config = JSON.parse(data);
+      //console.log(this.config);
+    });
+  }
+
+  public ionViewWillEnter(): void {
+    console.log('ControlPage ionViewWillEnter called');
+    this.statusSub = this.statusService.socketData().subscribe((result) => {
       this.status = JSON.parse(result.data);
 
       // Split Temperature and hack the ghost zero - wtf??
@@ -96,10 +102,14 @@ export class ControlPage {
     });
   }
 
-  public onPageWillLeave(): void {
-    console.log('WillLeave');
+  public ionViewDidLoad(): void {
+    console.log('ControlPage ionViewDidLoad called');
+  }
+
+  public ionViewWillLeave(): void {
+    console.log('ControlPage ionViewWillLeave called');
     this.statusSub.unsubscribe();
-    this.statusService.disconnect();
+    //this.statusService.disconnect();
   }
 
   public openHelp(): void {

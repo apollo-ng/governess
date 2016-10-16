@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "governess-app",
+  "short_name": "Governess",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

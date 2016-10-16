@@ -1,6 +1,3 @@
-
-// https://www.npmjs.com/package/fs-extra
-
 module.exports = {
   include: [
     {

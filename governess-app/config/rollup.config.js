@@ -4,7 +4,6 @@ var globals = require('rollup-plugin-node-globals');
 var builtins = require('rollup-plugin-node-builtins');
 var json = require('rollup-plugin-json');
 
-
 // https://github.com/rollup/rollup/wiki/JavaScript-API
 
 var rollupConfig = {
@@ -54,7 +53,6 @@ var rollupConfig = {
   ]
 
 };
-
 
 if (process.env.IONIC_ENV == 'prod') {
   // production mode
