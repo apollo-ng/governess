@@ -23,7 +23,7 @@ tasks-page {
 
     ion-item-sliding, .item {
       border: 0 !important;
-      border-bottom: 1px solid #1f1e1a !important;
+      //border-bottom: 1px solid #1f1e1a !important;
       text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
       background: #2f2e2a;
       background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%);
@@ -55,6 +55,11 @@ tasks-page {
       font-size: 1.2rem;
       line-height: 1.1rem;
       color: #5f5e5a;
+    }
+
+    .active {
+      background: #3f3e3a !important;
+      border-bottom: 1px solid #1f1e1a !important;
     }
   }
 }

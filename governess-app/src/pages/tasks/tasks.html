@@ -28,7 +28,7 @@
 <ion-content class="task-list">
   <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks; let p = index">
-      <div ion-item [ngStyle]="{ 'background': task === config.taskActive ? 'rgba(117, 137, 12,1)' : 'transparent'}">
+      <div ion-item [ngClass]="{ active: task === config.taskActive }">
         <ion-icon *ngIf="task === config.taskActive" item-left name="checkbox"
           (click)="activateTask(task)"
           [ngStyle]="{ 'color': task === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
