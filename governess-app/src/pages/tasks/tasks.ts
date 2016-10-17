@@ -43,13 +43,14 @@ export class TasksPage {
     this.alertCtrl = alertCtrl;
 
     this.taskService = taskService;
-    this.tasks = this.taskService.get();
+    this.taskService.pull();
 
     this.configService = configService;
     this.config = {};
 
-    this.init().then(data => {
-      //console.log('I seem to be needed to get the promise')
+    this.initConfig().then(data => {
+
+      this.tasks = this.taskService.tasks;
     });
 
   }
@@ -57,10 +58,18 @@ export class TasksPage {
   //////////////////////////////////////////////////////////////////////
 
   // as init is async separate logic here so it's testable
-  public init(): Promise<void> {
+  public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
       //console.log('settings ngoninit configdata', data);
       this.config = JSON.parse(data);
+      //console.log(this.config);
+    });
+  }
+
+  public initTasks(): Promise<void> {
+    return this.taskService.get().then((data: string) => {
+      //console.log('settings ngoninit configdata', data);
+      //this.tasks = JSON.parse(data);
       //console.log(this.config);
     });
   }
@@ -86,7 +95,7 @@ export class TasksPage {
   }
 
   public copyTask(index: number): void {
-    // console.log('Duplicate task:', index);
+    console.log('Duplicate task:', index);
     this.taskService.copy(index);
   }
 

@@ -15,6 +15,9 @@
     <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
     <ion-buttons end>
       <button ion-button (click)="addTask()">
+        <ion-icon name="ios-funnel" ></ion-icon>
+      </button>
+      <button ion-button (click)="addTask()">
         <ion-icon name="add" ></ion-icon>
       </button>
     </ion-buttons>
@@ -25,11 +28,14 @@
 <ion-content class="task-list">
   <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks; let p = index">
-      <div ion-item>
-        <ion-icon item-left name="{{task.icon}}"
+      <div ion-item [ngStyle]="{ 'background': task === config.taskActive ? 'rgba(117, 137, 12,1)' : 'transparent'}">
+        <ion-icon *ngIf="task === config.taskActive" item-left name="checkbox"
           (click)="activateTask(task)"
-          [ngStyle]="{ 'background': task === config.taskActive ? 'rgba(117, 137, 12, 0.75)' : 'transparent',
-                       'color': task === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
+          [ngStyle]="{ 'color': task === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
+        </ion-icon>
+        <ion-icon *ngIf="task !== config.taskActive" item-left name="{{task.icon}}"
+          (click)="activateTask(task)"
+          [ngStyle]="{ 'color': task === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
         </ion-icon>
         <div (click)="goToTaskDetail(task)">
           <h2>{{task.name}}</h2>

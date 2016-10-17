@@ -1,13 +1,13 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {Task} from './task-model';
+import { Pipe, PipeTransform } from '@angular/core';
+import { TaskModel } from './task.model';
 
 @Pipe({
   name: 'taskSearch',
 })
 
 export class TaskSearchPipe implements PipeTransform {
-  public transform(tasks: Task[], searchString: string): any {
-    let matches: Task[] = [];
+  public transform(tasks: TaskModel[], searchString: string): any {
+    let matches: TaskModel[] = [];
 
     if (!searchString) {
       return tasks;

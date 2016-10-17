@@ -1,11 +1,4 @@
-export interface Task {
-  name: string;
-  userLang: string;
-  ctrlMode: string;
-  lastView?: string;
-}
-
-export let TASKMODEL: Array<any> = [{
+export let TaskMock: Array<any> = [{
     'id': '123',
     'dev-id': 'xyz',
     'name': 'Reflow Lead-Free',

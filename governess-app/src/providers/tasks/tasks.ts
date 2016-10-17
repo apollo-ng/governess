@@ -1,9 +1,8 @@
-'use strict';
-
 import { Injectable }             from '@angular/core';
 import { UUID }                   from 'angular2-uuid';
-//import { cloneDeep }              from 'lodash/cloneDeep';
-import { TASKMODEL }              from './task-model.ts';
+import { StorageService }         from '../storage/storage';
+import { TaskModel }              from './task.model';
+import { TaskMock }               from './task.mock';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -19,34 +18,68 @@ import { TASKMODEL }              from './task-model.ts';
 
 export class TaskService {
 
+  public storage: StorageService;
   public tasks: any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
-
+    storage: StorageService
   ) {
 
-    let tasks: string = localStorage.getItem('tasks');
+    this.storage = storage;
+    this.tasks = [];
+    this.init().then(data => {
+      //console.log('All promises returned', data)
+      this.tasks = data;
+    });
+
+
+    /*let tasks: string = localStorage.getItem('tasks');
 
     if (!tasks) {
-      console.log('No tasks in DB - Initiate from TASKMODEL', TASKMODEL);
-      localStorage.setItem('tasks', JSON.stringify(TASKMODEL));
-      this.tasks = TASKMODEL;
+      console.log('No tasks in DB - Initiate from TASKMODEL', TaskMock);
+      localStorage.setItem('tasks', JSON.stringify(TaskMock));
+      this.tasks = TaskMock;
     } else {
       console.log('Returning user - Load tasks from DB', tasks);
       this.tasks = JSON.parse(tasks);
     }
-
+*/
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  public get(): any {
-    return this.tasks;
+
+  public init(): Promise<{}> {
+    console.log('Initializing Task Service');
+
+    return this.storage.get('tasks').then((data: string) => {
+      if (!data) {
+        console.log('Got NO Storage Data - creating from Mock:');
+        let initTask: any = TaskMock;
+        this.storage.set('tasks', JSON.stringify(TaskMock));
+        this.tasks = TaskMock;
+        return TaskMock;
+      }
+      //console.log('Got Storage Data:', data);
+      this.tasks = JSON.parse(data);
+      return JSON.parse(data);
+    });
+  }
+
+  public get(): Promise<{}> {
+    return this.storage.get('tasks')
+  }
+
+  public pull(): any {
+    this.get().then((data: string) => {
+      this.tasks = JSON.parse(data);
+    });
   }
 
   public copy(index: number): void {
+    console.log('copy called to clone', this.tasks);
     // crude hack to copy the array after lodash deepClone refused to work
     let copy: any = JSON.parse(JSON.stringify(this.tasks[index]));
     copy.name = copy.name + ' Copy';
@@ -63,12 +96,12 @@ export class TaskService {
 
   public update(tasks: Object): any {
     console.log('Updating tasks...');
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    this.storage.set('tasks', JSON.stringify(tasks));
   }
 
   public reset(): any {
     console.log('Resetting tasks...');
-    localStorage.setItem('tasks', JSON.stringify(TASKMODEL));
+    this.storage.set('tasks', JSON.stringify(TaskMock));
   }
 
 }
