@@ -1,5 +1,5 @@
 export let TaskMock: Array<any> = [{
-    'id': '123',
+    'tid': '123',
     'dev-id': 'xyz',
     'name': 'Reflow Lead-Free',
     'icon': 'star-outline',

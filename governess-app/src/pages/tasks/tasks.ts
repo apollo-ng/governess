@@ -1,9 +1,11 @@
 import { Component }          from '@angular/core';
 import { reorderArray,
          NavController,
-         AlertController }    from 'ionic-angular';
+         AlertController,
+         ModalController }    from 'ionic-angular';
 import { ConfigService }      from '../../providers/config/config';
 import { TaskService }        from '../../providers/tasks/tasks';
+import { TasksHelp }          from './tasks.help';
 import { TaskDetailPage }     from '../tasks/task-detail';
 
 ////////////////////////////////////////////////////////////////////////
@@ -23,6 +25,7 @@ export class TasksPage {
 
   public navCtrl: NavController;
   public alertCtrl: AlertController;
+  public modalCtrl: ModalController;
   public taskService: TaskService;
   public tasks: any;
   public configService: ConfigService;
@@ -34,6 +37,7 @@ export class TasksPage {
 
     navCtrl: NavController,
     alertCtrl: AlertController,
+    modalCtrl: ModalController,
     taskService: TaskService,
     configService: ConfigService
 
@@ -41,16 +45,18 @@ export class TasksPage {
 
     this.navCtrl = navCtrl;
     this.alertCtrl = alertCtrl;
+    this.modalCtrl = modalCtrl;
 
     this.taskService = taskService;
-    this.taskService.pull();
+
 
     this.configService = configService;
     this.config = {};
 
     this.initConfig().then(data => {
-
+      this.taskService.pull();
       this.tasks = this.taskService.tasks;
+      console.log(this.tasks);
     });
 
   }
@@ -75,12 +81,13 @@ export class TasksPage {
   }
 
   public openHelp(): void {
-    console.log('FIXME: Add proper help');
+    let modal: any = this.modalCtrl.create(TasksHelp);
+    modal.present(modal);
   }
 
   public activateTask(task: any): void {
-    console.log('Activate task:', task);
-    this.config.taskActive = task;
+    console.log('Activate task:', task.tid);
+    this.config.taskActive = task.tid;
     this.configService.update(this.config);
     console.log(this.config);
   }
@@ -97,6 +104,7 @@ export class TasksPage {
   public copyTask(index: number): void {
     console.log('Duplicate task:', index);
     this.taskService.copy(index);
+    this.tasks = this.taskService.tasks;
   }
 
   public removeTask(index: number, name: string): void {
@@ -131,7 +139,7 @@ export class TasksPage {
   }
 
   public searchInput(event: any): void {
-    this.tasks = this.taskService.get();
+    this.tasks = this.taskService.tasks;
     let val: string = event.target.value;
     if (val && val.trim() !== '') {
       this.tasks = this.tasks.filter((task) => {
@@ -141,6 +149,13 @@ export class TasksPage {
         );
       });
     }
+  }
+
+  public calculateRuntime(task: any): any {
+    let len: number = task.data[0].points.length();
+    let max: number = task.data[0].points[len-1][1];
+    console.log('Max: ', max);
+    return max;
   }
 
 }

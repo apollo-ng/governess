@@ -15,6 +15,7 @@ import { TasksPage }              from '../pages/tasks/tasks';
 import { TaskDetailPage }         from '../pages/tasks/task-detail';
 
 import { SettingsHelp }           from '../pages/settings/settings.help';
+import { TasksHelp }              from '../pages/tasks/tasks.help';
 
 import { $WebSocket }             from '../providers/websocket/websocket';
 import { StorageService }         from '../providers/storage/storage';
@@ -36,6 +37,7 @@ import { ChartsModule }           from 'ng2-charts/components/charts/charts';
     SettingsPage,
     SettingsHelp,
     TasksPage,
+    TasksHelp,
     TaskDetailPage,
   ],
   imports: [
@@ -53,6 +55,7 @@ import { ChartsModule }           from 'ng2-charts/components/charts/charts';
     SettingsPage,
     SettingsHelp,
     TasksPage,
+    TasksHelp,
     TaskDetailPage,
   ],
   providers: [

@@ -202,6 +202,7 @@ export class TaskDetailPage {
           icon: 'create',
           handler: () => {
            console.log('Rename clicked');
+           this.renameTask(this.task);
           }
         },
         {
@@ -229,6 +230,36 @@ export class TaskDetailPage {
       ]
     });
     actionSheet.present();
+  }
+
+  public renameTask(task: any): void {
+    console.log('Renaming ', task.name)
+    let confirm: any = this.alertCtrl.create({
+      title: 'Name of this Task',
+      message: '',
+      inputs: [
+        {
+          name: 'taskName',
+          placeholder: 'What I want this to be called',
+          value: task.name
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => { /* */ },
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.task.name = data.taskName;
+            this.taskService.updateD();
+          },
+        },
+      ],
+    });
+    confirm.present();
   }
 
   public removeTask(index: number, name: string): void {

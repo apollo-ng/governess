@@ -164,8 +164,12 @@ ion-navbar ion-buttons[end] {
 .alert-wrapper,
 .action-sheet-group,
 .popover-content .item {
-  background-color: #2f2e2a;
-  color: #d8d3c5;
+  background-color: #2f2e2a !important;
+  color: #d8d3c5 !important;
+
+  input {
+    color: #d8d3c5 !important;
+  }
 }
 
 .alert-radio-label,

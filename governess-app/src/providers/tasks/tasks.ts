@@ -83,7 +83,7 @@ export class TaskService {
     // crude hack to copy the array after lodash deepClone refused to work
     let copy: any = JSON.parse(JSON.stringify(this.tasks[index]));
     copy.name = copy.name + ' Copy';
-    copy.id = UUID.UUID();
+    copy.tid = UUID.UUID();
     copy.created = Math.round(new Date().getTime());
     this.tasks.push(copy);
     this.update(this.tasks);
@@ -97,6 +97,11 @@ export class TaskService {
   public update(tasks: Object): any {
     console.log('Updating tasks...');
     this.storage.set('tasks', JSON.stringify(tasks));
+  }
+
+  public updateD(): any {
+    console.log('Updating tasks...');
+    this.storage.set('tasks', JSON.stringify(this.tasks));
   }
 
   public reset(): any {
