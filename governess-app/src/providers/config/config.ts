@@ -41,7 +41,7 @@ export class ConfigService {
     return this.storage.get('config').then((data: any) => {
       if (!data) {
         console.log('Got NO Storage Data - creating from Mock:');
-        let initAppConfig: AppConfigModel = AppConfigMock;
+        let initAppConfig: any = AppConfigMock;
         initAppConfig.clientID = UUID.UUID();
         this.storage.set('config', JSON.stringify(initAppConfig));
         return initAppConfig;

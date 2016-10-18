@@ -14,7 +14,7 @@ import { TaskService }              from '../../providers/tasks/tasks';
 
 @Component({
   selector: 'task-detail-page',
-  templateUrl: 'task-detail.html'
+  templateUrl: 'task.detail.html'
 })
 
 export class TaskDetailPage {
@@ -206,6 +206,14 @@ export class TaskDetailPage {
           }
         },
         {
+          text: 'Constraint',
+          icon: 'flash',
+          handler: () => {
+           console.log('Constraint clicked');
+           this.constraintTask(this.task);
+          }
+        },
+        {
           text: 'Clone',
           icon: 'copy',
           handler: () => {
@@ -232,35 +240,58 @@ export class TaskDetailPage {
     actionSheet.present();
   }
 
+  /*****************************************************************************
+   * renameTask - Create Task List Search Functionality
+   * @param {event} task
+   */
+
   public renameTask(task: any): void {
-    console.log('Renaming ', task.name)
-    let confirm: any = this.alertCtrl.create({
-      title: 'Name of this Task',
-      message: '',
-      inputs: [
-        {
-          name: 'taskName',
-          placeholder: 'What I want this to be called',
-          value: task.name
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => { /* */ },
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            this.task.name = data.taskName;
-            this.taskService.updateD();
-          },
-        },
-      ],
+    let alert: any =  this.alertCtrl.create();
+    alert.setTitle('Name of this Task');
+    alert.addInput({ type: 'text', name: 'taskName', value: task.name });
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Save',
+      handler: data => {
+        if (data !== undefined) {
+          console.log(data);
+          this.task.name = data.taskName;
+          this.taskService.updateD();
+        }
+      }
     });
-    confirm.present();
+    alert.present();
   }
+
+  /*****************************************************************************
+   * constraintTask - Create Task List Search Functionality
+   * @param {event} task
+   */
+
+  public constraintTask(task: any): void {
+    let alert: any =  this.alertCtrl.create();
+    alert.setTitle('Task Constrained?');
+    alert.addInput({ type: 'checkbox', label: 'Constraint Check OK',
+                    value: true, checked: task.constraints});
+    alert.addButton('Cancel');
+    alert.addButton({
+      text   : 'Save',
+      handler: data => {
+        if (data[0] === true) {
+          this.task.constraints = true;
+        } else {
+          this.task.constraints = false;
+        }
+        this.taskService.updateD();
+      }
+    });
+    alert.present();
+  }
+
+  /*****************************************************************************
+   * removeTask - Create Task List Search Functionality
+   * @param {event} task
+   */
 
   public removeTask(index: number, name: string): void {
     let confirm: any = this.alertCtrl.create({

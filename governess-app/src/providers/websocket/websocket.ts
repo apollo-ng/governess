@@ -79,10 +79,18 @@ export class $WebSocket {
     this.dataStream = new Subject();
   }
 
+  /*****************************************************************************
+   * connect
+   * @param {Object} task
+   */
+
   connect(force = false) {
     console.log('$WebSocket connect called');
     let self = this;
-    if (force || !this.socket || this.socket.readyState !== this.readyStateConstants.OPEN) {
+    if ( force
+      || !this.socket
+      || this.socket.readyState !== this.readyStateConstants.OPEN
+    ) {
       console.log('$WebSocket trying to open socket...');
       self.socket = this.protocols ? new WebSocket(this.url, this.protocols) : new WebSocket(this.url);
 
@@ -108,6 +116,12 @@ export class $WebSocket {
     }
   }
 
+  /*****************************************************************************
+   * send
+   * @param {Object} task
+   * @return number
+   */
+
   send(data): Observable<any> {
     console.log('$WebSocket trying to open socket...');
     let self = this;
@@ -125,20 +139,43 @@ export class $WebSocket {
     });
   };
 
+  /*****************************************************************************
+   * getDataStream
+   * @param {Object} task
+   * @return number
+   */
+
   getDataStream(): Subject<any> {
     return this.dataStream;
   }
+
+  /*****************************************************************************
+   * onOpenHandler
+   * @param {Object} task
+   */
 
   onOpenHandler(event: Event) {
     this.reconnectAttempts = 0;
     this.notifyOpenCallbacks(event);
     this.fireQueue();
   };
+
+  /*****************************************************************************
+   * notifyOpenCallbacks
+   * @param {Object} task
+   */
+
   notifyOpenCallbacks(event) {
     for (let i = 0; i < this.onOpenCallbacks.length; i++) {
         this.onOpenCallbacks[i].call(this, event);
     }
   }
+
+  /*****************************************************************************
+   * fireQueue
+   * @param {Object} task
+   */
+
   fireQueue() {
     while (this.sendQueue.length && this.socket.readyState === this.readyStateConstants.OPEN) {
       let data = this.sendQueue.shift();
@@ -150,11 +187,21 @@ export class $WebSocket {
     }
   }
 
+  /*****************************************************************************
+   * notifyCloseCallbacks
+   * @param {Object} task
+   */
+
   notifyCloseCallbacks(event) {
     for (let i = 0; i < this.onCloseCallbacks.length; i++) {
       this.onCloseCallbacks[i].call(this, event);
     }
   }
+
+  /*****************************************************************************
+   * notifyErrorCallbacks
+   * @param {Object} task
+   */
 
   notifyErrorCallbacks(event) {
     for (let i = 0; i < this.onErrorCallbacks.length; i++) {
@@ -162,21 +209,44 @@ export class $WebSocket {
     }
   }
 
+  /*****************************************************************************
+   * onOpen
+   * @param {Object} task
+   * @return number
+   */
+
   onOpen(cb) {
     this.onOpenCallbacks.push(cb);
     return this;
   };
+
+  /*****************************************************************************
+   * onClose
+   * @param {Object} task
+   * @return number
+   */
 
   onClose(cb) {
     this.onCloseCallbacks.push(cb);
     return this;
   }
 
+  /*****************************************************************************
+   * onError
+   * @param {Object} task
+   * @return number
+   */
+
   onError(cb) {
     this.onErrorCallbacks.push(cb);
     return this;
   };
 
+  /*****************************************************************************
+   * onMessage
+   * @param {Object} task
+   * @return number
+   */
 
   onMessage(callback, options) {
     if (!$WebSocket.Helpers.isFunction(callback)) {
@@ -191,6 +261,11 @@ export class $WebSocket {
     return this;
   }
 
+  /*****************************************************************************
+   * onMessageHandler
+   * @param {Object} task
+   */
+
   onMessageHandler(message: MessageEvent) {
     let self = this;
     let currentCallback;
@@ -199,6 +274,12 @@ export class $WebSocket {
       currentCallback.fn.apply(self, [message]);
     }
   };
+
+  /*****************************************************************************
+   * onCloseHandler
+   * @param {Object} task
+   */
+
   onCloseHandler(event: CloseEvent) {
     this.notifyCloseCallbacks(event);
     if ((this.config.reconnectIfNotNormalClose && event.code !== this.normalCloseCode)
@@ -209,9 +290,20 @@ export class $WebSocket {
     }
   };
 
+  /*****************************************************************************
+   * onErrorHandler
+   * @param {Object} task
+   */
+
   onErrorHandler(event) {
     this.notifyErrorCallbacks(event);
   };
+
+  /*****************************************************************************
+   * reconnect
+   * @param {Object} task
+   * @return number
+   */
 
   reconnect() {
     this.close(true);
@@ -221,6 +313,12 @@ export class $WebSocket {
     return this;
   }
 
+  /*****************************************************************************
+   * CLOSE
+   * @param {Object} task
+   * @return number
+   */
+
   close(force: boolean) {
     if (force || !this.socket.bufferedAmount) {
       this.socket.close();
@@ -228,8 +326,13 @@ export class $WebSocket {
     return this;
   };
 
-  // Exponential Backoff Formula by Prof. Douglas Thain
-  // http://dthain.blogspot.co.uk/2009/02/exponential-backoff-in-distributed.html
+  /*****************************************************************************
+   * Exponential Reconnect Backoff - Formula by Prof. Douglas Thain
+   * http://dthain.blogspot.co.uk/2009/02/exponential-backoff-in-distributed.html
+   * @param {Object} task
+   * @return number
+   */
+
   getBackoffDelay(attempt) {
     let R = Math.random() + 1;
     let T = this.config.initialTimeout;
@@ -238,6 +341,11 @@ export class $WebSocket {
     let M = this.config.maxTimeout;
     return Math.floor(Math.min(R * T * Math.pow(F, N), M));
   };
+
+  /*****************************************************************************
+   * setInternalState -
+   * @param {Object} task
+   */
 
   setInternalState(state) {
     if (Math.floor(state) !== state || state < 0 || state > 4) {
@@ -250,6 +358,7 @@ export class $WebSocket {
    * Could be -1 if not initzialized yet
    * @returns {number}
    */
+
   getReadyState() {
     if (this.socket == null) {
       return -1;

@@ -6,7 +6,7 @@ import { reorderArray,
 import { ConfigService }      from '../../providers/config/config';
 import { TaskService }        from '../../providers/tasks/tasks';
 import { TasksHelp }          from './tasks.help';
-import { TaskDetailPage }     from '../tasks/task-detail';
+import { TaskDetailPage }     from '../tasks/task.detail';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +19,7 @@ import { TaskDetailPage }     from '../tasks/task-detail';
 
 ////////////////////////////////////////////////////////////////////////
 //
-//
+//  TasksPage
 
 export class TasksPage {
 
@@ -63,7 +63,11 @@ export class TasksPage {
 
   //////////////////////////////////////////////////////////////////////
 
-  // as init is async separate logic here so it's testable
+  /*****************************************************************************
+   * initConfig - as init is async separate logic here so it's testable
+   * @param {event} task
+   */
+
   public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
       //console.log('settings ngoninit configdata', data);
@@ -71,6 +75,11 @@ export class TasksPage {
       //console.log(this.config);
     });
   }
+
+  /*****************************************************************************
+   * initTasks - Create Task List Search Functionality
+   * @param {event} task
+   */
 
   public initTasks(): Promise<void> {
     return this.taskService.get().then((data: string) => {
@@ -80,10 +89,20 @@ export class TasksPage {
     });
   }
 
+  /*****************************************************************************
+   * openHelp - Create Task List Search Functionality
+   * @param {event} task
+   */
+
   public openHelp(): void {
     let modal: any = this.modalCtrl.create(TasksHelp);
     modal.present(modal);
   }
+
+  /*****************************************************************************
+   * activateTask - Create Task List Search Functionality
+   * @param {event} task
+   */
 
   public activateTask(task: any): void {
     console.log('Activate task:', task.tid);
@@ -92,20 +111,40 @@ export class TasksPage {
     console.log(this.config);
   }
 
+  /*****************************************************************************
+   * addTask - Create Task List Search Functionality
+   * @param {event} task
+   */
+
   public addTask(): void {
     console.log('FIXME: Add a new empty task');
   }
+
+  /*****************************************************************************
+   * goToTaskDetail - Create Task List Search Functionality
+   * @param {event} task
+   */
 
   public goToTaskDetail(task: any): void {
     // console.log('Go to task detail:', task);
     this.navCtrl.push(TaskDetailPage, task);
   }
 
+  /*****************************************************************************
+   * copyTask - Create Task List Search Functionality
+   * @param {event} task
+   */
+
   public copyTask(index: number): void {
     console.log('Duplicate task:', index);
     this.taskService.copy(index);
     this.tasks = this.taskService.tasks;
   }
+
+  /*****************************************************************************
+   * removeTask - Create Task List Search Functionality
+   * @param {event} task
+   */
 
   public removeTask(index: number, name: string): void {
     let confirm: any = this.alertCtrl.create({
@@ -128,15 +167,20 @@ export class TasksPage {
     confirm.present();
   }
 
+  /*****************************************************************************
+   * reorderTasks - Create Task List Search Functionality
+   * @param {event} task
+   */
+
   public reorderTasks(move: any): void {
     this.tasks = reorderArray(this.tasks, move);
     this.taskService.update(this.tasks);
   }
 
-  public searchClear(event: any): void {
-    this.tasks = this.taskService.get();
-    event.stopPropagation();
-  }
+  /*****************************************************************************
+   * searchInput - Create Task List Search Functionality
+   * @param {event} task
+   */
 
   public searchInput(event: any): void {
     this.tasks = this.taskService.tasks;
@@ -151,11 +195,30 @@ export class TasksPage {
     }
   }
 
-  public calculateRuntime(task: any): any {
-    let len: number = task.data[0].points.length();
-    let max: number = task.data[0].points[len-1][1];
-    console.log('Max: ', max);
-    return max;
+  /*****************************************************************************
+   * searchClear - Disengage Search Filter
+   * @param {event} task
+   */
+
+  public searchClear(event: any): void {
+    this.tasks = this.taskService.tasks;
+    event.stopPropagation();
+  }
+
+  /*****************************************************************************
+   * calculateRuntime - Iterate over all profiles to find the farthest timepoint
+   * @param {Object} task
+   * @return number
+   */
+
+  public calculateRuntime(task: any): number {
+    let seconds: number = 0;
+    for ( let data of task.data ) {
+      if ( data.points[data.points.length-1][0] > seconds ) {
+        seconds = data.points[data.points.length-1][0];
+      }
+    }
+    return seconds;
   }
 
 }

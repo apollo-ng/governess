@@ -15,9 +15,6 @@
     <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
     <ion-buttons end>
       <button ion-button (click)="addTask()">
-        <ion-icon name="ios-funnel" ></ion-icon>
-      </button>
-      <button ion-button (click)="addTask()">
         <ion-icon name="add" ></ion-icon>
       </button>
     </ion-buttons>
@@ -29,18 +26,22 @@
   <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks; let p = index">
       <div ion-item [ngClass]="{ active: task.tid === config.taskActive }">
-        <ion-icon *ngIf="task.tid === config.taskActive" item-left name="checkbox"
+        <ion-icon *ngIf="task.constraints && task.tid !== config.taskActive" item-left name="checkmark-circle-outline"
           (click)="activateTask(task)"
-          [ngStyle]="{ 'color': task === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
+          [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)'}">
         </ion-icon>
-        <ion-icon *ngIf="task.tid !== config.taskActive" item-left name="{{task.icon}}"
+        <ion-icon *ngIf="task.constraints && task.tid === config.taskActive" item-left name="checkmark-circle"
           (click)="activateTask(task)"
-          [ngStyle]="{ 'color': task.tid === config.taskActive ? '#D8D3C5' : 'rgba(117, 137, 12, 0.75)'}">
+          [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)'}">
+        </ion-icon>
+        <ion-icon *ngIf="!task.constraints" item-left name="radio-button-off"
+          [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}">
         </ion-icon>
         <div tappable (click)="goToTaskDetail(task)">
           <h2>{{task.name}}</h2>
-          <p>Runtime: {{task.data[0].points[task.data[0].points?.length-1][0]}}</p>
-          <p>Last changed: {{task.created | date: 'yyyy-MM-dd HH:mm'}}</p>
+          <!--<p>Runtime: {{task.data[0].points[task.data[0].points?.length-1][0]}}</p>-->
+          <p><ion-icon name="time" item-left [ngStyle]="{ 'margin': '0'}"> {{calculateRuntime(task)}}</ion-icon></p>
+          <p><ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}"> {{task.created | date: 'yyyy-MM-dd HH:mm'}}</ion-icon></p>
         </div>
       </div>
       <ion-item-options side="right">

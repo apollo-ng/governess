@@ -46,6 +46,7 @@
           (click)="data[moduleView].options.fill = !data[moduleView].options.fill; updateChart()"
           [ngClass]="{'rb-white': data[moduleView].options.fill}">
             <ion-icon name="color-fill"></ion-icon>
+            <span class="minibar-button-txt">Fill</span>
           </button>
         </ion-col>
         <ion-col>
@@ -53,6 +54,7 @@
           (click)="data[moduleView].show = !data[moduleView].show; updateChart()"
           [ngClass]="{'rb-white': data[moduleView].show}">
             <ion-icon name="eye"></ion-icon>
+            <span class="minibar-button-txt">Show</span>
           </button>
         </ion-col>
         <ion-col>
@@ -60,12 +62,14 @@
           (click)="data[moduleView].options.yAxisID = data[moduleView].options.yAxisID === 'y-axis-1' ? 'y-axis-2' : 'y-axis-1'; updateChart()"
           [ngClass]="{'rb-white': data[moduleView].options.yAxisID === 'y-axis-2'}">
             <b>y2</b>
+            <span class="minibar-button-txt">Axis</span>
           </button>
         </ion-col>
         <ion-col>
           <button ion-button (click)="editStrokeWidth = !editStrokeWidth"
           [ngClass]="{'rb-green': editStrokeWidth}" full small dark>
             <ion-icon name="brush"></ion-icon>
+            <span class="minibar-button-txt">Size</span>
           </button>
         </ion-col>
         <ion-col *ngIf="editStrokeWidth" class="mb-input">
@@ -77,6 +81,7 @@
           <button ion-button (click)="editPointSize = !editPointSize"
           [ngClass]="{'rb-green': editPointSize}" full small dark>
             <ion-icon name="disc"></ion-icon>
+            <span class="minibar-button-txt">Size</span>
           </button>
         </ion-col>
         <ion-col *ngIf="editPointSize" class="mb-input">
@@ -85,15 +90,11 @@
           (ngModelChange)="updateChart()"/>
         </ion-col>
         <ion-col>
-          <button ion-button (click)="editTimeScope = !editTimeScope"
-          [ngClass]="{'rb-green': editTimeScope}" full small dark>
+          <button ion-button (click)="editTimeScope"
+           full small dark>
             <ion-icon name="watch"></ion-icon>
+            <span class="minibar-button-txt">Time</span>
           </button>
-        </ion-col>
-        <ion-col *ngIf="editTimeScope" class="mb-input">
-          <input  type="number" min="0" max="25" autocomplete="off"
-          [(ngModel)]="data[moduleView].options.pointSize"
-          (ngModelChange)="updateChart()"/>
         </ion-col>
       </ion-row>
     </ion-grid>

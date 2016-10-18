@@ -9,7 +9,7 @@ import { ConfigService }        from '../../providers/config/config';
 import { TaskService }          from '../../providers/tasks/tasks';
 import { StatusService }        from '../../providers/status/status';
 
-import { TaskDetailPage }       from '../tasks/task-detail';
+import { TaskDetailPage }       from '../tasks/task.detail';
 
 ////////////////////////////////////////////////////////////////////////
 

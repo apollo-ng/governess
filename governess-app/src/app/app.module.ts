@@ -12,7 +12,7 @@ import { HelpPage }               from '../pages/help/help';
 import { LogsPage }               from '../pages/logs/logs';
 import { SettingsPage }           from '../pages/settings/settings';
 import { TasksPage }              from '../pages/tasks/tasks';
-import { TaskDetailPage }         from '../pages/tasks/task-detail';
+import { TaskDetailPage }         from '../pages/tasks/task.detail';
 
 import { SettingsHelp }           from '../pages/settings/settings.help';
 import { TasksHelp }              from '../pages/tasks/tasks.help';

@@ -50,21 +50,31 @@ tasks-page {
       border-bottom: 0 !important;
     }
 
+    .item h2 {
+      margin-bottom: 4px;
+      margin-top: 0;
+    }
+
     .item p {
-      text-shadow: none;
       font-size: 1.2rem;
       line-height: 1.1rem;
-      color: #5f5e5a;
+      color: #6f6e6a;
+    }
+
+    .item p ion-icon {
+      font-size: 1.2rem !important;
     }
 
     .active {
       background: #3f3e3a !important;
-      border-bottom: 1px solid #1f1e1a !important;
+      //border-bottom: 1px solid #1f1e1a !important;
+      border-bottom: 3px solid rgba(117, 137, 12, 1) !important;
     }
 
     .item-md ion-icon[item-left] {
-      font-size: 2em;
+      font-size: 1.6em;
     }
+
   }
 }
 
@@ -189,6 +199,11 @@ task-detail-page {
           border: 1px solid red;
         }
 
+        .minibar-button-txt {
+          padding-left: 5px;
+          text-transform: none;
+        }
+
   }
 
 
@@ -302,6 +317,12 @@ task-detail-page {
   }
   .md-table tfoot td:last-child {
     border-right: none;
+  }
+
+  @media (max-width: 480px) {
+    .minibar-button-txt {
+      display: none !important;
+    }
   }
 
 }
