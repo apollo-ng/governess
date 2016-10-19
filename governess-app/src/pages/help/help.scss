@@ -1,3 +1,17 @@
 .help {
 
+ion-card {
+  background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%);
+  background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%);
+  background: linear-gradient(to bottom, #2f2e2a 0%,#1f1e1a 100%);
+}
+
+.card-md ion-card-header {
+   color: #d8d3c5;
+}
+
+.card-md ion-card-content {
+   color: #7f7e7a; 
+}
+
 }
