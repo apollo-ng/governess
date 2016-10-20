@@ -12,15 +12,12 @@
     "moduleResolution": "node",
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "../node_modules/@types"
     ]
   },
   "exclude": [
     "node_modules",
     "src/**/*.e2e.ts"
-  ],
-  "compileOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  ]
 }

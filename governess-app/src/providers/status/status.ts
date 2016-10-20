@@ -17,6 +17,7 @@ import { $WebSocket }             from '../websocket/websocket';
 export class StatusService {
 
   private ws: any;
+  public status: any;
 
 /*  private readyStates: any = {
           'CONNECTING': 0,
@@ -40,6 +41,11 @@ export class StatusService {
       this.ws = new $WebSocket('ws://localhost:8765');
       this.ws.connect();
       this.ws.send('Hello World');
+      this.ws.getDataStream().subscribe((result) => {
+        console.log('getDataStream result', result);
+        this.status = result;
+     //this.setInstanceProperties(result);
+      });
 /*
       this.ws.onopen = (evt) => {
         this.ws.send('Hello World');

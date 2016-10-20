@@ -18,10 +18,10 @@ import { SettingsPage }             from '../pages/settings/settings';
 import { TasksPage }                from '../pages/tasks/tasks';
 import { TaskDetailPage }           from '../pages/tasks/task-detail';
 
-import { ConfigService }           from '../providers/config/config';
+import { ConfigService }            from '../providers/config/config';
 import { AppConfigModel }           from '../providers/config/config.model';
 
-import { environment }                   from '../environments/environment';
+import { environment }              from '../environments/environment';
 
 ////////////////////////////////////////////////////////////////////////
 

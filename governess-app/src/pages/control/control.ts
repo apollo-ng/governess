@@ -70,7 +70,7 @@ export class ControlPage {
     };
 
     this.init().then(data => {
-      //console.log('I seem to be needed to get the promise')
+      console.log('I seem to be needed to get the promise')
     });
 
   }

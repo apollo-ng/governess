@@ -67,7 +67,7 @@ export class $WebSocket {
   constructor(
     private url: string,
     private protocols?: Array<string>,
-    //private config?: WebSocketConfig
+
   ) {
     console.log('$WebSocket Init');
     let match = new RegExp('wss?:\/\/').test(url);
@@ -95,20 +95,20 @@ export class $WebSocket {
       self.socket = this.protocols ? new WebSocket(this.url, this.protocols) : new WebSocket(this.url);
 
       self.socket.onopen = (ev: Event) => {
-        console.log('onOpen: %s', ev);
+        console.log('$WebSocket onOpen: %s', ev);
         this.onOpenHandler(ev);
       };
       self.socket.onmessage = (ev: MessageEvent) => {
-        console.log('onNext: %s', ev.data);
+        console.log('$WebSocket onNext: %s', ev.data);
         self.onMessageHandler(ev);
         this.dataStream.next(ev);
       };
       this.socket.onclose = (ev: CloseEvent) => {
-        console.log('onClose, completed');
+        console.log('$WebSocket onClose, completed');
         self.onCloseHandler(ev);
       };
       this.socket.onerror = (ev: ErrorEvent) => {
-        console.log('onError', ev);
+        console.log('$WebSocket onError', ev);
         self.onErrorHandler(ev);
         this.dataStream.error(ev);
       };
@@ -128,10 +128,11 @@ export class $WebSocket {
     if (this.getReadyState() !== this.readyStateConstants.OPEN
             && this.getReadyState() !== this.readyStateConstants.CONNECTING) {
         this.connect();
+        console.log('$WebSocket connection opened');
     }
     return Observable.create((observer) => {
         if (self.socket.readyState === self.readyStateConstants.RECONNECT_ABORTED) {
-            observer.next('Socket connection has been closed');
+            observer.next('$WebSocket connection has been closed');
         } else {
             self.sendQueue.push({ message: data });
             self.fireQueue();
@@ -155,6 +156,7 @@ export class $WebSocket {
    */
 
   onOpenHandler(event: Event) {
+    console.log('$WebSocket onOpenHandler', event);
     this.reconnectAttempts = 0;
     this.notifyOpenCallbacks(event);
     this.fireQueue();
@@ -216,6 +218,7 @@ export class $WebSocket {
    */
 
   onOpen(cb) {
+    console.log('$WebSocket onOpen', cb);
     this.onOpenCallbacks.push(cb);
     return this;
   };
@@ -227,6 +230,7 @@ export class $WebSocket {
    */
 
   onClose(cb) {
+    console.log('$WebSocket onClose', cb);
     this.onCloseCallbacks.push(cb);
     return this;
   }
@@ -238,6 +242,7 @@ export class $WebSocket {
    */
 
   onError(cb) {
+    console.log('$WebSocket onError', cb);
     this.onErrorCallbacks.push(cb);
     return this;
   };
@@ -253,6 +258,8 @@ export class $WebSocket {
       throw new Error('Callback must be a function');
     }
 
+    console.log('$WebSocket onMessage', callback, options);
+
     this.onMessageCallbacks.push({
       fn: callback,
       pattern: options ? options.filter : undefined,
@@ -267,6 +274,7 @@ export class $WebSocket {
    */
 
   onMessageHandler(message: MessageEvent) {
+    console.log('$WebSocket onMessageHandler', message);
     let self = this;
     let currentCallback;
     for (let i = 0; i < self.onMessageCallbacks.length; i++) {
@@ -281,6 +289,7 @@ export class $WebSocket {
    */
 
   onCloseHandler(event: CloseEvent) {
+    console.log('$WebSocket onCloseHandler', event);
     this.notifyCloseCallbacks(event);
     if ((this.config.reconnectIfNotNormalClose && event.code !== this.normalCloseCode)
        || this.reconnectableStatusCodes.indexOf(event.code) > -1) {
@@ -296,6 +305,7 @@ export class $WebSocket {
    */
 
   onErrorHandler(event) {
+    console.log('$WebSocket onErrorHandler', event);
     this.notifyErrorCallbacks(event);
   };
 
