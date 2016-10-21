@@ -18,8 +18,8 @@ export class WebSocketService {
   // These can be altered by calling code
   public debug: boolean = false;
 
-  // Time in ms to wait before attempting to reconnect (after a close)
-  public reconnectInterval: number = 1000;
+  // Max Time in ms to wait before attempting to reconnect (after a close)
+  public reconnectMaxInterval: number = 30000;
   // Time in ms to wait for WebSocket to open (before aborting and retrying)
   public timeoutInterval: number = 2000;
 
@@ -37,6 +37,7 @@ export class WebSocketService {
   // The underlying WebSocket
   private ws: WebSocket;
   private url: string;
+  private reconnectAttemptCount: number;
 
   // Setting this to true is the equivalent of setting all instances
   // of WebSocketService.debug to true
@@ -49,6 +50,8 @@ export class WebSocketService {
   public onmessage:(ev:MessageEvent) => void = function (event:MessageEvent) {};
   public onerror:(ev:ErrorEvent) => void = function (event:ErrorEvent) {};
 
+  /****************************************************************************/
+
   constructor(
 
     url: string,
@@ -59,6 +62,7 @@ export class WebSocketService {
     this.url = url;
     this.protocols = protocols;
     this.readyState = WebSocket.CONNECTING;
+    this.reconnectAttemptCount = 0;
     this.connect(false);
 
   }
@@ -89,6 +93,7 @@ export class WebSocketService {
       this.log('WebSocketService', 'onopen', this.url);
       this.readyState = WebSocket.OPEN;
       reconnectAttempt = false;
+      this.reconnectAttemptCount = 0;
       this.onopen(event);
     };
 
@@ -106,9 +111,15 @@ export class WebSocketService {
           this.log('WebSocketService', 'onclose', this.url);
           this.onclose(event);
         }
+        this.reconnectAttemptCount++
+        this.log('WebSocketService', 'recon try #', this.reconnectAttemptCount);
+        let interval: number = Math.floor(
+          ( Math.random() * ((2^this.reconnectAttemptCount) - 1 ) + 1) * 1000
+        );
+        this.log('WebSocketService', 'new interval', interval);
         setTimeout(() => {
           this.connect(true);
-        }, this.reconnectInterval);
+        }, interval);
       }
     };
 

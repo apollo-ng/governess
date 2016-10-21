@@ -42,12 +42,12 @@ export class StatusService {
 
     // A connection could not be made
     this.ws.onerror = function(event) {
-      console.log(event);
+      //console.log(event);
     }
 
     // A connection was closed
     this.ws.onclose = function(code, reason) {
-      console.log(code, reason);
+      //console.log(code, reason);
     }
 
     // Map and return socket data as Obervable
