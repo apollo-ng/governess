@@ -1,4 +1,4 @@
-import { Component}             from '@angular/core';
+import { Component }            from '@angular/core';
 import { NgClass }              from '@angular/common';
 import { ActionSheetController,
          ModalController,
@@ -11,97 +11,126 @@ import { TaskService }          from '../../providers/tasks/tasks';
 
 import { TaskDetailPage }       from '../tasks/task.detail';
 
-////////////////////////////////////////////////////////////////////////
+import { ControlHelp }          from './control.help';
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
+
+/******************************************************************************/
 
 @Component({
-  selector: 'control-page',
-  templateUrl: 'control.html'
+  selector:                     'control-page',
+  templateUrl:                  'control.html'
 })
 
-////////////////////////////////////////////////////////////////////////
-//
-//
+/*******************************************************************************
+ *
+ *    ControlPage
+ *
+ ******************************************************************************/
 
 export class ControlPage {
 
-  public config: any;
-  public tasks: any;
-  public status: any;
-  public statusSub: any;
+  public config:                any;
+  public tasks:                 any;
+  public task:                  any;
+  public status:                any;
+  public statusSub:             any;
 
-  //////////////////////////////////////////////////////////////////////
+  public lineChartData:         Array<any>;
+  public lineChartColours:      Array<any>;
+  public lineChartType:         string = 'line';
+
+  /*****************************************************************************
+  * constructor
+  *****************************************************************************/
 
   constructor (
 
-    public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public configService: ConfigService,
-    public taskService: TaskService,
-    public statusService: StatusService
+    public navCtrl:             NavController,
+    public modalCtrl:           ModalController,
+    public configService:       ConfigService,
+    public taskService:         TaskService,
+    public statusService:       StatusService
 
   ) {
 
-    this.navCtrl = navCtrl;
-    this.modalCtrl = modalCtrl;
-    this.configService = configService;
-    this.taskService = taskService;
-    this.statusService = statusService;
+    this.navCtrl =              navCtrl;
+    this.modalCtrl =            modalCtrl;
+    this.configService =        configService;
+    this.taskService =          taskService;
+    this.statusService =        statusService;
+    this.lineChartData =        [{ data: [], label: 'Data' }];
 
-    this.config = {};
+    this.config =               {};
+    this.task =                 {};
 
     this.status = {
       'status': 'offline',
       'temperature': 25.0
     };
 
+    // This seems to work to get all the async promis/observable stuff
+    // going without throwing undefined foo...
     this.initConfig().then(data => {
-      this.taskService.pull();
-      this.tasks = this.taskService.tasks;
-      console.log(this.tasks);
+      this.taskService.pull     ();
+      this.tasks =              this.taskService.tasks;
+      this.task = this.tasks.filter(
+        task => task.tid.includes(
+          this.config.taskActive
+        )
+      )[0];
+
+      this.updateChart          ();
     });
 
-    this.statusService.telemetry().subscribe((result) => {
-      this.statusUpdate(result);
+    // Subscribe and assign the websocket data handlers
+    this.statusService.statusSocketRX().subscribe( (data) => {
+      this.statusUpdate         (data);
     });
 
   }
 
-  //////////////////////////////////////////////////////////////////////
+  /*****************************************************************************
+  * initConfig
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
-      //console.log('settings ngoninit configdata', data);
       this.config = JSON.parse(data);
-      //console.log(this.config);
     });
   }
+
+  /*****************************************************************************
+  * ionViewWillEnter
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public ionViewWillEnter(): void {
     console.log('ControlPage ionViewWillEnter called');
-
-/*
-    this.statusSub = this.statusService.onMessage().subscribe((result) => {
-      this.status = JSON.parse(result.data);
-
-      // Split Temperature and hack the ghost zero - wtf??
-      let temp: Array<any> = this.status.temperature.toString().split('.');
-      this.status.temperature_major = temp[0];
-      if (temp[1] > 1) {
-        this.status.temperature_minor = temp[1];
-      } else {
-        this.status.temperature_minor = "0";
-      }
-      console.log('GIS:', this.status);
-    });
-*/
   }
+
+  /*****************************************************************************
+  * ionViewDidLoad
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public ionViewDidLoad(): void {
     console.log('ControlPage ionViewDidLoad called');
-
   }
+
+  /*****************************************************************************
+  * Returns boolean, whether websocket was FORCEFULLY closed.
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public ionViewWillLeave(): void {
     console.log('ControlPage ionViewWillLeave called');
@@ -109,47 +138,57 @@ export class ControlPage {
     //this.statusService.disconnect();
   }
 
+  /*****************************************************************************
+   * openHelp
+   */
+
   public openHelp(): void {
-    let modal: any = this.modalCtrl.create(HelpModal);
+    let modal: any = this.modalCtrl.create(ControlHelp);
     modal.present(modal);
-  };
-
-public statusUpdate(data: any): void {
-  this.status = JSON.parse(data);
-  let temp: Array<any> = this.status.temperature.toString().split('.');
-  this.status.temperature_major = temp[0];
-  if (temp[1] > 1) {
-    this.status.temperature_minor = temp[1];
-  } else {
-    this.status.temperature_minor = "0";
   }
-  console.log('final set to this.status:', this.status);
-}
 
-  public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40],
-      label: 'Series A',
-      lineTension: 0,
-      yAxisID: 'y-axis-1' },
-    { data: [28, 48, 40, 19, 86, 27, 90],
-      label: 'Series B',
-      lineTension: 0,
-      yAxisID: 'y-axis-1' },
-    { data: [18, 48, 77, 9, 100, 27, 40],
-      label: 'Series C',
-      lineTension: 0,
-      yAxisID: 'y-axis-2' },
-  ];
+  /*****************************************************************************
+  * triggerUpdate
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
-  public lineChartLabels: Array<any> = [
-    new Date(1466888585 * 1000).toISOString(),
-    new Date(1466888590 * 1000).toISOString(),
-    new Date(1466888595 * 1000).toISOString(),
-    new Date(1466888600 * 1000).toISOString(),
-    new Date(1466888605 * 1000).toISOString(),
-    new Date(1466888610 * 1000).toISOString(),
-    new Date(1466888615 * 1000).toISOString(),
-  ];
+  public triggerUpdate(data) {
+    this.config = data;
+    this.configService.update(this.config);
+
+    this.task = this.tasks.filter(
+      task => task.tid.includes(this.config.taskActive)
+    )[0];;
+
+    this.updateChart();
+  }
+
+  /*****************************************************************************
+  * statusUpdate
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
+  public statusUpdate(data: any): void {
+    this.status = JSON.parse(data);
+    let temp: Array<any> = this.status.temperature.toString().split('.');
+    this.status.temperature_major = temp[0];
+    if (temp[1] > 1) {
+      this.status.temperature_minor = temp[1];
+    } else {
+      this.status.temperature_minor = "0";
+    }
+  }
+
+  /*****************************************************************************
+  * lineChartOptions
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public lineChartOptions: any = {
     animation: false,
@@ -162,9 +201,9 @@ public statusUpdate(data: any): void {
           type: 'time',
           time: {
             unit: 'second',
-            unitStepSize: 5,
+            unitStepSize: 15,
             displayFormats: {
-              second: 'ss',
+              second: 'HH:mm:ss',
             },
           },
           gridLines: {
@@ -206,58 +245,105 @@ public statusUpdate(data: any): void {
             beginAtZero: false,
             fontColor: '#d8d3c5',
             fontFamily: 'DIN',
-            maxTicksLimit: 8,
+            maxTicksLimit: 2,
           },
         },
       ],
     },
   };
 
-  public lineChartColours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255, 152, 0, 0.15)',
-      borderColor: 'rgb(255, 152, 0)',
-      borderWidth: 2,
-      pointRadius: '3',
-      pointBorderWidth: '2',
-      pointBackgroundColor: '#fff',
-      pointBorderColor: 'rgb(255, 152, 0)',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-    },
-    {
-      backgroundColor: 'rgba(162, 48, 22, 0.15)',
-      borderColor: 'rgb(162, 48, 22)',
-      borderWidth: 2,
-      pointRadius: '3',
-      pointBorderWidth: '2',
-      pointBackgroundColor: '#fff',
-      pointBorderColor:  'rgb(162, 48, 22)',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)',
-    },
-    {
-      backgroundColor: 'rgba(109, 128, 6, 0.15)',
-      borderColor: 'rgb(109, 128, 6)',
-      borderWidth: 2,
-      pointRadius: '3',
-      pointBorderWidth: '2',
-      pointBackgroundColor: '#fff',
-      pointBorderColor: 'rgb(109, 128, 6)',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-    },
-  ];
+  /*****************************************************************************
+  * updateChart
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
-  public lineChartType: string = 'line';
+  public updateChart(): void {
+
+    // Update the view parameters
+    let _lineChartColours: Array<any> = new Array();
+    for (let i: number = 0; i < this.task.data.length; i++) {
+      _lineChartColours[i] = {
+        backgroundColor: this.convertRGBA(this.task.data[i].options.color, 0.15),
+        borderColor: this.task.data[i].options.color,
+        borderWidth: this.task.data[i].options.strokeWidth,
+        pointRadius: this.task.data[i].options.pointRadius,
+        pointBorderWidth: this.task.data[i].options.pointBorderWidth,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: this.task.data[i].options.color,
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+      };
+    }
+
+    // Update the datapoints (y axis)
+    let _lineChartData: Array<any> = new Array();
+    for (let i: number = 0; i < this.task.data.length; i++) {
+      _lineChartData[i] = {
+        data: new Array(this.task.data[i].points.length),
+        label: this.task.data[i].control,
+        lineTension: 0,
+        yAxisID: this.task.data[i].options.yAxisID,
+        fill: this.task.data[i].options.fill,
+      };
+      for (let j: number = 0; j < this.task.data[i].points.length; j++) {
+        _lineChartData[i].data[j] = {
+          'x': new Date(this.task.data[i].points[j][0] * 1000).toISOString(),
+          'y': this.task.data[i].points[j][1],
+        };
+      }
+    }
+    this.lineChartData = _lineChartData;
+    this.lineChartColours = _lineChartColours;
+  }
+
+  /*****************************************************************************
+  * convertRGBA
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
+  public convertRGBA(color: string, alpha: number): string {
+    let _color: string = color;
+    if (color.match(/rgb\(/i)) {
+      _color = color.replace(/rgb\(/i, 'rgba(');
+      _color = _color.replace(/\)/i, ',' + alpha + ')');
+    } else {
+      _color = _color.replace(/\d*(\.\d+)?\)/i, ',' + alpha + ')');
+    }
+    return _color;
+  }
+
+  /*****************************************************************************
+  * chartClicked
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public chartClicked(e: any): void {
     console.log(e);
   }
 
+  /*****************************************************************************
+  * chartHovered
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
   public chartHovered(e: any): void {
     console.log(e);
   }
+
+  /*****************************************************************************
+  * playSound
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public playSound(file: string): void {
     let audio: any = new Audio();
@@ -266,20 +352,35 @@ public statusUpdate(data: any): void {
     audio.play();
   }
 
+  /*****************************************************************************
+  * setMode
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
   public setMode(mode: string): void {
     this.config.ctrlMode = mode;
     this.configService.update(this.config);
   }
 
+  /*****************************************************************************
+  * editTask
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
   public editTask(): void {
-
-    let activeTask: any = this.tasks.filter(
-      task => task.name.includes(this.config.taskActive)
-    )[0];
-
-    if (activeTask) this.navCtrl.push(TaskDetailPage, activeTask);
-
+    if (this.task) this.navCtrl.push(TaskDetailPage, this.task);
   }
+
+  /*****************************************************************************
+  * startTask
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public startTask(): void {
     if (this.config.audio) this.playSound('run.mp3');
@@ -287,11 +388,25 @@ public statusUpdate(data: any): void {
     this.status = 'running';
   }
 
+  /*****************************************************************************
+  * pauseTask
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
   public pauseTask(): void {
     if (this.config.audio) this.playSound('float.mp3');
     console.log('Pause Task');
     this.status = 'paused';
   }
+
+  /*****************************************************************************
+  * restartTask
+  *
+  * @param {event} task
+  * @return boolean
+  */
 
   public restartTask(): void {
     if (this.config.audio) this.playSound('float.mp3');
@@ -299,31 +414,17 @@ public statusUpdate(data: any): void {
     this.status = 'running';
   }
 
+  /*****************************************************************************
+  * stopTask
+  *
+  * @param {event} task
+  * @return boolean
+  */
+
   public stopTask(): void {
     if (this.config.audio) this.playSound('stop.mp3');
     console.log('Stop Task');
     this.status = 'idle';
   }
 
-}
-
-////////////////////////////////////////////////////////////////////////
-// Help
-////////////////////////////////////////////////////////////////////////
-
-@Component({
-  templateUrl: 'control.help.html',
-})
-
-class HelpModal {
-
-  private viewCtrl: ViewController;
-
-  constructor( viewCtrl: ViewController ) {
-    this.viewCtrl = viewCtrl;
-  }
-
-  private dismissModal(): void {
-    this.viewCtrl.dismiss();
-  }
 }

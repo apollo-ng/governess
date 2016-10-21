@@ -44,7 +44,6 @@ export class TasksPage {
 
     this.taskService = taskService;
 
-
     this.configService = configService;
     this.config = {};
 
@@ -99,9 +98,9 @@ export class TasksPage {
    * @param {event} task
    */
 
-  public activateTask(task: any): void {
-    console.log('Activate task:', task.tid);
-    this.config.taskActive = task.tid;
+  public activateTask(tid: string): void {
+    console.log('Activate task:', tid);
+    this.config.taskActive = tid;
     this.configService.update(this.config);
     console.log(this.config);
   }

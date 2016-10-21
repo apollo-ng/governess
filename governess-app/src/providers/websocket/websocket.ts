@@ -40,7 +40,7 @@ export class WebSocketService {
 
   // Setting this to true is the equivalent of setting all instances
   // of WebSocketService.debug to true
-  public static debugAll = true;
+  public static debugAll = false;
 
   // Set up the default 'noop' event handlers
   public onopen:(ev:Event) => void = function (event:Event) {};

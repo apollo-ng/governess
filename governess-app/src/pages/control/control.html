@@ -161,15 +161,15 @@
         </ion-row>
         <ion-row *ngIf="status.status === 'idle'">
           <ion-col style="padding-right: 3px;">
-
             <ion-select [(ngModel)]="config.taskActive"
+                        (ngModelChange)="triggerUpdate(config)"
                         class="rb-white"
                         placeholder="Select a Task"
                         [selectOptions]="{ title: 'EKA KF412 Tasks', subTitle: 'Please select a Task'}"
                         cancelText="Cancel"
                         okText="Select"
             >
-              <ion-option *ngFor="let task of tasks">{{task.name}}</ion-option>
+              <ion-option *ngFor="let task of tasks" value="{{task.tid}}">{{task.name}}</ion-option>
             </ion-select>
 
           </ion-col>

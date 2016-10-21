@@ -27,11 +27,11 @@
     <ion-item-sliding *ngFor="let task of tasks; let p = index">
       <div ion-item [ngClass]="{ active: task.tid === config.taskActive }">
         <ion-icon *ngIf="task.constraints && task.tid !== config.taskActive" item-left name="checkmark-circle-outline"
-          (click)="activateTask(task)"
+          (click)="activateTask(task.tid)"
           [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)'}">
         </ion-icon>
         <ion-icon *ngIf="task.constraints && task.tid === config.taskActive" item-left name="checkmark-circle"
-          (click)="activateTask(task)"
+          (click)="activateTask(task.tid)"
           [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)'}">
         </ion-icon>
         <ion-icon *ngIf="!task.constraints" item-left name="radio-button-off"
@@ -39,7 +39,6 @@
         </ion-icon>
         <div tappable (click)="goToTaskDetail(task)">
           <h2>{{task.name}}</h2>
-          <!--<p>Runtime: {{task.data[0].points[task.data[0].points?.length-1][0]}}</p>-->
           <p><ion-icon name="time" item-left [ngStyle]="{ 'margin': '0'}"> {{calculateRuntime(task)}}</ion-icon></p>
           <p><ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}"> {{task.created | date: 'yyyy-MM-dd HH:mm'}}</ion-icon></p>
         </div>

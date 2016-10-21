@@ -29,13 +29,13 @@ export class StatusService {
 
   //////////////////////////////////////////////////////////////////////
 
-  public telemetry(): Observable<any> {
+  public statusSocketRX(): Observable<any> {
 
     this.ws = new WebSocketService('ws://localhost:8765');
 
     // When a connection is made
     this.ws.onopen = function() {
-      console.log('Opened connection ');
+      console.log('statusSocketRX: Opened connection ');
       // send data to the server
       this.ws.send(JSON.stringify({ message: 'Hello ' }));
     }
@@ -50,6 +50,7 @@ export class StatusService {
       console.log(code, reason);
     }
 
+    // Map and return socket data as Obervable
     return Observable.create( observer => {
       this.ws.onmessage = (evt) => {
         observer.next(evt);
