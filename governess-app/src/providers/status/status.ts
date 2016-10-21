@@ -1,6 +1,6 @@
 import { Injectable }             from '@angular/core';
-import { Observable, Subject }    from 'rxjs/Rx';
-import { $WebSocket }             from '../websocket/websocket';
+import { Observable }             from 'rxjs/Rx';
+import { WebSocketService }       from '../websocket/websocket';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -16,66 +16,48 @@ import { $WebSocket }             from '../websocket/websocket';
 
 export class StatusService {
 
-  private ws: any;
+  public ws: any
   public status: any;
 
-/*  private readyStates: any = {
-          'CONNECTING': 0,
-          'OPEN': 1,
-          'CLOSING': 2,
-          'CLOSED': 3,
-          'RECONNECT_ABORTED': 4,
-  };
-*/
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
   ) {
-    this.connect();
+
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  public connect(): void {
-      this.ws = new $WebSocket('ws://localhost:8765');
-      this.ws.connect();
-      this.ws.send('Hello World');
-      this.ws.getDataStream().subscribe((result) => {
-        console.log('getDataStream result', result);
-        this.status = result;
-     //this.setInstanceProperties(result);
-      });
-/*
-      this.ws.onopen = (evt) => {
-        this.ws.send('Hello World');
-        console.log('StatusService Connection Opened');
-      };
-      this.ws.onclose = () => {
-        console.log('StatusService Connection Closed');
-      };
-      this.ws.onerror = (evt) => {
-        console.log('StatusService Connection Error: ' + evt);
-      };
-    } else {
-      console.log('StatusService WS already open');
+  public telemetry(): Observable<any> {
+
+    this.ws = new WebSocketService('ws://localhost:8765');
+
+    // When a connection is made
+    this.ws.onopen = function() {
+      console.log('Opened connection ');
+      // send data to the server
+      this.ws.send(JSON.stringify({ message: 'Hello ' }));
     }
-*/
-  }
 
-  public sendMessage(text: string): void {
-    this.ws.send(text);
-  }
+    // A connection could not be made
+    this.ws.onerror = function(event) {
+      console.log(event);
+    }
 
-  public socketData(): Observable<any> {
-    return Observable.fromEvent(this.ws.getDataStream(), 'message')
-      .map( res => res )
-      .share();
-  }
+    // A connection was closed
+    this.ws.onclose = function(code, reason) {
+      console.log(code, reason);
+    }
 
-  public disconnect(): void {
-    console.log('Closing Websocket...');
-    this.ws.close();
+    return Observable.create( observer => {
+      this.ws.onmessage = (evt) => {
+        observer.next(evt);
+      };
+    })
+    .map( res => res.data )
+    .share();
+
   }
 
 }

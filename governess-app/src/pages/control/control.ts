@@ -6,8 +6,8 @@ import { ActionSheetController,
          NavController }        from 'ionic-angular';
 
 import { ConfigService }        from '../../providers/config/config';
-import { TaskService }          from '../../providers/tasks/tasks';
 import { StatusService }        from '../../providers/status/status';
+import { TaskService }          from '../../providers/tasks/tasks';
 
 import { TaskDetailPage }       from '../tasks/task.detail';
 
@@ -26,58 +26,51 @@ import { TaskDetailPage }       from '../tasks/task.detail';
 
 export class ControlPage {
 
-  public navCtrl: NavController;
-  public modalCtrl: ModalController;
-
-  public configService: ConfigService;
   public config: any;
-
-  public taskService: TaskService;
   public tasks: any;
-
-  public statusService: StatusService;
   public status: any;
-  private statusSub: any;
+  public statusSub: any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    navCtrl: NavController,
-    modalCtrl: ModalController,
-    configService: ConfigService,
-    taskService: TaskService,
-    statusService: StatusService
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    public configService: ConfigService,
+    public taskService: TaskService,
+    public statusService: StatusService
 
   ) {
 
     this.navCtrl = navCtrl;
     this.modalCtrl = modalCtrl;
-
     this.configService = configService;
-    this.config = {};
-    //this.config = this.configService.get();
-
     this.taskService = taskService;
-    this.tasks = this.taskService.get();
-
     this.statusService = statusService;
+
+    this.config = {};
+
     this.status = {
-      status: 'offline',
-      temperature: '-',
-      temperature_major: '0',
-      temperature_minor: '0'
+      'status': 'offline',
+      'temperature': 25.0
     };
 
-    this.init().then(data => {
-      console.log('I seem to be needed to get the promise')
+    this.initConfig().then(data => {
+      this.taskService.pull();
+      this.tasks = this.taskService.tasks;
+      console.log(this.tasks);
+    });
+
+    this.statusService.telemetry().subscribe((result) => {
+      this.statusUpdate(result);
     });
 
   }
 
   //////////////////////////////////////////////////////////////////////
 
-  public init(): Promise<void> {
+  public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
       //console.log('settings ngoninit configdata', data);
       this.config = JSON.parse(data);
@@ -87,7 +80,9 @@ export class ControlPage {
 
   public ionViewWillEnter(): void {
     console.log('ControlPage ionViewWillEnter called');
-    this.statusSub = this.statusService.socketData().subscribe((result) => {
+
+/*
+    this.statusSub = this.statusService.onMessage().subscribe((result) => {
       this.status = JSON.parse(result.data);
 
       // Split Temperature and hack the ghost zero - wtf??
@@ -98,17 +93,19 @@ export class ControlPage {
       } else {
         this.status.temperature_minor = "0";
       }
-      //console.log('GIS:', this.status);
+      console.log('GIS:', this.status);
     });
+*/
   }
 
   public ionViewDidLoad(): void {
     console.log('ControlPage ionViewDidLoad called');
+
   }
 
   public ionViewWillLeave(): void {
     console.log('ControlPage ionViewWillLeave called');
-    this.statusSub.unsubscribe();
+    //this.statusSub.unsubscribe();
     //this.statusService.disconnect();
   }
 
@@ -116,6 +113,18 @@ export class ControlPage {
     let modal: any = this.modalCtrl.create(HelpModal);
     modal.present(modal);
   };
+
+public statusUpdate(data: any): void {
+  this.status = JSON.parse(data);
+  let temp: Array<any> = this.status.temperature.toString().split('.');
+  this.status.temperature_major = temp[0];
+  if (temp[1] > 1) {
+    this.status.temperature_minor = temp[1];
+  } else {
+    this.status.temperature_minor = "0";
+  }
+  console.log('final set to this.status:', this.status);
+}
 
   public lineChartData: Array<any> = [
     { data: [65, 59, 80, 81, 56, 55, 40],

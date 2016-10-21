@@ -4,8 +4,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      <h1 [ngClass]="{'title-reduced' : status.status === 'running' || status.status === 'paused'}">EKA KF412 {{status.status}}</h1>
-      <p *ngIf="status.status === 'running' || status.status === 'paused'">{{config.taskActive}}</p>
+      <h1 [ngClass]="{'title-reduced' : status?.status === 'running' || status?.status === 'paused'}">EKA KF412 {{status?.status}}</h1>
+      <p *ngIf="status?.status === 'running' || status?.status === 'paused'">{{config.taskActive}}</p>
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="openHelp()">
@@ -26,10 +26,10 @@
             </ion-col>
             <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px'}">
               <span class="value_major">
-              {{status.temperature_major}}.
+              {{status?.temperature_major}}.
             </span>
             <span class="value_minor">
-              {{status.temperature_minor}}
+              {{status?.temperature_minor}}
             </span>
             </ion-col>
             <ion-col width-10 class="unit">
@@ -46,10 +46,10 @@
             </ion-col>
             <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px'}">
               <span class="value_major">
-              {{status.temperature_major}}.
+              {{status?.temperature_major}}.
             </span>
             <span class="value_minor">
-              {{status.temperature_minor}}
+              {{status?.temperature_minor}}
             </span>
             </ion-col>
             <ion-col width-10 class="unit">
@@ -161,6 +161,7 @@
         </ion-row>
         <ion-row *ngIf="status.status === 'idle'">
           <ion-col style="padding-right: 3px;">
+
             <ion-select [(ngModel)]="config.taskActive"
                         class="rb-white"
                         placeholder="Select a Task"
@@ -170,14 +171,15 @@
             >
               <ion-option *ngFor="let task of tasks">{{task.name}}</ion-option>
             </ion-select>
+
           </ion-col>
           <ion-col width-10 class="icon-edit">
-            <button ion-button full [disabled]="!config.taskActive ? true : false" (click)="editTask()" class="rb-white">
+            <button ion-button full [disabled]="!config.taskActive" (click)="editTask()" class="rb-white">
               <ion-icon name="create"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20>
-            <button ion-button full [disabled]="!config.taskActive ? true : false" (click)="startTask()" class="rb-green">
+            <button ion-button full [disabled]="!config.taskActive" (click)="startTask()" class="rb-green">
               <ion-icon name="play"></ion-icon>
             </button>
           </ion-col>

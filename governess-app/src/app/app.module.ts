@@ -17,12 +17,11 @@ import { TaskDetailPage }         from '../pages/tasks/task.detail';
 import { SettingsHelp }           from '../pages/settings/settings.help';
 import { TasksHelp }              from '../pages/tasks/tasks.help';
 
-import { $WebSocket }             from '../providers/websocket/websocket';
+import { WebSocketService }       from '../providers/websocket/websocket';
 import { StorageService }         from '../providers/storage/storage';
 import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
 import { TaskService }            from '../providers/tasks/tasks';
-
 
 import { ChartsModule }           from 'ng2-charts/components/charts/charts';
 
@@ -60,11 +59,11 @@ import { ChartsModule }           from 'ng2-charts/components/charts/charts';
   ],
   providers: [
     Storage,
-    $WebSocket,
     StorageService,
     ConfigService,
     StatusService,
-    TaskService
+    TaskService,
+    WebSocketService,
   ]
 })
 

@@ -19,7 +19,7 @@ import { TasksPage }                from '../pages/tasks/tasks';
 import { TaskDetailPage }           from '../pages/tasks/task-detail';
 
 import { ConfigService }            from '../providers/config/config';
-import { AppConfigModel }           from '../providers/config/config.model';
+//import { AppConfigModel }           from '../providers/config/config.model';
 
 import { environment }              from '../environments/environment';
 

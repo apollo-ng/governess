@@ -23,23 +23,18 @@ import { TaskDetailPage }     from '../tasks/task.detail';
 
 export class TasksPage {
 
-  public navCtrl: NavController;
-  public alertCtrl: AlertController;
-  public modalCtrl: ModalController;
-  public taskService: TaskService;
   public tasks: any;
-  public configService: ConfigService;
   public config: any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    navCtrl: NavController,
-    alertCtrl: AlertController,
-    modalCtrl: ModalController,
-    taskService: TaskService,
-    configService: ConfigService
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public taskService: TaskService,
+    public configService: ConfigService
 
   ) {
 
