@@ -18,13 +18,15 @@ export class StatusService {
 
   public ws: any
   public status: any;
+  public online: boolean;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
   ) {
-
+    this.status = {};
+    this.online = false;
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -38,16 +40,19 @@ export class StatusService {
       console.log('statusSocketRX: Opened connection ');
       // send data to the server
       this.ws.send(JSON.stringify({ message: 'Hello ' }));
+      this.online = true;
     }
 
     // A connection could not be made
     this.ws.onerror = function(event) {
       //console.log(event);
+      this.online = false;
     }
 
     // A connection was closed
     this.ws.onclose = function(code, reason) {
       //console.log(code, reason);
+      this.online = false;
     }
 
     // Map and return socket data as Obervable
@@ -58,7 +63,11 @@ export class StatusService {
     })
     .map( res => res.data )
     .share();
+  }
 
+  public onlineCheck(): boolean {
+    console.log('onlinecheck fired');
+    return this.online;
   }
 
 }

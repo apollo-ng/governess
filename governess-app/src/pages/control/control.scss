@@ -8,18 +8,6 @@ control-page {
     border-top: 1px solid #444;
   }
 
-  .control-splitbar {
-    height: 5px;
-    line-height: 1px;
-    background-color: #282723;
-    border-bottom: 1px solid #0f0e0a;
-    border-top: 1px solid #3f3e3a;
-    cursor: row-resize;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-  }
-
   .title-reduced {
     font-size: 1.2rem;
   }
@@ -205,6 +193,7 @@ ion-grid.control-actions {
     max-width: initial;
     height: 35px;
     margin-left: 2px;
+    margin-right: 0;
   }
 
   .select-placeholder, .select-icon, .select-icon-inner {
@@ -218,6 +207,10 @@ ion-grid.control-actions {
   button {
     margin: 0;
     height: 35px;
+
+    ion-icon {
+      font-size: 1.5em;
+    }
   }
 
   .progress-status {

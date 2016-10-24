@@ -9,6 +9,9 @@ import { Platform,
 import { Splashscreen,
          StatusBar }                from 'ionic-native';
 
+import { environment }              from '../environments/environment';
+import { ConfigService }            from '../providers/config/config';
+
 import { AboutPage }                from '../pages/about/about';
 import { AppliancePage }            from '../pages/appliance/appliance';
 import { ControlPage }              from '../pages/control/control';
@@ -16,14 +19,8 @@ import { HelpPage }                 from '../pages/help/help';
 import { LogsPage }                 from '../pages/logs/logs';
 import { SettingsPage }             from '../pages/settings/settings';
 import { TasksPage }                from '../pages/tasks/tasks';
-import { TaskDetailPage }           from '../pages/tasks/task-detail';
 
-import { ConfigService }            from '../providers/config/config';
-//import { AppConfigModel }           from '../providers/config/config.model';
-
-import { environment }              from '../environments/environment';
-
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
 export interface PageObj {
   title: string;
@@ -32,23 +29,22 @@ export interface PageObj {
   icon: string;
 }
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
 @Component({
   templateUrl: 'app.html'
 })
 
-////////////////////////////////////////////////////////////////////////
-//
-//
+/*******************************************************************************
+ *
+ *     GovernessApp
+ */
 
 export class GovernessApp implements OnInit {
 
   @ViewChild(Nav) nav: Nav;
 
   public config:          any;
-  public platform:        Platform;
-  public configService:   ConfigService;
   public rootPage:        any;
 
   // Populate the side menu
@@ -62,63 +58,64 @@ export class GovernessApp implements OnInit {
     { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
   ];
 
-  //////////////////////////////////////////////////////////////////////
+  /****************************************************************************/
 
   constructor(
-    platform:               Platform,
-    configService:          ConfigService
+
+    public platform:               Platform,
+    public configService:          ConfigService
+
   ) {
 
-    this.platform =         platform;
-    this.configService =    configService;
     this.config = {};
-
     this.initializeApp();
 
   }
 
-  //////////////////////////////////////////////////////////////////////
+  /*****************************************************************************
+  * ngOnInit
+  */
 
   public ngOnInit(): void {
     //console.log('App ngOnInit');
-    StatusBar.styleDefault();
-
     this.configService.init().then((data) => {
-      //console.log('ngoninit configdata', data);
       this.config = data;
-    // Define which page the app should show by default
-    if (this.config.viewPref === 'last') {
+      // Define which page the app should show by default
+      if (this.config.viewPref === 'last') {
 
-      if (this.config.lastView) {
+        if (this.config.lastView) {
 
-        // Set last viewed page, if not null
-        this.rootPage = this.pages.filter (
-          page => page.title.includes(this.config.lastView)
-        )[0].component;
+          // Set last viewed page, if not null
+          this.rootPage = this.pages.filter (
+            page => page.title.includes(this.config.lastView)
+          )[0].component;
+
+        } else {
+
+          // Fallback to ControlPage
+          this.rootPage = this.pages.filter (
+            page => page.title.includes('Control')
+          )[0].component;
+        }
 
       } else {
 
-        // Fallback to ControlPage
-        this.rootPage = this.pages.filter (
-          page => page.title.includes('Control')
+        // Set selected value from config
+        this.rootPage = this.pages.filter(
+          page => page.title.includes(this.config.viewPref)
         )[0].component;
+
       }
-
-    } else {
-
-      // Set selected value from config
-      this.rootPage = this.pages.filter(
-        page => page.title.includes(this.config.viewPref)
-      )[0].component;
-
-    }
-});
+    });
   }
 
-  //////////////////////////////////////////////////////////////////////
+  /*****************************************************************************
+  * initializeApp
+  */
 
   private initializeApp(): void {
     this.platform.ready().then(() => {
+      StatusBar.styleDefault();
       //console.log('initializeApp called');
       //console.log('environment ', environment);
       // Okay, so the platform is ready and our plugins are available.
@@ -126,7 +123,10 @@ export class GovernessApp implements OnInit {
     });
   }
 
-  //////////////////////////////////////////////////////////////////////
+  /*****************************************************************************
+  * openPage
+  * @param {Page Object}
+  */
 
   public openPage(page: any): void {
     // Store as lastView in config, if enabled

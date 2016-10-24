@@ -1,39 +1,43 @@
 import { Injectable }             from '@angular/core';
 import { UUID }                   from 'angular2-uuid';
 import { StorageService }         from '../storage/storage';
-import { AppConfigModel }         from './config.model';
 import { AppConfigMock }          from './config.mock';
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
 @Injectable (
 
 )
 
-////////////////////////////////////////////////////////////////////////
-//
-//
+/*******************************************************************************
+ *
+ *     ConfigService
+ */
 
 export class ConfigService {
 
-  public storage: StorageService;
   public config:  any;
 
-  //////////////////////////////////////////////////////////////////////
+  /****************************************************************************/
 
   constructor(
-    storage: StorageService
+
+    public storage: StorageService
+
   ) {
 
-    //console.log('ConfigService Provider is being constructed');
-    this.storage = storage;
     this.init().then(data => {
       //console.log('All promises returned', data)
-      //this.config = data;
     });
   }
+
+  /*****************************************************************************
+  * init
+  *
+  * @return Promise
+  */
 
   public init(): Promise<{}> {
     console.log('Initializing Storage');
@@ -51,12 +55,25 @@ export class ConfigService {
     });
   }
 
+  /*****************************************************************************
+  * get
+  *
+  * @return Promise
+  */
+
   public get(): Promise<{}> {
     return this.storage.get('config')
   }
 
+  /*****************************************************************************
+  * update
+  *
+  * @param {config object}
+  */
+
   public update(config: Object): void {
     console.log('Updating config...');
+    this.config = config;
     this.storage.set('config', JSON.stringify(config));
   }
 

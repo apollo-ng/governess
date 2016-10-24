@@ -21,7 +21,7 @@ export class WebSocketService {
   // Max Time in ms to wait before attempting to reconnect (after a close)
   public reconnectMaxInterval: number = 30000;
   // Time in ms to wait for WebSocket to open (before aborting and retrying)
-  public timeoutInterval: number = 2000;
+  public timeoutInterval: number = 1000;
 
   // Should only be used to read WebSocket readyState
   public readyState: number;
@@ -37,7 +37,7 @@ export class WebSocketService {
   // The underlying WebSocket
   private ws: WebSocket;
   private url: string;
-  private reconnectAttemptCount: number;
+  private reconnectAttempt: number;
 
   // Setting this to true is the equivalent of setting all instances
   // of WebSocketService.debug to true
@@ -62,7 +62,7 @@ export class WebSocketService {
     this.url = url;
     this.protocols = protocols;
     this.readyState = WebSocket.CONNECTING;
-    this.reconnectAttemptCount = 0;
+    this.reconnectAttempt = 0;
     this.connect(false);
 
   }
@@ -70,12 +70,12 @@ export class WebSocketService {
   /*****************************************************************************
   * connect - the main magic
   *
-  * @param {reconnectAttempt} boolean
+  * @param {autoReconnect} boolean
   */
 
-  public connect(reconnectAttempt: boolean) {
-    this.ws = new WebSocket(this.url, this.protocols);
+  public connect(autoReconnect: boolean) {
 
+    this.ws = new WebSocket(this.url, this.protocols);
     this.onconnecting();
     this.log('WebSocketService', 'attempt-connect', this.url);
 
@@ -92,8 +92,8 @@ export class WebSocketService {
       clearTimeout(timeout);
       this.log('WebSocketService', 'onopen', this.url);
       this.readyState = WebSocket.OPEN;
-      reconnectAttempt = false;
-      this.reconnectAttemptCount = 0;
+      autoReconnect = false;
+      this.reconnectAttempt = 0;
       this.onopen(event);
     };
 
@@ -107,15 +107,14 @@ export class WebSocketService {
       } else {
         this.readyState = WebSocket.CONNECTING;
         this.onconnecting();
-        if (!reconnectAttempt && !this.timedOut) {
+        if (!autoReconnect && !this.timedOut) {
           this.log('WebSocketService', 'onclose', this.url);
           this.onclose(event);
         }
-        this.reconnectAttemptCount++
-        this.log('WebSocketService', 'recon try #', this.reconnectAttemptCount);
-        let interval: number = Math.floor(
-          ( Math.random() * ((2^this.reconnectAttemptCount) - 1 ) + 1) * 1000
-        );
+        this.reconnectAttempt++
+        //let interval: number = this.exponentialBackoff(this.reconnectAttempt, 250);
+        let interval: number = this.fibonacciBackoff(this.reconnectAttempt, 250);
+        this.log('WebSocketService', 'recon try #', this.reconnectAttempt);
         this.log('WebSocketService', 'new interval', interval);
         setTimeout(() => {
           this.connect(true);
@@ -194,4 +193,44 @@ export class WebSocketService {
       console.debug.apply(console, args);
     }
   }
+
+  /*****************************************************************************
+  *  exponentialBackoff algo to play with and test
+
+
+  private exponentialBackoff(attempt: number, delay: number): number {
+    let res = Math.floor(Math.random() * Math.pow(2, attempt) * delay);
+    if (res < this.reconnectMaxInterval) {
+      return res;
+    } else {
+      this.reconnectAttempt--;
+      return this.reconnectMaxInterval
+    }
+  }
+  */
+  
+  /*****************************************************************************
+  *  fibonacciBackoff algo to play with and test
+  */
+
+  private fibonacciBackoff(attempt: number, delay: number): number {
+    let act: number = 1;
+    if (attempt > act) {
+      let prev: number = 1;
+      act = 2;
+      for (let i=2; i < attempt; i++) {
+        let next = prev + act;
+        prev = act;
+        act = next;
+      }
+    }
+    let res = Math.floor(Math.random() * act * delay);
+    if (res < this.reconnectMaxInterval) {
+      return res;
+    } else {
+      this.reconnectAttempt--;
+      return Math.floor(Math.random() * (this.reconnectMaxInterval - 1000 + 1)) + 1000;
+    }
+  }
+
 }

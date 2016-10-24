@@ -14,7 +14,7 @@ import { SettingsPage }           from '../pages/settings/settings';
 import { TasksPage }              from '../pages/tasks/tasks';
 import { TaskDetailPage }         from '../pages/tasks/task.detail';
 
-import { ControlHelp }           from '../pages/control/control.help';
+import { ControlHelp }            from '../pages/control/control.help';
 import { SettingsHelp }           from '../pages/settings/settings.help';
 import { TasksHelp }              from '../pages/tasks/tasks.help';
 
@@ -25,6 +25,8 @@ import { StatusService }          from '../providers/status/status';
 import { TaskService }            from '../providers/tasks/tasks';
 
 import { ChartsModule }           from 'ng2-charts/components/charts/charts';
+
+import { TimeformatSelector }     from '../components/timeformat-selector';
 
 @NgModule({
   declarations: [
@@ -40,10 +42,14 @@ import { ChartsModule }           from 'ng2-charts/components/charts/charts';
     TasksPage,
     TasksHelp,
     TaskDetailPage,
+    TimeformatSelector,
   ],
   imports: [
     ChartsModule,
     IonicModule.forRoot(GovernessApp)
+  ],
+  exports: [
+    TimeformatSelector
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -59,6 +65,7 @@ import { ChartsModule }           from 'ng2-charts/components/charts/charts';
     TasksPage,
     TasksHelp,
     TaskDetailPage,
+    TimeformatSelector,
   ],
   providers: [
     Storage,

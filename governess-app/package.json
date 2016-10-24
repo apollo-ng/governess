@@ -18,14 +18,13 @@
   "scripts": {
     "build": "ionic-app-scripts build",
     "watch": "ionic-app-scripts watch",
-    "postinstall": "ionic state restore",
+    "postinstall": "ionic state restore && webdriver-manager update",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build",
     "start": "ionic serve",
-    "postinstall": "ionic state restore && webdriver-manager update",
     "test": "ng test",
     "e2e": "gulp --gulpfile test/gulpfile.ts --cwd ./ build-e2e && protractor test/protractor.conf.js",
     "electron": "electron .",
@@ -52,10 +51,12 @@
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^0.0.36",
+    "@ionic/app-scripts": "0.0.36",
     "@types/jasmine": "^2.2.30",
     "angular-cli": "1.0.0-beta.17",
     "codelyzer": "~0.0.26",
+    "electron": "1.3.3",
+    "electron-packager": "7.6.0",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
@@ -69,9 +70,7 @@
     "ts-node": "1.3.0",
     "tslint": "3.15.1",
     "tslint-eslint-rules": "1.5.0",
-    "typescript": "2.0.3",
-    "electron-packager": "7.6.0",
-    "electron": "1.3.3"
+    "typescript": "2.0.3"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

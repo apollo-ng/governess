@@ -3,9 +3,12 @@
     <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
+    <ion-title *ngIf="statusService.onlineCheck">
       <h1 [ngClass]="{'title-reduced' : status?.status === 'running' || status?.status === 'paused'}">EKA KF412 {{status?.status}}</h1>
-      <p *ngIf="status?.status === 'running' || status?.status === 'paused'">{{config.taskActive}}</p>
+      <p *ngIf="statusService?.status === 'running' || status?.status === 'paused'">{{config.taskActive}}</p>
+    </ion-title>
+    <ion-title *ngIf="!statusService.onlineCheck">
+      <h1>EKA KF412 (offline)</h1>
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="openHelp()">
@@ -14,7 +17,7 @@
     </ion-buttons>
   </ion-navbar>
 
-  <div class="control-splitbar"></div>
+  <div class="ui-splitbar"></div>
 
   <ion-grid dark class="control-display">
     <ion-row>
@@ -64,8 +67,8 @@
       <ion-col width-10 class="icon-led">
         <ion-icon name="snow"></ion-icon>
       </ion-col>
-      <ion-col width-10 class="icon-led" [ngStyle]="{'border-color': 'rgb(109, 128, 6)'}">
-        <ion-icon name="nuclear" [ngStyle]="{'color': 'rgb(109, 128, 6)', 'text-shadow': '0px 0px 25px rgba(109, 128, 6, 0.5), 0px 0px 25px rgba(109, 128, 6, 0.5)'}"></ion-icon>
+      <ion-col width-10 class="icon-led" [ngStyle]="{'border-color': 'rgb(144, 73, 249)'}">
+        <ion-icon name="nuclear" [ngStyle]="{'color': 'rgb(144, 73, 249)', 'text-shadow': '0px 0px 25px rgba(109, 128, 6, 0.5), 0px 0px 25px rgba(109, 128, 6, 0.5)'}"></ion-icon>
       </ion-col>
       <ion-col width-10 class="icon-led">
         <ion-icon name="exit"></ion-icon>
@@ -73,7 +76,7 @@
     </ion-row>
   </ion-grid>
 
-  <div class="control-splitbar"></div>
+  <div class="ui-splitbar"></div>
 
 </ion-header>
 
@@ -93,7 +96,7 @@
           (chartClick)="chartClicked()">
         </canvas>
       </div>
-      <div class="control-splitbar"></div>
+      <div class="ui-splitbar"></div>
       <ion-list style="height: 40%">
         <ion-item>
           <ion-label>Temperature</ion-label>
@@ -130,7 +133,7 @@
           <p>Please select a Task to run</p>
         </div>
       </div>
-      <div class="control-splitbar"></div>
+      <div class="ui-splitbar"></div>
       <ion-grid dark class="control-actions">
         <ion-row *ngIf="status.status === 'running' || status.status === 'paused'">
           <ion-col width-25 class="progress-status">
@@ -163,7 +166,7 @@
           <ion-col style="padding-right: 3px;">
             <ion-select [(ngModel)]="config.taskActive"
                         (ngModelChange)="triggerUpdate(config)"
-                        class="rb-white"
+                        class="rb-glass"
                         placeholder="Select a Task"
                         [selectOptions]="{ title: 'EKA KF412 Tasks', subTitle: 'Please select a Task'}"
                         cancelText="Cancel"
@@ -196,7 +199,7 @@
 </ion-content>
 
 <ion-footer>
-  <div class="control-splitbar"></div>
+  <div class="ui-splitbar"></div>
   <ion-toolbar position="bottom" dark class="control-bottombar">
     <ion-segment [(ngModel)]="config.ctrlMode">
       <ion-segment-button value="cam" (ionSelect)="setMode('hud')">

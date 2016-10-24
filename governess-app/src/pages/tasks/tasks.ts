@@ -71,7 +71,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * initTasks - Create Task List Search Functionality
+   * initTasks
    * @param {event} task
    */
 
@@ -84,8 +84,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * openHelp - Create Task List Search Functionality
-   * @param {event} task
+   * openHelp
    */
 
   public openHelp(): void {
@@ -94,7 +93,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * activateTask - Create Task List Search Functionality
+   * activateTask
    * @param {event} task
    */
 
@@ -106,7 +105,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * addTask - Create Task List Search Functionality
+   * addTask
    * @param {event} task
    */
 
@@ -115,7 +114,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * goToTaskDetail - Create Task List Search Functionality
+   * goToTaskDetail
    * @param {event} task
    */
 
@@ -125,7 +124,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * copyTask - Create Task List Search Functionality
+   * copyTask
    * @param {event} task
    */
 
@@ -136,7 +135,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * removeTask - Create Task List Search Functionality
+   * removeTask
    * @param {event} task
    */
 
@@ -162,7 +161,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * reorderTasks - Create Task List Search Functionality
+   * reorderTasks
    * @param {event} task
    */
 
@@ -172,7 +171,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * searchInput - Create Task List Search Functionality
+   * searchInput
    * @param {event} task
    */
 

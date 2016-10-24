@@ -92,10 +92,12 @@ ion-content {
   background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%);
 }
 
+/*
 ion-list .item .item-inner {
   border-bottom: 1px solid #484544;
   margin-left: 20px;
 }
+*/
 
 ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
     border-top: 1px solid #4f4e4a;
@@ -234,21 +236,20 @@ ion-navbar ion-buttons[end] {
 }
 
 .rb-green {
-  color: #fafafa;
-  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4);
-  box-shadow: inset 0 0 24px 0 #606f11, 0 0 8px 0 #9db134;
-  border: 1px solid rgb(121, 144, 55);
-  background: #7eaa0f;
-  background: -webkit-radial-gradient(center, ellipse cover, #7eaa0f 0%, #6d8006 100%);
-  background: -webkit-radial-gradient(center ellipse, #7eaa0f 0%, #6d8006 100%);
-  background: radial-gradient(ellipse at center, #7eaa0f 0%, #6d8006 100%);
+  color: #fafafa !important;
+  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4) !important;
+  box-shadow: inset 0 0 24px 0 #606f11, 0 0 3px 0 #9db134 !important;
+  border: 1px solid rgb(121, 144, 55) !important;
+  background: #7eaa0f !important;
+  background: -webkit-radial-gradient(center, ellipse cover, #7eaa0f 0%, #6d8006 100%) !important;
+  background: -webkit-radial-gradient(center ellipse, #7eaa0f 0%, #6d8006 100%) !important;
+  background: radial-gradient(ellipse at center, #7eaa0f 0%, #6d8006 100%) !important;
 }
 
-
 button[disabled].rb-green {
-    color: #c5dc80;
-    box-shadow: none;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    color: #c5dc80 !important;
+    box-shadow: none !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) !important;
 }
 
 .rb-green-pulse {
@@ -261,57 +262,57 @@ button[disabled].rb-green {
   animation-name: pulse-green;
   animation-duration: 2s;
   animation-iteration-count: infinite;
-  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4);
+  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4) !important;
 }
 
 // Red
 
 .rb-red {
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4);
-  box-shadow: inset 0 0 14px 0 #82290e, 0 0 8px 0 #db4213;
-  border: 1px solid #b73813;
-  background: #db4213;
-  background: -moz-radial-gradient(center, ellipse cover, #db4213 0%, #c93612 100%);
-  background: -webkit-radial-gradient(center, ellipse cover, #db4213 0%,#c93612 100%);
-  background: radial-gradient(ellipse at center, #db4213 0%,#c93612 100%);
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4) !important;
+  box-shadow: inset 0 0 14px 0 #82290e, 0 0 3px 0 #db4213 !important;
+  border: 1px solid #b73813 !important;
+  background: #db4213 !important;
+  background: -moz-radial-gradient(center, ellipse cover, #db4213 0%, #c93612 100%) !important;
+  background: -webkit-radial-gradient(center, ellipse cover, #db4213 0%,#c93612 100%) !important;
+  background: radial-gradient(ellipse at center, #db4213 0%,#c93612 100%) !important;
 }
 
 .rb-red.activated {
-  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 20px 0 #db4213;
-  border: 1px solid #cc2413;
+  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 20px 0 #db4213 !important;
+  border: 1px solid #cc2413 !important;
 }
 
 .rb-yellow {
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4);
-  box-shadow: inset 0 0 14px 0 #db4213, 0 0 8px 0 #db6113;
-  border: 1px solid rgba(255, 129, 92, 0.65);
-  background: #dbb013;
-  background: -moz-radial-gradient(center, ellipse cover, #dbb013 0%, #c69611 100%);
-  background: -webkit-radial-gradient(center, ellipse cover, #dbb013 0%,#c69611 100%);
-  background: radial-gradient(ellipse at center, #dbb013 0%,#c69611 100%);
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(65, 65, 65, 0.4) !important;
+  box-shadow: inset 0 0 14px 0 #db4213, 0 0 3px 0 #db6113 !important;
+  border: 1px solid rgba(255, 129, 92, 0.65) !important;
+  background: #dbb013 !important;
+  background: -moz-radial-gradient(center, ellipse cover, #dbb013 0%, #c69611 100%) !important;
+  background: -webkit-radial-gradient(center, ellipse cover, #dbb013 0%,#c69611 100%) !important;
+  background: radial-gradient(ellipse at center, #dbb013 0%,#c69611 100%) !important;
 }
 
 .rb-yellow.activated {
-  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 26px 0 #db6113;
-  border: 1px solid rgba(255, 129, 92, 0.85);
+  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 26px 0 #db6113 !important;
+  border: 1px solid rgba(255, 129, 92, 0.85) !important;
 }
 
 .rb-white {
-  color: #24231e;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 0 24px 0 rgba(62, 62, 62, 0.77), 0 0 8px 0 rgba(236, 232, 219, 0.75);
-  border: 1px solid #969696;
-  background: #dbb013;
-  background: -webkit-radial-gradient(center, ellipse cover, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
-  background: -webkit-radial-gradient(center ellipse, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
-  background: radial-gradient(ellipse at center, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%);
+  color: #24231e !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+  box-shadow: inset 0 0 24px 0 rgba(62, 62, 62, 0.77), 0 0 4px 0 rgba(236, 232, 219, 0.75);
+  border: 1px solid #969696 !important;
+  background: #dbb013 !important;
+  background: -webkit-radial-gradient(center, ellipse cover, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%) !important;
+  background: -webkit-radial-gradient(center ellipse, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%) !important;
+  background: radial-gradient(ellipse at center, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%) !important;
 }
 
-.rb-white.activated {
-  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 16px 0 rgba(236, 232, 219, 0.75);
-  border: 1px solid #e9e1e1;
+button.rb-white.activated {
+  box-shadow: inset 0 0 14px 0 rgba(62, 62, 62, 0.77), 0 0 16px 0 rgba(236, 232, 219, 0.75) !important;
+  border: 1px solid #e9e1e1 !important;
 }
 
 button[disabled].rb-white {
@@ -320,13 +321,48 @@ button[disabled].rb-white {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-.rb-glass {
+button.rb-glass {
   color: #d8d3c5;
   font-size: 1.5rem;
   text-shadow: 0 1px 1px #000;
-  box-shadow: inset 0 0 14px 0 #3f3e3a, 0 0 8px 0 rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #2f2e2a;
+  border-width: 1px;
+  border-radius: 0;
+  border-style: solid;
+  border-color: #44433f;
+  border-bottom-color: #3a3935;
+  box-shadow: inset 0 0 24px 0 rgb(47, 46, 44), 0 0 3px 0 #000000;
+  background: -webkit-linear-gradient(top, rgb(73, 71, 68) 0%, rgb(47, 46, 44) 100%) !important;
+  background: linear-gradient(to bottom, rgb(73, 71, 68) 0%, rgb(47, 46, 44) 100%) !important;
+}
+
+button.rb-glass.activated {
+  box-shadow: inset 0 0 2px 0 rgba(62, 62, 62, 0.77), 0 0 2px 0 rgba(236, 232, 219, 0.5) !important;
+  border-color: #6f6e6a !important;
+}
+
+button.rb-glass.active {
+  background: #2f2e2a !important;
+  border-color: #e9e1e1 !important;
+  color: #3f3e3a;
+  text-shadow: 0 1px 1px #d8d3c5;
+  box-shadow: inset 0 0 24px 0 rgba(62, 62, 62, 0.77), 0 0 3px 0 rgba(236, 232, 219, 0.75);
+  border: 1px solid #969696 !important;
+  background: #dbb013 !important;
+  background: -webkit-radial-gradient(center, ellipse cover, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%) !important;
+  background: -webkit-radial-gradient(center ellipse, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%) !important;
+  background: radial-gradient(ellipse at center, rgb(224, 219, 207) 0%, rgba(224, 219, 204, 0.7) 100%) !important;
+}
+
+.ui-splitbar {
+  height: 5px;
+  line-height: 1px;
+  background-color: #282723;
+  border-bottom: 1px solid #0f0e0a;
+  border-top: 1px solid #3f3e3a;
+  cursor: row-resize;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-wrapper {

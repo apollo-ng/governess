@@ -1,12 +1,13 @@
-import { Component, Input }         from '@angular/core';
-import { NgClass }                  from '@angular/common';
+import { Component }                from '@angular/core';
 import { NavParams,
          NavController,
-         ViewController,
+//         ViewController,
          AlertController,
          ModalController,
+         PopoverController,
          ActionSheetController }    from 'ionic-angular';
 import { TaskService }              from '../../providers/tasks/tasks';
+import { TimeformatSelector }       from '../../components/timeformat-selector';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -19,13 +20,6 @@ import { TaskService }              from '../../providers/tasks/tasks';
 
 export class TaskDetailPage {
 
-  public navCtrl: NavController;
-  public alertCtrl: AlertController;
-  public modalCtrl: ModalController;
-  public actionSheetCtrl: ActionSheetController;
-  public navParams: NavParams;
-  public taskService: TaskService;
-
   public task: any;
   public data: any;
   public chartHeight: number;
@@ -36,25 +30,20 @@ export class TaskDetailPage {
 
   constructor(
 
-    alertCtrl: AlertController,
-    modalCtrl: ModalController,
-    navCtrl: NavController,
-    actionSheetCtrl: ActionSheetController,
-    navParams: NavParams,
-    taskService: TaskService
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public navCtrl: NavController,
+    public popoverCtrl: PopoverController,
+    public actionSheetCtrl: ActionSheetController,
+    public navParams: NavParams,
+    public taskService: TaskService
 
   ) {
 
-    this.navCtrl = navCtrl;
-    this.navParams = navParams;
-    this.alertCtrl = alertCtrl;
-    this.modalCtrl = modalCtrl;
-    this.actionSheetCtrl = actionSheetCtrl;
-    this.taskService = taskService;
     this.task = this.navParams.data;
     this.data = this.task.data;
     this.moduleView = 0;
-    this.chartHeight = 200;
+    this.chartHeight = 250;
     this.lineChartData = [{ data: [], label: 'Data' }];
     this.updateChart();
     // console.log(this.task);
@@ -71,7 +60,7 @@ export class TaskDetailPage {
           type: 'time',
           time: {
             unit: 'second',
-            unitStepSize: 15,
+            unitStepSize: 30,
             displayFormats: {
               second: 'HH:mm:ss',
             },
@@ -154,35 +143,35 @@ export class TaskDetailPage {
     // Update the view parameters
     let _lineChartColours: Array<any> = new Array();
     for (let i: number = 0; i < this.data.length; i++) {
-      _lineChartColours[i] = {
-        backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
-        borderColor: this.data[i].options.color,
-        borderWidth: this.data[i].options.strokeWidth,
-        pointRadius: this.data[i].options.pointRadius,
-        pointBorderWidth: this.data[i].options.pointBorderWidth,
-        pointBackgroundColor: '#fff',
-        pointBorderColor: this.data[i].options.color,
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-      };
+        _lineChartColours[i] = {
+          backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
+          borderColor: this.data[i].options.color,
+          borderWidth: this.data[i].options.strokeWidth,
+          pointRadius: this.data[i].options.pointRadius,
+          pointBorderWidth: this.data[i].options.pointBorderWidth,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: this.data[i].options.color,
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+        };
     }
 
     // Update the datapoints (y axis)
     let _lineChartData: Array<any> = new Array();
     for (let i: number = 0; i < this.data.length; i++) {
-      _lineChartData[i] = {
-        data: new Array(this.data[i].points.length),
-        label: this.data[i].control,
-        lineTension: 0,
-        yAxisID: this.data[i].options.yAxisID,
-        fill: this.data[i].options.fill,
-      };
-      for (let j: number = 0; j < this.data[i].points.length; j++) {
-        _lineChartData[i].data[j] = {
-          'x': new Date(this.data[i].points[j][0] * 1000).toISOString(),
-          'y': this.data[i].points[j][1],
+        _lineChartData[i] = {
+          data: new Array(this.data[i].points.length),
+          label: this.data[i].control,
+          lineTension: 0,
+          yAxisID: this.data[i].options.yAxisID,
+          fill: this.data[i].options.fill,
         };
-      }
+        for (let j: number = 0; j < this.data[i].points.length; j++) {
+          _lineChartData[i].data[j] = {
+            'x': new Date(this.data[i].points[j][0] * 1000).toISOString(),
+            'y': this.data[i].points[j][1],
+          };
+        }
     }
     this.lineChartData = _lineChartData;
     this.lineChartColours = _lineChartColours;
@@ -217,22 +206,28 @@ export class TaskDetailPage {
           text: 'Clone',
           icon: 'copy',
           handler: () => {
-           console.log('Clone clicked');
+           console.log('FIXME: Clone clicked');
           }
         },
         {
           text: 'Delete',
           icon: 'trash',
           handler: () => {
-           console.log('Delete clicked');
-           this.removeTask(this.task,'fo');
+           console.log('FIXME: Delete clicked');
+          }
+        },
+        {
+          text: 'Help',
+          icon: 'buoy',
+          handler: () => {
+           console.log('FIXME: Help clicked');
           }
         },
         {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-           console.log('Cancel clicked');
+           console.log('FIXME: Cancel clicked');
           }
         }
       ]
@@ -313,6 +308,13 @@ export class TaskDetailPage {
       ],
     });
     confirm.present();
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(TimeformatSelector);
+    popover.present({
+      ev: myEvent
+    });
   }
 
 }

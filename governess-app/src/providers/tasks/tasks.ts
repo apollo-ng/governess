@@ -1,55 +1,46 @@
 import { Injectable }             from '@angular/core';
 import { UUID }                   from 'angular2-uuid';
 import { StorageService }         from '../storage/storage';
-import { TaskModel }              from './task.model';
 import { TaskMock }               from './task.mock';
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
 @Injectable (
 
 )
 
-////////////////////////////////////////////////////////////////////////
-//
-//
+/*******************************************************************************
+ *
+ *     TaskService
+ */
 
 export class TaskService {
 
-  public storage: StorageService;
   public tasks: any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
-    storage: StorageService
+
+    public storage: StorageService
+
   ) {
 
-    this.storage = storage;
     this.tasks = [];
     this.init().then(data => {
       //console.log('All promises returned', data)
       this.tasks = data;
     });
 
-
-    /*let tasks: string = localStorage.getItem('tasks');
-
-    if (!tasks) {
-      console.log('No tasks in DB - Initiate from TASKMODEL', TaskMock);
-      localStorage.setItem('tasks', JSON.stringify(TaskMock));
-      this.tasks = TaskMock;
-    } else {
-      console.log('Returning user - Load tasks from DB', tasks);
-      this.tasks = JSON.parse(tasks);
-    }
-*/
   }
 
-  //////////////////////////////////////////////////////////////////////
-
+  /*****************************************************************************
+  * init
+  *
+  * @return {Tasks} Object Promise
+  */
 
   public init(): Promise<{}> {
     console.log('Initializing Task Service');
@@ -58,9 +49,11 @@ export class TaskService {
       if (!data) {
         console.log('Got NO Storage Data - creating from Mock:');
         let initTask: any = TaskMock;
-        this.storage.set('tasks', JSON.stringify(TaskMock));
-        this.tasks = TaskMock;
-        return TaskMock;
+        initTask.id = UUID.UUID();
+        initTask.created = Math.round(new Date().getTime());
+        this.storage.set('tasks', JSON.stringify(initTask));
+        this.tasks = initTask;
+        return initTask;
       }
       //console.log('Got Storage Data:', data);
       this.tasks = JSON.parse(data);
@@ -68,15 +61,33 @@ export class TaskService {
     });
   }
 
+  /*****************************************************************************
+  * get
+  *
+  * @return {Tasks} Object Promise
+  */
+
   public get(): Promise<{}> {
     return this.storage.get('tasks')
   }
+
+  /*****************************************************************************
+  * pull
+  *
+  * @return {Tasks} Object Promise
+  */
 
   public pull(): any {
     this.get().then((data: string) => {
       this.tasks = JSON.parse(data);
     });
   }
+
+  /*****************************************************************************
+  * copy
+  *
+  * @param {id}
+  */
 
   public copy(index: number): void {
     console.log('copy called to clone', this.tasks);
@@ -89,22 +100,46 @@ export class TaskService {
     this.update(this.tasks);
   }
 
+  /*****************************************************************************
+  * delete
+  *
+  * @param {id}
+  */
+
   public delete(index: number): void {
     this.tasks.splice(index, 1);
     this.update(this.tasks);
   }
 
+  /*****************************************************************************
+  * update
+  *
+  * @param {Tasks} Object
+  * @return boolean
+  */
+
   public update(tasks: Object): any {
     console.log('Updating tasks...');
+    this.tasks = tasks;
     this.storage.set('tasks', JSON.stringify(tasks));
   }
 
-  public updateD(): any {
+  /*****************************************************************************
+  * updateD
+  *
+  */
+
+  public updateD(): void {
     console.log('Updating tasks...');
     this.storage.set('tasks', JSON.stringify(this.tasks));
   }
 
-  public reset(): any {
+  /*****************************************************************************
+  * reset
+  *
+  */
+
+  public reset(): void {
     console.log('Resetting tasks...');
     this.storage.set('tasks', JSON.stringify(TaskMock));
   }
