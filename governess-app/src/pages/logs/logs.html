@@ -10,8 +10,11 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+</ion-header>
 
-  <ion-toolbar color="primary">
+<ion-content class="logs">
+
+  <div class="ion-segment-container">
     <ion-segment color="dark" [(ngModel)]="view">
       <ion-segment-button value="tasks" (ionSelect)="setLogView('tasks')">
         Tasks
@@ -23,25 +26,23 @@
         System
       </ion-segment-button>
     </ion-segment>
-  </ion-toolbar>
+  </div>
 
-</ion-header>
-
-<ion-content class="logs">
+  <div class="ui-splitbar"></div>
 
   <div [ngSwitch]="view" style="height: 100%">
     <div *ngSwitchCase="'tasks'" style="height: 100%">
       <ion-list>
-  <ion-item>
-    Reflow Lead-Free
-  </ion-item>
-  <ion-item>
-    Reflow Lead-Free
-  </ion-item>
-  <ion-item>
-    Reflow Lead-Free
-  </ion-item>
-</ion-list>
+        <ion-item>
+          Reflow Lead-Free
+        </ion-item>
+        <ion-item>
+          Reflow Lead-Free
+        </ion-item>
+        <ion-item>
+          Reflow Lead-Free
+        </ion-item>
+      </ion-list>
     </div>
     <div *ngSwitchCase="'server'" style="height: 100%">
      <ion-textarea [(ngModel)]="syslog"  style="height: 100%">

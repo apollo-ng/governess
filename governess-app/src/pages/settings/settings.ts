@@ -5,53 +5,43 @@ import { NavController,
          ToastController,
          AlertController }  from 'ionic-angular';
 import { Vibration }        from 'ionic-native';
+
 import { ConfigService }    from '../../providers/config/config';
 import { TaskService }      from '../../providers/tasks/tasks';
 
 import { SettingsHelp }     from './settings.help';
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
 @Component ({
   selector: 'settings-page',
   templateUrl: 'settings.html'
 })
 
-////////////////////////////////////////////////////////////////////////
-//
-//
+/*******************************************************************************
+ *
+ *     SettingsPage
+ */
 
 export class SettingsPage {
 
-  public navCtrl:           NavController;
-  public toastCtrl:         ToastController;
-  public modalCtrl:         ModalController;
-  public alertCtrl:         AlertController;
-  public taskService:       TaskService;
-  public configService:     ConfigService;
   public config:            any;
 
   //////////////////////////////////////////////////////////////////////
 
   constructor (
 
-    navCtrl:                NavController,
-    toastCtrl:              ToastController,
-    modalCtrl:              ModalController,
-    alertCtrl:              AlertController,
-    configService:          ConfigService,
-    taskService:            TaskService
+    public navCtrl:         NavController,
+    public toastCtrl:       ToastController,
+    public modalCtrl:       ModalController,
+    public alertCtrl:       AlertController,
+    public configService:   ConfigService,
+    public taskService:     TaskService
 
   ) { /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-    this.navCtrl =          navCtrl;
-    this.toastCtrl =        toastCtrl;
-    this.modalCtrl =        modalCtrl;
-    this.alertCtrl =        alertCtrl;
-    this.configService =    configService;
-    this.taskService =      taskService;
     this.config = {};
 
     this.init().then(data => {

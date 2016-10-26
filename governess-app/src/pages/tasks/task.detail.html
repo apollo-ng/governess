@@ -7,19 +7,35 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <div class="ui-splitbar"></div>
 </ion-header>
 
 <ion-content class="task-detail" >
 
-  <div class="chart-container" [ngStyle]="{'height': chartHeightAct+'px'}">
+  <div class="ion-segment-container">
+    <ion-segment [(ngModel)]="moduleView" >
+      <ion-segment-button *ngFor="let module of data; let m = index" [value]="m"
+      [ngStyle]="{'color': data[m].options.color,
+                  'border-color':  m === moduleView ?
+                    data[m].options.color
+                  : 'transparent',
+                  'background': m === moduleView ?
+                    convertRGBA(data[m].options.color,0.15)
+                  : 'rgba(10,9,4,0.5)'
+                 }">
+        {{data[m].control}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div class="ui-splitbar"></div>
+  <div class="chart-container" >
     <canvas baseChart class="chart"
     [datasets]="lineChartData"
     [options]="lineChartOptions"
     [colors]="lineChartColours"
     [chartType]="'line'"
     (chartHover)="chartHovered()"
-    (chartClick)="chartClicked()">
+    (chartClick)="chartClicked()"
+    [style.height]="chartHeight + 'px'">
     </canvas>
   </div>
 
@@ -93,23 +109,6 @@
       </ion-row>
     </ion-grid>
 
-    <div class="ion-segment-container">
-      <ion-segment [(ngModel)]="moduleView" >
-        <ion-segment-button *ngFor="let module of data; let m = index" [value]="m"
-        [ngStyle]="{'color': data[m].options.color,
-                    'border-color': data[m].options.color,
-                    'background': m === moduleView ?
-                       convertRGBA(data[m].options.color,0.15)
-                    : 'rgba(10,9,4,0.5)',
-                    'box-shadow': m === moduleView ?
-                      'inset 0 5px 10px rgba(10,9,4,0.4),
-                       inset 0 -5px 10px '+convertRGBA(data[m].options.color,0.3)
-                    : 'inset 0 -5px 10px rgba(10,9,4,0.4)'
-                   }">
-          {{data[m].control}}
-        </ion-segment-button>
-      </ion-segment>
-    </div>
 
     <table class="md-table">
       <thead>

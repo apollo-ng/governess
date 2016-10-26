@@ -8,18 +8,19 @@ import { TaskService }        from '../../providers/tasks/tasks';
 import { TasksHelp }          from './tasks.help';
 import { TaskDetailPage }     from '../tasks/task.detail';
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
-////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
 
 @Component ({
   selector: 'tasks-page',
   templateUrl: 'tasks.html'
 })
 
-////////////////////////////////////////////////////////////////////////
-//
-//  TasksPage
+/*******************************************************************************
+ *
+ *     TasksPage
+ */
 
 export class TasksPage {
 
@@ -38,13 +39,6 @@ export class TasksPage {
 
   ) {
 
-    this.navCtrl = navCtrl;
-    this.alertCtrl = alertCtrl;
-    this.modalCtrl = modalCtrl;
-
-    this.taskService = taskService;
-
-    this.configService = configService;
     this.config = {};
 
     this.initConfig().then(data => {

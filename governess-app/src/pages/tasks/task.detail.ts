@@ -43,17 +43,23 @@ export class TaskDetailPage {
     this.task = this.navParams.data;
     this.data = this.task.data;
     this.moduleView = 0;
-    this.chartHeight = 250;
+    this.chartHeight = Math.floor(window.innerHeight / 2);
     this.lineChartData = [{ data: [], label: 'Data' }];
     this.updateChart();
-    // console.log(this.task);
+    console.log(this.chartHeight);
   }
 
   public lineChartOptions: any = {
-    animation: false,
+    animation: {
+      duration: 0,
+      easing: 'linear'
+    },
     responsive: true,
     maintainAspectRatio: false,
     legend: { display: false },
+    tooltips: {
+      enabled: false
+    },
     scales: {
       xAxes: [
         {
@@ -73,6 +79,7 @@ export class TaskDetailPage {
             beginAtZero: false,
             fontColor: '#d8d3c5',
             fontFamily: 'DIN',
+            padding: 0,
           },
         },
       ],
@@ -120,11 +127,19 @@ export class TaskDetailPage {
   }
 
   public dragSplitbar(e: any): void {
-    this.chartHeightAct = this.chartHeight + e.deltaY;
+    let newHeight: number = this.chartHeight + e.deltaY;
+    if (newHeight < 150) newHeight = 150;
+    if (newHeight > 800) newHeight = 800;
+    this.chartHeight = newHeight;
+    console.log(this.chartHeight);
+/*
+    this.lineChartData = this.lineChartData.slice();
     if (e.isFinal) {
       this.chartHeight = this.chartHeightAct;
-      this.updateChart();
+      //this.updateChart();
+      this.lineChartData = this.lineChartData.slice();
     }
+    */
   }
 
   public convertRGBA(color: string, alpha: number): string {
@@ -175,6 +190,7 @@ export class TaskDetailPage {
     }
     this.lineChartData = _lineChartData;
     this.lineChartColours = _lineChartColours;
+    this.lineChartData = this.lineChartData.slice();
   }
 
   public setModuleView(view: number): void {
