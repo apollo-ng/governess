@@ -7,6 +7,7 @@ import { GovernessApp }           from './app.component';
 
 import { AboutPage }              from '../pages/about/about';
 import { AppliancePage }          from '../pages/appliance/appliance';
+import { ApplianceDetailPage }    from '../pages/appliance/appliance.detail';
 import { ControlPage }            from '../pages/control/control';
 import { HelpPage }               from '../pages/help/help';
 import { LogsPage }               from '../pages/logs/logs';
@@ -22,17 +23,21 @@ import { WebSocketService }       from '../providers/websocket/websocket';
 import { StorageService }         from '../providers/storage/storage';
 import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
+import { ApplianceService }       from '../providers/appliance/appliance';
 import { TaskService }            from '../providers/tasks/tasks';
 
 import { ChartsModule }           from 'ng2-charts/components/charts/charts';
 
 import { TimeformatSelector }     from '../components/timeformat-selector';
 
+////////////////////////////////////////////////////////////////////////////////
+
 @NgModule({
   declarations: [
     GovernessApp,
     AboutPage,
     AppliancePage,
+    ApplianceDetailPage,
     ControlPage,
     ControlHelp,
     HelpPage,
@@ -46,16 +51,17 @@ import { TimeformatSelector }     from '../components/timeformat-selector';
   ],
   imports: [
     ChartsModule,
-    IonicModule.forRoot(GovernessApp)
+    IonicModule.forRoot(GovernessApp),
   ],
   exports: [
-    TimeformatSelector
+    TimeformatSelector,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     GovernessApp,
     AboutPage,
     AppliancePage,
+    ApplianceDetailPage,
     ControlPage,
     ControlHelp,
     HelpPage,
@@ -71,10 +77,11 @@ import { TimeformatSelector }     from '../components/timeformat-selector';
     Storage,
     StorageService,
     ConfigService,
+    ApplianceService,
     StatusService,
     TaskService,
     WebSocketService,
-  ]
+  ],
 })
 
 export class AppModule {}

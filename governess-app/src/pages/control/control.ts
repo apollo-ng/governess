@@ -1,8 +1,5 @@
 import { Component }            from '@angular/core';
-import { NgClass }              from '@angular/common';
-import { ActionSheetController,
-         ModalController,
-         ViewController,
+import { ModalController,
          NavController }        from 'ionic-angular';
 
 import { ConfigService }        from '../../providers/config/config';
@@ -13,20 +10,18 @@ import { TaskDetailPage }       from '../tasks/task.detail';
 
 import { ControlHelp }          from './control.help';
 
-/******************************************************************************/
-
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
 @Component({
   selector:                     'control-page',
-  templateUrl:                  'control.html'
+  templateUrl:                  'control.html',
 })
 
 /*******************************************************************************
  *
  *    ControlPage
  *
- ******************************************************************************/
+ */
 
 export class ControlPage {
 
@@ -40,25 +35,32 @@ export class ControlPage {
   public lineChartColours:      Array<any>;
   public lineChartType:         string = 'line';
 
+  public navCtrl:             NavController;
+  public modalCtrl:           ModalController;
+  public configService:       ConfigService;
+  public taskService:         TaskService;
+  public statusService:       StatusService;
+
   /*****************************************************************************
-  * constructor
-  *****************************************************************************/
+   * constructor
+   */
 
   constructor (
 
-    public navCtrl:             NavController,
-    public modalCtrl:           ModalController,
-    public configService:       ConfigService,
-    public taskService:         TaskService,
-    public statusService:       StatusService
+    navCtrl:             NavController,
+    modalCtrl:           ModalController,
+    configService:       ConfigService,
+    taskService:         TaskService,
+    statusService:       StatusService,
 
   ) {
 
-    this.navCtrl =              navCtrl;
-    this.modalCtrl =            modalCtrl;
-    this.configService =        configService;
-    this.taskService =          taskService;
-    this.statusService =        statusService;
+    this.navCtrl = navCtrl;
+    this.modalCtrl = modalCtrl;
+    this.configService = configService;
+    this.taskService = taskService;
+    this.statusService = statusService;
+
     this.lineChartData =        [{ data: [], label: 'Data' }];
 
     this.config =               {};
@@ -66,12 +68,12 @@ export class ControlPage {
 
     this.status = {
       'status': 'offline',
-      'temperature': 25.0
+      'temperature': 25.0,
     };
 
     // This seems to work to get all the async promis/observable stuff
     // going without throwing undefined foo...
-    this.initConfig().then(data => {
+    this.initConfig().then(() => {
       this.taskService.pull     ();
       this.tasks =              this.taskService.tasks;
       this.task = this.tasks.filter(
@@ -84,18 +86,16 @@ export class ControlPage {
     });
 
     // Subscribe and assign the websocket data handlers
-    this.statusService.statusSocketRX().subscribe( (data) => {
+    this.statusService.statusSocketRX().subscribe( (data: any) => {
       this.statusUpdate         (data);
     });
 
   }
 
   /*****************************************************************************
-  * initConfig
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * initConfig
+   * @return boolean
+   */
 
   public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
@@ -104,38 +104,29 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * ionViewWillEnter
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * ionViewWillEnter
+   */
 
   public ionViewWillEnter(): void {
     console.log('ControlPage ionViewWillEnter called');
   }
 
   /*****************************************************************************
-  * ionViewDidLoad
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * ionViewDidLoad
+   */
 
   public ionViewDidLoad(): void {
     console.log('ControlPage ionViewDidLoad called');
   }
 
   /*****************************************************************************
-  * Returns boolean, whether websocket was FORCEFULLY closed.
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * ionViewWillLeave
+   */
 
   public ionViewWillLeave(): void {
     console.log('ControlPage ionViewWillLeave called');
-    //this.statusSub.unsubscribe();
-    //this.statusService.disconnect();
+    // this.statusSub.unsubscribe();
+    // this.statusService.disconnect();
   }
 
   /*****************************************************************************
@@ -148,29 +139,25 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * triggerUpdate
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * triggerUpdate
+   * @param {event} task
+   */
 
-  public triggerUpdate(data) {
+  public triggerUpdate(data: any): void {
     this.config = data;
     this.configService.update(this.config);
 
     this.task = this.tasks.filter(
       task => task.tid.includes(this.config.taskActive)
-    )[0];;
+    )[0];
 
     this.updateChart();
   }
 
   /*****************************************************************************
-  * statusUpdate
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * statusUpdate
+   * @param {event} task
+   */
 
   public statusUpdate(data: any): void {
     this.status = JSON.parse(data);
@@ -179,16 +166,13 @@ export class ControlPage {
     if (temp[1] > 1) {
       this.status.temperature_minor = temp[1];
     } else {
-      this.status.temperature_minor = "0";
+      this.status.temperature_minor = '0';
     }
   }
 
   /*****************************************************************************
-  * lineChartOptions
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * lineChartOptions
+   */
 
   public lineChartOptions: any = {
     animation: false,
@@ -253,11 +237,9 @@ export class ControlPage {
   };
 
   /*****************************************************************************
-  * updateChart
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * updateChart
+   * @param {event} task
+   */
 
   public updateChart(): void {
 
@@ -299,11 +281,10 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * convertRGBA
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * convertRGBA
+   * @param {event} task
+   * @return boolean
+   */
 
   public convertRGBA(color: string, alpha: number): string {
     let _color: string = color;
@@ -317,33 +298,27 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * chartClicked
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * chartClicked
+   * @param {event} task
+   */
 
   public chartClicked(e: any): void {
     console.log(e);
   }
 
   /*****************************************************************************
-  * chartHovered
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * chartHovered
+   * @param {event} task
+   */
 
   public chartHovered(e: any): void {
     console.log(e);
   }
 
   /*****************************************************************************
-  * playSound
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * playSound
+   * @param {event} task
+   */
 
   public playSound(file: string): void {
     let audio: any = new Audio();
@@ -353,11 +328,9 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * setMode
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * setMode
+   * @param {event} task
+   */
 
   public setMode(mode: string): void {
     this.config.ctrlMode = mode;
@@ -365,22 +338,16 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * editTask
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * editTask
+   */
 
   public editTask(): void {
     if (this.task) this.navCtrl.push(TaskDetailPage, this.task);
   }
 
   /*****************************************************************************
-  * startTask
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * startTask
+   */
 
   public startTask(): void {
     if (this.config.audio) this.playSound('run.mp3');
@@ -389,11 +356,8 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * pauseTask
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * pauseTask
+   */
 
   public pauseTask(): void {
     if (this.config.audio) this.playSound('float.mp3');
@@ -402,11 +366,8 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * restartTask
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * restartTask
+   */
 
   public restartTask(): void {
     if (this.config.audio) this.playSound('float.mp3');
@@ -415,11 +376,8 @@ export class ControlPage {
   }
 
   /*****************************************************************************
-  * stopTask
-  *
-  * @param {event} task
-  * @return boolean
-  */
+   * stopTask
+   */
 
   public stopTask(): void {
     if (this.config.audio) this.playSound('stop.mp3');

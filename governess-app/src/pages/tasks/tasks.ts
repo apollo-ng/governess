@@ -3,45 +3,57 @@ import { reorderArray,
          NavController,
          AlertController,
          ModalController }    from 'ionic-angular';
+
 import { ConfigService }      from '../../providers/config/config';
 import { TaskService }        from '../../providers/tasks/tasks';
 import { TasksHelp }          from './tasks.help';
 import { TaskDetailPage }     from '../tasks/task.detail';
 
-/******************************************************************************/
-
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
 @Component ({
   selector: 'tasks-page',
-  templateUrl: 'tasks.html'
+  templateUrl: 'tasks.html',
 })
 
 /*******************************************************************************
  *
- *     TasksPage
+ *   TasksPage
+ *
  */
 
 export class TasksPage {
 
   public tasks: any;
-  public config: any;
+  public config: any = {};
 
-  //////////////////////////////////////////////////////////////////////
+  public navCtrl: NavController;
+  public alertCtrl: AlertController;
+  public modalCtrl: ModalController;
+  public taskService: TaskService;
+  public configService: ConfigService;
+
+  /*****************************************************************************
+   * constructor
+   */
 
   constructor (
 
-    public navCtrl: NavController,
-    public alertCtrl: AlertController,
-    public modalCtrl: ModalController,
-    public taskService: TaskService,
-    public configService: ConfigService
+    navCtrl: NavController,
+    alertCtrl: AlertController,
+    modalCtrl: ModalController,
+    taskService: TaskService,
+    configService: ConfigService,
 
   ) {
 
-    this.config = {};
+    this.navCtrl = navCtrl;
+    this.alertCtrl = alertCtrl;
+    this.modalCtrl = modalCtrl;
+    this.taskService = taskService;
+    this.configService = configService;
 
-    this.initConfig().then(data => {
+    this.initConfig().then( () => {
       this.taskService.pull();
       this.tasks = this.taskService.tasks;
       console.log(this.tasks);
@@ -49,31 +61,29 @@ export class TasksPage {
 
   }
 
-  //////////////////////////////////////////////////////////////////////
-
   /*****************************************************************************
    * initConfig - as init is async separate logic here so it's testable
-   * @param {event} task
+   * @return Promise
    */
 
   public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
-      //console.log('settings ngoninit configdata', data);
+      // console.log('settings ngoninit configdata', data);
       this.config = JSON.parse(data);
-      //console.log(this.config);
+      // console.log(this.config);
     });
   }
 
   /*****************************************************************************
    * initTasks
-   * @param {event} task
+   * @return Promise
    */
 
   public initTasks(): Promise<void> {
     return this.taskService.get().then((data: string) => {
-      //console.log('settings ngoninit configdata', data);
-      //this.tasks = JSON.parse(data);
-      //console.log(this.config);
+      // console.log('settings ngoninit configdata', data);
+      this.tasks = JSON.parse(data);
+      // console.log(this.config);
     });
   }
 
@@ -88,7 +98,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * activateTask
-   * @param {event} task
+   * @param
    */
 
   public activateTask(tid: string): void {
@@ -99,8 +109,7 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * addTask
-   * @param {event} task
+   * FIXME: addTask
    */
 
   public addTask(): void {
@@ -109,7 +118,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * goToTaskDetail
-   * @param {event} task
+   * @param
    */
 
   public goToTaskDetail(task: any): void {
@@ -119,7 +128,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * copyTask
-   * @param {event} task
+   * @param
    */
 
   public copyTask(index: number): void {
@@ -130,7 +139,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * removeTask
-   * @param {event} task
+   * @param
    */
 
   public removeTask(index: number, name: string): void {
@@ -156,7 +165,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * reorderTasks
-   * @param {event} task
+   * @param
    */
 
   public reorderTasks(move: any): void {
@@ -166,7 +175,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * searchInput
-   * @param {event} task
+   * @param
    */
 
   public searchInput(event: any): void {
@@ -184,7 +193,7 @@ export class TasksPage {
 
   /*****************************************************************************
    * searchClear - Disengage Search Filter
-   * @param {event} task
+   * @param
    */
 
   public searchClear(event: any): void {
@@ -194,15 +203,15 @@ export class TasksPage {
 
   /*****************************************************************************
    * calculateRuntime - Iterate over all profiles to find the farthest timepoint
-   * @param {Object} task
+   * @param
    * @return number
    */
 
   public calculateRuntime(task: any): number {
     let seconds: number = 0;
     for ( let data of task.data ) {
-      if ( data.points[data.points.length-1][0] > seconds ) {
-        seconds = data.points[data.points.length-1][0];
+      if ( data.points[ data.points.length - 1 ][0] > seconds ) {
+        seconds = data.points[ data.points.length - 1 ][0];
       }
     }
     return seconds;

@@ -1,11 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { UUID }                   from 'angular2-uuid';
 import { StorageService }         from '../storage/storage';
-import { AppConfigMock }          from './config.mock';
+import { appConfigMock }          from './config.mock';
 
-/******************************************************************************/
-
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
 @Injectable (
 
@@ -13,31 +11,36 @@ import { AppConfigMock }          from './config.mock';
 
 /*******************************************************************************
  *
- *     ConfigService
+ *   ConfigService
+ *
  */
 
 export class ConfigService {
 
   public config:  any;
+  public storage: StorageService;
 
-  /****************************************************************************/
+  /*****************************************************************************
+   * constructor
+   */
 
   constructor(
 
-    public storage: StorageService
+    storage: StorageService,
 
   ) {
 
-    this.init().then(data => {
-      //console.log('All promises returned', data)
+    this.storage = storage;
+    this.init().then( () => {
+      // console.log('All promises returned', data)
     });
   }
 
   /*****************************************************************************
-  * init
-  *
-  * @return Promise
-  */
+   * init
+   *
+   * @return Promise
+   */
 
   public init(): Promise<{}> {
     console.log('Initializing Storage');
@@ -45,31 +48,31 @@ export class ConfigService {
     return this.storage.get('config').then((data: any) => {
       if (!data) {
         console.log('Got NO Storage Data - creating from Mock:');
-        let initAppConfig: any = AppConfigMock;
-        initAppConfig.clientID = UUID.UUID();
+        let initAppConfig: any = appConfigMock;
+        initAppConfig.cid = UUID.UUID();
         this.storage.set('config', JSON.stringify(initAppConfig));
         return initAppConfig;
       }
-      //console.log('Got Storage Data:', data);
+      // console.log('Got Storage Data:', data);
       return JSON.parse(data);
     });
   }
 
   /*****************************************************************************
-  * get
-  *
-  * @return Promise
-  */
+   * get
+   *
+   * @return Promise
+   */
 
   public get(): Promise<{}> {
-    return this.storage.get('config')
+    return this.storage.get('config');
   }
 
   /*****************************************************************************
-  * update
-  *
-  * @param {config object}
-  */
+   * update
+   *
+   * @param {config object}
+   */
 
   public update(config: Object): void {
     console.log('Updating config...');

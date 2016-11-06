@@ -33,6 +33,10 @@ plugins/android.json
 plugins/ios.json
 www/
 
+# e2e
+e2e/*.js
+e2e/*.map
+
 $RECYCLE.BIN/
 .io-config.json
 .DS_Store

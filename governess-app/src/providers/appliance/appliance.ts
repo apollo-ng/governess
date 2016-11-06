@@ -1,7 +1,7 @@
 import { Injectable }             from '@angular/core';
 import { UUID }                   from 'angular2-uuid';
 import { StorageService }         from '../storage/storage';
-import { taskMock }               from './task.mock';
+import { applianceMock }          from './appliance.mock';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -11,14 +11,14 @@ import { taskMock }               from './task.mock';
 
 /*******************************************************************************
  *
- *   TaskService
+ *   ApplianceService
  *
  */
 
-export class TaskService {
+export class ApplianceService {
 
-  public tasks: any = [];
-  private storage: StorageService;
+  public appliances: any = [];
+  public storage: StorageService;
 
   /*****************************************************************************
    * constructor
@@ -26,98 +26,97 @@ export class TaskService {
 
   constructor (
 
-    storage: StorageService,
+    storage: StorageService
 
   ) {
 
     this.storage = storage;
     this.init().then(data => {
-      // console.log('All promises returned', data)
-      this.tasks = data;
+      this.appliances = data;
     });
 
   }
 
   /*****************************************************************************
    * init
-   * @return {Tasks} Object Promise
+   * @return {Appliance} Object Promise
    */
 
-  public init(): Promise<{}> {
-    console.log('Initializing Task Service');
+  private init(): Promise<{}> {
+    console.log('Initializing Appliance Service');
 
-    return this.storage.get('tasks').then((data: string) => {
+    return this.storage.get('appliances').then((data: string) => {
       if (!data) {
         console.log('Got NO Storage Data - creating from Mock:');
-        let initTask: any = taskMock;
-        initTask.id = UUID.UUID();
-        initTask.created = Math.round(new Date().getTime());
-        this.storage.set('tasks', JSON.stringify(initTask));
-        this.tasks = initTask;
-        return initTask;
+        let initAppliance: any = applianceMock;
+        this.write(initAppliance);
+        this.appliances = initAppliance;
+        return initAppliance;
       }
       // console.log('Got Storage Data:', data);
-      this.tasks = JSON.parse(data);
+      this.appliances = JSON.parse(data);
       return JSON.parse(data);
     });
   }
 
   /*****************************************************************************
    * get
-   * @return {Tasks} Object Promise
+   * @return
    */
 
   public get(): Promise<{}> {
-    return this.storage.get('tasks');
+    return this.storage.get('appliances');
   }
 
   /*****************************************************************************
    * pull
-   * @return {Tasks} Object Promise
    */
 
   public pull(): any {
     this.get().then((data: string) => {
-      this.tasks = JSON.parse(data);
+      this.appliances = JSON.parse(data);
     });
   }
 
   /*****************************************************************************
    * copy
-   * @param {id}
+   * @param
    */
 
   public copy(index: number): void {
-    console.log('copy called to clone', this.tasks);
+
     // crude hack to copy the array after lodash deepClone refused to work
-    let copy: any = JSON.parse(JSON.stringify(this.tasks[index]));
+    let copy: any = JSON.parse(JSON.stringify(this.appliances[index]));
+
+    // create a fresh set of metadata for this copy
     copy.name = copy.name + ' Copy';
-    copy.tid = UUID.UUID();
+    copy.aid = UUID.UUID();
     copy.created = Math.round(new Date().getTime());
-    this.tasks.push(copy);
-    this.update(this.tasks);
+
+    // roll it out
+    this.appliances.push(copy);
+    this.updateD();
   }
 
   /*****************************************************************************
    * delete
-   * @param {id}
+   * @param
    */
 
   public delete(index: number): void {
-    this.tasks.splice(index, 1);
-    this.update(this.tasks);
+    this.appliances.splice(index, 1);
+    this.updateD();
   }
 
   /*****************************************************************************
    * update
-   * @param {Tasks} Object
-   * @return boolean
+   * @param
    */
 
-  public update(tasks: Object): any {
-    console.log('Updating tasks...');
-    this.tasks = tasks;
-    this.storage.set('tasks', JSON.stringify(tasks));
+  public update(appliances: Object): any {
+    console.log('Updating appliances...');
+    this.appliances = appliances;
+    this.write(appliances);
   }
 
   /*****************************************************************************
@@ -125,8 +124,8 @@ export class TaskService {
    */
 
   public updateD(): void {
-    console.log('Updating tasks...');
-    this.storage.set('tasks', JSON.stringify(this.tasks));
+    console.log('Updating appliances...');
+    this.write(this.appliances);
   }
 
   /*****************************************************************************
@@ -134,8 +133,18 @@ export class TaskService {
    */
 
   public reset(): void {
-    console.log('Resetting tasks...');
-    this.storage.set('tasks', JSON.stringify(taskMock));
+    console.log('Resetting appliances...');
+    this.write(applianceMock);
+  }
+
+  /*****************************************************************************
+   * write
+   * @param
+   */
+
+  private write(appliances: Object): void {
+    console.log('Writing Appliances to LocalStorage', appliances);
+    this.storage.set('appliances', JSON.stringify(appliances));
   }
 
 }

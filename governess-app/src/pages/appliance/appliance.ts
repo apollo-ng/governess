@@ -1,341 +1,177 @@
-'use strict';
-
 import { Component }                from '@angular/core';
 import { ActionSheetController,
+         AlertController,
          ModalController,
-         ViewController,
          NavController,
-         NavParams,
-         Platform }                 from 'ionic-angular';
+         reorderArray }             from 'ionic-angular';
 
-////////////////////////////////////////////////////////////////////////
+import { ConfigService }            from '../../providers/config/config';
+import { ApplianceService }         from '../../providers/appliance/appliance';
+import { ApplianceDetailPage }      from '../appliance/appliance.detail';
 
-////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 @Component ({
   selector: 'appliance-page',
-  templateUrl: 'appliance.html'
+  templateUrl: 'appliance.html',
 })
 
-////////////////////////////////////////////////////////////////////////
-//
-//
+/*******************************************************************************
+ *
+ *   AppliancePage
+ *
+ */
 
 export class AppliancePage {
+
+  public appliances: any = [];
+  public config: any = {};
 
   public navCtrl: NavController;
   public modalCtrl: ModalController;
   public actionSheetCtrl: ActionSheetController;
-  public appliance: any;
+  public alertCtrl: AlertController;
+  public configService: ConfigService;
+  public applianceService: ApplianceService;
 
-  constructor(
+  /*****************************************************************************
+   * constructor
+   */
+
+  constructor (
 
     navCtrl: NavController,
     modalCtrl: ModalController,
-    actionSheetCtrl: ActionSheetController
+    actionSheetCtrl: ActionSheetController,
+    alertCtrl: AlertController,
+    configService: ConfigService,
+    applianceService: ApplianceService,
 
   ) {
 
     this.navCtrl = navCtrl;
-    this.actionSheetCtrl = actionSheetCtrl;
     this.modalCtrl = modalCtrl;
+    this.actionSheetCtrl = actionSheetCtrl;
+    this.alertCtrl = alertCtrl;
+    this.configService = configService;
+    this.applianceService = applianceService;
 
-    this.appliance = {
+    this.initConfig().then(() => {
+      this.applianceService.pull();
+      this.appliances = this.applianceService.appliances;
+    });
 
-      'name': 'EKA KF412',
-      'desc': 'Small convection-heat lab-oven',
-      'modules': [
-        {
-          'name': 'PID Temperature Governor',
-          'icon': 'thermometer',
-          'control': {
-            'name': 'PID Temp Full',
-            'icon': 'thermometer',
-            'driver': 'drv/ctrl-pid-temp',
-            'inputs': [
-              {
-                'type': 'float',
-                'unit': '°C',
-              },
-            ],
-            'outputs': [
-              {
-                'type': 'binary',
-              },
-              {
-                'type': 'binary',
-              },
-            ],
-            'conf': [
-              {
-                'name': 'Max tRun',
-                'val': '300s',
-              },
-              {
-                'name': 'Max °C',
-                'val': '250',
-              },
-              {
-                'name': 'Min °C',
-                'val': '0',
-              },
-              {
-                'name': 'Kp',
-                'val': '30.2',
-              },
-              {
-                'name': 'Ki',
-                'val': '0.77',
-              },
-              {
-                'name': 'Kd',
-                'val': '30.2',
-              },
-            ],
-          },
-          'inputs': [
-            {
-              'name': 'K-Type Probe',
-              'color': '#c70000',
-              'icon': 'thermometer',
-              'type': 'float',
-              'driver': 'drv/input-MAX31855',
-            },
-          ],
-          'outputs': [
-            {
-              'name': 'Heater AC-SSR',
-              'color': 'rgba(255, 153, 0, 0.7)',
-              'icon': 'flame',
-              'type': 'binary',
-              'driver': 'drv/input-gpio',
-              'conf': [
-                {
-                  'name': 'PinIO',
-                  'val': '27',
-                },
-              ],
-            },
-            {
-              'name': 'Cooler AC-SSR',
-              'color': '#0000c7',
-              'icon': 'snow',
-              'type': 'binary',
-              'driver': 'drv/output-gpio',
-              'conf': [
-                {
-                  'name': 'PinIO',
-                  'val': '23',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          'name': 'Circulator',
-          'icon': 'nuclear',
-          'control': {
-            'name': 'OnOff',
-            'icon': 'power',
-            'driver': 'drv/ctrl-onoff',
-            'inputs': [],
-            'outputs': [
-              {
-                'type': 'binary',
-              },
-            ],
-            'conf': [
-              {
-                'name': 'Max tRun',
-                'val': '300s',
-              },
-            ],
-          },
-          'outputs': [
-            {
-              'name': 'SSR-Circulator',
-              'color': 'purple',
-              'icon': 'nuclear',
-              'type': 'binary',
-              'driver': 'drv/gpio-out',
-              'conf': [
-                {
-                  'name': 'PinIO',
-                  'val': '23',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          'name': 'Door',
-          'icon': 'exit',
-          'control': {
-            'name': 'Trigger',
-            'icon': 'flash',
-            'driver': 'drv/ctrl-trigger',
-            'inputs': [
-              {
-                'type': 'Interrupt',
-              },
-            ],
-            'outputs': [{}],
-            'conf': [
-              {
-                'name': 'Action',
-                'val': 'TBD',
-              },
-            ],
-          },
-          'inputs': [
-            {
-              'name': 'Door-Sensor',
-              'color': 'yellow',
-              'icon': 'alert',
-              'type': 'Interrupt',
-              'driver': 'drv/gpio-in',
-              'conf': [
-                {
-                  'name': 'PinIO',
-                  'val': '21',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          'name': 'RPC - Abzug',
-          'icon': 'exit',
-          'control': {},
-          'inputs': [],
-          'outputs': [],
-        },
-      ],
-    };
   }
 
-  //////////////////////////////////////////////////////////////////////
+  /*****************************************************************************
+   * initConfig
+   * @return
+   */
 
-  public openHelp(): void {
-    // FIXME: Add proper help
-    console.log('help tapped');
-  };
+  public initConfig(): Promise<void> {
+    return this.configService.get().then((data: string) => {
+      // console.log('settings ngoninit configdata', data);
+      this.config = JSON.parse(data);
+      // console.log(this.config);
+    });
+  }
 
-  public openMenu(modid: any): any {
-    let actionSheet: any = this.actionSheetCtrl.create({
-      title: this.appliance.modules[modid].name,
-      cssClass: 'action-sheets-basic-page',
+  /*****************************************************************************
+   * goToApplianceDetail
+   * @param
+   */
+
+  public goToApplianceDetail(appliance: any): void {
+    console.log('Go to appliance detail:', appliance);
+    this.navCtrl.push(ApplianceDetailPage, appliance);
+  }
+
+  /*****************************************************************************
+   * FIXME: addAppliance
+   */
+
+  public addAppliance(): void {
+    console.log('FIXME: Add a new empty appliance');
+  }
+
+  /*****************************************************************************
+   * copyAppliance
+   * @param
+   */
+
+  public copyAppliance(index: number): void {
+    console.log('Duplicate Appliance:', index);
+    this.applianceService.copy(index);
+    this.appliances = this.applianceService.appliances;
+  }
+
+  /*****************************************************************************
+   * removeAppliance
+   * @param
+   */
+
+  public removeAppliance(index: number, name: string): void {
+    let confirm: any = this.alertCtrl.create({
+      title: 'Please confirm',
+      message: 'Do you really want to remove the appliance<br/>' + name + '?',
       buttons: [
-        {
-          text: 'Edit Module',
-          icon: 'create',
-          handler: (): void => {
-            console.log('Edit Module clicked');
-          },
-        },
-        {
-          text: 'Add Input-Plug',
-          icon: 'add-circle',
-          handler: (): void => {
-            console.log('Add Input-Plug clicked');
-          },
-        },
-        {
-          text: 'Add Output-Plug',
-          icon: 'add-circle',
-          handler: (): void => {
-            console.log('Add Output-Plug clicked');
-          },
-        },
-        {
-          text: 'Delete Module',
-          icon: 'trash',
-          role: 'destructive',
-          handler: (): void => {
-            console.log('Delete Module clicked');
-          },
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel', // will always sort to be on the bottom
-          icon: 'close',
-          handler: (): void => {
-            console.log('Cancel clicked');
+        { text: 'No', role: 'cancel', handler: () => { /* */ } },
+        { text: 'Yes',
+          handler: () => {
+            this.applianceService.delete(index);
+            this.appliances = this.applianceService.appliances;
           },
         },
       ],
     });
-
-    actionSheet.present(actionSheet);
+    confirm.present();
   }
 
-  public editInputPlug(modid: any, plugid: any): any {
-    console.log('Edit Input-Plug:' + modid + plugid);
-    let modal: any = this.modalCtrl.create(ModalsContentPage);
-    modal.present(modal);
+  /*****************************************************************************
+   * reorderAppliances
+   * @param
+   */
+
+  public reorderAppliances(move: any): void {
+    this.appliances = reorderArray(this.appliances, move);
+    this.applianceService.update(this.appliances);
   }
 
-  public editOutputPlug(modid: any, plugid: any): any {
-    console.log('Edit Output-Plug:' + modid + plugid);
+  /*****************************************************************************
+   * searchInput
+   * @param
+   */
+
+  public searchInput(event: any): void {
+    this.appliances = this.applianceService.appliances;
+    let val: string = event.target.value;
+    if (val && val.trim() !== '') {
+      this.appliances = this.appliances.filter((appliance) => {
+        return (
+          appliance.name.toLowerCase().
+          indexOf(val.toLowerCase()) > -1
+        );
+      });
+    }
   }
 
-}
+  /*****************************************************************************
+   * searchClear - Disengage Search Filter
+   * @param
+   */
 
-@Component({
-  templateUrl: 'app-sys-modal.html',
-})
-
-class ModalsContentPage {
-
-  public platform: Platform;
-  public params: NavParams;
-  public viewCtrl: ViewController;
-
-  public character: any;
-
-  constructor(
-      platform: Platform,
-      params: NavParams,
-      viewCtrl: ViewController
-  ) {
-
-    let characters: any = [
-      {
-        name: 'Gollum',
-        quote: 'Sneaky little hobbitses!',
-        image: 'img/avatar-gollum.jpg',
-        items: [
-          { title: 'Race', note: 'Hobbit' },
-          { title: 'Culture', note: 'River Folk' },
-          { title: 'Alter Ego', note: 'Smeagol' },
-        ],
-      },
-      {
-        name: 'Frodo',
-        quote: 'Go back, Sam! I\'m going to Mordor alone!',
-        image: 'img/avatar-frodo.jpg',
-        items: [
-          { title: 'Race', note: 'Hobbit' },
-          { title: 'Culture', note: 'Shire Folk' },
-          { title: 'Weapon', note: 'Sting' },
-        ],
-      },
-      {
-        name: 'Samwise Gamgee',
-        quote: 'What we need is a few good taters.',
-        image: 'img/avatar-samwise.jpg',
-        items: [
-          { title: 'Race', note: 'Hobbit' },
-          { title: 'Culture', note: 'Shire Folk' },
-          { title: 'Nickname', note: 'Sam' },
-        ],
-      },
-    ];
-    this.character = characters[1];
-    this.viewCtrl = viewCtrl;
+  public searchClear(event: any): void {
+    this.appliances = this.applianceService.appliances;
+    event.stopPropagation();
   }
 
-  public dismiss(): void {
-    this.viewCtrl.dismiss();
+  /*****************************************************************************
+   * openHelp
+   */
+
+  public openHelp(): void {
+    // FIXME: Add proper help
+    console.log('help tapped');
   }
+
 }

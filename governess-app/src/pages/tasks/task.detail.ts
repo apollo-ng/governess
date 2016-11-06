@@ -1,22 +1,27 @@
 import { Component }                from '@angular/core';
+
 import { NavParams,
          NavController,
-//         ViewController,
          AlertController,
          ModalController,
          PopoverController,
          ActionSheetController }    from 'ionic-angular';
+
 import { TaskService }              from '../../providers/tasks/tasks';
 import { TimeformatSelector }       from '../../components/timeformat-selector';
 
-////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 @Component({
   selector: 'task-detail-page',
-  templateUrl: 'task.detail.html'
+  templateUrl: 'task.detail.html',
 })
+
+/*******************************************************************************
+ *
+ *   TaskDetailPage
+ *
+ */
 
 export class TaskDetailPage {
 
@@ -24,41 +29,62 @@ export class TaskDetailPage {
   public data: any;
   public chartHeight: number;
   public chartHeightAct: number;
-  public lineChartData: Array<any>;
-  public lineChartColours: Array<any>;
+  public lineChartData: any;
+  public lineChartColours: any;
   public moduleView: number;
+  public showMiniBar: boolean;
+  public newPointData: any;
+
+  public alertCtrl: AlertController;
+  public modalCtrl: ModalController;
+  public navCtrl: NavController;
+  public popoverCtrl: PopoverController;
+  public actionSheetCtrl: ActionSheetController;
+  public navParams: NavParams;
+  public taskService: TaskService;
 
   constructor(
 
-    public alertCtrl: AlertController,
-    public modalCtrl: ModalController,
-    public navCtrl: NavController,
-    public popoverCtrl: PopoverController,
-    public actionSheetCtrl: ActionSheetController,
-    public navParams: NavParams,
-    public taskService: TaskService
+    alertCtrl: AlertController,
+    modalCtrl: ModalController,
+    navCtrl: NavController,
+    popoverCtrl: PopoverController,
+    actionSheetCtrl: ActionSheetController,
+    navParams: NavParams,
+    taskService: TaskService,
 
   ) {
+
+    this.alertCtrl = alertCtrl;
+    this.modalCtrl = modalCtrl;
+    this.navCtrl = navCtrl;
+    this.popoverCtrl = popoverCtrl;
+    this.actionSheetCtrl = actionSheetCtrl;
+    this.navParams = navParams;
+    this.taskService = taskService;
 
     this.task = this.navParams.data;
     this.data = this.task.data;
     this.moduleView = 0;
+    this.showMiniBar = false;
     this.chartHeight = Math.floor(window.innerHeight / 2);
     this.lineChartData = [{ data: [], label: 'Data' }];
     this.updateChart();
     console.log(this.chartHeight);
+    this.newPointData = {
+      time: '',
+      target: '',
+      note: '',
+    };
   }
 
   public lineChartOptions: any = {
-    animation: {
-      duration: 0,
-      easing: 'linear'
-    },
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     legend: { display: false },
     tooltips: {
-      enabled: false
+      enabled: false,
     },
     scales: {
       xAxes: [
@@ -78,6 +104,7 @@ export class TaskDetailPage {
           ticks: {
             beginAtZero: false,
             fontColor: '#d8d3c5',
+            fontSize: 14,
             fontFamily: 'DIN',
             padding: 0,
           },
@@ -156,37 +183,37 @@ export class TaskDetailPage {
   public updateChart(): void {
 
     // Update the view parameters
-    let _lineChartColours: Array<any> = new Array();
+    let _lineChartColours: any = new Array();
     for (let i: number = 0; i < this.data.length; i++) {
-        _lineChartColours[i] = {
-          backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
-          borderColor: this.data[i].options.color,
-          borderWidth: this.data[i].options.strokeWidth,
-          pointRadius: this.data[i].options.pointRadius,
-          pointBorderWidth: this.data[i].options.pointBorderWidth,
-          pointBackgroundColor: '#fff',
-          pointBorderColor: this.data[i].options.color,
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        };
+      _lineChartColours[i] = {
+        backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
+        borderColor: this.data[i].options.color,
+        borderWidth: this.data[i].options.strokeWidth,
+        pointRadius: this.data[i].options.pointRadius,
+        pointBorderWidth: this.data[i].options.pointBorderWidth,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: this.data[i].options.color,
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+      };
     }
 
     // Update the datapoints (y axis)
-    let _lineChartData: Array<any> = new Array();
+    let _lineChartData: any = new Array();
     for (let i: number = 0; i < this.data.length; i++) {
-        _lineChartData[i] = {
-          data: new Array(this.data[i].points.length),
-          label: this.data[i].control,
-          lineTension: 0,
-          yAxisID: this.data[i].options.yAxisID,
-          fill: this.data[i].options.fill,
+      _lineChartData[i] = {
+        data: new Array(this.data[i].points.length),
+        label: this.data[i].control,
+        lineTension: 0,
+        yAxisID: this.data[i].options.yAxisID,
+        fill: this.data[i].options.fill,
+      };
+      for (let j: number = 0; j < this.data[i].points.length; j++) {
+        _lineChartData[i].data[j] = {
+          'x': new Date(this.data[i].points[j][0] * 1000).toISOString(),
+          'y': this.data[i].points[j][1],
         };
-        for (let j: number = 0; j < this.data[i].points.length; j++) {
-          _lineChartData[i].data[j] = {
-            'x': new Date(this.data[i].points[j][0] * 1000).toISOString(),
-            'y': this.data[i].points[j][1],
-          };
-        }
+      }
     }
     this.lineChartData = _lineChartData;
     this.lineChartColours = _lineChartColours;
@@ -198,55 +225,55 @@ export class TaskDetailPage {
     console.log('modview', this.moduleView);
   }
 
-  public taskActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
+  public taskActionSheet(): void {
+    let actionSheet: any = this.actionSheetCtrl.create({
       title: 'More Task options',
       buttons: [
         {
           text: 'Rename',
           icon: 'create',
           handler: () => {
-           console.log('Rename clicked');
-           this.renameTask(this.task);
-          }
+            console.log('Rename clicked');
+            this.renameTask(this.task);
+          },
         },
         {
           text: 'Constraint',
           icon: 'flash',
           handler: () => {
-           console.log('Constraint clicked');
-           this.constraintTask(this.task);
-          }
+            console.log('Constraint clicked');
+            this.constraintTask(this.task);
+          },
         },
         {
           text: 'Clone',
           icon: 'copy',
           handler: () => {
-           console.log('FIXME: Clone clicked');
-          }
+            console.log('FIXME: Clone clicked');
+          },
         },
         {
           text: 'Delete',
           icon: 'trash',
           handler: () => {
-           console.log('FIXME: Delete clicked');
-          }
+            console.log('FIXME: Delete clicked');
+          },
         },
         {
           text: 'Help',
           icon: 'buoy',
           handler: () => {
-           console.log('FIXME: Help clicked');
-          }
+            console.log('FIXME: Help clicked');
+          },
         },
         {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-           console.log('FIXME: Cancel clicked');
-          }
-        }
-      ]
+            console.log('FIXME: Cancel clicked');
+          },
+        },
+      ],
     });
     actionSheet.present();
   }
@@ -257,7 +284,7 @@ export class TaskDetailPage {
    */
 
   public renameTask(task: any): void {
-    let alert: any =  this.alertCtrl.create();
+    let alert: any = this.alertCtrl.create();
     alert.setTitle('Name of this Task');
     alert.addInput({ type: 'text', name: 'taskName', value: task.name });
     alert.addButton('Cancel');
@@ -269,7 +296,7 @@ export class TaskDetailPage {
           this.task.name = data.taskName;
           this.taskService.updateD();
         }
-      }
+      },
     });
     alert.present();
   }
@@ -280,7 +307,7 @@ export class TaskDetailPage {
    */
 
   public constraintTask(task: any): void {
-    let alert: any =  this.alertCtrl.create();
+    let alert: any = this.alertCtrl.create();
     alert.setTitle('Task Constrained?');
     alert.addInput({ type: 'checkbox', label: 'Constraint Check OK',
                     value: true, checked: task.constraints});
@@ -294,7 +321,7 @@ export class TaskDetailPage {
           this.task.constraints = false;
         }
         this.taskService.updateD();
-      }
+      },
     });
     alert.present();
   }
@@ -326,11 +353,53 @@ export class TaskDetailPage {
     confirm.present();
   }
 
-  presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(TimeformatSelector);
+  /*****************************************************************************
+   * changeTimeFormat
+   * @param {event} ?
+   */
+
+  public changeTimeFormat(myEvent: any): void {
+    let popover: any = this.popoverCtrl.create(TimeformatSelector);
     popover.present({
-      ev: myEvent
+      ev: myEvent,
     });
+  }
+
+  /*****************************************************************************
+   * calcSlope - Calculate and return the slope between two points
+   * @param {event} ?
+   * @return slope
+   */
+
+  public calcSlope(p: number, d: any): string {
+    let slope: string = '-';
+    let deltaT: number = 0;
+
+    // Skip 0, since there is no slope yet
+    if (p > 0) {
+
+      deltaT = Math.round(
+        ( d[p][1] - d[p - 1][1] ) /
+        ( d[p][0] - d[p - 1][0]) * 10
+      ) / 10;
+
+      if (deltaT > 0) {
+        slope = '+' + deltaT;
+      } else if (deltaT === 0) {
+        slope = '' + 0;
+      } else {
+        slope = '' + deltaT;
+      }
+    }
+    return slope;
+  }
+
+  public dropPoint(points: any, point: number): void {
+    console.log('FIXME: I should drop the point ', points, point);
+  }
+
+  public addPoint(): void {
+    console.log('FIXME: I should add the point ');
   }
 
 }

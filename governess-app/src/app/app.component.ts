@@ -1,15 +1,14 @@
 import { Component,
-         Type,
          OnInit,
          ViewChild }                from '@angular/core';
 
 import { Platform,
+         // MenuController,
          Nav }                      from 'ionic-angular';
 
 import { Splashscreen,
          StatusBar }                from 'ionic-native';
 
-import { environment }              from '../environments/environment';
 import { ConfigService }            from '../providers/config/config';
 
 import { AboutPage }                from '../pages/about/about';
@@ -20,7 +19,7 @@ import { LogsPage }                 from '../pages/logs/logs';
 import { SettingsPage }             from '../pages/settings/settings';
 import { TasksPage }                from '../pages/tasks/tasks';
 
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
 export interface PageObj {
   title: string;
@@ -29,22 +28,24 @@ export interface PageObj {
   icon: string;
 }
 
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 
 /*******************************************************************************
  *
- *     GovernessApp
+ *   GovernessApp
+ *
  */
 
 export class GovernessApp implements OnInit {
 
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) public nav: Nav;
 
-  public config:          any;
+  public configService:   ConfigService;
+  public config:          any = {};
   public rootPage:        any;
 
   // Populate the side menu
@@ -58,26 +59,34 @@ export class GovernessApp implements OnInit {
     { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
   ];
 
-  /****************************************************************************/
+  // private menu: MenuController;
+  private platform: Platform;
+
+  /*****************************************************************************
+   * constructor
+   */
 
   constructor(
 
-    public platform:               Platform,
-    public configService:          ConfigService
+    platform:               Platform,
+    // menu:                   MenuController,
+    configService:          ConfigService
 
   ) {
 
-    this.config = {};
+    this.platform = platform;
+    // this.menu = menu;
+    this.configService = configService;
     this.initializeApp();
 
   }
 
   /*****************************************************************************
-  * ngOnInit
-  */
+   * ngOnInit
+   */
 
   public ngOnInit(): void {
-    //console.log('App ngOnInit');
+    // console.log('App ngOnInit');
     this.configService.init().then((data) => {
       this.config = data;
       // Define which page the app should show by default
@@ -110,23 +119,23 @@ export class GovernessApp implements OnInit {
   }
 
   /*****************************************************************************
-  * initializeApp
-  */
+   * initializeApp
+   */
 
   private initializeApp(): void {
     this.platform.ready().then(() => {
-      StatusBar.styleDefault();
-      //console.log('initializeApp called');
-      //console.log('environment ', environment);
+      console.log('initializeApp called');
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+      Splashscreen.hide();
     });
   }
 
   /*****************************************************************************
-  * openPage
-  * @param {Page Object}
-  */
+   * openPage
+   * @param {Page Object}
+   */
 
   public openPage(page: any): void {
     // Store as lastView in config, if enabled
@@ -138,4 +147,5 @@ export class GovernessApp implements OnInit {
     // Navigate to the new page, if it is not the current page
     this.nav.setRoot(page.component);
   }
+
 }

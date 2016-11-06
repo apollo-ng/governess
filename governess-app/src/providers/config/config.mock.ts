@@ -1,5 +1,5 @@
-export let AppConfigMock = {
-  'clientID': '',
+export let appConfigMock: any = {
+  'cid'     : '',
   'userLang': 'en',
   'theme'   : 'default-dark',
   'audio'   : true,

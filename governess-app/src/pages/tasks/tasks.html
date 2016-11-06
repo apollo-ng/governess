@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-navbar>
 
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
     <ion-buttons end>
       <button ion-button (click)="addTask()">
@@ -24,7 +24,7 @@
 
 <ion-content class="task-list">
   <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
-    <ion-item-sliding *ngFor="let task of tasks; let p = index">
+    <ion-item-sliding *ngFor="let task of tasks; let p = index" [ngClass]="{'odd-row': p % 2}">
       <div ion-item [ngClass]="{ active: task.tid === config.taskActive }">
         <ion-icon *ngIf="task.constraints && task.tid !== config.taskActive" item-left name="checkmark-circle-outline"
           (click)="activateTask(task.tid)"

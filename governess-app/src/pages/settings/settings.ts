@@ -1,6 +1,5 @@
 import { Component }        from '@angular/core';
 import { NavController,
-         ViewController,
          ModalController,
          ToastController,
          AlertController }  from 'ionic-angular';
@@ -11,68 +10,96 @@ import { TaskService }      from '../../providers/tasks/tasks';
 
 import { SettingsHelp }     from './settings.help';
 
-/******************************************************************************/
-
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
 @Component ({
   selector: 'settings-page',
-  templateUrl: 'settings.html'
+  templateUrl: 'settings.html',
 })
 
 /*******************************************************************************
  *
- *     SettingsPage
+ *   SettingsPage
+ *
  */
 
 export class SettingsPage {
 
-  public config:            any;
+  public navCtrl:         NavController;
+  public toastCtrl:       ToastController;
+  public modalCtrl:       ModalController;
+  public alertCtrl:       AlertController;
+  public configService:   ConfigService;
+  public taskService:     TaskService;
 
-  //////////////////////////////////////////////////////////////////////
+  public config: any;
+
+  /*****************************************************************************
+   * constructor
+   */
 
   constructor (
 
-    public navCtrl:         NavController,
-    public toastCtrl:       ToastController,
-    public modalCtrl:       ModalController,
-    public alertCtrl:       AlertController,
-    public configService:   ConfigService,
-    public taskService:     TaskService
+    navCtrl:         NavController,
+    toastCtrl:       ToastController,
+    modalCtrl:       ModalController,
+    alertCtrl:       AlertController,
+    configService:   ConfigService,
+    taskService:     TaskService
 
-  ) { /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  ) {
+
+    this.navCtrl = navCtrl;
+    this.toastCtrl = toastCtrl;
+    this.modalCtrl = modalCtrl;
+    this.alertCtrl = alertCtrl;
+    this.configService = configService;
+    this.taskService = taskService;
 
     this.config = {};
 
-    this.init().then(data => {
-      //console.log('I seem to be needed to get the promise')
+    this.init().then( () => {
+      // console.log('I seem to be needed to get the promise');
     });
 
   }
 
-  //////////////////////////////////////////////////////////////////////
+  /*****************************************************************************
+   * init
+   * @return {Appliance} Object Promise
+   */
 
-  // as init is async separate logic here so it's testable
   public init(): Promise<void> {
     return this.configService.get().then((data: string) => {
-      //console.log('settings ngoninit configdata', data);
+      console.log('settings ngoninit configdata', data);
       this.config = JSON.parse(data);
-      //console.log(this.config);
+      // console.log(this.config);
     });
   }
+
+  /*****************************************************************************
+   * openHelp
+   */
 
   public openHelp(): void {
     let modal: any = this.modalCtrl.create(SettingsHelp);
     modal.present(modal);
   }
 
+  /*****************************************************************************
+   * updateConfig
+   */
+
   public updateConfig(): any {
     this.configService.update(this.config);
+    this.config = this.configService.config;
   }
 
-  // Full Client Profile/Device/Settings Config-Reset (Factory Reset)
+  /*****************************************************************************
+   * Full Client Profile/Device/Settings Config-Reset (Factory Reset)
+   */
 
-  public resetCPD(e: any): void {
+  public resetCPD(): void {
     Vibration.vibrate(400);
     let confirm: any = this.alertCtrl.create({
       title: 'Please confirm:',
@@ -88,7 +115,7 @@ export class SettingsPage {
         {
           text: 'Yes',
           handler: () => {
-            //this.config = this.configService.init();
+            // this.config = this.configService.init();
             this.taskService.reset();
 
             let toast: any = this.toastCtrl.create({
