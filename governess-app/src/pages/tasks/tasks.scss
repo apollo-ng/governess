@@ -22,6 +22,8 @@ tasks-page {
   .searchbar-input {
     background-color: rgba(0, 0, 0, 0.3) !important;
     border-radius: 0 !important;
+    padding: 6px 60px !important;
+    color: #fafafa !important;
   }
 
   ion-searchbar {
@@ -53,6 +55,10 @@ tasks-page {
       text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
     }
 
+    ion-label {
+      padding-left: 3px;
+    }
+
     .list-md ion-item-options {
       border-bottom: 0;
     }
@@ -64,9 +70,9 @@ tasks-page {
     }
 
     .item {
-      border-top: 1px solid #4f4e4a !important;
+      border-top: 1px solid #3f3e3a !important;
       border-bottom: 1px solid #0f0e0a !important;
-      background: #1f1e1a;
+      background: #23221e;
     }
 
     .item-inner {
@@ -90,10 +96,12 @@ tasks-page {
 
     .active {
       background: #2f2e2a !important;
-      background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%) !important;
+      background: -moz-linear-gradient(top, #3f2e2a 0%, #1f1e1a 100%) !important;
       background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%) !important;
-      background: linear-gradient(to bottom, #2f2e2a 0%,#1f1e1a 100%) !important;
+      background: linear-gradient(to bottom, #3f3e3a 0%,#2f2e2a 100%) !important;
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f2e2a', endColorstr='#1f1e1a',GradientType=0 );
+      border-bottom: 1px solid #000 !important;
+      box-shadow: inset 0 0 42px 0 rgba(#1f1e1a, 0.5);
     }
 
     .item-md ion-icon[item-left] {
@@ -102,7 +110,7 @@ tasks-page {
 
     .odd-row {
       .item {
-      background: #2f2e2a;
+      background: rgb(41, 40, 37);
     }
     }
 
