@@ -1,4 +1,4 @@
-import { Component }                from '@angular/core';
+import { Component, ViewChild }     from '@angular/core';
 
 import { NavParams,
          NavController,
@@ -7,8 +7,10 @@ import { NavParams,
          PopoverController,
          ActionSheetController }    from 'ionic-angular';
 
+import { ChartComponent }           from 'angular2-chartjs';
+
 import { TaskService }              from '../../providers/tasks/tasks';
-import { TimeformatSelector }       from '../../components/timeformat-selector';
+import { lineChartGlobals }         from '../../components/chart-globals';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,11 +27,14 @@ import { TimeformatSelector }       from '../../components/timeformat-selector';
 
 export class TaskDetailPage {
 
+  @ViewChild(ChartComponent) public chartc: ChartComponent;
+
   public task: any;
   public data: any;
   public chartHeight: number;
   public chartHeightAct: number;
   public lineChartData: any;
+  public lineChartOptions: any;
   public lineChartColours: any;
   public moduleView: number;
   public showMiniBar: boolean;
@@ -68,7 +73,16 @@ export class TaskDetailPage {
     this.moduleView = 0;
     this.showMiniBar = false;
     this.chartHeight = Math.floor(window.innerHeight / 2);
-    this.lineChartData = [{ data: [], label: 'Data' }];
+    this.lineChartData = { datasets: [] };
+    this.lineChartOptions = lineChartGlobals;
+
+    console.log(this.lineChartOptions);
+    /*
+    this.lineChartOptions.scales.xAxes[0].ticks.callback = function(value: number, t: any, p: any, task: any = this.task): any {
+      console.log(task);
+      return value;
+    },*/
+
     this.updateChart();
     console.log(this.chartHeight);
     this.newPointData = {
@@ -77,73 +91,6 @@ export class TaskDetailPage {
       note: '',
     };
   }
-
-  public lineChartOptions: any = {
-    animation: false,
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: { display: false },
-    tooltips: {
-      enabled: false,
-    },
-    scales: {
-      xAxes: [
-        {
-          type: 'time',
-          time: {
-            unit: 'second',
-            unitStepSize: 30,
-            displayFormats: {
-              second: 'HH:mm:ss',
-            },
-          },
-          gridLines: {
-            color: 'rgba(255,255,255,0.15)',
-            drawTicks: false,
-          },
-          ticks: {
-            beginAtZero: false,
-            fontColor: '#d8d3c5',
-            fontSize: 14,
-            fontFamily: 'DIN',
-            padding: 0,
-          },
-        },
-      ],
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          position: 'left',
-          gridLines: {
-            color: 'rgba(255,255,255,0.15)',
-            drawTicks: false,
-          },
-          ticks: {
-            beginAtZero: false,
-            fontColor: '#d8d3c5',
-            fontFamily: 'DIN',
-            maxTicksLimit: 8,
-          },
-        },
-        {
-          id: 'y-axis-2',
-          type: 'linear',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,255,255,0.15)',
-            drawTicks: false,
-          },
-          ticks: {
-            beginAtZero: false,
-            fontColor: '#d8d3c5',
-            fontFamily: 'DIN',
-            maxTicksLimit: 2,
-          },
-        },
-      ],
-    },
-  };
 
   public chartClicked(e: any): void {
     console.log(e);
@@ -159,14 +106,7 @@ export class TaskDetailPage {
     if (newHeight > 800) newHeight = 800;
     this.chartHeight = newHeight;
     console.log(this.chartHeight);
-/*
-    this.lineChartData = this.lineChartData.slice();
-    if (e.isFinal) {
-      this.chartHeight = this.chartHeightAct;
-      //this.updateChart();
-      this.lineChartData = this.lineChartData.slice();
-    }
-    */
+    if (this.chartc) this.chartc.chart.resize();
   }
 
   public convertRGBA(color: string, alpha: number): string {
@@ -182,47 +122,38 @@ export class TaskDetailPage {
 
   public updateChart(): void {
 
-    // Update the view parameters
-    let _lineChartColours: any = new Array();
-    for (let i: number = 0; i < this.data.length; i++) {
-      _lineChartColours[i] = {
-        backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
-        borderColor: this.data[i].options.color,
-        borderWidth: this.data[i].options.strokeWidth,
-        pointRadius: this.data[i].options.pointRadius,
-        pointBorderWidth: this.data[i].options.pointBorderWidth,
-        pointBackgroundColor: '#fff',
-        pointBorderColor: this.data[i].options.color,
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-      };
-    }
-
     // Update the datapoints (y axis)
     let _lineChartData: any = new Array();
     for (let i: number = 0; i < this.data.length; i++) {
-      _lineChartData[i] = {
-        data: new Array(this.data[i].points.length),
-        label: this.data[i].control,
-        lineTension: 0,
-        yAxisID: this.data[i].options.yAxisID,
-        fill: this.data[i].options.fill,
-      };
-      for (let j: number = 0; j < this.data[i].points.length; j++) {
-        _lineChartData[i].data[j] = {
-          'x': new Date(this.data[i].points[j][0] * 1000).toISOString(),
-          'y': this.data[i].points[j][1],
+      if (this.data[i].show === true) {
+        _lineChartData[i] = {
+          label: this.data[i].control,
+          lineTension: 0,
+          yAxisID: this.data[i].options.yAxisID,
+          fill: this.data[i].options.fill,
+          backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
+          borderColor: this.data[i].options.color,
+          borderWidth: this.data[i].options.strokeWidth,
+          pointRadius: this.data[i].options.pointRadius,
+          pointBorderWidth: this.data[i].options.pointBorderWidth,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: this.data[i].options.color,
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+          data: new Array(this.data[i].points.length),
         };
+        for (let j: number = 0; j < this.data[i].points.length; j++) {
+          _lineChartData[i].data[j] = {
+            'x': this.data[i].points[j][0],
+            'y': this.data[i].points[j][1],
+          };
+        }
       }
     }
-    this.lineChartData = _lineChartData;
-    this.lineChartColours = _lineChartColours;
-    this.lineChartData = this.lineChartData.slice();
-  }
 
-  public setModuleView(view: number): void {
-    this.moduleView = view;
-    console.log('modview', this.moduleView);
+    this.lineChartData.datasets = _lineChartData;
+    console.log('Updated chart:', this.lineChartData);
+    if (this.chartc) this.chartc.chart.update();
   }
 
   public taskActionSheet(): void {
@@ -354,15 +285,18 @@ export class TaskDetailPage {
   }
 
   /*****************************************************************************
-   * changeTimeFormat
-   * @param {event} ?
+   * displayTimeFormat
+   * @param seconds: number
+   * @return formatedTime: string
    */
 
-  public changeTimeFormat(myEvent: any): void {
-    let popover: any = this.popoverCtrl.create(TimeformatSelector);
-    popover.present({
-      ev: myEvent,
-    });
+  public displayTimeFormat(seconds: number): any {
+    if (this.task.timeFormat === 'auto') {
+      return seconds;
+    } else {
+      return seconds * 1000;
+    }
+
   }
 
   /*****************************************************************************
@@ -394,9 +328,19 @@ export class TaskDetailPage {
     return slope;
   }
 
+  /*****************************************************************************
+   * dropPoint
+   * @param points: any, point: number
+   */
+
   public dropPoint(points: any, point: number): void {
     console.log('FIXME: I should drop the point ', points, point);
   }
+
+  /*****************************************************************************
+   * addPoint
+   * @param points: any
+   */
 
   public addPoint(): void {
     console.log('FIXME: I should add the point ');

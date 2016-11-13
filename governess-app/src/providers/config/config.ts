@@ -80,4 +80,9 @@ export class ConfigService {
     this.storage.set('config', JSON.stringify(config));
   }
 
+  public updateD(): void {
+    console.log('UpdatingD config...');
+    this.storage.set('config', JSON.stringify(this.config));
+  }
+
 }

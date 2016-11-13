@@ -17,7 +17,7 @@
                   : 'transparent',
                   'background': m === moduleView ?
                     convertRGBA(data[m].options.color, 0.15)
-                  : 'rgba(10,9,4,0.5)'
+                  : 'rgba(10,9,4,0.3)'
                  }">
                  <ion-icon name="{{module.icon}}"></ion-icon>
                  <span class="minibar-button-txt">{{module.control}}</span>
@@ -29,18 +29,14 @@
 
 </ion-header>
 
-<ion-content class="task-detail no-scroll" style="overflow-y: hidden;" scroll="false">
+<ion-content class="task-detail">
 
-  <div class="chart-container" >
-    <canvas baseChart class="chart"
-    [datasets]="lineChartData"
-    [options]="lineChartOptions"
-    [colors]="lineChartColours"
-    [chartType]="'line'"
-    (chartHover)="chartHovered($event)"
-    (chartClick)="chartClicked($event)"
-    [style.height]="chartHeight + 'px'">
-    </canvas>
+  <div class="chart-container">
+    <chart [type]="'line'"
+           [data]="lineChartData"
+           [options]="lineChartOptions"
+           [style.height]="chartHeight + 'px'">
+    </chart>
   </div>
 
   <div class="segment-splitbar">
@@ -102,11 +98,20 @@
         (ngModelChange)="updateChart()"/>
       </ion-col>
       <ion-col>
-        <button ion-button full class="rb-glass"
-        (click)="changeTimeFormat($event)">
-          <ion-icon name="watch"></ion-icon>
-          <span class="minibar-button-txt">Time</span>
-        </button>
+        <ion-select [(ngModel)]="task.timeFormat"
+                    (ngModelChange)="updateChart()"
+                    class="rb-glass"
+                    placeholder="Time"
+                    [selectOptions]="{ title: 'Time Format', subTitle: 'Change your timeframe if auto doesnt do it for you'}"
+                    cancelText="Cancel"
+                    okText="Select">
+          <ion-option value="auto">Auto</ion-option>
+          <ion-option value="ssss">Miliseconds</ion-option>
+          <ion-option value="ss">Seconds</ion-option>
+          <ion-option value="mm:ss">Minutes</ion-option>
+          <ion-option value="hh:mm">Hours</ion-option>
+          <ion-option value="d:hh:mm">Days</ion-option>
+        </ion-select>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,7 +1,17 @@
+'use strict';
+
 import { NgModule }               from '@angular/core';
 import { IonicApp,
          IonicModule }            from 'ionic-angular';
 import { Storage }                from '@ionic/storage';
+
+import { ChartsModule }           from 'ng2-charts/components/charts/charts';
+import { ChartModule }            from 'angular2-chartjs';
+
+import { Http }                   from '@angular/http';
+import { TranslateModule,
+         TranslateLoader,
+         TranslateStaticLoader }  from 'ng2-translate/ng2-translate';
 
 import { GovernessApp }           from './app.component';
 
@@ -26,9 +36,11 @@ import { StatusService }          from '../providers/status/status';
 import { ApplianceService }       from '../providers/appliance/appliance';
 import { TaskService }            from '../providers/tasks/tasks';
 
-import { ChartsModule }           from 'ng2-charts/components/charts/charts';
+////////////////////////////////////////////////////////////////////////////////
 
-import { TimeformatSelector }     from '../components/timeformat-selector';
+export function createTranslateLoader(http: Http): any {
+    return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,14 +59,20 @@ import { TimeformatSelector }     from '../components/timeformat-selector';
     TasksPage,
     TasksHelp,
     TaskDetailPage,
-    TimeformatSelector,
   ],
   imports: [
     ChartsModule,
-    IonicModule.forRoot(GovernessApp),
-  ],
-  exports: [
-    TimeformatSelector,
+    ChartModule,
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (createTranslateLoader),
+      deps: [Http],
+    }),
+    IonicModule.forRoot(GovernessApp, {
+      mode: 'md',
+      menuType: 'overlay',
+      activator: 'ripple',
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -71,7 +89,6 @@ import { TimeformatSelector }     from '../components/timeformat-selector';
     TasksPage,
     TasksHelp,
     TaskDetailPage,
-    TimeformatSelector,
   ],
   providers: [
     Storage,

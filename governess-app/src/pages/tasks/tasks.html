@@ -12,7 +12,12 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-searchbar (input)="searchInput($event)" (ionClear)="searchClear($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="filterTasks($event)"
+                   (ionClear)="clearFilter($event)"
+                   [showCancelButton]="shouldShowCancel"
+                   placeholder="Filter"
+                   autocorrect="off">
+    </ion-searchbar>
     <ion-buttons end>
       <button ion-button (click)="addTask()">
         <ion-icon name="add" ></ion-icon>
@@ -24,23 +29,39 @@
 
 <ion-content class="task-list">
   <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
-    <ion-item-sliding *ngFor="let task of tasks; let p = index" [ngClass]="{'odd-row': p % 2}">
-      <div ion-item [ngClass]="{ active: task.tid === config.taskActive }">
-        <ion-icon *ngIf="task.constraints && task.tid !== config.taskActive" item-left name="checkmark-circle-outline"
-          (click)="activateTask(task.tid)"
-          [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)'}">
+    <ion-item-sliding *ngFor="let task of tasks; let p = index"
+                      [ngClass]="{'odd-row': p % 2, 'active': task.tid === config.taskActive}">
+      <div ion-item>
+        <ion-icon *ngIf="task.constraints && task.tid !== config.taskActive"
+                  (click)="activateTask(task.tid)"
+                  [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)'}"
+                  item-left name="checkmark-circle-outline">
         </ion-icon>
-        <ion-icon *ngIf="task.constraints && task.tid === config.taskActive" item-left name="checkmark-circle"
-          (click)="activateTask(task.tid)"
-          [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)'}">
+        <ion-icon *ngIf="task.constraints && task.tid === config.taskActive"
+                  (click)="activateTask(task.tid)"
+                  [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)'}"
+                  item-left name="checkmark-circle">
         </ion-icon>
-        <ion-icon *ngIf="!task.constraints" item-left name="radio-button-off"
-          [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}">
+        <ion-icon *ngIf="!task.constraints"
+                  [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}"
+                  item-left name="radio-button-off">
         </ion-icon>
         <div tappable (click)="goToTaskDetail(task)">
           <h2>{{task.name}}</h2>
-          <p><ion-icon name="time" item-left [ngStyle]="{ 'margin': '0'}"> {{calculateRuntime(task)}}</ion-icon></p>
-          <p><ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}"> {{task.created | date: 'yyyy-MM-dd HH:mm'}}</ion-icon></p>
+          <table>
+            <tr>
+              <td>
+                <ion-icon name="time" item-left [ngStyle]="{ 'margin': '0'}">
+                  {{calculateRuntime(task)}}
+                </ion-icon>
+              </td>
+              <td>
+                <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}">
+                  {{task.created | date: 'yyyy-MM-dd HH:mm'}}
+                </ion-icon>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
       <ion-item-options side="right">

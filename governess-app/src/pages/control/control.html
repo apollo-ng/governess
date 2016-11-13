@@ -20,13 +20,13 @@
 
   <ion-grid dark class="control-display" style="border-top: 1px solid #3f3e3a">
     <ion-row>
-      <ion-col [ngStyle]="{'border-color': '#c97819', 'color': '#c97819'}">
+      <ion-col [ngStyle]="{'border-color': 'rgba(201, 120, 25, 0.6)', 'color': '#c97819'}">
         <ion-grid class="icon-display">
           <ion-row>
             <ion-col width-10>
               <ion-icon name="thermometer"></ion-icon>
             </ion-col>
-            <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px'}">
+            <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px', 'background': 'rgba(11, 10, 6, 0.6)' }">
               <span class="value_major">
               {{status?.temperature_major}}.
             </span>
@@ -40,13 +40,13 @@
           </ion-row>
         </ion-grid>
       </ion-col>
-      <ion-col [ngStyle]="{'border-color': '#a23016', 'color': '#a23016'}">
+      <ion-col [ngStyle]="{'border-color': 'rgba(162, 48, 22, 0.59)', 'color': '#a23016'}">
         <ion-grid class="icon-display">
           <ion-row>
             <ion-col width-10>
               <ion-icon name="thermometer"></ion-icon>
             </ion-col>
-            <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px'}">
+            <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px', 'background': 'rgba(11, 10, 6, 0.6)' }">
               <span class="value_major">
               {{status?.temperature_major}}.
             </span>
@@ -66,7 +66,7 @@
       <ion-col width-10 class="icon-led">
         <ion-icon name="snow"></ion-icon>
       </ion-col>
-      <ion-col width-10 class="icon-led" [ngStyle]="{'border-color': 'rgb(144, 73, 249)'}">
+      <ion-col width-10 class="icon-led" [ngStyle]="{'border-color': 'rgba(144, 73, 249, 0.6)'}">
         <ion-icon name="nuclear" [ngStyle]="{'color': 'rgb(144, 73, 249)', 'text-shadow': '0px 0px 25px rgba(109, 128, 6, 0.5), 0px 0px 25px rgba(109, 128, 6, 0.5)'}"></ion-icon>
       </ion-col>
       <ion-col width-10 class="icon-led">

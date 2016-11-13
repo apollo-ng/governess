@@ -3,11 +3,12 @@ import { Component,
          ViewChild }                from '@angular/core';
 
 import { Platform,
-         // MenuController,
          Nav }                      from 'ionic-angular';
 
 import { Splashscreen,
          StatusBar }                from 'ionic-native';
+
+import { TranslateService }         from 'ng2-translate';
 
 import { ConfigService }            from '../providers/config/config';
 
@@ -44,22 +45,12 @@ export class GovernessApp implements OnInit {
 
   @ViewChild(Nav) public nav: Nav;
 
-  public configService:   ConfigService;
-  public config:          any = {};
-  public rootPage:        any;
+  public configService: ConfigService;
+  public translate: TranslateService;
+  public config: any = {};
+  public rootPage: any;
 
-  // Populate the side menu
-  public pages: PageObj[] = [
-    { title: 'Control',   component: ControlPage,   idx: 0, icon: 'speedometer' },
-    { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
-    { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
-    { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
-    { title: 'Settings',  component: SettingsPage,  idx: 4, icon: 'settings' },
-    { title: 'Help',      component: HelpPage,      idx: 5, icon: 'help-buoy' },
-    { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
-  ];
-
-  // private menu: MenuController;
+  private pages: PageObj[];
   private platform: Platform;
 
   /*****************************************************************************
@@ -68,15 +59,20 @@ export class GovernessApp implements OnInit {
 
   constructor(
 
-    platform:               Platform,
-    // menu:                   MenuController,
-    configService:          ConfigService
+    platform: Platform,
+    configService: ConfigService,
+    translate: TranslateService
 
   ) {
 
     this.platform = platform;
-    // this.menu = menu;
+    this.translate = translate;
     this.configService = configService;
+
+    // Initialize translations
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+
     this.initializeApp();
 
   }
@@ -86,9 +82,23 @@ export class GovernessApp implements OnInit {
    */
 
   public ngOnInit(): void {
-    // console.log('App ngOnInit');
+
+    // Wrapping into configService.init to make sure that we have a config
+    // FIXME: This seems kinda messy, isn't there a more elegant way?
     this.configService.init().then((data) => {
       this.config = data;
+
+      // Populate the side menu
+      this.pages = [
+        { title: 'Control',   component: ControlPage,   idx: 0, icon: 'speedometer' },
+        { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
+        { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
+        { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
+        { title: 'Settings',  component: SettingsPage,  idx: 4, icon: 'settings' },
+        { title: this.translate.instant('Help'),      component: HelpPage,      idx: 5, icon: 'help-buoy' },
+        { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
+      ];
+
       // Define which page the app should show by default
       if (this.config.viewPref === 'last') {
 

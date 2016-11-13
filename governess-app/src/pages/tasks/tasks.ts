@@ -56,6 +56,7 @@ export class TasksPage {
     this.initConfig().then( () => {
       this.taskService.pull();
       this.tasks = this.taskService.tasks;
+      // this.config = this.configService.config;
       console.log(this.tasks);
     });
 
@@ -174,11 +175,11 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * searchInput
+   * filterTasks
    * @param
    */
 
-  public searchInput(event: any): void {
+  public filterTasks(event: any): void {
     this.tasks = this.taskService.tasks;
     let val: string = event.target.value;
     if (val && val.trim() !== '') {
@@ -196,7 +197,7 @@ export class TasksPage {
    * @param
    */
 
-  public searchClear(event: any): void {
+  public clearFilter(event: any): void {
     this.tasks = this.taskService.tasks;
     event.stopPropagation();
   }
