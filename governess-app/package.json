@@ -1,6 +1,6 @@
 {
   "name": "governess-app",
-  "description": "iontest1: An Ionic project",
+  "description": "Angular2/Ionic2 hybrid user interface for governess",
   "version": "1.0.0",
   "license": "GPL-3.0",
   "homepage": "https://apollo.open-resource.org/lab:governess:app",
@@ -20,7 +20,8 @@
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build",
-    "postinstall": "ionic state restore",
+    "postinstall": "ionic state restore && webdriver-manager update",
+    "e2e": "protractor tests/e2e/protractor.conf.js",
     "electron": "electron .",
     "electron dist-linux-x64": "electron-packager . governess-app --app-version=1.0.0 --platform=linux --arch=x64 --prune --asar --overwrite --ignore=config --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=src --ignore=hooks"
   },
@@ -35,20 +36,26 @@
     "@angular/platform-browser-dynamic": "2.1.1",
     "@angular/platform-server": "2.1.1",
     "@ionic/storage": "1.1.6",
-    "angular2-chartjs": "^0.1.5",
+    "angular2-chartjs": "0.1.5",
     "angular2-uuid": "1.1.0",
     "ionic-angular": "2.0.0-rc.2",
     "ionic-native": "2.2.3",
     "ionicons": "3.0.0",
     "ng2-charts": "1.4.1",
-    "ng2-translate": "^4.0.0",
+    "ng2-translate": "4.0.0",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.21"
   },
   "devDependencies": {
     "@ionic/app-scripts": "0.0.39",
-    "electron": "1.4.4",
+    "@types/jasmine": "2.5.36",
+    "electron": "1.4.6",
     "electron-packager": "8.2.0",
+    "jasmine-core": "2.5.2",
+    "jasmine-spec-reporter": "2.7.0",
+    "protractor": "4.0.11",
+    "protractor-jasmine2-screenshot-reporter": "0.3.2",
+    "ts-node": "1.7.0",
     "typescript": "2.0.6"
   },
   "cordovaPlugins": [
