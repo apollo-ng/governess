@@ -26,6 +26,7 @@ export class TasksPage {
 
   public tasks: any;
   public config: any = {};
+  public filteredList: boolean = false;
 
   public navCtrl: NavController;
   public alertCtrl: AlertController;
@@ -56,8 +57,6 @@ export class TasksPage {
     this.initConfig().then( () => {
       this.taskService.pull();
       this.tasks = this.taskService.tasks;
-      // this.config = this.configService.config;
-      console.log(this.tasks);
     });
 
   }
@@ -69,22 +68,8 @@ export class TasksPage {
 
   public initConfig(): Promise<void> {
     return this.configService.get().then((data: string) => {
-      // console.log('settings ngoninit configdata', data);
       this.config = JSON.parse(data);
-      // console.log(this.config);
-    });
-  }
-
-  /*****************************************************************************
-   * initTasks
-   * @return Promise
-   */
-
-  public initTasks(): Promise<void> {
-    return this.taskService.get().then((data: string) => {
-      // console.log('settings ngoninit configdata', data);
-      this.tasks = JSON.parse(data);
-      // console.log(this.config);
+      console.log(this.config);
     });
   }
 
@@ -179,11 +164,12 @@ export class TasksPage {
    * @param
    */
 
-  public filterTasks(event: any): void {
+  public filterTasks(name: any): void {
     this.tasks = this.taskService.tasks;
-    let val: string = event.target.value;
+    let val: string = name.target.value;
     if (val && val.trim() !== '') {
-      this.tasks = this.tasks.filter((task) => {
+      this.filteredList = true;
+      this.tasks = this.tasks.filter( (task) => {
         return (
           task.name.toLowerCase().
           indexOf(val.toLowerCase()) > -1
@@ -193,11 +179,12 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * searchClear - Disengage Search Filter
+   * clearFilter - Disengage Search Filter
    * @param
    */
 
   public clearFilter(event: any): void {
+    this.filteredList = false;
     this.tasks = this.taskService.tasks;
     event.stopPropagation();
   }

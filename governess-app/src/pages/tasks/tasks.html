@@ -28,7 +28,7 @@
 </ion-header>
 
 <ion-content class="task-list">
-  <ion-list reorder="true" (ionItemReorder)="reorderTasks($event)">
+  <ion-list *ngIf="tasks?.length > 0" reorder="true" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks; let p = index"
                       [ngClass]="{'odd-row': p % 2, 'active': task.tid === config.taskActive}">
       <div ion-item>
@@ -46,7 +46,7 @@
                   [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}"
                   item-left name="radio-button-off">
         </ion-icon>
-        <div tappable (click)="goToTaskDetail(task)" class="task-list-item">
+        <div (click)="goToTaskDetail(task)" class="task-list-item">
           <h2>{{task.name}}</h2>
           <table>
             <tr>
@@ -65,14 +65,21 @@
         </div>
       </div>
       <ion-item-options side="right">
-        <button ion-button icon-only color="secondary" (click)="copyTask(p)">
+        <button ion-button icon-only color="secondary" (click)="copyTask(p)" class="rb-white">
           <ion-icon name="copy"></ion-icon>
         </button>
-        <button ion-button icon-only color="danger" (click)="removeTask(p,task.name)">
+        <button ion-button icon-only color="danger" (click)="removeTask(p,task.name)" class="rb-red">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <div *ngIf="!filteredList && (!tasks || tasks.length === 0)" class="zero-res-list">
+    This appliance has no tasks
+  </div>
+  <div *ngIf="filteredList && (!tasks || tasks.length === 0)" class="zero-res-list">
+    No tasks match your filter
+  </div>
 
 </ion-content>
