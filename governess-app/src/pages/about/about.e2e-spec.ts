@@ -22,7 +22,7 @@ describe('AboutPage', () => {
     expect(element(by.css('ion-navbar:first-child')).getText()).toContain('About');
   });
 
-  it('has <nav>', () => {
+  it('has a navbar', () => {
     expect(element(by.css('ion-navbar'))
     .isPresent()).toEqual(true);
   });

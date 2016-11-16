@@ -1,5 +1,3 @@
-'use strict';
-
 import { NgModule }               from '@angular/core';
 import { IonicApp,
          IonicModule }            from 'ionic-angular';
@@ -39,7 +37,8 @@ import { TaskService }            from '../providers/tasks/tasks';
 ////////////////////////////////////////////////////////////////////////////////
 
 export function createTranslateLoader(http: Http): any {
-    return new TranslateStaticLoader(http, './assets/i18n', '.json');
+  'use strict';
+  return new TranslateStaticLoader(http, './assets/i18n', '.json');
 }
 
 ////////////////////////////////////////////////////////////////////////////////

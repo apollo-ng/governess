@@ -7,7 +7,6 @@ import { NavParams,
          ActionSheetController }    from 'ionic-angular';
 
 import { ApplianceService }         from '../../providers/appliance/appliance';
-import { TimeformatSelector }       from '../../components/timeformat-selector';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -162,18 +161,6 @@ export class ApplianceDetailPage {
       ],
     });
     confirm.present();
-  }
-
-  /*****************************************************************************
-   * presentPopover
-   * @param
-   */
-
-  public presentPopover(myEvent: any): void {
-    let popover: any = this.popoverCtrl.create(TimeformatSelector);
-    popover.present({
-      ev: myEvent,
-    });
   }
 
   /*****************************************************************************

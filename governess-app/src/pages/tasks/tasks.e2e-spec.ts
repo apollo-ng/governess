@@ -22,9 +22,25 @@ describe('TasksPage', () => {
     expect(element(by.css('ion-navbar:first-child')).getText()).toContain('Tasks');
   });
 
-  it('has <nav>', () => {
+  it('has a navbar', () => {
     expect(element(by.css('ion-navbar'))
     .isPresent()).toEqual(true);
+  });
+
+  it('has a search box to filter tasks', () => {
+    expect(element(by.css('.searchbar-input')).isPresent()).toEqual(true);
+  });
+
+  it('has a list of tasks', () => {
+    expect(element(by.css('ion-list')).isPresent()).toEqual(true);
+  });
+
+  it('opens TaskDetailsPage', () => {
+    element.all(by.className('task-list-item')).then((tasks) => {
+      tasks[0].click();
+      browser.driver.sleep(500); // wait for the animation
+      expect(element(by.css('ion-title')).getText()).toContain('Reflow Lead-Free');
+    });
   });
 
 });
