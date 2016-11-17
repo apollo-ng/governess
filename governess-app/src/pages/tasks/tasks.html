@@ -3,7 +3,7 @@
     <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Tasks</ion-title>
+    <ion-title>{{'Tasks' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="openHelp()">
         <ion-icon name="cube"></ion-icon>
@@ -14,7 +14,6 @@
   <ion-toolbar>
     <ion-searchbar (ionInput)="filterTasks($event)"
                    (ionClear)="clearFilter($event)"
-                   [showCancelButton]="shouldShowCancel"
                    placeholder="Filter"
                    autocorrect="off">
     </ion-searchbar>

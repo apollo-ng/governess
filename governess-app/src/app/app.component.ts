@@ -50,7 +50,7 @@ export class GovernessApp implements OnInit {
   public config: any = {};
   public rootPage: any;
 
-  private pages: PageObj[];
+  public pages: PageObj[];
   private platform: Platform;
 
   /*****************************************************************************
