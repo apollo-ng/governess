@@ -12,6 +12,14 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
 
+  <!-- prevent white flash during JS bootstrapping -->
+  <style type="text/css">
+    html { background-color: #2f2e2a; }
+    body { background-color: #2f2e2a; }
+  </style>
+
+  <link href="build/main.css" rel="stylesheet">
+
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
 
@@ -23,8 +31,6 @@
         .catch(err => console.log('Error', err));
     }
   </script>-->
-
-  <link href="build/main.css" rel="stylesheet">
 
 </head>
 <body>

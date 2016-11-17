@@ -13,7 +13,7 @@ are currently in the process of implementation.
 
 ## Available Platforms
 
-### Web
+### Browser
 
 HTML5/Progressive Web-client delivered by governess-server to
 any modern browser on any platform.
@@ -40,9 +40,9 @@ extend and coherently test the client.
 Known to work NodeJS & NPM versions:
 
   * NodeJS
-    * >= 4.4.1 (tested with gentoo-portage stable)
+    * \>= 4.4.1 (tested with gentoo-portage stable)
   * NPM
-    * >= 3.10.5 (tested with gentoo-portage stable + npm update)
+    * \>= 3.10.5 (tested with gentoo-portage stable + npm update)
 
 ### Global NodeJS-Requirements
 
@@ -68,21 +68,36 @@ connection bandwidth and your host's compiling performance.
 
     $ ionic serve (-l)
 
-### Run in Electron wrapper
+### Run in Browser
 
-    $ npm run electron
+Open http://localhost:8100
 
 ### Run on Android via ADB
 
     $ ionic run android
 
+### Run in Electron wrapper
+
+    $ npm run electron
+
 ## Tests
 
-Tests are not available anymore for RC0+, since the whole structure
-has changed and the clicker crowd needs time to catch up first how
-to proceed further.
+### Unit testing
+
+Unit testing is still not yet available again.
+
+### E2E testing
+
+End-to-End tests are available and configured in tests/e2e. This is also where
+the report and automated screenshots can be found.
+
+    $ npm run e2e
 
 ## Building
+
+### Browser
+
+    $ ionic build browser
 
 ### Android
 
@@ -90,11 +105,13 @@ to proceed further.
 
 ### Electron
 
-    $ ionic build browser
-
 #### Linux
 
     $ npm run electron dist-linux-x64
+
+#### Other OS
+
+Not available/tested yet.
 
 ## Bootstrapping from scratch
 
@@ -105,5 +122,7 @@ to proceed further.
 
 Please use the [issue tracker](https://github.com/apollo-ng/governess/issues)
 for governess related issues.
+
+### IRC
 
 Join #apollo on freenode.

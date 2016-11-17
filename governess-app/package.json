@@ -18,7 +18,7 @@
     "postinstall": "ionic state restore && webdriver-manager update",
     "e2e": "protractor tests/e2e/protractor.conf.js",
     "electron": "electron .",
-    "electron dist-linux-x64": "electron-packager . governess-app --app-version=1.0.0 --platform=linux --arch=x64 --prune --asar --overwrite --ignore=config --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=src --ignore=hooks"
+    "electron-dist-linux-x64": "ionic build browser && electron-packager . governess-app --out=platforms --app-version=1.0.0 --version-string.CompanyName=Apollo-NG --version-string.ProductName=GovernessApp --version-string.ProductVersion=1.0.0 --platform=linux --arch=x64 --icon=src/assets/icon/favicon.ico --prune --asar --overwrite --ignore=config --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=src --ignore=hooks"
   },
   "dependencies": {
     "@angular/common": "2.1.1",
