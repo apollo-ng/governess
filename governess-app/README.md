@@ -88,12 +88,14 @@ Unit testing is still not yet available again.
 
 ### E2E testing
 
-End-to-End tests are available and configured in tests/e2e. This is also where
-the report and automated screenshots can be found.
+End-to-End tests are available and configured in governess-app/tests/e2e.
+This is also where the report and automated screenshots can be found.
 
     $ npm run e2e
 
 ## Building
+
+Compiled production code is located below governess-app/platforms
 
 ### Browser
 
@@ -107,7 +109,7 @@ the report and automated screenshots can be found.
 
 #### Linux
 
-    $ npm run electron dist-linux-x64
+    $ npm run electron-dist-linux-x64
 
 #### Other OS
 
