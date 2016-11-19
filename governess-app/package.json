@@ -12,6 +12,9 @@
     "url": "https://github.com/apollo-ng/governess/issues"
   },
   "private": true,
+  "config": {
+    "ionic_source_map": "source-map"
+  },
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
@@ -43,9 +46,9 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "0.0.45",
-    "@types/jasmine": "2.5.36",
+    "@types/jasmine": "2.5.38",
     "electron": "1.4.7",
-    "electron-packager": "8.2.0",
+    "electron-packager": "8.3.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.7.0",
     "protractor": "4.0.11",

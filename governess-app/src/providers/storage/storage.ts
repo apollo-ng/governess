@@ -50,6 +50,8 @@ export class StorageService {
    */
 
   public set(key: string, value: string): Promise<{}> {
+    console.log('storageService set key', key);
+    console.log('storageService set value', value);
     return this.storage.set(key, value);
   }
 

@@ -2,6 +2,7 @@ export let applianceMock: Array<any> = [{
   'aid': 'e4d8edc4-6700-b16c-f8f3-783a87a352dc',
   'name': 'EKA KF412',
   'desc': 'Small convection-heat lab-oven',
+  'constraints': true,
   'modules': [
     {
       'name': 'PID Temperature Governor',

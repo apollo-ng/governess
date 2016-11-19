@@ -1,12 +1,14 @@
-import { NgModule }               from '@angular/core';
+import { NgModule }           from '@angular/core';
+import { Http }                   from '@angular/http';
+
 import { IonicApp,
          IonicModule }            from 'ionic-angular';
-import { Storage }                from '@ionic/storage';
 
 import { ChartsModule }           from 'ng2-charts/components/charts/charts';
 import { ChartModule }            from 'angular2-chartjs';
 
-import { Http }                   from '@angular/http';
+import { Storage }                from '@ionic/storage';
+
 import { TranslateModule,
          TranslateLoader,
          TranslateStaticLoader }  from 'ng2-translate/ng2-translate';
@@ -14,8 +16,8 @@ import { TranslateModule,
 import { GovernessApp }           from './app.component';
 
 import { AboutPage }              from '../pages/about/about';
-import { AppliancePage }          from '../pages/appliance/appliance';
-import { ApplianceDetailPage }    from '../pages/appliance/appliance.detail';
+import { AppliancesPage }         from '../pages/appliances/appliances';
+import { ApplianceDetailPage }    from '../pages/appliances/appliance.detail';
 import { ControlPage }            from '../pages/control/control';
 import { HelpPage }               from '../pages/help/help';
 import { LogsPage }               from '../pages/logs/logs';
@@ -31,7 +33,7 @@ import { WebSocketService }       from '../providers/websocket/websocket';
 import { StorageService }         from '../providers/storage/storage';
 import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
-import { ApplianceService }       from '../providers/appliance/appliance';
+import { ApplianceService }       from '../providers/appliances/appliances';
 import { TaskService }            from '../providers/tasks/tasks';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +49,7 @@ export function createTranslateLoader(http: Http): any {
   declarations: [
     GovernessApp,
     AboutPage,
-    AppliancePage,
+    AppliancesPage,
     ApplianceDetailPage,
     ControlPage,
     ControlHelp,
@@ -77,7 +79,7 @@ export function createTranslateLoader(http: Http): any {
   entryComponents: [
     GovernessApp,
     AboutPage,
-    AppliancePage,
+    AppliancesPage,
     ApplianceDetailPage,
     ControlPage,
     ControlHelp,

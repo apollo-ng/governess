@@ -5,6 +5,8 @@ import { NavController,
          AlertController }  from 'ionic-angular';
 import { Vibration }        from 'ionic-native';
 
+import { TranslateService } from 'ng2-translate';
+
 import { ConfigService }    from '../../providers/config/config';
 import { TaskService }      from '../../providers/tasks/tasks';
 
@@ -31,8 +33,9 @@ export class SettingsPage {
   public alertCtrl:       AlertController;
   public configService:   ConfigService;
   public taskService:     TaskService;
+  public translate:       TranslateService;
 
-  public config: any;
+  public config: any =    {};
 
   /*****************************************************************************
    * constructor
@@ -45,7 +48,8 @@ export class SettingsPage {
     modalCtrl:       ModalController,
     alertCtrl:       AlertController,
     configService:   ConfigService,
-    taskService:     TaskService
+    taskService:     TaskService,
+    translate:       TranslateService
 
   ) {
 
@@ -55,8 +59,7 @@ export class SettingsPage {
     this.alertCtrl = alertCtrl;
     this.configService = configService;
     this.taskService = taskService;
-
-    this.config = {};
+    this.translate = translate;
 
     this.init().then( () => {
       // console.log('I seem to be needed to get the promise');
@@ -89,10 +92,17 @@ export class SettingsPage {
   /*****************************************************************************
    * updateConfig
    */
-
-  public updateConfig(): any {
+/*
+  public updateConfigD(): void {
+    console.log('updateConfig called', this.config);
     this.configService.update(this.config);
     this.config = this.configService.config;
+  }
+*/
+  public updateConfig(): void {
+    console.log('updateConfig called...', this.config);
+    this.translate.use(this.config.userLang);
+    this.configService.update(this.config);
   }
 
   /*****************************************************************************

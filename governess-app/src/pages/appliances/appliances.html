@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar dark>
+    <button ion-button icon-only color="primary" menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'Appliances' | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="primary" (click)="openHelp()">
+        <ion-icon name="logo-buffer"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar>
+    <ion-searchbar (ionInput)="filterAppliances($event)"
+                   (ionClear)="clearFilter($event)"
+                   placeholder="Filter"
+                   autocorrect="off">
+    </ion-searchbar>
+    <ion-buttons end>
+      <button ion-button (click)="addAppliance()">
+        <ion-icon name="add" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="appliances-list">
+  <ion-list *ngIf="appliances?.length > 0" reorder="true" (ionItemReorder)="reorderAppliances($event)">
+    <ion-item-sliding *ngFor="let appliance of appliances; let p = index"
+                      [ngClass]="{'odd-row': p % 2, 'active': appliance.aid === config.applianceActive}">
+      <div ion-item>
+        <ion-icon *ngIf="appliance.constraints && appliance.aid !== config.applianceActive"
+                  (click)="activateAppliance(appliance.aid)"
+                  [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)'}"
+                  item-left name="checkmark-circle-outline">
+        </ion-icon>
+        <ion-icon *ngIf="appliance.constraints && appliance.aid === config.applianceActive"
+                  (click)="activateAppliance(appliance.aid)"
+                  [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)'}"
+                  item-left name="checkmark-circle">
+        </ion-icon>
+        <ion-icon *ngIf="!appliance.constraints"
+                  [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}"
+                  item-left name="radio-button-off">
+        </ion-icon>
+        <div (click)="goToApplianceDetail(appliance)" class="appliances-list-item">
+          <h2>{{appliance.name}}</h2>
+          <table>
+            <tr>
+              <td>
+                <ion-icon name="time" item-left [ngStyle]="{ 'margin': '0'}">
+                  1
+                </ion-icon>
+              </td>
+              <td>
+                <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}">
+                  {{appliance.created | date: 'yyyy-MM-dd HH:mm'}}
+                </ion-icon>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <ion-item-options side="right">
+        <button ion-button icon-only color="secondary" (click)="copyAppliance(p)" class="rb-white">
+          <ion-icon name="copy"></ion-icon>
+        </button>
+        <button ion-button icon-only color="danger" (click)="removeAppliance(p,appliance.name)" class="rb-red">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div *ngIf="!filteredList && (!appliances || appliances.length === 0)" class="zero-res-list">
+    No Appliance created or loaded yet
+  </div>
+  <div *ngIf="filteredList && (!appliances || appliances.length === 0)" class="zero-res-list">
+    No appliances match your filter
+  </div>
+
+</ion-content>

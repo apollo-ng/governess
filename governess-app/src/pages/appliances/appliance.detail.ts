@@ -6,7 +6,7 @@ import { NavParams,
          PopoverController,
          ActionSheetController }    from 'ionic-angular';
 
-import { ApplianceService }         from '../../providers/appliance/appliance';
+import { ApplianceService }         from '../../providers/appliances/appliances';
 
 ////////////////////////////////////////////////////////////////////////////////
 

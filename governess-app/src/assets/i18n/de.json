@@ -1,5 +1,13 @@
 {
   "Help": "Hilfe",
-  "About": "Ueber",
-  "Tasks": "Tasks"
+  "About": "Über",
+  "Tasks": "Prozesse",
+  "Settings": "Einstellungen",
+  "Entry Point": "Startseite",
+  "Entry Point Long": "Einstiegspunkt bei Rückkehr",
+  "Language": "Sprache",
+  "Appliances": "Geräte",
+  "Manual override": "Manueller Eingriff",
+  "Audio": "Audio",
+  "Keep Display on": "Display bleibt aktiv"
 }

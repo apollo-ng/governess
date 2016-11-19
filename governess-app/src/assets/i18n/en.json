@@ -1,5 +1,13 @@
 {
   "Help": "Help",
   "About": "About",
-  "Tasks": "Tasks"
+  "Tasks": "Tasks",
+  "Settings": "Settings",
+  "Entry Point": "Entry Point",
+  "Entry Point Long": "Where to start on return",
+  "Language": "Language",
+  "Appliances": "Appliances",
+  "Manual override": "Manual override",
+  "Audio": "Audio",
+  "Keep Display on": "Keep Display on"
 }

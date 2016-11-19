@@ -13,7 +13,7 @@ import { TranslateService }         from 'ng2-translate';
 import { ConfigService }            from '../providers/config/config';
 
 import { AboutPage }                from '../pages/about/about';
-import { AppliancePage }            from '../pages/appliance/appliance';
+import { AppliancesPage }           from '../pages/appliances/appliances';
 import { ControlPage }              from '../pages/control/control';
 import { HelpPage }                 from '../pages/help/help';
 import { LogsPage }                 from '../pages/logs/logs';
@@ -22,7 +22,7 @@ import { TasksPage }                from '../pages/tasks/tasks';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export interface PageObj {
+export interface PageInterface {
   title: string;
   component: any;
   idx?: number;
@@ -48,9 +48,9 @@ export class GovernessApp implements OnInit {
   public configService: ConfigService;
   public translate: TranslateService;
   public config: any = {};
+  public pages: PageInterface[];
   public rootPage: any;
 
-  public pages: PageObj[];
   private platform: Platform;
 
   /*****************************************************************************
@@ -87,16 +87,18 @@ export class GovernessApp implements OnInit {
     // FIXME: This seems kinda messy, isn't there a more elegant way?
     this.configService.init().then((data) => {
       this.config = data;
+      console.log('userLang', this.config.userLang);
+      this.translate.use(this.config.userLang);
 
       // Populate the side menu
       this.pages = [
-        { title: 'Control',   component: ControlPage,   idx: 0, icon: 'speedometer' },
-        { title: 'Appliance', component: AppliancePage, idx: 1, icon: 'logo-buffer' },
-        { title: 'Tasks',     component: TasksPage,     idx: 2, icon: 'cube' },
-        { title: 'Logs',      component: LogsPage,      idx: 3, icon: 'filing' },
-        { title: 'Settings',  component: SettingsPage,  idx: 4, icon: 'settings' },
+        { title: 'Control',    component: ControlPage,    idx: 0, icon: 'speedometer' },
+        { title: 'Appliances', component: AppliancesPage, idx: 1, icon: 'logo-buffer' },
+        { title: 'Tasks',      component: TasksPage,      idx: 2, icon: 'cube' },
+        { title: 'Logs',       component: LogsPage,       idx: 3, icon: 'filing' },
+        { title: 'Settings',   component: SettingsPage,   idx: 4, icon: 'settings' },
         { title: this.translate.instant('Help'),      component: HelpPage,      idx: 5, icon: 'help-buoy' },
-        { title: 'About',     component: AboutPage,     idx: 6, icon: 'information-circle' },
+        { title: 'About',      component: AboutPage,      idx: 6, icon: 'information-circle' },
       ];
 
       // Define which page the app should show by default

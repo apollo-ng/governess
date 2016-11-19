@@ -6,26 +6,27 @@ import { ActionSheetController,
          reorderArray }             from 'ionic-angular';
 
 import { ConfigService }            from '../../providers/config/config';
-import { ApplianceService }         from '../../providers/appliance/appliance';
-import { ApplianceDetailPage }      from '../appliance/appliance.detail';
+import { ApplianceService }         from '../../providers/appliances/appliances';
+import { ApplianceDetailPage }      from '../appliances/appliance.detail';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 @Component ({
-  selector: 'appliance-page',
-  templateUrl: 'appliance.html',
+  selector: 'appliances-page',
+  templateUrl: 'appliances.html',
 })
 
 /*******************************************************************************
  *
- *   AppliancePage
+ *   AppliancesPage
  *
  */
 
-export class AppliancePage {
+export class AppliancesPage {
 
   public appliances: any = [];
   public config: any = {};
+  public filteredList: boolean = false;
 
   public navCtrl: NavController;
   public modalCtrl: ModalController;
@@ -77,13 +78,15 @@ export class AppliancePage {
   }
 
   /*****************************************************************************
-   * goToApplianceDetail
+   * activateTask
    * @param
    */
 
-  public goToApplianceDetail(appliance: any): void {
-    console.log('Go to appliance detail:', appliance);
-    this.navCtrl.push(ApplianceDetailPage, appliance);
+  public activateAppliance(aid: string): void {
+    console.log('Activate appliance:', aid);
+    this.config.applianceActive = aid;
+    this.configService.update(this.config);
+    console.log(this.config);
   }
 
   /*****************************************************************************
@@ -142,10 +145,11 @@ export class AppliancePage {
    * @param
    */
 
-  public searchInput(event: any): void {
+  public filterAppliances(event: any): void {
     this.appliances = this.applianceService.appliances;
     let val: string = event.target.value;
     if (val && val.trim() !== '') {
+      this.filteredList = true;
       this.appliances = this.appliances.filter((appliance) => {
         return (
           appliance.name.toLowerCase().
@@ -160,9 +164,20 @@ export class AppliancePage {
    * @param
    */
 
-  public searchClear(event: any): void {
+  public clearFilter(event: any): void {
     this.appliances = this.applianceService.appliances;
+    this.filteredList = false;
     event.stopPropagation();
+  }
+
+  /*****************************************************************************
+   * goToApplianceDetail
+   * @param
+   */
+
+  public goToApplianceDetail(appliance: any): void {
+    console.log('Go to appliance detail:', appliance);
+    this.navCtrl.push(ApplianceDetailPage, appliance);
   }
 
   /*****************************************************************************

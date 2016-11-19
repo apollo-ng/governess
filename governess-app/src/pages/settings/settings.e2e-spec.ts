@@ -22,9 +22,13 @@ describe('SettingsPage', () => {
     expect(element(by.css('ion-navbar:first-child')).getText()).toContain('Settings');
   });
 
-  it('has <nav>', () => {
+  it('has a navbar', () => {
     expect(element(by.css('ion-navbar'))
     .isPresent()).toEqual(true);
+  });
+
+  it('has a list of settings', () => {
+    expect(element(by.css('ion-list')).isPresent()).toEqual(true);
   });
 
 });
