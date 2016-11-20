@@ -25,6 +25,7 @@ export class ApplianceDetailPage {
 
   public appliance: any;
   public data: any;
+  public view: string = 'settings';
 
   public alertCtrl: AlertController;
   public modalCtrl: ModalController;
@@ -59,60 +60,7 @@ export class ApplianceDetailPage {
     console.log('appliancedetail init coming up with:', this.appliance);
 
   }
-/*
-  public taskActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'More Task options',
-      buttons: [
-        {
-          text: 'Rename',
-          icon: 'create',
-          handler: () => {
-           console.log('Rename clicked');
-           this.renameTask(this.task);
-          }
-        },
-        {
-          text: 'Constraint',
-          icon: 'flash',
-          handler: () => {
-           console.log('Constraint clicked');
-           this.constraintTask(this.task);
-          }
-        },
-        {
-          text: 'Clone',
-          icon: 'copy',
-          handler: () => {
-           console.log('FIXME: Clone clicked');
-          }
-        },
-        {
-          text: 'Delete',
-          icon: 'trash',
-          handler: () => {
-           console.log('FIXME: Delete clicked');
-          }
-        },
-        {
-          text: 'Help',
-          icon: 'buoy',
-          handler: () => {
-           console.log('FIXME: Help clicked');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-           console.log('FIXME: Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-*/
+
   /*****************************************************************************
    * renameAppliance
    * @param {event} appliance
@@ -163,24 +111,8 @@ export class ApplianceDetailPage {
     confirm.present();
   }
 
-  /*****************************************************************************
-   * editInputPlug
-   * @param
-   */
-
-  public editInputPlug(modid: any, plugid: any): any {
-    console.log('Edit Input-Plug:' + modid + plugid);
-//    let modal: any = this.modalCtrl.create(ModalsContentPage);
-//    modal.present(modal);
-  }
-
-  /*****************************************************************************
-   * editOutputPlug
-   * @param
-   */
-
-  public editOutputPlug(modid: any, plugid: any): any {
-    console.log('Edit Output-Plug:' + modid + plugid);
+  public setAppView(_view: string): void {
+    this.view = _view;
   }
 
 }

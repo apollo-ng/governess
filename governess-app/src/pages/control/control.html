@@ -82,7 +82,7 @@
   <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 48px)">
 
     <div *ngSwitchCase="'man'" style="height: 100%">
-      <div class="chart-container" style="height: 60%">
+      <div class="chart-container" style="height: calc(100% - 88px)">
         <canvas baseChart class="chart"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
@@ -96,12 +96,10 @@
       <div class="ui-splitbar"></div>
       <ion-list style="height: 40%">
         <ion-item>
-          <ion-label>Temperature</ion-label>
           <ion-range min="-273" max="2500" [(ngModel)]="singleValue" pin="true">
             <ion-icon small range-left name="thermometer"></ion-icon>
             <ion-icon range-right name="thermometer"></ion-icon>
           </ion-range>
-          <ion-toggle></ion-toggle>
         </ion-item>
         <ion-item>
           <ion-icon name="hand" item-left></ion-icon>
