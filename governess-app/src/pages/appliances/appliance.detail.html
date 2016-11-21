@@ -28,7 +28,7 @@
     <div *ngSwitchCase="'settings'" style="height: 100%">
       <ion-list class="settings-list">
         <ion-item>
-          <ion-icon name="finger-print" item-left></ion-icon>
+          <ion-icon name="logo-buffer" item-left></ion-icon>
           <ion-label><h2>Name</h2></ion-label>
           <ion-input placeholder="192.168.1.66" value="{{appliance.name}}"></ion-input>
         </ion-item>
@@ -43,6 +43,19 @@
         <ion-item>
           <ion-icon name="globe" item-left></ion-icon>
           <ion-label><h2>Hostname/IP</h2></ion-label>
+          <ion-input placeholder="192.168.1.66"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="hand" item-left></ion-icon>
+          <ion-label>
+            <h2>Webcam connected</h2>
+            <p>Webcam connected</p>
+          </ion-label>
+          <ion-toggle></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="globe" item-left></ion-icon>
+          <ion-label><h2>MJPG-Streamer URL</h2></ion-label>
           <ion-input placeholder="192.168.1.66"></ion-input>
         </ion-item>
       </ion-list>
