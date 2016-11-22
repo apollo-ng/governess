@@ -13,7 +13,8 @@
   },
   "private": true,
   "config": {
-    "ionic_source_map": "source-map"
+    "ionic_source_map": "source-map",
+    "ionic_bundler": "webpack"
   },
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
@@ -57,17 +58,26 @@
     "typescript": "2.0.10"
   },
   "cordovaPlugins": [
-    "cordova-plugin-device",
-    "cordova-plugin-console",
     "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-splashscreen",
     "cordova-plugin-vibration",
     "phonegap-plugin-barcodescanner",
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
-    "android"
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "browser",
+      "version": "",
+      "locator": "browser"
+    }
   ],
   "main": "electron.js"
 }

@@ -3,7 +3,7 @@
     <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{'Tasks' | translate}}</ion-title>
+    <ion-title>{{ 'TASKS' | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="openHelp()">
         <ion-icon name="cube"></ion-icon>
@@ -14,7 +14,7 @@
   <ion-toolbar>
     <ion-searchbar (ionInput)="filterTasks($event)"
                    (ionClear)="clearFilter($event)"
-                   placeholder="Filter"
+                   placeholder="{{ 'FILTER' | translate }}"
                    autocorrect="off">
     </ion-searchbar>
     <ion-buttons end>
@@ -75,10 +75,10 @@
   </ion-list>
 
   <div *ngIf="!filteredList && (!tasks || tasks.length === 0)" class="zero-res-list">
-    This appliance has no tasks
+    {{ 'NO-TASKS' | translate }}This appliance has no tasks
   </div>
   <div *ngIf="filteredList && (!tasks || tasks.length === 0)" class="zero-res-list">
-    No tasks match your filter
+    {{ 'NO-TASKS-MATCH' | translate }}No tasks match your filter
   </div>
 
 </ion-content>

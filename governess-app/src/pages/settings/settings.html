@@ -3,7 +3,7 @@
     <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ 'Settings' | translate }}</ion-title>
+    <ion-title>{{ 'SETTINGS' | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="openHelp()">
         <ion-icon name="settings"></ion-icon>
@@ -18,44 +18,40 @@
 
     <ion-item>
       <ion-icon name="text" item-left></ion-icon>
-      <ion-label><h2>{{ 'Language' | translate }}</h2></ion-label>
+      <ion-label><h2>{{ 'LANGUAGE' | translate }}</h2></ion-label>
       <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
         <ion-option value="en">English</ion-option>
         <ion-option value="de">Deutsch</ion-option>
-        <ion-option value="es">Espanol</ion-option>
-        <ion-option value="it">Italiana</ion-option>
-        <ion-option value="ru">Pусский</ion-option>
-        <ion-option value="fr">Francais</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-icon name="bowtie" item-left></ion-icon>
-      <ion-label><h2>{{ 'Theme' | translate }}</h2></ion-label>
+      <ion-label><h2>{{ 'THEME' | translate }}</h2></ion-label>
       <ion-select [(ngModel)]="config.theme" (ngModelChange)="updateConfig()">
-        <ion-option value="default-dark">Dark</ion-option>
+        <ion-option value="default" selected="true">Default</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-icon name="star-outline" item-left></ion-icon>
       <ion-label>
-        <h2>{{ 'Entry Point' | translate }}</h2>
-        <p>{{ 'Entry Point Long' | translate }}</p>
+        <h2>{{ 'ENTRY-POINT' | translate }}</h2>
+        <p>{{ 'ENTRY-POINT-LONG' | translate }}</p>
       </ion-label>
       <ion-select [(ngModel)]="config.viewPref" (ngModelChange)="updateConfig()">
         <ion-option value="Control">Control</ion-option>
-        <ion-option value="Appliances">{{ 'Appliances' | translate }}</ion-option>
-        <ion-option value="Tasks">{{ 'Tasks' | translate }}</ion-option>
-        <ion-option value="last">Last Viewed Page</ion-option>
+        <ion-option value="Appliances">{{ 'APPLIANCES' | translate }}</ion-option>
+        <ion-option value="Tasks">{{ 'TASKS' | translate }}</ion-option>
+        <ion-option value="last">{{ 'LAST-VIEWED-PAGE' | translate }}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-icon name="hand" item-left></ion-icon>
       <ion-label>
-        <h2>{{ 'Manual override' | translate }}</h2>
-        <p>Allow manual override during task run</p>
+        <h2>{{ 'MANUAL-OVERRIDE' | translate }}</h2>
+        <p>{{ 'MANUAL-OVERRIDE-LONG' | translate }}</p>
       </ion-label>
       <ion-toggle [(ngModel)]="config.manOverr" (ngModelChange)="updateConfig()"></ion-toggle>
     </ion-item>
@@ -63,8 +59,8 @@
     <ion-item>
       <ion-icon name="headset" item-left></ion-icon>
       <ion-label>
-        <h2>{{ 'Audio' | translate }}</h2>
-        <p>Enable Sounds and Audio Feedback</p>
+        <h2>{{ 'AUDIO' | translate }}</h2>
+        <p>{{ 'AUDIO-LONG' | translate }}</p>
       </ion-label>
       <ion-toggle [(ngModel)]="config.audio" (ngModelChange)="updateConfig()"></ion-toggle>
     </ion-item>
@@ -72,8 +68,8 @@
     <ion-item hideWhen="core">
       <ion-icon name="tablet-landscape" item-left></ion-icon>
       <ion-label>
-        <h2>{{ 'Keep Display on' | translate }}</h2>
-        <p>Prevent app from going to sleep</p>
+        <h2>{{ 'KEEP-DISPLAY-ON' | translate }}</h2>
+        <p>{{ 'KEEP-DISPLAY-ON-LONG' | translate }}</p>
       </ion-label>
       <ion-toggle [(ngModel)]="config.keepOn" (ngModelChange)="updateConfig()"></ion-toggle>
     </ion-item>

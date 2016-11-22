@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar dark class="task-detail-toolbar">
-    <ion-title>{{appliance.name}} Configuration</ion-title>
+    <ion-title>{{appliance.name}} {{ 'CONFIGURATION' | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary">
         <ion-icon name="logo-buffer"></ion-icon>
@@ -11,10 +11,12 @@
   <div class="ion-segment-container">
     <ion-segment [(ngModel)]="view">
       <ion-segment-button value="settings" (ionSelect)="setAppView('settings')">
-        General Settings
+        <ion-icon name="settings"></ion-icon>
+        <span class="minibar-button-txt">{{ 'SETTINGS' | translate }}</span>
       </ion-segment-button>
-      <ion-segment-button value="configuration" (ionSelect)="setAppView('configuration')">
-        Configuration
+      <ion-segment-button value="plugins" (ionSelect)="setAppView('plugins')">
+        <ion-icon name="grid"></ion-icon>
+        <span class="minibar-button-txt">{{ 'PLUGINS' | translate }}</span>
       </ion-segment-button>
     </ion-segment>
   </div>
@@ -29,7 +31,7 @@
       <ion-list class="settings-list">
         <ion-item>
           <ion-icon name="logo-buffer" item-left></ion-icon>
-          <ion-label><h2>Name</h2></ion-label>
+          <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
           <ion-input placeholder="192.168.1.66" value="{{appliance.name}}"></ion-input>
         </ion-item>
         <ion-item>
@@ -61,7 +63,7 @@
       </ion-list>
     </div>
 
-    <div *ngSwitchCase="'configuration'" style="height: 100%">
+    <div *ngSwitchCase="'plugins'" style="height: 100%">
       <ion-list class="section-list">
         <ion-item>
           <div class="section-title-outer">

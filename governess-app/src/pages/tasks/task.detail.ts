@@ -1,6 +1,7 @@
 import { Component, ViewChild }     from '@angular/core';
 
-import { NavParams,
+import { Content,
+         NavParams,
          NavController,
          AlertController,
          ModalController,
@@ -28,6 +29,7 @@ import { lineChartGlobals }         from '../../components/chart-globals';
 export class TaskDetailPage {
 
   @ViewChild(ChartComponent) public chartc: ChartComponent;
+  @ViewChild(Content) public content: Content;
 
   public task: any;
   public data: any;
