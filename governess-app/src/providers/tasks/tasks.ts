@@ -1,5 +1,5 @@
 import { Injectable }             from '@angular/core';
-import { UUID }                   from 'angular2-uuid';
+import { ShortID }                from '../crypto/shortid';
 import { StorageService }         from '../storage/storage';
 import { taskMock }               from './task.mock';
 
@@ -19,6 +19,7 @@ export class TaskService {
 
   public tasks: any = [];
   private storage: StorageService;
+  private shortID: ShortID;
 
   /*****************************************************************************
    * constructor
@@ -27,10 +28,12 @@ export class TaskService {
   constructor (
 
     storage: StorageService,
+    shortID: ShortID
 
   ) {
 
     this.storage = storage;
+    this.shortID = shortID;
     this.init().then(data => {
       // console.log('All promises returned', data)
       this.tasks = data;
@@ -50,7 +53,7 @@ export class TaskService {
       if (!data) {
         console.log('Got NO Storage Data - creating from Mock:');
         let initTask: any = taskMock;
-        initTask.id = UUID.UUID();
+        initTask.id = this.shortID.create();
         initTask.created = Math.round(new Date().getTime());
         this.storage.set('tasks', JSON.stringify(initTask));
         this.tasks = initTask;
@@ -92,7 +95,7 @@ export class TaskService {
     // crude hack to copy the array after lodash deepClone refused to work
     let copy: any = JSON.parse(JSON.stringify(this.tasks[index]));
     copy.name = copy.name + ' Copy';
-    copy.tid = UUID.UUID();
+    copy.tid = this.shortID.create();
     copy.created = Math.round(new Date().getTime());
     this.tasks.push(copy);
     this.update(this.tasks);

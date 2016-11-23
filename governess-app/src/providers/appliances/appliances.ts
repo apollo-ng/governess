@@ -1,5 +1,5 @@
 import { Injectable }             from '@angular/core';
-import { UUID }                   from 'angular2-uuid';
+import { ShortID }                from '../crypto/shortid';
 import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
 
@@ -19,6 +19,7 @@ export class ApplianceService {
 
   public appliances: any = [];
   public storage: StorageService;
+  private shortID: ShortID;
 
   /*****************************************************************************
    * constructor
@@ -26,11 +27,13 @@ export class ApplianceService {
 
   constructor (
 
-    storage: StorageService
+    storage: StorageService,
+    shortID: ShortID
 
   ) {
 
     this.storage = storage;
+    this.shortID = shortID;
     this.init().then(data => {
       this.appliances = data;
     });
@@ -90,7 +93,7 @@ export class ApplianceService {
 
     // create a fresh set of metadata for this copy
     copy.name = copy.name + ' Copy';
-    copy.aid = UUID.UUID();
+    copy.aid = this.shortID.create();
     copy.created = Math.round(new Date().getTime());
 
     // roll it out
