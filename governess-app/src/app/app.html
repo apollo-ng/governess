@@ -7,7 +7,10 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+      <button ion-item menuClose
+              *ngFor="let p of pages"
+              [ngClass]="{'selected': p.title === config.lastView}"
+              (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>

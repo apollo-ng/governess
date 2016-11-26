@@ -23,14 +23,16 @@ export class ShortID {
 
   constructor() {
 
-    this.alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    this.idSize = 12;
+    this.idSize   = 12;
+    this.alphabet = '0123456789'
+                  + 'abcdefghijklmnopqrstuvwxyz'
+                  + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   }
 
   /*****************************************************************************
-   * new - returns a new shortid
-   * FIXME: Make this crypto more reliable by using WebCrypto API when available
+   * create - returns a new shortid
+   * FIXME: Reduce collision risk by using WebCrypto API when available
    * @param: size: number (optional)
    * @return id: string
    */
