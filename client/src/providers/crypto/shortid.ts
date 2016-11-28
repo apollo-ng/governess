@@ -32,7 +32,7 @@ export class ShortID {
 
   /*****************************************************************************
    * create - returns a new shortid
-   * FIXME: Reduce collision risk by using WebCrypto API when available
+   * FIXME: Reduce collision risk by using seed/salt/WebCrypto API when available
    * @param: size: number (optional)
    * @return id: string
    */

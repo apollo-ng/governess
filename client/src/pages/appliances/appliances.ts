@@ -27,6 +27,7 @@ export class AppliancesPage {
   public appliances: any = [];
   public config: any = {};
   public filteredList: boolean = false;
+  public isSending: boolean = false;
 
   public navCtrl: NavController;
   public modalCtrl: ModalController;
@@ -95,6 +96,7 @@ export class AppliancesPage {
 
   public addAppliance(): void {
     console.log('FIXME: Add a new empty appliance');
+    this.isSending = !this.isSending;
   }
 
   /*****************************************************************************

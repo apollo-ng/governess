@@ -13,7 +13,7 @@
   },
   "private": true,
   "config": {
-    "ionic_source_map": "source-map",
+    "ionic_source_map": "eval",
     "ionic_bundler": "webpack"
   },
   "scripts": {

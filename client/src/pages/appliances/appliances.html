@@ -5,7 +5,10 @@
     </button>
     <ion-title>{{ 'APPLIANCES' | translate }}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="primary" (click)="openHelp()">
+      <button ion-button icon-only *ngIf="isSending">
+        <ion-spinner name="ios" color="secondary"></ion-spinner>
+      </button>
+      <button ion-button icon-only color="primary" *ngIf="!isSending" (click)="openHelp()">
         <ion-icon name="logo-buffer"></ion-icon>
       </button>
     </ion-buttons>

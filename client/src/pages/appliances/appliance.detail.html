@@ -84,7 +84,7 @@
             </ion-grid>
             </div>
             <button ion-button item-right>
-              <ion-icon name="add"></ion-icon>
+              <ion-icon name="add" (click)="popAddPluginModal('input')"></ion-icon>
             </button>
         </ion-item>
         <ion-item>
@@ -114,7 +114,7 @@
               </ion-grid>
             </div>
             <button ion-button item-right>
-              <ion-icon name="add"></ion-icon>
+              <ion-icon name="add" (click)="popAddPluginModal('control')"></ion-icon>
             </button>
         </ion-item>
         <ion-item>
@@ -140,7 +140,7 @@
             </ion-grid>
             </div>
           <button ion-button item-right>
-            <ion-icon name="add"></ion-icon>
+            <ion-icon name="add" (click)="popAddPluginModal('output')"></ion-icon>
           </button>
         </ion-item>
       </ion-list>

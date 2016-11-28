@@ -1,6 +1,7 @@
 import { Component, ViewChild }      from '@angular/core';
 import { NavController }  from 'ionic-angular';
 import { ChartComponent } from 'angular2-chartjs';
+import { appTag }          from '../../app/tag.ts';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -19,6 +20,7 @@ export class AboutPage {
   @ViewChild(ChartComponent) public chartc: ChartComponent;
 
   public navCtrl: NavController;
+  public tag: string = appTag;
   public data: any = { datasets: [] };
   public options: any;
   public mock: any = { datasets: [] };

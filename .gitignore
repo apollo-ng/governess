@@ -32,10 +32,12 @@ plugins/
 plugins/android.json
 plugins/ios.json
 www/
+Chart-2*.js
 
 # e2e
 e2e/*.js
 e2e/*.map
+client/tests/e2e/screenshots/
 
 $RECYCLE.BIN/
 .io-config.json

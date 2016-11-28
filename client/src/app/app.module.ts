@@ -1,23 +1,32 @@
-import { NgModule }           from '@angular/core';
+import { NgModule,
+         ErrorHandler }           from '@angular/core';
 import { Http }                   from '@angular/http';
 
 import { IonicApp,
-         IonicModule }            from 'ionic-angular';
+         IonicModule,
+         IonicErrorHandler }      from 'ionic-angular';
+
+import { Storage }                from '@ionic/storage';
 
 import { ChartsModule }           from 'ng2-charts/components/charts/charts';
 import { ChartModule }            from 'angular2-chartjs';
 
-import { Storage }                from '@ionic/storage';
+// Translation
 
 import { TranslateModule,
          TranslateLoader,
          TranslateStaticLoader }  from 'ng2-translate/ng2-translate';
 
+// Root Component
+
 import { GovernessApp }           from './app.component';
+
+// Pages
 
 import { AboutPage }              from '../pages/about/about';
 import { AppliancesPage }         from '../pages/appliances/appliances';
-import { ApplianceDetailPage }    from '../pages/appliances/appliance.detail';
+import { ApplianceDetailPage,
+         AddPluginModal }         from '../pages/appliances/appliance.detail';
 import { ControlPage }            from '../pages/control/control';
 import { HelpPage }               from '../pages/help/help';
 import { LogsPage }               from '../pages/logs/logs';
@@ -25,17 +34,26 @@ import { SettingsPage }           from '../pages/settings/settings';
 import { TasksPage }              from '../pages/tasks/tasks';
 import { TaskDetailPage }         from '../pages/tasks/task.detail';
 
+// Help
+
 import { ControlHelp }            from '../pages/control/control.help';
 import { SettingsHelp }           from '../pages/settings/settings.help';
 import { TasksHelp }              from '../pages/tasks/tasks.help';
+
+// Providers
 
 import { WebSocketService }       from '../providers/websocket/websocket';
 import { StorageService }         from '../providers/storage/storage';
 import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
 import { ApplianceService }       from '../providers/appliances/appliances';
+import { PluginService }          from '../providers/plugins/plugins';
 import { TaskService }            from '../providers/tasks/tasks';
 import { ShortID }                from '../providers/crypto/shortid';
+
+// Pipes
+
+import { TemperaturePipe }        from '../pipes/temperature';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -52,6 +70,7 @@ export function createTranslateLoader(http: Http): any {
     AboutPage,
     AppliancesPage,
     ApplianceDetailPage,
+    AddPluginModal,
     ControlPage,
     ControlHelp,
     HelpPage,
@@ -61,6 +80,7 @@ export function createTranslateLoader(http: Http): any {
     TasksPage,
     TasksHelp,
     TaskDetailPage,
+    TemperaturePipe,
   ],
   imports: [
     ChartsModule,
@@ -82,6 +102,7 @@ export function createTranslateLoader(http: Http): any {
     AboutPage,
     AppliancesPage,
     ApplianceDetailPage,
+    AddPluginModal,
     ControlPage,
     ControlHelp,
     HelpPage,
@@ -93,11 +114,13 @@ export function createTranslateLoader(http: Http): any {
     TaskDetailPage,
   ],
   providers: [
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Storage,
     ShortID,
     StorageService,
     ConfigService,
     ApplianceService,
+    PluginService,
     StatusService,
     TaskService,
     WebSocketService,

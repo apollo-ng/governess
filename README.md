@@ -1,9 +1,9 @@
  governess
 ==========
 
-Fully autonomous, multi-module governing/monitoring bot for any DIY appliance.
+Fully autonomous, modular governing/monitoring bot for any DIY appliance.
 
-## App
+## Client
 
 Multi-Platform Hybrid-Client to monitor and control governess,
 based on Angular2/Ionic2.
