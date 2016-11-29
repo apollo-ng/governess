@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar dark>
-    <ion-title>Add new {{type}} plugin</ion-title>
+
+    <ion-title><ion-icon name="logo-buffer"></ion-icon> Add {{type}} plugin</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
@@ -9,29 +10,27 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-grid>
+    <ion-grid no-padding>
       <ion-row>
-        <ion-col>
-    <ion-searchbar (ionInput)="filterPluginsByName($event)"
-                   (ionClear)="clearNameFilter($event)"
-                   placeholder="{{ 'FILTER' | translate }}"
-                   autocorrect="off">
-    </ion-searchbar>
-  </ion-col>
-  <ion-col>
-    <ion-select [(ngModel)]="groupFilter"
-                (ngModelChange)="filterPluginsByGroup($event)"
-                class="rb-glass"
-                placeholder="All"
-                [selectOptions]="{ title: 'Filter by Group', subTitle: 'Please select a Group'}"
-                cancelText="Cancel"
-                okText="Select">
-      <ion-option value="" selected="true">All Groups</ion-option>
-      <ion-option *ngFor="let group of groups">{{group}}</ion-option>
-    </ion-select>
-  </ion-col>
-</ion-row>
-</ion-grid>
+        <ion-col width-50>
+          <ion-searchbar (ionInput)="filterPluginsByName($event)"
+                         (ionClear)="clearNameFilter($event)"
+                         placeholder="{{ 'FILTER' | translate }}"
+                         autocorrect="off">
+          </ion-searchbar>
+        </ion-col>
+        <ion-col width-50 style="padding-left: 2px">
+          <ion-select [(ngModel)]="groupFilter"
+                      (ngModelChange)="filterPluginsByGroup($event)"
+                      [selectOptions]="{ title: 'Filter by Group' }"
+                      cancelText="Cancel"
+                      okText="Set">
+            <ion-option selected="true" value="All">All Groups</ion-option>
+            <ion-option *ngFor="let group of groups">{{group}}</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
@@ -39,6 +38,9 @@
   <ion-list *ngIf="plugins?.length > 0">
     <ion-item *ngFor="let plugin of plugins; let p = index">
       {{plugin.name}}
+      <button ion-button item-right class="rb-green">
+        <ion-icon name="add"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>

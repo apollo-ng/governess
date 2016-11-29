@@ -147,22 +147,23 @@ export class AddPluginModal {
 
   public plugins: any;
   public groups: any;
-  public filteredNames: boolean = false;
-  public groupFilter: any = false;
+  public nameFilter: boolean = false;
+  public groupFilter: string = "All";
   public type: string;
 
   constructor(
+
     public viewCtrl: ViewController,
     public pluginService: PluginService,
     public params: NavParams
+
   ) {
 
-    console.log('type', params.get('type'));
     this.pluginService = pluginService;
     this.type = params.get('type');
     this.plugins = this.pluginService.plugins[this.type];
     this.groups = pluginService.getDistinctGroups(this.type);
-    console.log('groups', this.groups);
+
   }
 
   public dismissModal(): void {
@@ -178,7 +179,7 @@ export class AddPluginModal {
     this.plugins = this.pluginService.plugins[this.type];
     let val: string = event.target.value;
     if (val && val.trim() !== '') {
-      this.filteredNames = true;
+      this.nameFilter = true;
       this.plugins = this.plugins.filter((plugin) => {
         return (
           plugin.name.toLowerCase().
@@ -190,21 +191,15 @@ export class AddPluginModal {
 
   /*****************************************************************************
    * filterPluginsByGroup
-   * @param
    */
 
-  public filterPluginsByGroup(event: any): void {
-    console.log('filterPluginsByGroup', event);
+  public filterPluginsByGroup(): void {
     this.plugins = this.pluginService.plugins[this.type];
-    //let val: string = event.target.value;
-    //if (val && val.trim() !== '') {
-      //this.groupFilter = true;
+    if (this.groupFilter !== 'All') {
       this.plugins = this.plugins.filter((plugin) => {
-        return (
-          plugin.group.indexOf(this.groupFilter) > -1
-        );
+        return (plugin.group.indexOf(this.groupFilter) > -1);
       });
-    //}
+    }
   }
 
   /*****************************************************************************
@@ -214,7 +209,7 @@ export class AddPluginModal {
 
   public clearNameFilter(event: any): void {
     this.plugins = this.pluginService.plugins[this.type];
-    this.filteredNames = false;
+    this.nameFilter = false;
     event.stopPropagation();
   }
 

@@ -2,7 +2,7 @@ export let pluginMock: any = {
   'input': [
     {
       'pid': '3jO8dBtt2',
-      'name': 'Simple GPIO Driver',
+      'name': 'Simple GPIO Input Driver',
       'group': 'GPIO',
       'type': 'boolean',
       'conf': {
@@ -11,8 +11,8 @@ export let pluginMock: any = {
     },
     {
       'pid': '3jO8dBtt2',
-      'name': 'Hallsensor RPM Driver',
-      'group': 'Speed',
+      'name': 'Hallsensor RPM Input Driver',
+      'group': 'GPIO',
       'type': 'float',
       'conf': {
         'PIN': {},
@@ -21,7 +21,7 @@ export let pluginMock: any = {
     {
       'pid': 'AbCdEfGhIj',
       'name': 'MAX31885 K-Type Thermocouple Adapter Driver',
-      'group': 'Temperature',
+      'group': 'SPI',
       'unit': '°C',
       'type': 'float',
       'conf': {
@@ -33,7 +33,7 @@ export let pluginMock: any = {
     {
       'pid': 'ZkLMnbGhzU',
       'name': 'MAX6675 K-Type Thermocouple Adapter Driver',
-      'group': 'Temperature',
+      'group': 'SPI',
       'type': 'float',
       'conf': {
         'CSEL': {},
@@ -69,7 +69,7 @@ export let pluginMock: any = {
   'output': [
     {
       'pid': 'T6Dc0GhaqZt',
-      'name': 'Simple GPIO Driver',
+      'name': 'Simple GPIO Output Driver',
       'group': 'GPIO',
       'type': 'boolean',
       'conf': {
@@ -79,7 +79,7 @@ export let pluginMock: any = {
     },
     {
       'pid': 'T6Dc0GhaqZt',
-      'name': 'Simple PWM Driver',
+      'name': 'Simple PWM Output Driver',
       'group': 'GPIO',
       'type': 'float',
       'conf': {
