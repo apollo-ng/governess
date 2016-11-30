@@ -127,6 +127,12 @@ export class ApplianceDetailPage {
     addPluginModal.present();
   }
 
+  public popEditPluginModal(plugin: any): void {
+    let editPluginModal: any = this.modalCtrl.create (
+      EditPluginModal, { 'plugin': plugin });
+    editPluginModal.present();
+  }
+
   public setAppView(_view: string): void {
     this.view = _view;
   }
@@ -224,6 +230,47 @@ export class AddPluginModal {
     this.plugins = this.pluginService.plugins[this.type];
     this.nameFilter = false;
     event.stopPropagation();
+  }
+
+}
+
+/*******************************************************************************
+ *
+ *     EditPluginModal
+ *
+ */
+
+@Component({
+  selector: 'appliance-detail-editplugin',
+  templateUrl: 'appliance.detail.editplugin.html',
+})
+
+////////////////////////////////////////////////////////////////////////////////
+
+export class EditPluginModal {
+
+  public plugin: any;
+
+  public viewCtrl: ViewController;
+  public applianceService: ApplianceService;
+  public params: NavParams;
+
+  constructor(
+
+    viewCtrl: ViewController,
+    applianceService: ApplianceService,
+    params: NavParams
+
+  ) {
+
+    this.viewCtrl = viewCtrl;
+    this.applianceService = applianceService;
+    this.plugin = params.get('plugin');
+
+  }
+
+  public dismissModal(): void {
+    this.viewCtrl.dismiss();
   }
 
 }

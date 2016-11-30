@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar dark>
+    <ion-title>
+      <ion-icon name="logo-buffer"></ion-icon>
+      {{plugin.name}}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="primary" (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+    <ion-item *ngFor="let conf of plugin.conf; let p = index">
+      {{conf}}
+    </ion-item>
+  </ion-list>
+</ion-content>

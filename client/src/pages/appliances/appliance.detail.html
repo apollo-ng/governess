@@ -72,13 +72,11 @@
           <div class="section-grid">
             <ion-grid>
               <ion-row>
-                <ion-col style="background-color: rgba(191, 128, 6, 0.76);">
-                    <ion-icon name="color-fill"></ion-icon>
-                    <span class="plugin-title">K-Type Temperature Sensor</span>
-                </ion-col>
-                <ion-col style="background-color: rgba(12, 154, 141, 0.83);">
-                    <ion-icon name="eye"></ion-icon>
-                    <span class="plugin-title">Door Sensor</span>
+                <ion-col *ngFor="let plugin of appliance.plugins.input; let p = index"
+                         (click)="popEditPluginModal(plugin)"
+                         style="background-color: rgba(191, 128, 6, 0.76);">
+                  <ion-icon name="color-fill"></ion-icon>
+                  <span class="plugin-title">{{plugin.name}}</span>
                 </ion-col>
               </ion-row>
             </ion-grid>

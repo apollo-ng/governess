@@ -26,7 +26,8 @@ import { GovernessApp }           from './app.component';
 import { AboutPage }              from '../pages/about/about';
 import { AppliancesPage }         from '../pages/appliances/appliances';
 import { ApplianceDetailPage,
-         AddPluginModal }         from '../pages/appliances/appliance.detail';
+         AddPluginModal,
+         EditPluginModal }        from '../pages/appliances/appliance.detail';
 import { ControlPage }            from '../pages/control/control';
 import { HelpPage }               from '../pages/help/help';
 import { LogsPage }               from '../pages/logs/logs';
@@ -71,6 +72,7 @@ export function createTranslateLoader(http: Http): any {
     AppliancesPage,
     ApplianceDetailPage,
     AddPluginModal,
+    EditPluginModal,
     ControlPage,
     ControlHelp,
     HelpPage,
@@ -103,6 +105,7 @@ export function createTranslateLoader(http: Http): any {
     AppliancesPage,
     ApplianceDetailPage,
     AddPluginModal,
+    EditPluginModal,
     ControlPage,
     ControlHelp,
     HelpPage,

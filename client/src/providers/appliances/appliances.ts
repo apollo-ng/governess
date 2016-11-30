@@ -119,7 +119,7 @@ export class ApplianceService {
   public update(appliances: Object): any {
     console.log('Updating appliances...');
     this.appliances = appliances;
-    this.write(appliances);
+    this.write(this.appliances);
   }
 
   /*****************************************************************************
@@ -137,11 +137,11 @@ export class ApplianceService {
 
   public addPlugin(aid: string, type: string, plugin: any): void {
     console.log('Add new plugin to appliance', aid, type, plugin);
-    let appliance = this.appliances.filter((appliance) => {
+    let appliance: any = this.appliances.filter((appliance) => {
       return (appliance.aid.indexOf(aid) > -1);
     });
-    //appliance.plugins[type].push(plugin);
-    console.log(appliance);
+    appliance[0].plugins[type].push(plugin);
+    this.write(this.appliances);
   }
 
   /*****************************************************************************
