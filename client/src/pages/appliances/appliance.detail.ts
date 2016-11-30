@@ -116,10 +116,13 @@ export class ApplianceDetailPage {
     confirm.present();
   }
 
-  public popAddPluginModal(type: string): void {
+  public popAddPluginModal(aid: string, type: string): void {
     let addPluginModal: any = this.modalCtrl.create (
       AddPluginModal,
-      { 'type': type }
+      {
+        'aid': aid,
+        'type': type,
+      }
     );
     addPluginModal.present();
   }
@@ -148,19 +151,29 @@ export class AddPluginModal {
   public plugins: any;
   public groups: any;
   public nameFilter: boolean = false;
-  public groupFilter: string = "All";
+  public groupFilter: string = 'All';
   public type: string;
+  public aid: string;
+
+  public viewCtrl: ViewController;
+  public pluginService: PluginService;
+  public applianceService: ApplianceService;
+  public params: NavParams;
 
   constructor(
 
-    public viewCtrl: ViewController,
-    public pluginService: PluginService,
-    public params: NavParams
+    viewCtrl: ViewController,
+    pluginService: PluginService,
+    applianceService: ApplianceService,
+    params: NavParams
 
   ) {
 
+    this.viewCtrl = viewCtrl;
     this.pluginService = pluginService;
+    this.applianceService = applianceService;
     this.type = params.get('type');
+    this.aid = params.get('aid');
     this.plugins = this.pluginService.plugins[this.type];
     this.groups = pluginService.getDistinctGroups(this.type);
 

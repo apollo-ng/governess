@@ -132,6 +132,19 @@ export class ApplianceService {
   }
 
   /*****************************************************************************
+   * addPlugin
+   */
+
+  public addPlugin(aid: string, type: string, plugin: any): void {
+    console.log('Add new plugin to appliance', aid, type, plugin);
+    let appliance = this.appliances.filter((appliance) => {
+      return (appliance.aid.indexOf(aid) > -1);
+    });
+    //appliance.plugins[type].push(plugin);
+    console.log(appliance);
+  }
+
+  /*****************************************************************************
    * reset
    */
 

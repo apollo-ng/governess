@@ -3,6 +3,7 @@ export let pluginMock: any = {
     {
       'pid': '3jO8dBtt2',
       'name': 'Simple GPIO Input Driver',
+      'desc': '',
       'group': 'GPIO',
       'type': 'boolean',
       'conf': {
@@ -12,6 +13,7 @@ export let pluginMock: any = {
     {
       'pid': '3jO8dBtt2',
       'name': 'Hallsensor RPM Input Driver',
+      'desc': '',
       'group': 'GPIO',
       'type': 'float',
       'conf': {
@@ -21,6 +23,7 @@ export let pluginMock: any = {
     {
       'pid': 'AbCdEfGhIj',
       'name': 'MAX31885 K-Type Thermocouple Adapter Driver',
+      'desc': '',
       'group': 'SPI',
       'unit': '°C',
       'type': 'float',
@@ -33,6 +36,19 @@ export let pluginMock: any = {
     {
       'pid': 'ZkLMnbGhzU',
       'name': 'MAX6675 K-Type Thermocouple Adapter Driver',
+      'desc': '',
+      'group': 'SPI',
+      'type': 'float',
+      'conf': {
+        'CSEL': {},
+        'CLCK': {},
+        'DATA': {},
+      },
+    },
+    {
+      'pid': 'ZkLMnbGhzU',
+      'name': 'ADS1118 K-Type Thermocouple Adapter Driver',
+      'desc': '16-Bit Analog-to-Digital Converter with Internal Reference and Temperature Sensor',
       'group': 'SPI',
       'type': 'float',
       'conf': {
@@ -46,6 +62,7 @@ export let pluginMock: any = {
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'PID Temperature Governor',
+      'desc': '',
       'group': 'Temperature',
       'conf': {
         'TEMP': {},
@@ -59,6 +76,7 @@ export let pluginMock: any = {
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'PID Speed Governor',
+      'desc': '',
       'group': 'Speed',
       'conf': {
         'PIN': {},
@@ -70,6 +88,7 @@ export let pluginMock: any = {
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'Simple GPIO Output Driver',
+      'desc': '',
       'group': 'GPIO',
       'type': 'boolean',
       'conf': {
@@ -80,6 +99,7 @@ export let pluginMock: any = {
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'Simple PWM Output Driver',
+      'desc': '',
       'group': 'GPIO',
       'type': 'float',
       'conf': {
@@ -90,6 +110,7 @@ export let pluginMock: any = {
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'PCA9685 16-Channel 12-Bit PWM Driver',
+      'desc': '',
       'group': 'I2C',
       'type': 'float',
       'conf': {
@@ -102,6 +123,7 @@ export let pluginMock: any = {
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'TLC5947 24-Channel 12-Bit PWM Driver',
+      'desc': '',
       'group': 'SPI',
       'type': 'float',
       'conf': {

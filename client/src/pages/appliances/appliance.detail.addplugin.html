@@ -1,7 +1,9 @@
 <ion-header>
   <ion-navbar dark>
-
-    <ion-title><ion-icon name="logo-buffer"></ion-icon> Add {{type}} plugin</ion-title>
+    <ion-title>
+      <ion-icon name="logo-buffer"></ion-icon>
+      Add {{type}} plugin
+    </ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
@@ -21,10 +23,9 @@
         </ion-col>
         <ion-col width-50 style="padding-left: 2px">
           <ion-select [(ngModel)]="groupFilter"
-                      (ngModelChange)="filterPluginsByGroup($event)"
+                      (ngModelChange)="filterPluginsByGroup()"
                       [selectOptions]="{ title: 'Filter by Group' }"
-                      cancelText="Cancel"
-                      okText="Set">
+                      interface="action-sheet">
             <ion-option selected="true" value="All">All Groups</ion-option>
             <ion-option *ngFor="let group of groups">{{group}}</ion-option>
           </ion-select>
@@ -39,7 +40,7 @@
     <ion-item *ngFor="let plugin of plugins; let p = index">
       {{plugin.name}}
       <button ion-button item-right class="rb-green">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="add" (click)="applianceService.addPlugin(aid, type, plugin)"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
