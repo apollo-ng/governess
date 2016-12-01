@@ -266,7 +266,7 @@ export class EditPluginModal {
     this.viewCtrl = viewCtrl;
     this.applianceService = applianceService;
     this.plugin = params.get('plugin');
-
+    console.log(this.plugin);
   }
 
   public dismissModal(): void {

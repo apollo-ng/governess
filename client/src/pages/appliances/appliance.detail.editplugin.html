@@ -17,9 +17,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-list >
+  <ion-list>
+    <ion-item>
+      <ion-icon name="logo-buffer" item-left></ion-icon>
+      <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
+      <ion-input value="{{plugin.name}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-buffer" item-left></ion-icon>
+      <ion-label><h2>{{ 'COLOR' | translate }}</h2></ion-label>
+      <ion-input value="{{plugin.color}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-buffer" item-left></ion-icon>
+      <ion-label><h2>{{ 'ICON' | translate }}</h2></ion-label>
+      <ion-input value="{{plugin.icon}}"></ion-input>
+    </ion-item>
+    <ion-item-divider color="dark">
+      <ion-icon name="logo-buffer" item-left></ion-icon>
+      Driver Settings
+    </ion-item-divider>
     <ion-item *ngFor="let conf of plugin.conf; let p = index">
-      {{conf}}
+      <ion-label><h2>{{conf.name}}</h2></ion-label>
+      <ion-input value="{{conf.value}}"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

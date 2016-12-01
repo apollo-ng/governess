@@ -6,9 +6,10 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'boolean',
-      'conf': {
-        'PIN': {},
-      },
+      'conf': [
+        { 'name': 'PIN' },
+        { 'name': 'INV' },
+      ],
     },
     {
       'pid': '3jO8dBtt2',
@@ -16,9 +17,10 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'float',
-      'conf': {
-        'PIN': {},
-      },
+      'conf': [
+        { 'name': 'PIN' },
+        { 'name': 'INV' },
+      ],
     },
     {
       'pid': 'AbCdEfGhIj',
@@ -27,11 +29,11 @@ export let pluginMock: any = {
       'group': 'SPI',
       'unit': '°C',
       'type': 'float',
-      'conf': {
-        'CSEL': {},
-        'CLCK': {},
-        'DATA': {},
-      },
+      'conf': [
+        { 'name': 'CSEL' },
+        { 'name': 'CLCK' },
+        { 'name': 'DATA' },
+      ],
     },
     {
       'pid': 'ZkLMnbGhzU',
@@ -39,11 +41,11 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'SPI',
       'type': 'float',
-      'conf': {
-        'CSEL': {},
-        'CLCK': {},
-        'DATA': {},
-      },
+      'conf': [
+        { 'name': 'CSEL' },
+        { 'name': 'CLCK' },
+        { 'name': 'DATA' },
+      ],
     },
     {
       'pid': 'ZkLMnbGhzU',
@@ -51,12 +53,12 @@ export let pluginMock: any = {
       'desc': '16-Bit Analog-to-Digital Converter with Internal Reference and Temperature Sensor',
       'group': 'SPI',
       'type': 'float',
-      'conf': {
-        'SCLK': {},
-        'SDO': {},
-        'SDI': {},
-        '/SS': {},
-      },
+      'conf': [
+        { 'name': 'SCLK' },
+        { 'name': 'SDO' },
+        { 'name': 'SDI' },
+        { 'name': '/SS' },
+      ],
     },
   ],
   'control': [
@@ -65,26 +67,26 @@ export let pluginMock: any = {
       'name': 'PID Temperature Governor',
       'desc': '',
       'group': 'Temperature',
-      'conf': {
-        'TEMP': {},
-        'HEAT': {},
-        'COOL': {},
-        'K_P': {},
-        'K_I': {},
-        'K_D': {},
-      },
+      'conf': [
+        { 'name': 'TEMP' },
+        { 'name': 'HEAT' },
+        { 'name': 'COOL' },
+        { 'name': 'K_P' },
+        { 'name': 'K_I' },
+        { 'name': 'K_D' },
+      ],
     },
     {
       'pid': 'T6Dc0GhaqZt',
       'name': 'PID Speed Governor',
       'desc': '',
       'group': 'Speed',
-      'conf': {
-        'RPM': {},
-        'K_P': {},
-        'K_I': {},
-        'K_D': {},
-      },
+      'conf': [
+        { 'name': 'RPM' },
+        { 'name': 'K_P' },
+        { 'name': 'K_I' },
+        { 'name': 'K_D' },
+      ],
     },
   ],
   'output': [
@@ -94,10 +96,10 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'boolean',
-      'conf': {
-        'PIN': {},
-        'INV': {},
-      },
+      'conf': [
+        { 'name': 'PIN' },
+        { 'name': 'INV' },
+      ],
     },
     {
       'pid': 'T6Dc0GhaqZt',
@@ -105,10 +107,10 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'float',
-      'conf': {
-        'PIN': {},
-        'INV': {},
-      },
+      'conf': [
+        { 'name': 'PIN' },
+        { 'name': 'INV' },
+      ],
     },
     {
       'pid': 'T6Dc0GhaqZt',
@@ -116,12 +118,12 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'I2C',
       'type': 'float',
-      'conf': {
-        'CHN': {},
-        'FSW': {},
-        'SDA': {},
-        'SCL': {},
-      },
+      'conf': [
+        { 'name': 'CHN' },
+        { 'name': 'FSW' },
+        { 'name': 'SDA' },
+        { 'name': 'SCL' },
+      ],
     },
     {
       'pid': 'T6Dc0GhaqZt',
@@ -129,13 +131,13 @@ export let pluginMock: any = {
       'desc': '',
       'group': 'SPI',
       'type': 'float',
-      'conf': {
-        'CHN': {},
-        'FSW': {},
-        'DIN': {},
-        'CLK': {},
-        'LAT': {},
-      },
+      'conf': [
+        { 'name': 'CHN' },
+        { 'name': 'FSW' },
+        { 'name': 'DIN' },
+        { 'name': 'CLK' },
+        { 'name': 'LAT' },
+      ],
     },
   ],
 };

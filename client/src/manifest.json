@@ -4,10 +4,10 @@
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "assets/imgs/logo.png",
+    "src": "assets/images/apollo-ng-badge.svg",
     "sizes": "512x512",
-    "type": "image/png"
+    "type": "image/svg"
   }],
-  "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "background_color": "#2f2e2a",
+  "theme_color": "#75880c"
 }
