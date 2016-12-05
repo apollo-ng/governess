@@ -270,15 +270,14 @@ export class EditPluginModal {
     this.type = params.get('type');
     this.aid = params.get('aid');
     this.pidx = params.get('pidx');
+
     // Find the designated appliance for this plugin
     let appliance: any = this.applianceService.appliances.filter((_appliance) => {
       return (_appliance.aid.indexOf(this.aid) > -1);
     });
-    console.log('EditPluginModal cont', appliance);
 
     // Roll it out
     this.plugin = appliance[0].plugins[this.type][this.pidx];
-    console.log('EditPluginModal plug', this.pidx, this.plugin);
 
   }
 

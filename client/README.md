@@ -158,7 +158,7 @@ this is the basis on which the app was started on:
 
     $ ionic start governess-app sidemenu -s --v2 --ts
     $ ionic platform add android
-    $ ionic platform add android
+    $ ionic platform add browser
 
 ----
 Support & Contact
