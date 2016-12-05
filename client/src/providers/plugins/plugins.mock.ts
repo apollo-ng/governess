@@ -71,6 +71,17 @@ export let pluginMock: any = {
         { 'name': '/SS' },
       ],
     },
+    {
+      'pid': 'Tfh8LP2iXxA3',
+      'name': 'HX711 Load Cell Amplifier Driver',
+      'desc': 'Allows you to easily read load cells to measure weight by reading the changes in the resistance of the load cell. With some calibration you’ll be able to get very accurate weight measurements. This can be handy for creating your own industrial scale, process control, thrust/force analyzer or simple presence detection',
+      'group': 'I2C',
+      'type': 'float',
+      'conf': [
+        { 'name': 'SDA' },
+        { 'name': 'SCL' },
+      ],
+    },
   ],
   'control': [
     {
@@ -126,7 +137,7 @@ export let pluginMock: any = {
     {
       'pid': 'pG0gKAPvmvZ3',
       'name': 'PCA9685 16-Channel 12-Bit PWM Servo Driver',
-      'desc': '',
+      'desc': 'To control pwm/servos',
       'group': 'I2C',
       'type': 'float',
       'conf': [
@@ -137,7 +148,7 @@ export let pluginMock: any = {
       ],
     },
     {
-      'pid': 'bVD0eno5RWkV',
+      'pid': '4gRqDX1akMN0',
       'name': 'TLC5947 24-Channel 12-Bit PWM Driver',
       'desc': '',
       'group': 'SPI',
