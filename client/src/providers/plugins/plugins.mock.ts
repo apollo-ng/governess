@@ -74,7 +74,7 @@ export let pluginMock: any = {
     {
       'pid': 'Tfh8LP2iXxA3',
       'name': 'HX711 Load Cell Amplifier Driver',
-      'desc': 'Allows you to easily read load cells to measure weight by reading the changes in the resistance of the load cell. With some calibration you’ll be able to get very accurate weight measurements. This can be handy for creating your own industrial scale, process control, thrust/force analyzer or simple presence detection',
+      'desc': 'Measures weight by reading the changes in load cell resistance. Handy for creating scales, process controls, thrust/force analyzer or simple presence detection',
       'group': 'I2C',
       'type': 'float',
       'conf': [
