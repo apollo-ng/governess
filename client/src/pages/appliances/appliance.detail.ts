@@ -72,7 +72,7 @@ export class ApplianceDetailPage {
    */
 
   public renameAppliance(appliance: any): void {
-    let alert: any =  this.alertCtrl.create();
+    let alert: any = this.alertCtrl.create();
     alert.setTitle('Name of this Appliance');
     alert.addInput({ type: 'text', name: 'appName', value: appliance.name });
     alert.addButton('Cancel');
@@ -117,19 +117,19 @@ export class ApplianceDetailPage {
   }
 
   public popAddPluginModal(aid: string, type: string): void {
-    let addPluginModal: any = this.modalCtrl.create (
-      AddPluginModal,
-      {
-        'aid': aid,
-        'type': type,
-      }
-    );
+    let addPluginModal: any = this.modalCtrl.create ( AddPluginModal, {
+      'aid': aid,
+      'type': type,
+    });
     addPluginModal.present();
   }
 
-  public popEditPluginModal(plugin: any): void {
-    let editPluginModal: any = this.modalCtrl.create (
-      EditPluginModal, { 'plugin': plugin });
+  public popEditPluginModal(aid: string, type: string, pidx: number): void {
+    let editPluginModal: any = this.modalCtrl.create ( EditPluginModal, {
+      'aid': aid,
+      'type': type,
+      'pidx': pidx,
+    });
     editPluginModal.present();
   }
 
@@ -249,11 +249,13 @@ export class AddPluginModal {
 
 export class EditPluginModal {
 
-  public plugin: any;
-
   public viewCtrl: ViewController;
   public applianceService: ApplianceService;
   public params: NavParams;
+  public plugin: any;
+  public type: string;
+  public aid: string;
+  public pidx: number;
 
   constructor(
 
@@ -265,8 +267,24 @@ export class EditPluginModal {
 
     this.viewCtrl = viewCtrl;
     this.applianceService = applianceService;
-    this.plugin = params.get('plugin');
-    console.log(this.plugin);
+    this.type = params.get('type');
+    this.aid = params.get('aid');
+    this.pidx = params.get('pidx');
+    // Find the designated appliance for this plugin
+    let appliance: any = this.applianceService.appliances.filter((_appliance) => {
+      return (_appliance.aid.indexOf(this.aid) > -1);
+    });
+    console.log('EditPluginModal cont', appliance);
+
+    // Roll it out
+    this.plugin = appliance[0].plugins[this.type][this.pidx];
+    console.log('EditPluginModal plug', this.pidx, this.plugin);
+
+  }
+
+  public removePlugin(aid: string, type: string, pidx: any): void {
+    this.applianceService.removePlugin(aid, type, pidx);
+    this.dismissModal();
   }
 
   public dismissModal(): void {

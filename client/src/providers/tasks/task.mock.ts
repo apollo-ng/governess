@@ -1,6 +1,6 @@
 export let taskMock: Array<any> = [{
-    'tid': '36ba8b6f-7603-b046-1bab-0093d1515fbe',
-    'aid': 'e4d8edc4-6700-b16c-f8f3-783a87a352dc',
+    'tid': 'pGJz1rZwp8EG',
+    'aid': 'Xj5d7oNJmRLV',
     'name': 'Reflow Lead-Free',
     'icon': 'star-outline',
     'created': Math.round( new Date().getTime() / 1000 ),

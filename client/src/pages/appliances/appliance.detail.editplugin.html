@@ -12,7 +12,28 @@
   </ion-navbar>
 
   <ion-toolbar>
-
+    <ion-grid no-padding class="mini-bar">
+      <ion-row>
+        <ion-col>
+          <button ion-button full class="rb-glass">
+            <ion-icon name="color-pallete"></ion-icon>
+            <span class="minibar-button-txt">Color</span>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button full class="rb-glass">
+            <ion-icon name="eye"></ion-icon>
+            <span class="minibar-button-txt">Icon</span>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button full class="rb-red"
+                  (click)="removePlugin(aid, type, plugin)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
@@ -22,16 +43,6 @@
       <ion-icon name="logo-buffer" item-left></ion-icon>
       <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
       <ion-input value="{{plugin.name}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="logo-buffer" item-left></ion-icon>
-      <ion-label><h2>{{ 'COLOR' | translate }}</h2></ion-label>
-      <ion-input value="{{plugin.color}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="logo-buffer" item-left></ion-icon>
-      <ion-label><h2>{{ 'ICON' | translate }}</h2></ion-label>
-      <ion-input value="{{plugin.icon}}"></ion-input>
     </ion-item>
     <ion-item-divider color="dark">
       <ion-icon name="logo-buffer" item-left></ion-icon>

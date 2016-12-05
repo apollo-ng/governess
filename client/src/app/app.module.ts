@@ -11,17 +11,17 @@ import { Storage }                from '@ionic/storage';
 import { ChartsModule }           from 'ng2-charts/components/charts/charts';
 import { ChartModule }            from 'angular2-chartjs';
 
-// Translation
+// Translation /////////////////////////////////////////////////////////////////
 
 import { TranslateModule,
          TranslateLoader,
          TranslateStaticLoader }  from 'ng2-translate/ng2-translate';
 
-// Root Component
+// Root Component //////////////////////////////////////////////////////////////
 
 import { GovernessApp }           from './app.component';
 
-// Pages
+// Pages ///////////////////////////////////////////////////////////////////////
 
 import { AboutPage }              from '../pages/about/about';
 import { AppliancesPage }         from '../pages/appliances/appliances';
@@ -35,13 +35,14 @@ import { SettingsPage }           from '../pages/settings/settings';
 import { TasksPage }              from '../pages/tasks/tasks';
 import { TaskDetailPage }         from '../pages/tasks/task.detail';
 
-// Help
+// Help ////////////////////////////////////////////////////////////////////////
 
+import { AppliancesHelp }         from '../pages/appliances/appliances.help';
 import { ControlHelp }            from '../pages/control/control.help';
 import { SettingsHelp }           from '../pages/settings/settings.help';
 import { TasksHelp }              from '../pages/tasks/tasks.help';
 
-// Providers
+// Providers ///////////////////////////////////////////////////////////////////
 
 import { WebSocketService }       from '../providers/websocket/websocket';
 import { StorageService }         from '../providers/storage/storage';
@@ -51,8 +52,9 @@ import { ApplianceService }       from '../providers/appliances/appliances';
 import { PluginService }          from '../providers/plugins/plugins';
 import { TaskService }            from '../providers/tasks/tasks';
 import { ShortID }                from '../providers/crypto/shortid';
+import { HashID }                 from '../providers/crypto/hashid';
 
-// Pipes
+// Pipes ///////////////////////////////////////////////////////////////////////
 
 import { TemperaturePipe }        from '../pipes/temperature';
 
@@ -70,6 +72,7 @@ export function createTranslateLoader(http: Http): any {
     GovernessApp,
     AboutPage,
     AppliancesPage,
+    AppliancesHelp,
     ApplianceDetailPage,
     AddPluginModal,
     EditPluginModal,
@@ -103,6 +106,7 @@ export function createTranslateLoader(http: Http): any {
     GovernessApp,
     AboutPage,
     AppliancesPage,
+    AppliancesHelp,
     ApplianceDetailPage,
     AddPluginModal,
     EditPluginModal,
@@ -120,6 +124,7 @@ export function createTranslateLoader(http: Http): any {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Storage,
     ShortID,
+    HashID,
     StorageService,
     ConfigService,
     ApplianceService,

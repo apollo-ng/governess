@@ -5,9 +5,15 @@ import { ActionSheetController,
          NavController,
          reorderArray }             from 'ionic-angular';
 
+// Providers ///////////////////////////////////////////////////////////////////
+
 import { ConfigService }            from '../../providers/config/config';
 import { ApplianceService }         from '../../providers/appliances/appliances';
-import { ApplianceDetailPage }      from '../appliances/appliance.detail';
+
+// Sub-Pages/Modals ////////////////////////////////////////////////////////////
+
+import { ApplianceDetailPage }      from './appliance.detail';
+import { AppliancesHelp }           from './appliances.help';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -95,8 +101,10 @@ export class AppliancesPage {
    */
 
   public addAppliance(): void {
-    console.log('FIXME: Add a new empty appliance');
-    this.isSending = !this.isSending;
+    // console.log('FIXME: Add a new empty appliance');
+    // this.isSending = !this.isSending;
+    this.applianceService.add();
+    this.appliances = this.applianceService.appliances;
   }
 
   /*****************************************************************************
@@ -187,8 +195,8 @@ export class AppliancesPage {
    */
 
   public openHelp(): void {
-    // FIXME: Add proper help
-    console.log('help tapped');
+    let modal: any = this.modalCtrl.create(AppliancesHelp);
+    modal.present(modal);
   }
 
 }

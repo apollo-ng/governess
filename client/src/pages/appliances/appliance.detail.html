@@ -35,7 +35,7 @@
           <ion-input placeholder="192.168.1.66" value="{{appliance.name}}"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-icon name="game-controller-b" item-left></ion-icon>
+          <ion-icon name="social-tux" item-left></ion-icon>
           <ion-label><h2>Platform</h2></ion-label>
           <ion-select>
             <ion-option selected="true" value="rapsberrypi">Raspberry Pi</ion-option>
@@ -48,7 +48,7 @@
           <ion-input placeholder="192.168.1.66"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-icon name="hand" item-left></ion-icon>
+          <ion-icon name="videocam" item-left></ion-icon>
           <ion-label>
             <h2>Webcam connected</h2>
             <p>Webcam connected</p>
@@ -71,12 +71,17 @@
           </div>
           <div class="section-grid">
             <ion-grid>
-              <ion-row>
+              <ion-row *ngIf="appliance.plugins.input.length > 0">
                 <ion-col *ngFor="let plugin of appliance.plugins.input; let p = index"
-                         (click)="popEditPluginModal(plugin)"
+                         (click)="popEditPluginModal(appliance.aid, 'input', p)"
                          style="background-color: rgba(191, 128, 6, 0.76);">
                   <ion-icon name="color-fill"></ion-icon>
                   <span class="plugin-title">{{plugin.name}}</span>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="!appliance.plugins.input || appliance.plugins.input.length < 1">
+                <ion-col>
+                  No Input plugin has been added yet
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -91,22 +96,17 @@
           </div>
             <div class="section-grid">
               <ion-grid>
-                <ion-row>
-                  <ion-col style="background-color: rgba(191, 128, 6, 0.76);">
-                      <ion-icon name="color-fill"></ion-icon>
-                      <span class="plugin-title">PID Temperature Governor</span>
+                <ion-row *ngIf="appliance?.plugins.control.length > 0">
+                  <ion-col *ngFor="let plugin of appliance?.plugins.control; let p = index"
+                           (click)="popEditPluginModal(appliance.aid, 'control', p)"
+                           style="background-color: rgba(91, 228, 6, 0.76);">
+                    <ion-icon name="color-fill"></ion-icon>
+                    <span class="plugin-title">{{plugin.name}}</span>
                   </ion-col>
-                  <ion-col style="background-color: rgba(144, 73, 249, 0.6);">
-                        <ion-icon name="eye"></ion-icon>
-                      <span class="plugin-title">Circulator Controller</span>
-                  </ion-col>
-                  <ion-col style="background-color: rgba(12, 154, 141, 0.83);">
-                      <ion-icon name="eye"></ion-icon>
-                      <span class="plugin-title">Door Trigger</span>
-                  </ion-col>
-                  <ion-col style="background-color: rgba(13, 133, 32, 0.83);">
-                      <ion-icon name="eye"></ion-icon>
-                      <span class="plugin-title">Start/Stop Events</span>
+                </ion-row>
+                <ion-row *ngIf="!appliance.plugins.control || appliance.plugins.control.length < 1">
+                  <ion-col>
+                    No Contol plugin has been added yet
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -121,18 +121,17 @@
           </div>
           <div class="section-grid">
             <ion-grid>
-              <ion-row>
-                <ion-col style="background-color: rgba(133, 23, 13, 0.83);">
-                    <ion-icon name="flame"></ion-icon>
-                    <span class="plugin-title">Heater AC SSR</span>
+              <ion-row *ngIf="appliance.plugins.output.length > 0">
+                <ion-col *ngFor="let plugin of appliance.plugins.output; let p = index"
+                         (click)="popEditPluginModal(appliance.aid, 'output', p)"
+                         style="background-color: rgba(91, 228, 6, 0.76);">
+                  <ion-icon name="color-fill"></ion-icon>
+                  <span class="plugin-title">{{plugin.name}}</span>
                 </ion-col>
-                <ion-col style="background-color: rgba(13, 68, 133, 0.83);">
-                    <ion-icon name="snow"></ion-icon>
-                    <span class="plugin-title">Cooler DC MOSFET</span>
-                </ion-col>
-                <ion-col style="background-color: rgba(144, 73, 249, 0.6);">
-                    <ion-icon name="nuclear"></ion-icon>
-                    <span class="plugin-title">Circulator AC SSR</span>
+              </ion-row>
+              <ion-row *ngIf="!appliance.plugins.output || appliance.plugins.output.length < 1">
+                <ion-col>
+                  No Output plugin has been added yet
                 </ion-col>
               </ion-row>
             </ion-grid>

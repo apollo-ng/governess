@@ -1,5 +1,7 @@
 import { Injectable }             from '@angular/core';
-import { ShortID }                from '../crypto/shortid';
+import { ToastController }        from 'ionic-angular';
+// import { ShortID }                from '../crypto/shortid';
+import { HashID }                 from '../crypto/hashid';
 import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
 
@@ -19,7 +21,8 @@ export class ApplianceService {
 
   public appliances: any = [];
   public storage: StorageService;
-  private shortID: ShortID;
+  public toastCtrl: ToastController;
+  private hashID: HashID;
 
   /*****************************************************************************
    * constructor
@@ -28,12 +31,14 @@ export class ApplianceService {
   constructor (
 
     storage: StorageService,
-    shortID: ShortID
+    toastCtrl: ToastController,
+    hashID: HashID,
 
   ) {
 
     this.storage = storage;
-    this.shortID = shortID;
+    this.toastCtrl = toastCtrl;
+    this.hashID = hashID;
     this.init().then(data => {
       this.appliances = data;
     });
@@ -93,12 +98,33 @@ export class ApplianceService {
 
     // create a fresh set of metadata for this copy
     copy.name = copy.name + ' Copy';
-    copy.aid = this.shortID.create();
+    copy.aid = this.hashID.create();
     copy.created = Math.round(new Date().getTime());
 
     // roll it out
     this.appliances.push(copy);
     this.updateD();
+  }
+
+  /*****************************************************************************
+   * pull
+   */
+
+  public add(): any {
+
+    // crude hack to copy the array after lodash deepClone refused to work
+    let _appliance: any = JSON.parse(JSON.stringify(applianceMock[0]));
+
+    // create a fresh set of metadata for this copy
+    _appliance.name = 'New Appliance';
+    _appliance.desc = '';
+    _appliance.aid = this.hashID.create();
+    _appliance.created = Math.round(new Date().getTime());
+
+    // roll it out
+    this.appliances.push(_appliance);
+    this.updateD();
+
   }
 
   /*****************************************************************************
@@ -136,12 +162,46 @@ export class ApplianceService {
    */
 
   public addPlugin(aid: string, type: string, plugin: any): void {
-    console.log('Add new plugin to appliance', aid, type, plugin);
-    let appliance: any = this.appliances.filter((appliance) => {
-      return (appliance.aid.indexOf(aid) > -1);
+
+    // Find the designated appliance for this plugin
+    let appliance: any = this.appliances.filter((_appliance) => {
+      return (_appliance.aid.indexOf(aid) > -1);
     });
+
+    // Roll it out
     appliance[0].plugins[type].push(plugin);
-    this.write(this.appliances);
+    this.updateD();
+
+    // Give feedback to user
+    let msg: string = 'Plugin ' + plugin.name + ' added to ' + appliance[0].name;
+    let toast: any = this.toastCtrl.create({ message: msg, duration: 3000 });
+    toast.present();
+  }
+
+  /*****************************************************************************
+   * removePlugin
+   */
+
+  public removePlugin(aid: string, type: string, pidx: any): void {
+
+    console.log('plugin remove called:', aid, type, pidx);
+
+    // Find the designated appliance for this plugin
+    let appliance: any = this.appliances.filter((_appliance) => {
+      return (_appliance.aid.indexOf(aid) > -1);
+    });
+
+    // Roll it out
+    appliance[0].plugins[type].splice(pidx, 1);
+    /*
+    for (let i: number = 0; i < appliance[0].plugins[type].length; i++) {
+      if (appliance[0].plugins[type][i].pid === plugin.pid) {
+        appliance[0].plugins[type].splice(i, 1);
+      }
+    }*/
+    this.updateD();
+    console.log('plugin removed');
+
   }
 
   /*****************************************************************************

@@ -82,12 +82,15 @@ export class ControlPage {
         )
       )[0];
 
-      this.updateChart          ();
+      // Crude hack to prevent exception during init with no app/task selected
+      if (this.task) {
+        this.updateChart          ();
+      }
     });
 
     // Subscribe and assign the websocket data handlers
     this.statusService.statusSocketRX().subscribe( (data: any) => {
-      this.statusUpdate         (data);
+      this.statusUpdate(data);
     });
 
   }
@@ -143,8 +146,8 @@ export class ControlPage {
    * @param {event} task
    */
 
-  public triggerUpdate(data: any): void {
-    this.config = data;
+  public triggerUpdate(_config: any): void {
+    this.config = _config;
     this.configService.update(this.config);
 
     this.task = this.tasks.filter(
@@ -159,8 +162,8 @@ export class ControlPage {
    * @param {event} task
    */
 
-  public statusUpdate(data: any): void {
-    this.status = JSON.parse(data);
+  public statusUpdate(_status: any): void {
+    this.status = JSON.parse(_status);
     let temp: Array<any> = this.status.temperature.toString().split('.');
     this.status.temperature_major = temp[0];
     if (temp[1] > 1) {
