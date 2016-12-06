@@ -29,7 +29,19 @@
       <ion-icon name="bowtie" item-left></ion-icon>
       <ion-label><h2>{{ 'THEME' | translate }}</h2></ion-label>
       <ion-select [(ngModel)]="config.theme" (ngModelChange)="updateConfig()">
-        <ion-option value="default" selected="true">Default</ion-option>
+        <ion-option value="default">Default</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="calendar" item-left></ion-icon>
+      <ion-label><h2>{{ 'DATE-FORMAT' | translate }}</h2></ion-label>
+      <ion-select [(ngModel)]="config.dateFormat" (ngModelChange)="updateConfig()">
+        <ion-option value="y-MM-ddTHH:mm:ss+00:00">ISO 8601</ion-option>
+        <ion-option value="y-MM-dd HH:mm">{{ reftime | date: 'y-MM-dd HH:mm' }}</ion-option>
+        <ion-option value="y/M/d HH:mm">{{ reftime | date: 'y/M/d HH:mm' }}</ion-option>
+        <ion-option value="dd.MM.y HH:mm">{{ reftime | date: 'dd.MM.y HH:mm' }}</ion-option>
+        <ion-option value="EEEE, MMMM d, y HH:mm">{{ reftime | date: 'EEEE, MMMM d, y HH:mm' }}</ion-option>
       </ion-select>
     </ion-item>
 

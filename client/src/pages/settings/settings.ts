@@ -36,6 +36,7 @@ export class SettingsPage {
   public translate:       TranslateService;
 
   public config: any =    {};
+  public reftime: any;
 
   /*****************************************************************************
    * constructor
@@ -60,6 +61,7 @@ export class SettingsPage {
     this.configService = configService;
     this.taskService = taskService;
     this.translate = translate;
+    this.reftime = new Date();
 
     this.init().then( () => {
       // console.log('I seem to be needed to get the promise');

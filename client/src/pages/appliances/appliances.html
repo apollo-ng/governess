@@ -59,7 +59,7 @@
               </td>
               <td>
                 <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}">
-                  {{appliance.created | date: 'yyyy-MM-dd HH:mm'}}
+                  {{ appliance.created | date: config.dateFormat }}
                 </ion-icon>
               </td>
             </tr>

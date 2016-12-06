@@ -8,6 +8,7 @@
   "PLUGINS": "Plugins",
   "CONFIGURATION": "Configuration",
   "THEME": "Theme",
+  "DATE-FORMAT": "Date Format",
   "ENTRY-POINT": "Entry Point",
   "ENTRY-POINT-LONG": "Where to start on return",
   "LAST-VIEWED-PAGE": "Last viewed Page",
