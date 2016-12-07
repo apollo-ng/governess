@@ -26,6 +26,7 @@ import { PluginService }            from '../../providers/plugins/plugins';
 export class ApplianceDetailPage {
 
   public appliance: any;
+  public platforms: any;
   public data: any;
   public view: string = 'settings';
 
@@ -62,6 +63,7 @@ export class ApplianceDetailPage {
 
     this.appliance = this.navParams.data;
     this.data = this.appliance.data;
+    this.platforms = this.applianceService.getHostPlatforms();
     console.log('appliancedetail init coming up with:', this.appliance);
 
   }

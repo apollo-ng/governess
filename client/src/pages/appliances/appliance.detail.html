@@ -35,11 +35,15 @@
           <ion-input placeholder="192.168.1.66" value="{{appliance.name}}"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-icon name="social-tux" item-left></ion-icon>
-          <ion-label><h2>Platform</h2></ion-label>
-          <ion-select>
-            <ion-option selected="true" value="rapsberrypi">Raspberry Pi</ion-option>
-            <ion-option value="odroid">Odroid</ion-option>
+          <ion-icon name="at" item-left></ion-icon>
+          <ion-label><h2>Host-Platform</h2></ion-label>
+          <ion-select [(ngModel)]="appliance.hid"
+                      [selectOptions]="{
+                        title: 'Host-Platform',
+                        subTitle: 'Pick your board'
+                      }">
+            <ion-option *ngIf="!appliance.hid" value="">Select a platform</ion-option>
+            <ion-option *ngFor="let platform of platforms" [value]="platform.hid">{{platform.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>

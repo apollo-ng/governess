@@ -4,6 +4,7 @@ import { ToastController }        from 'ionic-angular';
 import { HashID }                 from '../crypto/hashid';
 import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
+import { hostPlatforms }          from './platforms';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -155,6 +156,14 @@ export class ApplianceService {
   public updateD(): void {
     console.log('Updating appliances...');
     this.write(this.appliances);
+  }
+
+  /*****************************************************************************
+   * getHostPlatforms
+   */
+
+  public getHostPlatforms(): any {
+    return hostPlatforms;
   }
 
   /*****************************************************************************
