@@ -167,6 +167,35 @@ export class ApplianceService {
   }
 
   /*****************************************************************************
+   * getHostPins
+   */
+
+  public getHostPins(hid: string): any {
+
+    // FIXME: There must be a better way to get this data with ng2/map tools.
+    //        Couldn't figure it out, so this crude loop does it for now.
+
+    let combined: any = [];
+
+    // Query platform data with hid
+    let platform: any = hostPlatforms.filter((_platform) => {
+      return (_platform.hid.indexOf(hid) > -1);
+    });
+
+    // Assemble all pins from all available headers in one array
+    for (let header of platform[0].headers) {
+      for (let pin of header.pins) {
+        combined.push(pin);
+      }
+    }
+
+    // FIXME: Remove already assigned pins from this list
+
+    return combined;
+
+  }
+
+  /*****************************************************************************
    * addPlugin
    */
 
@@ -193,8 +222,6 @@ export class ApplianceService {
 
   public removePlugin(aid: string, type: string, pidx: any): void {
 
-    console.log('plugin remove called:', aid, type, pidx);
-
     // Find the designated appliance for this plugin
     let appliance: any = this.appliances.filter((_appliance) => {
       return (_appliance.aid.indexOf(aid) > -1);
@@ -202,14 +229,7 @@ export class ApplianceService {
 
     // Roll it out
     appliance[0].plugins[type].splice(pidx, 1);
-    /*
-    for (let i: number = 0; i < appliance[0].plugins[type].length; i++) {
-      if (appliance[0].plugins[type][i].pid === plugin.pid) {
-        appliance[0].plugins[type].splice(i, 1);
-      }
-    }*/
     this.updateD();
-    console.log('plugin removed');
 
   }
 

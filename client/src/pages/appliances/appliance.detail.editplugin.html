@@ -16,7 +16,7 @@
       <ion-row>
         <ion-col>
           <button ion-button full class="rb-glass">
-            <ion-icon name="color-pallete"></ion-icon>
+            <ion-icon name="color-palette"></ion-icon>
             <span class="minibar-button-txt">Color</span>
           </button>
         </ion-col>
@@ -39,10 +39,25 @@
 
 <ion-content>
   <ion-list>
+    <ion-item-divider color="dark">
+      <ion-icon name="logo-buffer" item-left></ion-icon>
+      Driver Settings
+    </ion-item-divider>
     <ion-item>
       <ion-icon name="logo-buffer" item-left></ion-icon>
       <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
       <ion-input value="{{plugin.name}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" item-left></ion-icon>
+      <ion-label><h2>Host-PIN</h2></ion-label>
+      <ion-select
+                  [selectOptions]="{
+                    title: 'Host-Platform',
+                    subTitle: 'Pick your board'
+                  }">
+        <ion-option *ngFor="let pin of applianceService.getHostPins(hid)" [value]="pin.PIN">{{ pin.name }}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item-divider color="dark">
       <ion-icon name="logo-buffer" item-left></ion-icon>

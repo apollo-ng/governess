@@ -255,8 +255,11 @@ export class EditPluginModal {
   public applianceService: ApplianceService;
   public params: NavParams;
   public plugin: any;
+  public platform: any;
+  public appliance: any;
   public type: string;
   public aid: string;
+  public hid: string;
   public pidx: number;
 
   constructor(
@@ -274,12 +277,13 @@ export class EditPluginModal {
     this.pidx = params.get('pidx');
 
     // Find the designated appliance for this plugin
-    let appliance: any = this.applianceService.appliances.filter((_appliance) => {
+    this.appliance = this.applianceService.appliances.filter((_appliance) => {
       return (_appliance.aid.indexOf(this.aid) > -1);
     });
 
     // Roll it out
-    this.plugin = appliance[0].plugins[this.type][this.pidx];
+    this.plugin = this.appliance[0].plugins[this.type][this.pidx];
+    this.hid = this.appliance[0].hid;
 
   }
 
