@@ -2,7 +2,7 @@
   <ion-navbar dark>
     <ion-title>
       <ion-icon name="logo-buffer"></ion-icon>
-      {{plugin.name}}
+      {{ plugin.name }}
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="dismissModal()">
@@ -46,26 +46,31 @@
     <ion-item>
       <ion-icon name="logo-buffer" item-left></ion-icon>
       <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
-      <ion-input value="{{plugin.name}}"></ion-input>
+      <ion-input value="{{ plugin.name }}"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="at" item-left></ion-icon>
       <ion-label><h2>Host-PIN</h2></ion-label>
       <ion-select
                   [selectOptions]="{
-                    title: 'Host-Platform',
-                    subTitle: 'Pick your board'
+                    title: 'Host-PIN',
+                    subTitle: 'Pick available GPIO pin'
                   }">
-        <ion-option *ngFor="let pin of applianceService.getHostPins(hid)" [value]="pin.PIN">{{ pin.name }}</ion-option>
+        <ion-option *ngFor="let pin of applianceService.getHostGPIOs(hid)" [value]="pin.PIN">
+         PIN {{ pin.PIN }} ◀▶ {{ pin.TXT }}
+        </ion-option>
       </ion-select>
     </ion-item>
     <ion-item-divider color="dark">
       <ion-icon name="logo-buffer" item-left></ion-icon>
       Driver Settings
     </ion-item-divider>
-    <ion-item *ngFor="let conf of plugin.conf; let p = index">
-      <ion-label><h2>{{conf.name}}</h2></ion-label>
-      <ion-input value="{{conf.value}}"></ion-input>
+    <ion-item *ngFor="let conf of plugin.conf">
+      <ion-label><h2>{{ conf.name }}</h2></ion-label>
+      <ion-input value="{{ conf.value }}"></ion-input>
     </ion-item>
   </ion-list>
+
+  <canvas #ConnectionVisualizer width="400" height="400"></canvas>
+
 </ion-content>

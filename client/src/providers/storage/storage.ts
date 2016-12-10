@@ -1,3 +1,5 @@
+'use strict';
+
 import { Injectable } from '@angular/core';
 import { Storage }    from '@ionic/storage';
 
@@ -27,17 +29,17 @@ export class StorageService {
 
   /*****************************************************************************
    * initStorage
-   * @param
+   * @return Storage Object
    */
 
   public static initStorage(): Storage {
-    console.log('Connecting to local storage...');
     return new Storage();
   }
 
   /*****************************************************************************
    * get
-   * @param
+   * @param key: string
+   * @return
    */
 
   public get(key: string): Promise<{}> {
@@ -46,18 +48,18 @@ export class StorageService {
 
   /*****************************************************************************
    * set
-   * @param
+   * @param key: string
+   * @return
    */
 
   public set(key: string, value: string): Promise<{}> {
-    console.log('storageService set key', key);
-    console.log('storageService set value', value);
     return this.storage.set(key, value);
   }
 
   /*****************************************************************************
    * remove
-   * @param
+   * @param key: string
+   * @return
    */
 
   public remove(key: string): Promise<{}> {

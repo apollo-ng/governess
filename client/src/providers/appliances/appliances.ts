@@ -1,6 +1,5 @@
 import { Injectable }             from '@angular/core';
 import { ToastController }        from 'ionic-angular';
-// import { ShortID }                from '../crypto/shortid';
 import { HashID }                 from '../crypto/hashid';
 import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
@@ -167,14 +166,38 @@ export class ApplianceService {
   }
 
   /*****************************************************************************
-   * getHostPins
+   * getHostHeaders
    */
 
-  public getHostPins(hid: string): any {
+  public getHostHeaders(hid: string): any {
 
     // FIXME: There must be a better way to get this data with ng2/map tools.
     //        Couldn't figure it out, so this crude loop does it for now.
+    // console.log('HID:', hid);
+    let combined: any = [];
 
+    // Query platform data with hid
+    let platform: any = hostPlatforms.filter((_platform) => {
+      return (_platform.hid.indexOf(hid) > -1);
+    });
+
+    for (let header of platform[0].headers) {
+      combined.push(header);
+    }
+
+    return combined;
+
+  }
+
+  /*****************************************************************************
+   * getHostGPIOs
+   */
+
+  public getHostGPIOs(hid: string): any {
+
+    // FIXME: There must be a better way to get this data with ng2/map tools.
+    //        Couldn't figure it out, so this crude loop does it for now.
+    console.log('HID:', hid);
     let combined: any = [];
 
     // Query platform data with hid
@@ -185,7 +208,10 @@ export class ApplianceService {
     // Assemble all pins from all available headers in one array
     for (let header of platform[0].headers) {
       for (let pin of header.pins) {
-        combined.push(pin);
+        // Isolate only GPIOs
+        if (pin.GRP === 'GPIO') {
+          combined.push(pin);
+        }
       }
     }
 

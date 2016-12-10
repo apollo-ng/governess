@@ -25,9 +25,9 @@ import { GovernessApp }           from './app.component';
 
 import { AboutPage }              from '../pages/about/about';
 import { AppliancesPage }         from '../pages/appliances/appliances';
-import { ApplianceDetailPage,
-         AddPluginModal,
-         EditPluginModal }        from '../pages/appliances/appliance.detail';
+import { ApplianceDetailPage }    from '../pages/appliances/appliance.detail';
+import { AddPluginModal }         from '../pages/appliances/appliance.detail.addplugin';
+import { EditPluginModal }        from '../pages/appliances/appliance.detail.editplugin';
 import { ControlPage }            from '../pages/control/control';
 import { HelpPage }               from '../pages/help/help';
 import { LogsPage }               from '../pages/logs/logs';

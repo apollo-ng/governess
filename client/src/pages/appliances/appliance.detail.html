@@ -37,19 +37,19 @@
         <ion-item>
           <ion-icon name="at" item-left></ion-icon>
           <ion-label><h2>Host-Platform</h2></ion-label>
-          <ion-select [(ngModel)]="appliance.hid"
+          <ion-select [(ngModel)]="appliance.conf.hid"
                       [selectOptions]="{
                         title: 'Host-Platform',
                         subTitle: 'Pick your board'
                       }">
-            <ion-option *ngIf="!appliance.hid" value="">Select a platform</ion-option>
+            <ion-option *ngIf="!appliance.conf.hid" value="">Select a platform</ion-option>
             <ion-option *ngFor="let platform of platforms" [value]="platform.hid">{{ platform.name }}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-icon name="globe" item-left></ion-icon>
           <ion-label><h2>Hostname/IP</h2></ion-label>
-          <ion-input placeholder="192.168.1.66"></ion-input>
+          <ion-input [(ngModel)]="appliance.conf.host" placeholder="192.168.1.66"></ion-input>
         </ion-item>
         <ion-item>
           <ion-icon name="videocam" item-left></ion-icon>
@@ -57,12 +57,12 @@
             <h2>Webcam connected</h2>
             <p>Webcam connected</p>
           </ion-label>
-          <ion-toggle></ion-toggle>
+          <ion-toggle [(ngModel)]="appliance.conf.hud" (ngModelChange)="updateAppliance()"></ion-toggle>
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="appliance.conf.hud === true">
           <ion-icon name="globe" item-left></ion-icon>
           <ion-label><h2>MJPG-Streamer URL</h2></ion-label>
-          <ion-input placeholder="192.168.1.66"></ion-input>
+          <ion-input [(ngModel)]="appliance.conf.hud_url" placeholder="192.168.1.66"></ion-input>
         </ion-item>
       </ion-list>
     </div>
@@ -76,8 +76,8 @@
           <div class="section-grid">
             <ion-grid>
               <ion-row *ngIf="appliance.plugins.input.length > 0">
-                <ion-col *ngFor="let plugin of appliance.plugins.input; let p = index"
-                         (click)="popEditPluginModal(appliance.aid, 'input', p)"
+                <ion-col *ngFor="let plugin of appliance.plugins.input; let i = index"
+                         (click)="editPlugin(appliance.aid, 'input', i)"
                          style="background-color: rgba(191, 128, 6, 0.76);">
                   <ion-icon name="color-fill"></ion-icon>
                   <span class="plugin-title">{{ plugin.name }}</span>
@@ -91,7 +91,7 @@
             </ion-grid>
             </div>
             <button ion-button item-right>
-              <ion-icon name="add" (click)="popAddPluginModal(appliance.aid,'input')"></ion-icon>
+              <ion-icon name="add" (click)="addPlugin(appliance.aid, 'input')"></ion-icon>
             </button>
         </ion-item>
         <ion-item>
@@ -101,8 +101,8 @@
             <div class="section-grid">
               <ion-grid>
                 <ion-row *ngIf="appliance?.plugins.control.length > 0">
-                  <ion-col *ngFor="let plugin of appliance?.plugins.control; let p = index"
-                           (click)="popEditPluginModal(appliance.aid, 'control', p)"
+                  <ion-col *ngFor="let plugin of appliance?.plugins.control; let i = index"
+                           (click)="editPlugin(appliance.aid, 'control', i)"
                            style="background-color: rgba(91, 228, 6, 0.76);">
                     <ion-icon name="color-fill"></ion-icon>
                     <span class="plugin-title">{{ plugin.name }}</span>
@@ -116,7 +116,7 @@
               </ion-grid>
             </div>
             <button ion-button item-right>
-              <ion-icon name="add" (click)="popAddPluginModal(appliance.aid,'control')"></ion-icon>
+              <ion-icon name="add" (click)="addPlugin(appliance.aid,'control')"></ion-icon>
             </button>
         </ion-item>
         <ion-item>
@@ -126,8 +126,8 @@
           <div class="section-grid">
             <ion-grid>
               <ion-row *ngIf="appliance.plugins.output.length > 0">
-                <ion-col *ngFor="let plugin of appliance.plugins.output; let p = index"
-                         (click)="popEditPluginModal(appliance.aid, 'output', p)"
+                <ion-col *ngFor="let plugin of appliance.plugins.output; let i = index"
+                         (click)="editPlugin(appliance.aid, 'output', i)"
                          style="background-color: rgba(91, 228, 6, 0.76);">
                   <ion-icon name="color-fill"></ion-icon>
                   <span class="plugin-title">{{ plugin.name }}</span>
@@ -141,7 +141,7 @@
             </ion-grid>
             </div>
           <button ion-button item-right>
-            <ion-icon name="add" (click)="popAddPluginModal(appliance.aid,'output')"></ion-icon>
+            <ion-icon name="add" (click)="addPlugin(appliance.aid,'output')"></ion-icon>
           </button>
         </ion-item>
       </ion-list>

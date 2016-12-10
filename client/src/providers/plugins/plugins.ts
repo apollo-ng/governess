@@ -1,6 +1,6 @@
+
 import { Injectable }             from '@angular/core';
-import { ShortID }                from '../crypto/shortid';
-import { StorageService }         from '../storage/storage';
+import { Storage }                from '@ionic/storage';
 import { PluginModel }            from './plugins.model';
 import { pluginMock }             from './plugins.mock';
 
@@ -18,9 +18,7 @@ import { pluginMock }             from './plugins.mock';
 
 export class PluginService {
 
-  public plugins: PluginModel;
-  public storage: StorageService;
-  private shortID: ShortID;
+  private storage: Storage;
 
   /*****************************************************************************
    * constructor
@@ -28,16 +26,12 @@ export class PluginService {
 
   constructor (
 
-    storage: StorageService,
-    shortID: ShortID
+    storage: Storage
 
   ) {
 
     this.storage = storage;
-    this.shortID = shortID;
-    this.init().then(data => {
-      this.plugins = data;
-    });
+    this.init();
 
   }
 
@@ -46,21 +40,14 @@ export class PluginService {
    * @return {Appliance} Object Promise
    */
 
-  private init(): Promise<{}> {
-    console.log('Initializing Plugin Service');
+  private init(): void {
 
-    return this.storage.get('plugins').then((data: string) => {
-      if (!data) {
-        console.log('Got NO Storage Data - creating from Mock:');
-        let initPlugins: any = pluginMock;
-        this.write(initPlugins);
-        this.plugins = initPlugins;
-        return initPlugins;
+    this.storage.get('plugins').then( (plugins: string) => {
+      if (!plugins) {
+        this.write(pluginMock);
       }
-      // console.log('Got Storage Data:', data);
-      this.plugins = JSON.parse(data);
-      return JSON.parse(data);
     });
+
   }
 
   /*****************************************************************************
@@ -68,41 +55,8 @@ export class PluginService {
    * @return
    */
 
-  public get(): Promise<{}> {
+  public getAllPlugins(): any {
     return this.storage.get('plugins');
-  }
-
-  /*****************************************************************************
-   * pull
-   */
-
-  public pull(): any {
-    this.get().then((data: string) => {
-      this.plugins = JSON.parse(data);
-    });
-  }
-
-  /*****************************************************************************
-   * getDistinctGroups - Returns distinct plugin groups by given type
-   * @param type: string [input, control, output]
-   * @return groups: Array <string>
-   */
-
-  public getDistinctGroups(type: string): Array<string> {
-
-    // Set up local compare & store scaffolds
-    let groups: Array<string> = [];
-    let lookup: Object = {};
-
-    // Loop through all available plugins of given type
-    for (let plugin of this.plugins[type]) {
-      if (!(plugin.group in lookup)) {
-        lookup[plugin.group] = true;
-        groups.push(plugin.group);
-      }
-    }
-
-    return groups;
   }
 
   /*****************************************************************************
@@ -110,7 +64,6 @@ export class PluginService {
    */
 
   public reset(): void {
-    console.log('Resetting plugins...');
     this.write(pluginMock);
   }
 
@@ -119,8 +72,7 @@ export class PluginService {
    * @param
    */
 
-  private write(plugins: Object): void {
-    console.log('Writing Plugins to LocalStorage', plugins);
+  private write(plugins: PluginModel): void {
     this.storage.set('plugins', JSON.stringify(plugins));
   }
 
