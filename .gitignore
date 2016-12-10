@@ -28,7 +28,7 @@ tmp/
 temp/
 hooks/
 platforms/
-plugins/
+client/plugins/
 www/
 Chart-2*.js
 
