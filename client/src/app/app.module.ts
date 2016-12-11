@@ -49,6 +49,7 @@ import { StorageService }         from '../providers/storage/storage';
 import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
 import { ApplianceService }       from '../providers/appliances/appliances';
+import { PlatformService }        from '../providers/platforms/platforms';
 import { PluginService }          from '../providers/plugins/plugins';
 import { TaskService }            from '../providers/tasks/tasks';
 import { ShortID }                from '../providers/crypto/shortid';
@@ -128,6 +129,7 @@ export function createTranslateLoader(http: Http): any {
     StorageService,
     ConfigService,
     ApplianceService,
+    PlatformService,
     PluginService,
     StatusService,
     TaskService,

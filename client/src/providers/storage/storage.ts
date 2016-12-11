@@ -17,7 +17,7 @@ import { Storage }    from '@ionic/storage';
 
 export class StorageService {
 
-  private storage: Storage;
+  public storage: Storage;
 
   /*****************************************************************************
    * constructor

@@ -24,10 +24,10 @@
         <ion-col width-50 style="padding-left: 2px">
           <ion-select [(ngModel)]="groupFilter"
                       (ngModelChange)="filterPluginsByGroup()"
-                      [selectOptions]="{ title: 'Filter by Group' }"
+                      [selectOptions]="{ title: 'Filter by Group', buttons: [] }"
                       interface="action-sheet">
-            <ion-option selected="true" value="All">All Groups</ion-option>
-            <ion-option *ngFor="let group of groups">{{ group }}</ion-option>
+            <ion-option selected="true" value="All">{{ 'ALL_GROUPS' | translate }}</ion-option>
+            <ion-option *ngFor="let group of pluginGroups">{{ group }}</ion-option>
           </ion-select>
         </ion-col>
       </ion-row>

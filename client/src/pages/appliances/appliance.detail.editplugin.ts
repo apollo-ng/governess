@@ -1,10 +1,11 @@
+
 import { Component,
-         ViewChild,
-         AfterViewInit }            from '@angular/core';
+         ViewChild }                from '@angular/core';
 import { NavParams,
          ViewController }           from 'ionic-angular';
 
 import { ApplianceService }         from '../../providers/appliances/appliances';
+import { PlatformService }          from '../../providers/platforms/platforms';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -15,64 +16,80 @@ import { ApplianceService }         from '../../providers/appliances/appliances'
 
 /*******************************************************************************
  *
- *     EditPluginModal
+ *   EditPluginModal
  *
  */
 
-export class EditPluginModal implements AfterViewInit {
+export class EditPluginModal {
 
   @ViewChild('ConnectionVisualizer')
     public connectionVisualizer:   any;
 
   public viewCtrl:                  ViewController;
   public applianceService:          ApplianceService;
+  public platformService:           PlatformService;
   public params:                    NavParams;
   public plugin:                    any;
   public appliance:                 any;
   public platform:                  any;
-  public headers:                   Array<any>;
+  public hostGPIOs:                 any;
+  public hostHeaders:               Array<any>;
+  public viewPort:                  string;
   public type:                      string;
   public aid:                       string;
   public hid:                       string;
   public pidx:                      number;
-
-  // private rectW: number =          100;
-  // private rectH: number =          100;
-  public cv:                       CanvasRenderingContext2D;
+  public cv:                        CanvasRenderingContext2D;
 
   constructor(
 
     viewCtrl:                       ViewController,
     applianceService:               ApplianceService,
+    platformService:                PlatformService,
     params:                         NavParams
 
   ) {
 
     this.viewCtrl =                 viewCtrl;
     this.applianceService =         applianceService;
+    this.platformService =          platformService;
+
     this.type =                     params.get('type');
     this.aid =                      params.get('aid');
     this.pidx =                     params.get('pidx');
 
+    // Set settings viewPort as default
+    this.viewPort =                 'settings';
+
     // Find the designated appliance for this plugin
-    this.appliance = this.applianceService.appliances.filter((_appliance) => {
+    let appliance: any = this.applianceService.appliances.filter((_appliance) => {
       return (_appliance.aid.indexOf(this.aid) > -1);
     });
 
     // Roll it out
-    this.plugin = this.appliance[0].plugins[this.type][this.pidx];
-    this.hid = this.appliance[0].conf.hid;
-    this.headers = this.applianceService.getHostHeaders(this.hid);
+    this.appliance = appliance[0];
+    this.plugin = this.appliance.plugins[this.type][this.pidx];
+    this.hid = this.appliance.conf.hid;
+    this.hostHeaders = this.platformService.getHostHeaders(this.hid);
+    this.hostGPIOs = this.platformService.getHostGPIOs(this.hid);
 
   }
 
   /*****************************************************************************
-   * ngAfterViewInit
+   * setWiringViewPort
    */
 
-  public ngAfterViewInit(): void {
-    this.cv = this.connectionVisualizer.nativeElement.getContext('2d');
-    this.drawConnectionVisualizer();
+  public setWiringViewPort(): void {
+
+    this.viewPort = 'wiring';
+    setTimeout(
+      () => {
+        this.cv = this.connectionVisualizer.nativeElement.getContext('2d');
+        this.drawConnectionVisualizer();
+      },
+      150
+    );
+
   }
 
   /*****************************************************************************
@@ -82,23 +99,25 @@ export class EditPluginModal implements AfterViewInit {
   public drawConnectionVisualizer(): void {
 
     // Settings
-    const pinrad: number      = 11;
-    const pitch: number       = 24;
-    const labelWidth: number  = 60;
-    const colors: any = {
-      '3V3' : '#cd9c12',  // Orange
-      '5V'  : '#cd3b12',  // Red
-      'GND' : '#3f3e3a',  // Grey
-      'GPIO': '#75890c',  // Green
+    const pinrad:     number = 11;
+    const pitch:      number = 24;
+    const labelWidth: number = 60;
+
+    // PIN group color definitions
+    const colors:     any = {
+      '3V3' : '#cd9c12', // Orange
+      '5V'  : '#cd3b12', // Red
+      'GND' : '#3f3e3a', // Grey
+      'GPIO': '#75890c', // Green
     };
 
     // Local variables
-    let xOffset: number       = pitch;
-    let yOffset: number       = pitch;
-    let row: number         = 1;
+    let xOffset:      number = pitch;
+    let yOffset:      number = pitch;
+    let row:          number = 1;
 
     // Loop through all headers/pins and draw them on the canvas
-    for (let header of this.headers) {
+    for (let header of this.hostHeaders) {
       if (header.pins.length > 0) {
         for (let pin of header.pins) {
 
@@ -128,7 +147,7 @@ export class EditPluginModal implements AfterViewInit {
           this.cv.globalCompositeOperation = 'source-over';
           this.cv.strokeStyle = '#000000';
           this.cv.fillStyle = '#000000';
-          this.cv.font = 'regular 12pt DIN';
+          this.cv.font = 'regular 14pt DIN';
           this.cv.textAlign = 'center';
           this.cv.fillText(pin.PIN, row * xOffset + labelWidth - pitch, yOffset + 3);
           this.cv.fillStyle = '#ffffff';

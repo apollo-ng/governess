@@ -27,7 +27,7 @@ node_modules/
 tmp/
 temp/
 hooks/
-platforms/
+client/platforms/
 client/plugins/
 www/
 Chart-2*.js

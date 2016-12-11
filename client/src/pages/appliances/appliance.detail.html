@@ -2,7 +2,7 @@
   <ion-navbar dark class="task-detail-toolbar">
     <ion-title>{{ appliance.name }} {{ 'CONFIGURATION' | translate }}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="primary">
+      <button ion-button icon-only color="primary" (click)="applianceActions()">
         <ion-icon name="logo-buffer"></ion-icon>
       </button>
     </ion-buttons>

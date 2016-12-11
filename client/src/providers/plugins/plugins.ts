@@ -37,26 +37,16 @@ export class PluginService {
 
   /*****************************************************************************
    * init
-   * @return {Appliance} Object Promise
    */
 
   private init(): void {
 
-    this.storage.get('plugins').then( (plugins: string) => {
-      if (!plugins) {
-        this.write(pluginMock);
+    this.storage.get('plugins').then( (_plugins: string) => {
+      if (!_plugins || _plugins.trim().length === 0) {
+        this.reset();
       }
     });
 
-  }
-
-  /*****************************************************************************
-   * get
-   * @return
-   */
-
-  public getAllPlugins(): any {
-    return this.storage.get('plugins');
   }
 
   /*****************************************************************************
@@ -68,8 +58,17 @@ export class PluginService {
   }
 
   /*****************************************************************************
+   * getAll
+   * @return Promise
+   */
+
+  public getAll(): any {
+    return this.storage.get('plugins');
+  }
+
+  /*****************************************************************************
    * write
-   * @param
+   * @param Plugins Object
    */
 
   private write(plugins: PluginModel): void {

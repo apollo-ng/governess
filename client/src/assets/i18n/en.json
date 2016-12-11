@@ -24,5 +24,7 @@
   "NO-APPLIANCE-MATCH": "No Appliances match your filter",
   "NO-TASKS": "This Appliance has no Tasks",
   "NO-TASKS-MATCH": "No Tasks match your Filter",
-  "FILTER": "Filter"
+  "FILTER": "Filter",
+  "ALL_GROUPS": "All Groups",
+  "FILTER_BY_GROUP": "Filter by Group"
 }

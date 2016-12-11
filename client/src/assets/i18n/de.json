@@ -24,5 +24,7 @@
   "NO-APPLIANCE-MATCH": "Keine Geräte mit diesem Filter",
   "NO-TASKS": "Dieses Gerät hat noch keine Prozesse",
   "NO-TASKS-MATCH": "Keine Prozesse mit diesem Filter",
-  "FILTER": "Filter"
+  "FILTER": "Filter",
+  "ALL_GROUPS": "Alle Gruppen",
+  "FILTER_BY_GROUP": "Filtern nach Gruppe"
 }

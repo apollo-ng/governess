@@ -3,7 +3,6 @@ import { ToastController }        from 'ionic-angular';
 import { HashID }                 from '../crypto/hashid';
 import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
-import { hostPlatforms }          from './platforms';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -155,70 +154,6 @@ export class ApplianceService {
   public updateD(): void {
     console.log('Updating appliances...');
     this.write(this.appliances);
-  }
-
-  /*****************************************************************************
-   * getHostPlatforms
-   */
-
-  public getHostPlatforms(): any {
-    return hostPlatforms;
-  }
-
-  /*****************************************************************************
-   * getHostHeaders
-   */
-
-  public getHostHeaders(hid: string): any {
-
-    // FIXME: There must be a better way to get this data with ng2/map tools.
-    //        Couldn't figure it out, so this crude loop does it for now.
-    // console.log('HID:', hid);
-    let combined: any = [];
-
-    // Query platform data with hid
-    let platform: any = hostPlatforms.filter((_platform) => {
-      return (_platform.hid.indexOf(hid) > -1);
-    });
-
-    for (let header of platform[0].headers) {
-      combined.push(header);
-    }
-
-    return combined;
-
-  }
-
-  /*****************************************************************************
-   * getHostGPIOs
-   */
-
-  public getHostGPIOs(hid: string): any {
-
-    // FIXME: There must be a better way to get this data with ng2/map tools.
-    //        Couldn't figure it out, so this crude loop does it for now.
-    console.log('HID:', hid);
-    let combined: any = [];
-
-    // Query platform data with hid
-    let platform: any = hostPlatforms.filter((_platform) => {
-      return (_platform.hid.indexOf(hid) > -1);
-    });
-
-    // Assemble all pins from all available headers in one array
-    for (let header of platform[0].headers) {
-      for (let pin of header.pins) {
-        // Isolate only GPIOs
-        if (pin.GRP === 'GPIO') {
-          combined.push(pin);
-        }
-      }
-    }
-
-    // FIXME: Remove already assigned pins from this list
-
-    return combined;
-
   }
 
   /*****************************************************************************

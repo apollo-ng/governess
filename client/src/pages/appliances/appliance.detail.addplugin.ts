@@ -1,4 +1,3 @@
-'use strict';
 
 import { Component }                from '@angular/core';
 import { NavParams,
@@ -16,7 +15,7 @@ import { PluginService }            from '../../providers/plugins/plugins';
 
 /*******************************************************************************
  *
- *     AddPluginModal
+ *   AddPluginModal
  *
  */
 
@@ -24,9 +23,9 @@ export class AddPluginModal {
 
   public plugins:                   any;
   public filteredPlugins:           any;
-  public groups:                    any;
-  public nameFilter:                boolean = false;
+  public pluginGroups:              any;
   public groupFilter:               string = 'All';
+  public nameFilter:                boolean = false;
   public type:                      string;
   public aid:                       string;
 
@@ -59,28 +58,29 @@ export class AddPluginModal {
   }
 
   /*****************************************************************************
-   * getPluginData
+   * init
    */
 
-  public init(): void {
+  private init(): void {
 
-    this.pluginService.getAllPlugins().then( (_plugins) => {
+    // Get all plugin data
+    this.pluginService.getAll().then( (_plugins: any) => {
       if (_plugins) {
         let plugins: any = JSON.parse(_plugins);
         this.plugins = plugins[this.type];
         this.filteredPlugins = this.plugins;
-        this.groups = this.getDistinctGroups();
+        this.pluginGroups = this.getDistinctPluginGroups();
       }
     });
 
   }
 
   /*****************************************************************************
-   * getDistinctGroups - Returns distinct plugin groups by given type
+   * getDistinctGroups - Return distinct plugin groups of a given type
    * @return groups: Array <string>
    */
 
-  public getDistinctGroups(): any {
+  public getDistinctPluginGroups(): any {
 
     // Set up local compare & store scaffolds
     let groups: Array<string> = [];
@@ -99,40 +99,47 @@ export class AddPluginModal {
   }
 
   /*****************************************************************************
-   * filterPluginsByName
+   * filterPluginsByGroup - Populate filteredPlugins by group filtering
+   */
+
+  public filterPluginsByGroup(): void {
+
+    if (this.groupFilter === 'All') {
+      this.filteredPlugins = this.plugins;
+    } else {
+      this.filteredPlugins = this.plugins.filter( (_plugin: any) => {
+        return (_plugin.group.indexOf(this.groupFilter) > -1);
+      });
+    }
+
+  }
+
+  /*****************************************************************************
+   * filterPluginsByName - Populate filteredPlugins by name search
    * @param
    */
 
   public filterPluginsByName(event: any): void {
-    this.filteredPlugins = this.plugins;
-    let val: string = event.target.value;
-    if (val && val.trim() !== '') {
+
+    let searchString: string = event.target.value;
+
+    if (!searchString || searchString.trim().length === 0) {
+      this.filteredPlugins = this.plugins;
+    } else {
       this.nameFilter = true;
-      this.filteredPlugins = this.plugins.filter((plugin) => {
+      this.filteredPlugins = this.plugins.filter( (_plugin: any) => {
         return (
-          plugin.name.toLowerCase().
-          indexOf(val.toLowerCase()) > -1
+          _plugin.name.toLowerCase().
+          indexOf(searchString.toLowerCase()) > -1
         );
       });
     }
+
   }
 
   /*****************************************************************************
-   * filterPluginsByGroup
-   */
-
-  public filterPluginsByGroup(): void {
-    this.filteredPlugins = this.plugins;
-    if (this.groupFilter !== 'All') {
-      this.filteredPlugins = this.plugins.filter((plugin) => {
-        return (plugin.group.indexOf(this.groupFilter) > -1);
-      });
-    }
-  }
-
-  /*****************************************************************************
-   * clearNameFilter - Disengage Search Filter
-   * @param
+   * clearNameFilter - Disengage the Name Filter and show the full list again
+   * @param event Object
    */
 
   public clearNameFilter(event: any): void {
