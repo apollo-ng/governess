@@ -12,7 +12,7 @@
               [ngClass]="{'selected': p.title === config.lastView}"
               (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{p.title | translate }}
+        {{ p.title | translate }}
       </button>
     </ion-list>
   </ion-content>
