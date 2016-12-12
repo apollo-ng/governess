@@ -1,1 +1,1 @@
-export let appTag: any = 'master-3d0c624, Sat Dec 10 23:11:33 2016 +0000';
+export let appTag: any = 'master-30e3c00, Sun Dec 11 19:51:48 2016 +0000';

@@ -1,5 +1,6 @@
 {
   "HELP": "Hilfe",
+  "CONTROL": "Steuerung",
   "ABOUT": "Über",
   "TASKS": "Prozesse",
   "LOGS": "Logs",
@@ -25,6 +26,6 @@
   "NO-TASKS": "Dieses Gerät hat noch keine Prozesse",
   "NO-TASKS-MATCH": "Keine Prozesse mit diesem Filter",
   "FILTER": "Filter",
-  "ALL_GROUPS": "Alle Gruppen",
-  "FILTER_BY_GROUP": "Filtern nach Gruppe"
+  "ALL-GROUPS": "Alle Gruppen",
+  "FILTER-BY-GROUP": "Filtern nach Gruppe"
 }

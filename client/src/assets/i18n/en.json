@@ -1,5 +1,6 @@
 {
   "HELP": "Help",
+  "CONTROL": "Control",
   "ABOUT": "About",
   "TASKS": "Tasks",
   "LOGS": "Logs",
@@ -25,6 +26,6 @@
   "NO-TASKS": "This Appliance has no Tasks",
   "NO-TASKS-MATCH": "No Tasks match your Filter",
   "FILTER": "Filter",
-  "ALL_GROUPS": "All Groups",
-  "FILTER_BY_GROUP": "Filter by Group"
+  "ALL-GROUPS": "All Groups",
+  "FILTER-BY-GROUP": "Filter by Group"
 }

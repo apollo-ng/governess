@@ -83,8 +83,8 @@
     </ion-item>
   </ion-list>
   </div>
-  <div *ngIf="viewPort === 'wiring'">
-    <canvas #ConnectionVisualizer width="400" height="500"></canvas>
+  <div *ngIf="viewPort === 'wiring'" class="cv-container">
+    <canvas #ConnectionVisualizer width="400" height="500" class="connectionVisualizer"></canvas>
   </div>
 
 </ion-content>

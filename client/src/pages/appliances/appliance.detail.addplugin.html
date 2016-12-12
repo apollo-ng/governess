@@ -26,7 +26,7 @@
                       (ngModelChange)="filterPluginsByGroup()"
                       [selectOptions]="{ title: 'Filter by Group', buttons: [] }"
                       interface="action-sheet">
-            <ion-option selected="true" value="All">{{ 'ALL_GROUPS' | translate }}</ion-option>
+            <ion-option selected="true" value="All">{{ 'ALL-GROUPS' | translate }}</ion-option>
             <ion-option *ngFor="let group of pluginGroups">{{ group }}</ion-option>
           </ion-select>
         </ion-col>

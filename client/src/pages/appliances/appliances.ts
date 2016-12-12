@@ -9,6 +9,7 @@ import { ActionSheetController,
 
 import { ConfigService }            from '../../providers/config/config';
 import { ApplianceService }         from '../../providers/appliances/appliances';
+import { HashID }                   from '../../providers/crypto/hashid';
 
 // Sub-Pages/Modals ////////////////////////////////////////////////////////////
 
@@ -42,6 +43,8 @@ export class AppliancesPage {
   public configService: ConfigService;
   public applianceService: ApplianceService;
 
+  private hashID: HashID;
+
   /*****************************************************************************
    * constructor
    */
@@ -54,6 +57,7 @@ export class AppliancesPage {
     alertCtrl: AlertController,
     configService: ConfigService,
     applianceService: ApplianceService,
+    hashID: HashID,
 
   ) {
 
@@ -63,6 +67,7 @@ export class AppliancesPage {
     this.alertCtrl = alertCtrl;
     this.configService = configService;
     this.applianceService = applianceService;
+    this.hashID = hashID;
 
     this.initConfig().then(() => {
       this.applianceService.pull();
@@ -113,9 +118,19 @@ export class AppliancesPage {
    */
 
   public copyAppliance(index: number): void {
-    console.log('Duplicate Appliance:', index);
-    this.applianceService.copy(index);
-    this.appliances = this.applianceService.appliances;
+
+    // FIXME: Crude hack to copy the array after lodash deepClone refused
+    //        to work. Isn't there a better lightweight alternative?
+    let copy: any = JSON.parse(JSON.stringify(this.appliances[index]));
+
+    // create a fresh set of metadata for this copy
+    copy.name = copy.name + ' Copy';
+    copy.aid = this.hashID.create();
+    copy.ctime = Math.round(new Date().getTime());
+
+    this.appliances.push(copy);
+    this.applianceService.update(this.appliances);
+
   }
 
   /*****************************************************************************

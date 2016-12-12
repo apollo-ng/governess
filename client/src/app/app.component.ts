@@ -1,3 +1,4 @@
+
 import { Component,
          OnInit,
          ViewChild }                from '@angular/core';
@@ -8,9 +9,12 @@ import { Platform,
 import { Splashscreen,
          StatusBar }                from 'ionic-native';
 
-import { TranslateService }         from 'ng2-translate';
+// Providers ///////////////////////////////////////////////////////////////////
 
+import { TranslateService }         from 'ng2-translate';
 import { ConfigService }            from '../providers/config/config';
+
+// Pages ///////////////////////////////////////////////////////////////////////
 
 import { AboutPage }                from '../pages/about/about';
 import { AppliancesPage }           from '../pages/appliances/appliances';
@@ -23,10 +27,10 @@ import { TasksPage }                from '../pages/tasks/tasks';
 ////////////////////////////////////////////////////////////////////////////////
 
 export interface PageInterface {
-  title: string;
-  component: any;
-  idx?: number;
-  icon: string;
+  title: string; // Page Title
+  cmp: any;      // Component
+  idx: number;   // Index Number (defines order)
+  icon: string;  // Icon for Menu/Header
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +41,7 @@ export interface PageInterface {
 
 /*******************************************************************************
  *
- *   GovernessApp
+ *    GovernessApp
  *
  */
 
@@ -69,10 +73,8 @@ export class GovernessApp implements OnInit {
     this.translate = translate;
     this.configService = configService;
 
-    // Initialize translations
     this.translate.setDefaultLang('en');
     this.translate.use('en');
-
     this.initializeApp();
 
   }
@@ -85,20 +87,20 @@ export class GovernessApp implements OnInit {
 
     // Wrapping into configService.init to make sure that we have a config
     // FIXME: This seems kinda messy, isn't there a more elegant way?
-    this.configService.init().then((data) => {
-      this.config = data;
-      console.log('userLang', this.config.userLang);
+    this.configService.init().then( (_data) => {
+
+      this.config = _data;
       this.translate.use(this.config.userLang);
 
       // Populate the side menu
       this.pages = [
-        { title: 'Control',    component: ControlPage,    idx: 0, icon: 'speedometer' },
-        { title: 'Appliances', component: AppliancesPage, idx: 1, icon: 'logo-buffer' },
-        { title: 'Tasks',      component: TasksPage,      idx: 2, icon: 'cube' },
-        { title: 'Logs',       component: LogsPage,       idx: 3, icon: 'filing' },
-        { title: 'Settings',   component: SettingsPage,   idx: 4, icon: 'settings' },
-        { title: this.translate.instant('Help'),      component: HelpPage,      idx: 5, icon: 'help-buoy' },
-        { title: 'About',      component: AboutPage,      idx: 6, icon: 'information-circle' },
+        { title: 'CONTROL',    cmp: ControlPage,    idx: 0, icon: 'speedometer' },
+        { title: 'APPLIANCES', cmp: AppliancesPage, idx: 1, icon: 'logo-buffer' },
+        { title: 'TASKS',      cmp: TasksPage,      idx: 2, icon: 'cube' },
+        { title: 'LOGS',       cmp: LogsPage,       idx: 3, icon: 'filing' },
+        { title: 'SETTINGS',   cmp: SettingsPage,   idx: 4, icon: 'settings' },
+        { title: 'HELP',       cmp: HelpPage,       idx: 5, icon: 'help-buoy' },
+        { title: 'ABOUT',      cmp: AboutPage,      idx: 6, icon: 'information-circle' },
       ];
 
       // Define which page the app should show by default
@@ -109,14 +111,14 @@ export class GovernessApp implements OnInit {
           // Set last viewed page, if not null
           this.rootPage = this.pages.filter (
             page => page.title.includes(this.config.lastView)
-          )[0].component;
+          )[0].cmp;
 
         } else {
 
           // Fallback to ControlPage
           this.rootPage = this.pages.filter (
-            page => page.title.includes('Control')
-          )[0].component;
+            page => page.title.includes('CONTROL')
+          )[0].cmp;
         }
 
       } else {
@@ -124,9 +126,10 @@ export class GovernessApp implements OnInit {
         // Set selected value from config
         this.rootPage = this.pages.filter(
           page => page.title.includes(this.config.viewPref)
-        )[0].component;
+        )[0].cmp;
 
       }
+
     });
   }
 
@@ -136,9 +139,6 @@ export class GovernessApp implements OnInit {
 
   private initializeApp(): void {
     this.platform.ready().then(() => {
-      console.log('initializeApp called');
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
@@ -150,6 +150,7 @@ export class GovernessApp implements OnInit {
    */
 
   public openPage(page: any): void {
+
     // Store as lastView in config, if enabled
     if (this.config.viewPref === 'last') {
       this.config.lastView = page.title;
@@ -157,7 +158,8 @@ export class GovernessApp implements OnInit {
     }
 
     // Navigate to the new page, if it is not the current page
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page.cmp);
+
   }
 
 }

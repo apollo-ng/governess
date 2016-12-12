@@ -99,8 +99,8 @@ export class EditPluginModal {
   public drawConnectionVisualizer(): void {
 
     // Settings
-    const pinrad:     number = 11;
-    const pitch:      number = 24;
+    const pinrad:     number = 12;
+    const pitch:      number = 25;
     const labelWidth: number = 60;
 
     // PIN group color definitions
@@ -136,34 +136,37 @@ export class EditPluginModal {
           this.cv.arc(row * xOffset + labelWidth - pitch, yOffset, pinrad, 0, 2 * Math.PI, false);
           this.cv.fill();
 
-          // Draw white circle over background circle
+          // Draw #d8d3c5 circle over background circle
           this.cv.globalCompositeOperation = 'source-over';
-          this.cv.fillStyle = '#ffffff';
+          this.cv.fillStyle = '#d8d3c5';
           this.cv.beginPath();
           this.cv.arc(row * xOffset + labelWidth - pitch, yOffset, pinrad - 3, 0, 2 * Math.PI, false);
           this.cv.fill();
 
-          // Draw pin number
+          // Draw #0f0e0a pin number
           this.cv.globalCompositeOperation = 'source-over';
-          this.cv.strokeStyle = '#000000';
-          this.cv.fillStyle = '#000000';
-          this.cv.font = 'regular 14pt DIN';
+          this.cv.strokeStyle = '#0f0e0a';
+          this.cv.fillStyle = '#0f0e0a';
+          this.cv.font = 'normal 10pt DIN';
           this.cv.textAlign = 'center';
-          this.cv.fillText(pin.PIN, row * xOffset + labelWidth - pitch, yOffset + 3);
-          this.cv.fillStyle = '#ffffff';
+          this.cv.fillText(pin.PIN, row * xOffset + labelWidth - pitch, yOffset + 5);
 
           // Draw pin txt and finally increase or reset row count
+          this.cv.fillStyle = '#d8d3c5';
+          this.cv.font = 'bold 10pt DIN';
+
           if (row < header.rows) {
             this.cv.textAlign = 'left';
-            this.cv.fillText(pin.TXT, row * xOffset - pitch + 4, yOffset + 3);
+            this.cv.fillText(pin.TXT, row * xOffset - pitch + 4, yOffset + 5);
             row++;
           } else {
             this.cv.textAlign = 'right';
-            this.cv.fillText(pin.TXT, row * xOffset + labelWidth + pitch + 5, yOffset + 3);
+            this.cv.fillText(pin.TXT, row * xOffset + labelWidth + pitch + 6, yOffset + 5);
             row = 1;
             // Finished row, jump down one pitch step
             yOffset = yOffset + pitch;
           }
+
           // End of pin loop
         }
         // End of pins.length check
