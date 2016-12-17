@@ -27,4 +27,8 @@ describe('AppliancesPage', () => {
     .isPresent()).toEqual(true);
   });
 
+  it('has a list of appliances', () => {
+    expect(element(by.css('ion-list')).isPresent()).toEqual(true);
+  });
+
 });

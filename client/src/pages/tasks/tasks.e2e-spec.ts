@@ -1,3 +1,4 @@
+
 import { browser, element, by } from 'protractor';
 
 describe('TasksPage', () => {
@@ -38,7 +39,7 @@ describe('TasksPage', () => {
   it('opens TaskDetailsPage', () => {
     element.all(by.className('task-list-item')).then((tasks) => {
       tasks[0].click();
-      browser.driver.sleep(500); // wait for the animation
+      browser.driver.sleep(5000); // wait for the animation
       expect(element(by.css('ion-title')).getText()).toContain('Reflow Lead-Free');
     });
   });

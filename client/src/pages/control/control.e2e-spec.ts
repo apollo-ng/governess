@@ -11,7 +11,7 @@ describe('ControlPage', () => {
       browser.driver.sleep(500); // wait for the animation
       element.all(by.className('input-wrapper')).then((items) => {
         items[0].click();
-        browser.driver.sleep(500); // wait for the animation
+        browser.driver.sleep(1000); // wait for the animation
         expect(browser.getTitle()).toEqual('EKA KF412 idle');
         return items[0];
       });
