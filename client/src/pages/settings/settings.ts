@@ -103,7 +103,7 @@ export class SettingsPage {
 */
   public updateConfig(): void {
     console.log('updateConfig called...', this.config);
-    this.translate.use(this.config.userLang);
+    this.translate.use(this.config.language);
     this.configService.update(this.config);
   }
 

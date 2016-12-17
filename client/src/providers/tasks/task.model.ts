@@ -1,6 +1,6 @@
 export interface TaskModel {
   name: string;
-  userLang: string;
+  language: string;
   ctrlMode: string;
   lastView?: string;
 }

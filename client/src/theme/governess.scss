@@ -191,7 +191,11 @@ ion-menu {
   }
 
 
-  .menu-inner ion-content {
+  .menu-inner {
+
+    box-shadow: 0 0 25px rgba(0, 0, 0, 1) !important;
+
+    ion-content {
     background: #1f1e1a;
 
     .item-md {
@@ -217,7 +221,7 @@ ion-menu {
       //border-right: 1px solid #53524d;
     }
   }
-
+  }
 }
 
 .action-sheet-button {

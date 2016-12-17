@@ -98,7 +98,7 @@ export class ApplianceService {
     // create a fresh set of metadata for this copy
     copy.name = copy.name + ' Copy';
     copy.aid = this.hashID.create();
-    copy.created = Math.round(new Date().getTime());
+    copy.ctime = Math.round(new Date().getTime());
 
     // roll it out
     this.appliances.push(copy);
@@ -118,7 +118,7 @@ export class ApplianceService {
     _appliance.name = 'New Appliance';
     _appliance.desc = '';
     _appliance.aid = this.hashID.create();
-    _appliance.created = Math.round(new Date().getTime());
+    _appliance.ctime = Math.round(new Date().getTime());
 
     // roll it out
     this.appliances.push(_appliance);

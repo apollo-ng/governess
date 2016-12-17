@@ -1,6 +1,6 @@
 import { Injectable }             from '@angular/core';
-import { ShortID }                from '../crypto/shortid';
 import { StorageService }         from '../storage/storage';
+import { HashID }                 from '../crypto/hashid';
 import { appConfigMock }          from './config.mock';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ export class ConfigService {
 
   public config:  any;
   public storage: StorageService;
-  private shortID: ShortID;
+  private hashID: HashID;
 
   /*****************************************************************************
    * constructor
@@ -28,12 +28,12 @@ export class ConfigService {
   constructor(
 
     storage: StorageService,
-    shortID: ShortID
+    hashID: HashID
 
   ) {
 
     this.storage = storage;
-    this.shortID = shortID;
+    this.hashID = hashID;
     this.init().then( () => {
       // console.log('All promises returned', data)
     });
@@ -51,7 +51,7 @@ export class ConfigService {
       if (!data) {
         console.log('Got NO Storage Data - creating from Mock:');
         let initAppConfig: any = appConfigMock;
-        initAppConfig.cid = this.shortID.create();
+        initAppConfig.cid = this.hashID.create();
         this.storage.set('config', JSON.stringify(initAppConfig));
         return initAppConfig;
       }

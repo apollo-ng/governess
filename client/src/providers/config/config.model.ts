@@ -1,6 +1,6 @@
 export interface AppConfigModel {
   clientID:   string;
-  userLang:   string;
+  language:   string;
   theme:      string;
   audio:      boolean;
   ctrlMode:   string;

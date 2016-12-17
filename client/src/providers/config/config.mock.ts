@@ -1,12 +1,12 @@
 export let appConfigMock: any = {
   'cid'        : '',
-  'userLang'   : 'en',
+  'language'   : 'en',
   'theme'      : 'default',
-  'dateFormat' : 'y-MM-ddTHH:mm:ss+00:00',
-  'audio'      : true,
   'ctrlMode'   : 'auto',
   'viewPref'   : 'last',
-  'lastView'   : 'Control',
+  'lastView'   : 'DASHBOARD',
+  'dateFormat' : 'y-MM-ddTHH:mm:ss+00:00',
   'manOverr'   : false,
+  'audio'      : true,
   'keepOn'     : false,
 };

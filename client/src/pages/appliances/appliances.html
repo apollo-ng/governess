@@ -3,7 +3,7 @@
     <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ 'Appliances' | translate }}</ion-title>
+    <ion-title>{{ 'APPLIANCES' | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only *ngIf="isSending">
         <ion-spinner name="ios" color="secondary"></ion-spinner>
@@ -59,7 +59,7 @@
               </td>
               <td>
                 <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}">
-                  {{ appliance.created | date: config.dateFormat }}
+                  {{ appliance.ctime | date: config.dateFormat }}
                 </ion-icon>
               </td>
             </tr>

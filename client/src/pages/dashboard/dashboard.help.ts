@@ -4,16 +4,16 @@ import { ViewController } from 'ionic-angular';
 ////////////////////////////////////////////////////////////////////////////////
 
 @Component({
-  templateUrl: 'control.help.html',
+  templateUrl: 'dashboard.help.html',
 })
 
 /*******************************************************************************
  *
- *   ControlHelp
+ *   DashboardHelp
  *
  */
 
-export class ControlHelp {
+export class DashboardHelp {
 
   public viewCtrl: ViewController;
 

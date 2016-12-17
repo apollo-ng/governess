@@ -13,11 +13,14 @@ import { Splashscreen,
 import { TranslateService }         from 'ng2-translate';
 import { ConfigService }            from '../providers/config/config';
 
+// Dashboard ///////////////////////////////////////////////////////////////////
+
+import { Dashboard }                from '../pages/dashboard/dashboard';
+
 // Pages ///////////////////////////////////////////////////////////////////////
 
 import { AboutPage }                from '../pages/about/about';
 import { AppliancesPage }           from '../pages/appliances/appliances';
-import { ControlPage }              from '../pages/control/control';
 import { HelpPage }                 from '../pages/help/help';
 import { LogsPage }                 from '../pages/logs/logs';
 import { SettingsPage }             from '../pages/settings/settings';
@@ -89,17 +92,17 @@ export class GovernessApp implements OnInit {
     this.configService.init().then( (config) => {
 
       this.config = config;
-      this.translate.use(this.config.userLang);
+      this.translate.use(this.config.language);
 
       // Populate the side menu
       this.pages = [
-        { title: 'Control',    cmp: ControlPage,    idx: 0, icon: 'speedometer' },
-        { title: 'Appliances', cmp: AppliancesPage, idx: 1, icon: 'logo-buffer' },
-        { title: 'Tasks',      cmp: TasksPage,      idx: 2, icon: 'cube' },
-        { title: 'Logs',       cmp: LogsPage,       idx: 3, icon: 'filing' },
-        { title: 'Settings',   cmp: SettingsPage,   idx: 4, icon: 'settings' },
-        { title: 'Help',       cmp: HelpPage,       idx: 5, icon: 'help-buoy' },
-        { title: 'About',      cmp: AboutPage,      idx: 6, icon: 'information-circle' },
+        { title: 'DASHBOARD',  cmp: Dashboard,      idx: 0, icon: 'speedometer' },
+        { title: 'APPLIANCES', cmp: AppliancesPage, idx: 1, icon: 'logo-buffer' },
+        { title: 'TASKS',      cmp: TasksPage,      idx: 2, icon: 'cube' },
+        { title: 'LOGS',       cmp: LogsPage,       idx: 3, icon: 'filing' },
+        { title: 'SETTINGS',   cmp: SettingsPage,   idx: 4, icon: 'settings' },
+        { title: 'HELP',       cmp: HelpPage,       idx: 5, icon: 'help-buoy' },
+        { title: 'ABOUT',      cmp: AboutPage,      idx: 6, icon: 'information-circle' },
       ];
 
       // Define which page the app should show by default
@@ -114,9 +117,9 @@ export class GovernessApp implements OnInit {
 
         } else {
 
-          // Fallback to ControlPage
+          // Fallback to Dashboard
           this.rootPage = this.pages.filter (
-            page => page.title.includes('Control')
+            page => page.title.includes('Dashboard')
           )[0].cmp;
         }
 

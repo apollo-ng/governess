@@ -3,7 +3,7 @@
     <button ion-button icon-only color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ 'Settings' | translate }}</ion-title>
+    <ion-title>{{ 'SETTINGS' | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="openHelp()">
         <ion-icon name="settings"></ion-icon>
@@ -19,7 +19,7 @@
     <ion-item>
       <ion-icon name="text" item-left></ion-icon>
       <ion-label><h2>{{ 'LANGUAGE' | translate }}</h2></ion-label>
-      <ion-select [(ngModel)]="config.userLang" (ngModelChange)="updateConfig()">
+      <ion-select [(ngModel)]="config.language" (ngModelChange)="updateConfig()">
         <ion-option value="en">English</ion-option>
         <ion-option value="de">Deutsch</ion-option>
       </ion-select>

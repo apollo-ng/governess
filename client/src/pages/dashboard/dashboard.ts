@@ -8,22 +8,22 @@ import { TaskService }          from '../../providers/tasks/tasks';
 
 import { TaskDetailPage }       from '../tasks/task.detail';
 
-import { ControlHelp }          from './control.help';
+import { DashboardHelp }          from './dashboard.help';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 @Component({
-  selector:                     'control-page',
-  templateUrl:                  'control.html',
+  selector:                     'dashboard',
+  templateUrl:                  'dashboard.html',
 })
 
 /*******************************************************************************
  *
- *    ControlPage
+ *    Dashboard
  *
  */
 
-export class ControlPage {
+export class Dashboard {
 
   public config:                any;
   public tasks:                 any;
@@ -111,7 +111,7 @@ export class ControlPage {
    */
 
   public ionViewWillEnter(): void {
-    console.log('ControlPage ionViewWillEnter called');
+    console.log('Dashboard ionViewWillEnter called');
   }
 
   /*****************************************************************************
@@ -119,7 +119,7 @@ export class ControlPage {
    */
 
   public ionViewDidLoad(): void {
-    console.log('ControlPage ionViewDidLoad called');
+    console.log('Dashboard ionViewDidLoad called');
   }
 
   /*****************************************************************************
@@ -127,7 +127,7 @@ export class ControlPage {
    */
 
   public ionViewWillLeave(): void {
-    console.log('ControlPage ionViewWillLeave called');
+    console.log('Dashboard ionViewWillLeave called');
     // this.statusSub.unsubscribe();
     // this.statusService.disconnect();
   }
@@ -137,7 +137,7 @@ export class ControlPage {
    */
 
   public openHelp(): void {
-    let modal: any = this.modalCtrl.create(ControlHelp);
+    let modal: any = this.modalCtrl.create(DashboardHelp);
     modal.present(modal);
   }
 

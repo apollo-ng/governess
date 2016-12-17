@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-describe('ControlPage', () => {
+describe('Dashboard', () => {
 
   beforeEach(() => {
     browser.get('');
