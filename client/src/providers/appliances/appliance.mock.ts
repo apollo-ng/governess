@@ -1,4 +1,4 @@
-export let applianceMock: Array<any> = [{
+export const applianceMock: Array<any> = [{
   'aid': 'K4aMt1gLsT2e',
   'name': 'EKA KF412',
   'desc': 'Small convection-heat lab-oven',

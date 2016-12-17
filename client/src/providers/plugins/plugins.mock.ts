@@ -1,4 +1,4 @@
-export let pluginMock: any = {
+export const pluginMock: any = {
   'input': [
     {
       'pid': 'Dj7r8741OdrV',

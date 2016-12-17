@@ -1,4 +1,4 @@
-export let hostPlatforms: Array<any> = [
+export const hostPlatforms: Array<any> = [
   {
     'hid': 'Pj5d7oNJmRLV',
     'name': 'Raspberry Pi 1 Model B (Rev 1.0)',

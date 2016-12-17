@@ -1,4 +1,4 @@
-export let taskMock: Array<any> = [{
+export const taskMock: Array<any> = [{
     'tid': 'pGJz1rZwp8EG',
     'aid': 'K4aMt1gLsT2e',
     'name': 'Reflow Lead-Free',

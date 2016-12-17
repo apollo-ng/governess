@@ -1,4 +1,4 @@
-export let appConfigMock: any = {
+export const appConfigMock: any = {
   'cid'        : '',
   'language'   : 'en',
   'theme'      : 'default',
