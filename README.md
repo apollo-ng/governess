@@ -3,16 +3,31 @@
 
 Fully autonomous, modular governing/monitoring bot for any DIY appliance.
 
-## Client
+Client
+------
 
 Multi-Platform Hybrid-Client to monitor and control governess,
 based on Angular2/Ionic2.
 
-## Server
+Server
+------
 
 Python/RPi.GPIO backend communication/storage/task-runner
 
-## License
+Support & Contact
+-----------------
+
+### Issues
+
+Please use the [issue tracker](https://github.com/apollo-ng/governess/issues)
+for governess related issues.
+
+### IRC
+
+Join #apollo on freenode.
+
+License
+-------
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

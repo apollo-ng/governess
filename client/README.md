@@ -159,14 +159,3 @@ this is the basis on which the app was started on:
     $ ionic start governess-app sidemenu -s --v2 --ts
     $ ionic platform add android
     $ ionic platform add browser
-
-----
-Support & Contact
------------------
-
-Please use the [issue tracker](https://github.com/apollo-ng/governess/issues)
-for governess related issues.
-
-### IRC
-
-Join #apollo on freenode.
