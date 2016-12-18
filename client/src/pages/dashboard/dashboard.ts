@@ -18,7 +18,7 @@ import { lineChartGlobals }     from '../../components/chart-globals';
 @Component({
   selector:                     'dashboard',
   templateUrl:                  'dashboard.html',
-  host:                         { '(window:resize)': 'onResize($event)' }
+  host:                         { '(window:resize)': 'onResize($event)' },
 })
 
 /*******************************************************************************
@@ -105,11 +105,6 @@ export class Dashboard {
 
   }
 
-  public onResize(event: any): void {
-    this.chartHeight = Math.floor(event.target.innerHeight - 210);
-    // if (this.chartc) this.chartc.chart.resize();
-  }
-
   /*****************************************************************************
    * initConfig
    * @return boolean
@@ -145,6 +140,14 @@ export class Dashboard {
     console.log('Dashboard ionViewWillLeave called');
     // this.statusSub.unsubscribe();
     // this.statusService.disconnect();
+  }
+
+  /*****************************************************************************
+   * onResize
+   */
+
+  public onResize(event: any): void {
+    this.chartHeight = Math.floor(event.target.innerHeight - 210);
   }
 
   /*****************************************************************************
