@@ -4,8 +4,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="statusService.onlineCheck">
-      <h1 [ngClass]="{'title-reduced' : status?.status === 'running' || status?.status === 'paused'}">EKA KF412 {{status?.status}}</h1>
-      <p *ngIf="statusService?.status === 'running' || status?.status === 'paused'">{{config.taskActive}}</p>
+      <h1 [ngClass]="{'title-reduced' : status?.status === 'running' || status?.status === 'paused'}">EKA KF412 {{ status?.status }}</h1>
+      <p *ngIf="statusService?.status === 'running' || status?.status === 'paused'">{{ config.taskActive }}</p>
     </ion-title>
     <ion-title *ngIf="!statusService.onlineCheck">
       <h1>EKA KF412 (offline)</h1>
@@ -28,10 +28,10 @@
             </ion-col>
             <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px', 'background': 'rgba(11, 10, 6, 0.6)' }">
               <span class="value_major">
-              {{status?.temperature_major}}.
+              {{ status?.temperature_major }}.
             </span>
             <span class="value_minor">
-              {{status?.temperature_minor}}
+              {{ status?.temperature_minor }}
             </span>
             </ion-col>
             <ion-col width-10 class="unit">
@@ -48,10 +48,10 @@
             </ion-col>
             <ion-col [ngStyle]="{'text-align': 'center', 'padding-left': '10px', 'background': 'rgba(11, 10, 6, 0.6)' }">
               <span class="value_major">
-              {{status?.temperature_major}}.
+              {{ status?.temperature_major }}.
             </span>
             <span class="value_minor">
-              {{status?.temperature_minor}}
+              {{ status?.temperature_minor }}
             </span>
             </ion-col>
             <ion-col width-10 class="unit">
@@ -113,7 +113,8 @@
         <chart *ngIf="config.taskActive"
                [type]="'line'"
                [data]="lineChartData"
-               [options]="lineChartOptions" [style.height]="chartHeight + 'px'">
+               [options]="lineChartOptions"
+               [style.height]="chartHeight + 'px'">
         </chart>
         <div *ngIf="!config.taskActive" class="chart-empty">
           <p>Please select a Task to run</p>
@@ -133,42 +134,53 @@
             </div>
           </ion-col>
           <ion-col width-10 *ngIf="status.status === 'running'">
-            <button ion-button full (click)="pauseTask()" class="rb-yellow">
+            <button ion-button full class="rb-yellow"
+                    (click)="pauseTask()">
               <ion-icon name="pause"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-10 *ngIf="status.status === 'paused'">
-            <button ion-button full color="dark" (click)="restartTask()" class="rb-green-pulse">
+            <button ion-button full color="dark" class="rb-green-pulse"
+                    (click)="restartTask()">
               <ion-icon name="skip-forward"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20 *ngIf="status.status === 'running' || status === 'paused'">
-            <button ion-button full (click)="stopTask()" class="rb-red">
+            <button ion-button full class="rb-red"
+                    (click)="stopTask()">
               <ion-icon name="square"></ion-icon>
             </button>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="status.status !== 'running' && status.status !== 'paused'">
           <ion-col style="padding-right: 3px;">
-            <ion-select [(ngModel)]="config.taskActive"
+            <ion-select class="rb-glass"
+                        [(ngModel)]="config.taskActive"
                         (ngModelChange)="triggerUpdate(config)"
-                        class="rb-glass"
+                        [selectOptions]="{
+                          title: 'EKA KF412 Tasks',
+                          subTitle: 'Please select a Task'
+                        }"
                         placeholder="Select a Task"
-                        [selectOptions]="{ title: 'EKA KF412 Tasks', subTitle: 'Please select a Task'}"
                         cancelText="Cancel"
-                        okText="Select"
-            >
-              <ion-option *ngFor="let task of tasks" value="{{task.tid}}">{{task.name}}</ion-option>
+                        okText="Select">
+              <ion-option *ngFor="let task of tasks" value="{{ task.tid }}">
+                {{ task.name }}
+              </ion-option>
             </ion-select>
 
           </ion-col>
           <ion-col width-10 class="icon-edit">
-            <button ion-button full [disabled]="!config.taskActive" (click)="editTask()" class="rb-white">
+            <button ion-button full class="rb-white"
+                    [disabled]="!config.taskActive"
+                    (click)="editTask()">
               <ion-icon name="create"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-20>
-            <button ion-button full [disabled]="!config.taskActive" (click)="startTask()" class="rb-green">
+            <button ion-button full class="rb-green"
+                    [disabled]="!config.taskActive"
+                    (click)="startTask()">
               <ion-icon name="play"></ion-icon>
             </button>
           </ion-col>
