@@ -27,5 +27,9 @@
   "NO-TASKS-MATCH": "No Tasks match your Filter",
   "FILTER": "Filter",
   "ALL-GROUPS": "All Groups",
-  "FILTER-BY-GROUP": "Filter by Group"
+  "FILTER-BY-GROUP": "Filter by Group",
+  "INPUT": "INPUT",
+  "CONTROL": "CONTROL",
+  "OUTPUT": "OUTPUT",
+  "SELECT-PLATFORM": "Select a platform"
 }

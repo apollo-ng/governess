@@ -27,5 +27,9 @@
   "NO-TASKS-MATCH": "Keine Prozesse mit diesem Filter",
   "FILTER": "Filter",
   "ALL-GROUPS": "Alle Gruppen",
-  "FILTER-BY-GROUP": "Filtern nach Gruppe"
+  "FILTER-BY-GROUP": "Filtern nach Gruppe",
+  "INPUT": "EINGANG",
+  "CONTROL": "STEUERUNG",
+  "OUTPUT": "AUSGANG",
+  "SELECT-PLATFORM": "Platform auswählen"
 }

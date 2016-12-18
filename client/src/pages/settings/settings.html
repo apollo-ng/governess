@@ -20,8 +20,9 @@
       <ion-icon name="text" item-left></ion-icon>
       <ion-label><h2>{{ 'LANGUAGE' | translate }}</h2></ion-label>
       <ion-select [(ngModel)]="config.language" (ngModelChange)="updateConfig()">
-        <ion-option value="en">English</ion-option>
         <ion-option value="de">Deutsch</ion-option>
+        <ion-option value="en">English</ion-option>
+        <ion-option value="es">Español</ion-option>
       </ion-select>
     </ion-item>
 

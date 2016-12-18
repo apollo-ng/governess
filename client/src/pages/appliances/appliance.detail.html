@@ -40,9 +40,9 @@
           <ion-select [(ngModel)]="appliance.conf.hid"
                       [selectOptions]="{
                         title: 'Host-Platform',
-                        subTitle: 'Pick your board'
+                        subTitle: 'SELECT-PLATFORM' | translate
                       }">
-            <ion-option *ngIf="!appliance.conf.hid" value="">Select a platform</ion-option>
+            <ion-option *ngIf="!appliance.conf.hid" value="">{{ 'SELECT-PLATFORM' | translate }}</ion-option>
             <ion-option *ngFor="let platform of platforms" [value]="platform.hid">{{ platform.name }}</ion-option>
           </ion-select>
         </ion-item>
@@ -71,7 +71,7 @@
       <ion-list class="section-list">
         <ion-item>
           <div class="section-title-outer">
-            <div class="section-title-inner rotate">INPUT</div>
+            <div class="section-title-inner rotate">{{ 'INPUT' | translate }}</div>
           </div>
           <div class="section-grid">
             <ion-grid>
@@ -96,7 +96,7 @@
         </ion-item>
         <ion-item>
           <div class="section-title-outer">
-            <div class="section-title-inner rotate">CONTROL</div>
+            <div class="section-title-inner rotate">{{ 'CONTROL' | translate }}</div>
           </div>
             <div class="section-grid">
               <ion-grid>
@@ -121,7 +121,7 @@
         </ion-item>
         <ion-item>
           <div class="section-title-outer">
-            <div class="section-title-inner rotate">OUTPUT</div>
+            <div class="section-title-inner rotate">{{ 'OUTPUT' | translate }}</div>
           </div>
           <div class="section-grid">
             <ion-grid>
