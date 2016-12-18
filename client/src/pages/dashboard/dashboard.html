@@ -82,16 +82,12 @@
   <div [ngSwitch]="config.ctrlMode" style="height: calc(100% - 48px)">
 
     <div *ngSwitchCase="'man'" style="height: 100%">
-      <div class="chart-container" style="height: calc(100% - 88px)">
-        <canvas baseChart class="chart"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColours"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered()"
-          (chartClick)="chartClicked()">
-        </canvas>
+      <div class="chart-container">
+        <chart [type]="'line'"
+               [data]="lineChartData"
+               [options]="lineChartOptions"
+               [style.height]="chartHeight + 'px'">
+        </chart>
       </div>
       <div class="ui-splitbar"></div>
       <ion-list style="height: 40%">
@@ -113,17 +109,14 @@
     </div>
 
     <div *ngSwitchCase="'auto'" style="height: 100%; padding: 0">
-      <div class="chart-container" style="height: calc(100%)">
-        <canvas baseChart class="chart"
-          *ngIf="config.taskActive"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColours"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered()"
-          (chartClick)="chartClicked()">
-        </canvas>
+      <div *ngIf="config.taskActive" class="chart-container">
+        <div>
+        <chart [type]="'line'"
+               [data]="lineChartData"
+               [options]="lineChartOptions"
+               [style.height]="chartHeight + 'px'">
+        </chart>
+      </div>
         <div *ngIf="!config.taskActive" class="chart-empty">
           <p>Please select a Task to run</p>
         </div>

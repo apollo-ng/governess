@@ -24,10 +24,14 @@
         <ion-col width-50 style="padding-left: 2px">
           <ion-select [(ngModel)]="groupFilter"
                       (ngModelChange)="filterPluginsByGroup()"
-                      [selectOptions]="{ title: 'Filter by Group', buttons: [] }"
+                      [selectOptions]="{ title: 'FILTER-BY-GROUP' | translate }"
                       interface="action-sheet">
-            <ion-option selected="true" value="All">{{ 'ALL-GROUPS' | translate }}</ion-option>
-            <ion-option *ngFor="let group of pluginGroups">{{ group }}</ion-option>
+            <ion-option selected="true" value="All">
+              {{ 'ALL-GROUPS' | translate }}
+            </ion-option>
+            <ion-option *ngFor="let group of pluginGroups">
+              {{ group }}
+            </ion-option>
           </ion-select>
         </ion-col>
       </ion-row>
@@ -42,7 +46,9 @@
     <ion-item *ngFor="let plugin of filteredPlugins">
       {{ plugin.name }}
       <button ion-button item-right class="rb-green">
-        <ion-icon name="add" (click)="applianceService.addPlugin(aid, type, plugin)"></ion-icon>
+        <ion-icon name="add"
+                  (click)="applianceService.addPlugin(aid, type, plugin)">
+        </ion-icon>
       </button>
     </ion-item>
   </ion-list>

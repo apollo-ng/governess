@@ -8,7 +8,6 @@ import { IonicApp,
 
 import { Storage }                from '@ionic/storage';
 
-import { ChartsModule }           from 'ng2-charts/components/charts/charts';
 import { ChartModule }            from 'angular2-chartjs';
 
 // Translation /////////////////////////////////////////////////////////////////
@@ -91,7 +90,6 @@ export function createTranslateLoader(http: Http): any {
     TemperaturePipe,
   ],
   imports: [
-    ChartsModule,
     ChartModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,

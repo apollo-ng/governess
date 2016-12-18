@@ -1,4 +1,4 @@
-import { Component }            from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ModalController,
          NavController }        from 'ionic-angular';
 
@@ -8,7 +8,10 @@ import { TaskService }          from '../../providers/tasks/tasks';
 
 import { TaskDetailPage }       from '../tasks/task.detail';
 
-import { DashboardHelp }          from './dashboard.help';
+import { DashboardHelp }        from './dashboard.help';
+
+import { ChartComponent }       from 'angular2-chartjs';
+import { lineChartGlobals }     from '../../components/chart-globals';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,21 +28,25 @@ import { DashboardHelp }          from './dashboard.help';
 
 export class Dashboard {
 
+  @ViewChild(ChartComponent) public chartc: ChartComponent;
+
   public config:                any;
   public tasks:                 any;
   public task:                  any;
   public status:                any;
   public statusSub:             any;
 
-  public lineChartData:         Array<any>;
-  public lineChartColours:      Array<any>;
-  public lineChartType:         string = 'line';
+  public lineChartData:         any;
+  public lineChartOptions:      any;
+  public lineChartColours:      any;
+  public chartHeight:           number;
+  public chartHeightAct:        number;
 
-  public navCtrl:             NavController;
-  public modalCtrl:           ModalController;
-  public configService:       ConfigService;
-  public taskService:         TaskService;
-  public statusService:       StatusService;
+  public navCtrl:               NavController;
+  public modalCtrl:             ModalController;
+  public configService:         ConfigService;
+  public taskService:           TaskService;
+  public statusService:         StatusService;
 
   /*****************************************************************************
    * constructor
@@ -47,11 +54,11 @@ export class Dashboard {
 
   constructor (
 
-    navCtrl:             NavController,
-    modalCtrl:           ModalController,
-    configService:       ConfigService,
-    taskService:         TaskService,
-    statusService:       StatusService,
+    navCtrl:                    NavController,
+    modalCtrl:                  ModalController,
+    configService:              ConfigService,
+    taskService:                TaskService,
+    statusService:              StatusService,
 
   ) {
 
@@ -61,7 +68,10 @@ export class Dashboard {
     this.taskService = taskService;
     this.statusService = statusService;
 
-    this.lineChartData =        [{ data: [], label: 'Data' }];
+//    this.lineChartData =        [{ data: [], label: 'Data' }];
+    this.chartHeight = Math.floor(window.innerHeight / 2);
+    this.lineChartData = { datasets: [] };
+    this.lineChartOptions = lineChartGlobals;
 
     this.config =               {};
     this.task =                 {};
@@ -174,113 +184,44 @@ export class Dashboard {
   }
 
   /*****************************************************************************
-   * lineChartOptions
-   */
-
-  public lineChartOptions: any = {
-    animation: false,
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: { display: false },
-    scales: {
-      xAxes: [
-        {
-          type: 'time',
-          time: {
-            unit: 'second',
-            unitStepSize: 15,
-            displayFormats: {
-              second: 'HH:mm:ss',
-            },
-          },
-          gridLines: {
-            color: 'rgba(255,255,255,0.15)',
-            drawTicks: false,
-          },
-          ticks: {
-            beginAtZero: false,
-            fontColor: '#d8d3c5',
-            fontFamily: 'DIN',
-          },
-        },
-      ],
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          position: 'left',
-          gridLines: {
-            color: 'rgba(255,255,255,0.15)',
-            drawTicks: false,
-          },
-          ticks: {
-            beginAtZero: false,
-            fontColor: '#d8d3c5',
-            fontFamily: 'DIN',
-            maxTicksLimit: 8,
-          },
-        },
-        {
-          id: 'y-axis-2',
-          type: 'linear',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,255,255,0.15)',
-            drawTicks: false,
-          },
-          ticks: {
-            beginAtZero: false,
-            fontColor: '#d8d3c5',
-            fontFamily: 'DIN',
-            maxTicksLimit: 2,
-          },
-        },
-      ],
-    },
-  };
-
-  /*****************************************************************************
    * updateChart
    * @param {event} task
    */
 
   public updateChart(): void {
 
-    // Update the view parameters
-    let _lineChartColours: Array<any> = new Array();
-    for (let i: number = 0; i < this.task.data.length; i++) {
-      _lineChartColours[i] = {
-        backgroundColor: this.convertRGBA(this.task.data[i].options.color, 0.15),
-        borderColor: this.task.data[i].options.color,
-        borderWidth: this.task.data[i].options.strokeWidth,
-        pointRadius: this.task.data[i].options.pointRadius,
-        pointBorderWidth: this.task.data[i].options.pointBorderWidth,
-        pointBackgroundColor: '#fff',
-        pointBorderColor: this.task.data[i].options.color,
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-      };
-    }
-
     // Update the datapoints (y axis)
-    let _lineChartData: Array<any> = new Array();
+    let _lineChartData: any = new Array();
     for (let i: number = 0; i < this.task.data.length; i++) {
-      _lineChartData[i] = {
-        data: new Array(this.task.data[i].points.length),
-        label: this.task.data[i].control,
-        lineTension: 0,
-        yAxisID: this.task.data[i].options.yAxisID,
-        fill: this.task.data[i].options.fill,
-      };
-      for (let j: number = 0; j < this.task.data[i].points.length; j++) {
-        _lineChartData[i].data[j] = {
-          'x': new Date(this.task.data[i].points[j][0] * 1000).toISOString(),
-          'y': this.task.data[i].points[j][1],
+      if (this.task.data[i].show === true) {
+        _lineChartData[i] = {
+          label: this.task.data[i].control,
+          lineTension: 0,
+          yAxisID: this.task.data[i].options.yAxisID,
+          fill: this.task.data[i].options.fill,
+          backgroundColor: this.convertRGBA(this.task.data[i].options.color, 0.15),
+          borderColor: this.task.data[i].options.color,
+          borderWidth: this.task.data[i].options.strokeWidth,
+          pointRadius: this.task.data[i].options.pointRadius,
+          pointBorderWidth: this.task.data[i].options.pointBorderWidth,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: this.task.data[i].options.color,
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+          data: new Array(this.task.data[i].points.length),
         };
+        for (let j: number = 0; j < this.task.data[i].points.length; j++) {
+          _lineChartData[i].data[j] = {
+            'x': this.task.data[i].points[j][0],
+            'y': this.task.data[i].points[j][1],
+          };
+        }
       }
     }
-    this.lineChartData = _lineChartData;
-    this.lineChartColours = _lineChartColours;
+
+    this.lineChartData.datasets = _lineChartData;
+    console.log('Updated chart:', this.lineChartData);
+    if (this.chartc) this.chartc.chart.update();
   }
 
   /*****************************************************************************
@@ -298,24 +239,6 @@ export class Dashboard {
       _color = _color.replace(/\d*(\.\d+)?\)/i, ',' + alpha + ')');
     }
     return _color;
-  }
-
-  /*****************************************************************************
-   * chartClicked
-   * @param {event} task
-   */
-
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  /*****************************************************************************
-   * chartHovered
-   * @param {event} task
-   */
-
-  public chartHovered(e: any): void {
-    console.log(e);
   }
 
   /*****************************************************************************

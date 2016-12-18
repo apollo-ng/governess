@@ -4,7 +4,7 @@
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "assets/images/apollo-ng-badge.svg",
+    "src": "assets/images/apollo-ng-patch.svg",
     "sizes": "512x512",
     "type": "image/svg"
   }],

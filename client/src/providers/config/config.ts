@@ -49,7 +49,7 @@ export class ConfigService {
 
     return this.storage.get('config').then((data: any) => {
       if (!data) {
-        console.log('Got NO Storage Data - creating from Mock:');
+        // console.log('Got NO Storage Data - creating from Mock:');
         let initAppConfig: any = appConfigMock;
         initAppConfig.cid = this.hashID.create();
         this.storage.set('config', JSON.stringify(initAppConfig));
@@ -75,13 +75,13 @@ export class ConfigService {
    */
 
   public update(config: Object): void {
-    console.log('Updating config...');
+    // console.log('Updating config...');
     this.config = config;
     this.storage.set('config', JSON.stringify(config));
   }
 
   public updateD(): void {
-    console.log('UpdatingD config...');
+    // console.log('UpdatingD config...');
     this.storage.set('config', JSON.stringify(this.config));
   }
 
