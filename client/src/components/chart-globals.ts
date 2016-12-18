@@ -32,9 +32,14 @@ export let lineChartGlobals: any = {
         },
         ticks: {
           beginAtZero: false,
-          fontColor: '#d8d3c5',
+          fontColor: 'rgb(201, 120, 25)',
           fontFamily: 'DIN',
           maxTicksLimit: 8,
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Temperature in °C',
+          fontColor: 'rgb(201, 120, 25)',
         },
       },
       {
@@ -47,7 +52,7 @@ export let lineChartGlobals: any = {
         },
         ticks: {
           beginAtZero: false,
-          fontColor: '#d8d3c5',
+          fontColor: 'rgb(144, 73, 249)',
           fontFamily: 'DIN',
           maxTicksLimit: 2,
         },
