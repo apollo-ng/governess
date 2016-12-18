@@ -109,14 +109,12 @@
     </div>
 
     <div *ngSwitchCase="'auto'" style="height: 100%; padding: 0">
-      <div *ngIf="config.taskActive" class="chart-container">
-        <div>
-        <chart [type]="'line'"
+      <div class="chart-container" [style.height]="chartHeight + 'px'">
+        <chart *ngIf="config.taskActive"
+               [type]="'line'"
                [data]="lineChartData"
-               [options]="lineChartOptions"
-               [style.height]="chartHeight + 'px'">
+               [options]="lineChartOptions" [style.height]="chartHeight + 'px'">
         </chart>
-      </div>
         <div *ngIf="!config.taskActive" class="chart-empty">
           <p>Please select a Task to run</p>
         </div>
@@ -150,7 +148,7 @@
             </button>
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="status.status === 'idle'">
+        <ion-row *ngIf="status.status !== 'running' && status.status !== 'paused'">
           <ion-col style="padding-right: 3px;">
             <ion-select [(ngModel)]="config.taskActive"
                         (ngModelChange)="triggerUpdate(config)"

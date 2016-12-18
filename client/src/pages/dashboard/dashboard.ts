@@ -18,6 +18,7 @@ import { lineChartGlobals }     from '../../components/chart-globals';
 @Component({
   selector:                     'dashboard',
   templateUrl:                  'dashboard.html',
+  host:                         { '(window:resize)': 'onResize($event)' }
 })
 
 /*******************************************************************************
@@ -62,16 +63,15 @@ export class Dashboard {
 
   ) {
 
-    this.navCtrl = navCtrl;
-    this.modalCtrl = modalCtrl;
-    this.configService = configService;
-    this.taskService = taskService;
-    this.statusService = statusService;
+    this.navCtrl =              navCtrl;
+    this.modalCtrl =            modalCtrl;
+    this.configService =        configService;
+    this.taskService =          taskService;
+    this.statusService =        statusService;
 
-//    this.lineChartData =        [{ data: [], label: 'Data' }];
-    this.chartHeight = Math.floor(window.innerHeight / 2);
-    this.lineChartData = { datasets: [] };
-    this.lineChartOptions = lineChartGlobals;
+    this.chartHeight =          Math.floor(window.innerHeight - 210);
+    this.lineChartData =        { datasets: [] };
+    this.lineChartOptions =     lineChartGlobals;
 
     this.config =               {};
     this.task =                 {};
@@ -84,8 +84,8 @@ export class Dashboard {
     // This seems to work to get all the async promis/observable stuff
     // going without throwing undefined foo...
     this.initConfig().then(() => {
-      this.taskService.pull     ();
-      this.tasks =              this.taskService.tasks;
+      this.taskService.pull();
+      this.tasks = this.taskService.tasks;
       this.task = this.tasks.filter(
         task => task.tid.includes(
           this.config.taskActive
@@ -94,7 +94,7 @@ export class Dashboard {
 
       // Crude hack to prevent exception during init with no app/task selected
       if (this.task) {
-        this.updateChart          ();
+        this.updateChart();
       }
     });
 
@@ -103,6 +103,11 @@ export class Dashboard {
       this.statusUpdate(data);
     });
 
+  }
+
+  public onResize(event: any): void {
+    this.chartHeight = Math.floor(event.target.innerHeight - 210);
+    // if (this.chartc) this.chartc.chart.resize();
   }
 
   /*****************************************************************************
