@@ -45,6 +45,7 @@
                   item-left name="checkmark-circle">
         </ion-icon>
         <ion-icon *ngIf="!appliance.constraints"
+                  (click)="activateAppliance(appliance.aid)"
                   [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}"
                   item-left name="radio-button-off">
         </ion-icon>

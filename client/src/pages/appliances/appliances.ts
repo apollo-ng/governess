@@ -96,9 +96,17 @@ export class AppliancesPage {
 
   public activateAppliance(aid: string): void {
     console.log('Activate appliance:', aid);
+    let constraintAlert: any = this.alertCtrl.create({
+      title: 'constraintAlert!',
+      subTitle: 'This Appliance cannot be activated since not all constraints are met',
+      buttons: ['OK'],
+    });
+    constraintAlert.present();
+    /*
     this.config.applianceActive = aid;
     this.configService.update(this.config);
     console.log(this.config);
+    */
   }
 
   /*****************************************************************************
