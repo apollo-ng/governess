@@ -1,4 +1,4 @@
-<ion-menu id="leftMenu" [content]="content" side="left">
+<ion-menu [content]="content" side="left">
   <ion-header no-border color="primary">
     <ion-toolbar>
       <ion-title>Governess</ion-title>
@@ -7,17 +7,15 @@
 
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let p of pages" style="padding: 0" >
-      <button *ngIf="p.title === config.lastView" class="selected"
-              ion-item menuClose>
+      <ion-item *ngFor="let p of pages"
+                [ngClass]="{'selected': p.title === config.lastView}">
+      <button *ngIf="p.title === config.lastView" class="noise" menuClose>
         <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{ p.title | translate }}
+        <span>{{ p.title | translate }}</span>
       </button>
-      <button *ngIf="p.title !== config.lastView"
-              (click)="openPage(p)"
-              ion-item menuClose>
+      <button *ngIf="p.title !== config.lastView" (click)="openPage(p)" class="noise" menuClose>
         <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{ p.title | translate }}
+        <span>{{ p.title | translate }}</span>
       </button>
     </ion-item>
     </ion-list>
