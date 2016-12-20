@@ -1,3 +1,4 @@
+
 import { NgModule,
          ErrorHandler }           from '@angular/core';
 import { Http }                   from '@angular/http';
@@ -62,78 +63,113 @@ import { TemperaturePipe }        from '../pipes/temperature';
 
 ////////////////////////////////////////////////////////////////////////////////
 
+/*******************************************************************************
+ * createTranslateLoader - Set up static asset pipeline for i18n loading
+ * @param {http Object}
+ * @return {TranslateStaticLoader Object}
+ */
+
 export function createTranslateLoader(http: Http): any {
   'use strict';
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
 }
 
-////////////////////////////////////////////////////////////////////////////////
+/*******************************************************************************
+ * declarations
+ */
+
+export const declarations: any = [
+  GovernessApp,
+  AboutPage,
+  AppliancesPage,
+  AppliancesHelp,
+  ApplianceDetailPage,
+  AddPluginModal,
+  EditPluginModal,
+  Dashboard,
+  DashboardHelp,
+  HelpPage,
+  LogsPage,
+  SettingsPage,
+  SettingsHelp,
+  TasksPage,
+  TasksHelp,
+  TaskDetailPage,
+  TemperaturePipe,
+];
+
+/*******************************************************************************
+ * entryComponents
+ */
+
+export const entryComponents: any = [
+  GovernessApp,
+  AboutPage,
+  AppliancesPage,
+  AppliancesHelp,
+  ApplianceDetailPage,
+  AddPluginModal,
+  EditPluginModal,
+  Dashboard,
+  DashboardHelp,
+  HelpPage,
+  LogsPage,
+  SettingsPage,
+  SettingsHelp,
+  TasksPage,
+  TasksHelp,
+  TaskDetailPage,
+];
+
+/*******************************************************************************
+ * providers
+ */
+
+export const providers: any = [
+  Storage,
+  HashID,
+  StorageService,
+  ConfigService,
+  ApplianceService,
+  PlatformService,
+  PluginService,
+  StatusService,
+  TaskService,
+  WebSocketService,
+  // Enable Ionic's runtime error handling during development
+  { provide: ErrorHandler, useClass: IonicErrorHandler },
+];
+
+/*******************************************************************************
+ * imports
+ */
+
+export let imports: any = [
+  ChartModule,
+  TranslateModule.forRoot({
+    provide: TranslateLoader,
+    useFactory: (createTranslateLoader),
+    deps: [Http],
+  }),
+  IonicModule.forRoot(GovernessApp, {
+    mode: 'md',
+    menuType: 'overlay',
+    activator: 'ripple',
+  }),
+];
+
+/*******************************************************************************
+ *
+ *    NgModule
+ *
+ */
 
 @NgModule({
-  declarations: [
-    GovernessApp,
-    AboutPage,
-    AppliancesPage,
-    AppliancesHelp,
-    ApplianceDetailPage,
-    AddPluginModal,
-    EditPluginModal,
-    Dashboard,
-    DashboardHelp,
-    HelpPage,
-    LogsPage,
-    SettingsPage,
-    SettingsHelp,
-    TasksPage,
-    TasksHelp,
-    TaskDetailPage,
-    TemperaturePipe,
-  ],
-  imports: [
-    ChartModule,
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http],
-    }),
-    IonicModule.forRoot(GovernessApp, {
-      mode: 'md',
-      menuType: 'overlay',
-      activator: 'ripple',
-    }),
-  ],
+  declarations: declarations,
+  imports: imports,
   bootstrap: [IonicApp],
-  entryComponents: [
-    GovernessApp,
-    AboutPage,
-    AppliancesPage,
-    AppliancesHelp,
-    ApplianceDetailPage,
-    AddPluginModal,
-    EditPluginModal,
-    Dashboard,
-    DashboardHelp,
-    HelpPage,
-    LogsPage,
-    SettingsPage,
-    SettingsHelp,
-    TasksPage,
-    TasksHelp,
-    TaskDetailPage,
-  ],
-  providers: [
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    Storage,
-    HashID,
-    StorageService,
-    ConfigService,
-    ApplianceService,
-    PlatformService,
-    PluginService,
-    StatusService,
-    TaskService,
-    WebSocketService,
-  ],
+  entryComponents: entryComponents,
+  providers: providers,
 })
 
 export class AppModule {}
