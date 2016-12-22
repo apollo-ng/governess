@@ -35,11 +35,11 @@ describe('GovernessApp', () => {
     );
   });
 
-  it('has left menu first link with title Control', () => {
+  it('has left menu first link with title Dashboard', () => {
     element(by.css('.bar-button-menutoggle')).click()
       .then(() => {
         browser.driver.sleep(500); // wait for the animation
-        expect(element.all(by.css('ion-label')).first().getText()).toEqual('Control');
+        expect(element.all(by.css('ion-label')).first().getText()).toEqual('Dashboard');
       }
     );
   });

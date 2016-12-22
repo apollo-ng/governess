@@ -40,7 +40,7 @@ describe('TasksPage', () => {
     element.all(by.className('task-list-item')).then((tasks) => {
       tasks[0].click();
       browser.driver.sleep(5000); // wait for the animation
-      expect(element(by.css('ion-title')).getText()).toContain('Reflow Lead-Free');
+      expect(element(by.className('toolbar-title')).getText()).toContain('Reflow Lead-Free');
     });
   });
 

@@ -47,11 +47,11 @@
   "devDependencies": {
     "@ionic/app-scripts": "0.0.48",
     "@types/jasmine": "2.5.38",
-    "electron": "1.4.12",
+    "electron": "1.4.13",
     "electron-packager": "8.4.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.7.0",
-    "protractor": "4.0.13",
+    "protractor": "4.0.14",
     "protractor-jasmine2-screenshot-reporter": "0.3.2",
     "ts-node": "1.7.2",
     "typescript": "2.0.10"
