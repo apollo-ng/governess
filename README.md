@@ -1,11 +1,20 @@
 governess
 ==========
 
-A modular stack to create, manage and share software defined appliances (SDA)
+:construction: WIP (Work In Progress) :construction:
+
+A modular stack to create, manage and share Software Defined Appliances (SDA)
 with ease. governess can be deployed on platforms like the Raspberry Pi or the
 Odroid family (more to come) and use cheaply available PCB Break-out boards to
 create any kind of DIY appliance. From there, governess serves as an autonomous
 bot, watching over the appliance and running tasks from schedules, RPC or users.
+
+Proving ground targets:
+
+  - Reflow Oven
+  - Ceramic Kiln
+  - BLDC/Prop Thrust Analyser
+  - Small-scale Growbox (Software Defined Growing)
 
 Client
 ------
