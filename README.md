@@ -1,7 +1,11 @@
- governess
+governess
 ==========
 
-Fully autonomous, modular governing/monitoring bot for any DIY appliance.
+A modular stack to create, manage and share software defined appliances (SDA)
+with ease. governess can be deployed on platforms like the Raspberry Pi or the
+Odroid family (more to come) and use cheaply available PCB Break-out boards to
+create any kind of DIY appliance. From there, governess serves as an autonomous
+bot, watching over the appliance and running tasks from schedules, RPC or users.
 
 Client
 ------
@@ -12,7 +16,12 @@ based on Angular2/Ionic2.
 Server
 ------
 
-Python/RPi.GPIO backend communication/storage/task-runner
+Backend communication/storage/task-runner
+
+Still unclear whether Python/RPi.GPIO 3.5 (asyncio) or, for ease of deployment,
+selecting go as server language. Go is undoubtedly way easier to package and
+deploy but there would be far less ready to go hardware driver implementations.
+
 
 Support & Contact
 -----------------
