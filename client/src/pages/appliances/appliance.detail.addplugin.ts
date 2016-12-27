@@ -4,7 +4,8 @@ import { NavParams,
          ViewController }           from 'ionic-angular';
 
 import { ApplianceService }         from '../../providers/appliances/appliances';
-import { PluginService }            from '../../providers/plugins/plugins';
+import { PluginService,
+         pluginMock }               from '../../providers/plugins/';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +26,7 @@ export class AddPluginModal {
   public filteredPlugins:           any;
   public pluginGroups:              any;
   public groupFilter:               string = 'All';
-  public nameFilter:                boolean = false;
+  public nameFilter:                string;
   public type:                      string;
   public aid:                       string;
 
@@ -62,17 +63,21 @@ export class AddPluginModal {
    */
 
   private init(): void {
-
-    // Get all plugin data
     this.pluginService.getAll().then( (_plugins: any) => {
+      let plugins: any
       if (_plugins) {
-        let plugins: any = JSON.parse(_plugins);
-        this.plugins = plugins[this.type];
-        this.filteredPlugins = this.plugins;
-        this.pluginGroups = this.getDistinctPluginGroups();
-      }
-    });
+        plugins = JSON.parse(_plugins);
 
+      } else {
+        // FIXME: this is due to #21, it would be better if the async resolution
+        // would just work instead of this hack
+        plugins = pluginMock;
+      }
+      this.plugins = plugins[this.type];
+      this.filteredPlugins = this.plugins;
+      this.pluginGroups = this.getDistinctPluginGroups();
+
+    });
   }
 
   /*****************************************************************************
@@ -103,15 +108,7 @@ export class AddPluginModal {
    */
 
   public filterPluginsByGroup(): void {
-
-    if (this.groupFilter === 'All') {
-      this.filteredPlugins = this.plugins;
-    } else {
-      this.filteredPlugins = this.plugins.filter( (_plugin: any) => {
-        return (_plugin.group.indexOf(this.groupFilter) > -1);
-      });
-    }
-
+    this.filterPlugins();
   }
 
   /*****************************************************************************
@@ -121,16 +118,40 @@ export class AddPluginModal {
 
   public filterPluginsByName(event: any): void {
 
-    let searchString: string = event.target.value;
-
-    if (!searchString || searchString.trim().length === 0) {
-      this.filteredPlugins = this.plugins;
+    if (event.target.value) {
+      this.nameFilter = event.target.value.trim();
+      this.filterPlugins();
     } else {
-      this.nameFilter = true;
-      this.filteredPlugins = this.plugins.filter( (_plugin: any) => {
+      this.clearNameFilter(event);
+    }
+
+  }
+
+  /*****************************************************************************
+   * filterPlugins - Run the actual filtering
+   */
+
+  public filterPlugins(): void {
+
+    let plugins: any;
+
+    // Filter by Group first
+    if (this.groupFilter === 'All') {
+      plugins = this.plugins;
+    } else {
+      plugins = this.plugins.filter( (_plugin: any) => {
+        return (_plugin.group.indexOf(this.groupFilter.trim()) > -1);
+      });
+    }
+
+    // Apply name filter to group filtered list
+    if (!this.nameFilter || this.nameFilter.length === 0) {
+      this.filteredPlugins = plugins;
+    } else {
+      this.filteredPlugins = plugins.filter( (_plugin: any) => {
         return (
           _plugin.name.toLowerCase().
-          indexOf(searchString.toLowerCase()) > -1
+          indexOf(this.nameFilter.toLowerCase()) > -1
         );
       });
     }
@@ -143,9 +164,9 @@ export class AddPluginModal {
    */
 
   public clearNameFilter(event: any): void {
-    this.filteredPlugins = this.plugins;
-    this.nameFilter = false;
     event.stopPropagation();
+    this.nameFilter = '';
+    this.filterPlugins();
   }
 
   /*****************************************************************************

@@ -1,11 +1,13 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar dark>
     <ion-title>
-      <ion-icon name="logo-buffer"></ion-icon>
+      <ion-icon name="grid"></ion-icon>
       Add {{ type }} plugins
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="primary" (click)="dismissModal()">
+      <button
+        ion-button icon-only color="primary"
+        (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
@@ -15,17 +17,19 @@
     <ion-grid no-padding>
       <ion-row>
         <ion-col width-50>
-          <ion-searchbar (ionInput)="filterPluginsByName($event)"
-                         (ionClear)="clearNameFilter($event)"
-                         placeholder="{{ 'FILTER' | translate }}"
-                         autocorrect="off">
+          <ion-searchbar
+            (ionInput)="filterPluginsByName($event)"
+            (ionClear)="clearNameFilter($event)"
+            placeholder="{{ 'FILTER' | translate }}"
+            autocorrect="off">
           </ion-searchbar>
         </ion-col>
         <ion-col width-50 style="padding-left: 2px">
-          <ion-select [(ngModel)]="groupFilter"
-                      (ngModelChange)="filterPluginsByGroup()"
-                      [selectOptions]="{ title: 'FILTER-BY-GROUP' | translate }"
-                      interface="action-sheet">
+          <ion-select
+            [(ngModel)]="groupFilter"
+            (ngModelChange)="filterPluginsByGroup()"
+            [selectOptions]="{ title: 'FILTER-BY-GROUP' | translate }"
+            interface="action-sheet">
             <ion-option selected="true" value="All">
               {{ 'ALL-GROUPS' | translate }}
             </ion-option>
@@ -46,8 +50,9 @@
     <ion-item *ngFor="let plugin of filteredPlugins">
       {{ plugin.name }}
       <button ion-button item-right class="rb-green">
-        <ion-icon name="add"
-                  (click)="applianceService.addPlugin(aid, type, plugin)">
+        <ion-icon 
+          name="add"
+          (click)="applianceService.addPlugin(aid, type, plugin)">
         </ion-icon>
       </button>
     </ion-item>

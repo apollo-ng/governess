@@ -1,8 +1,8 @@
 
 import { Injectable }             from '@angular/core';
 import { Storage }                from '@ionic/storage';
-import { PluginModel }            from './plugins.model';
-import { pluginMock }             from './plugins.mock';
+import { PluginModel,
+         pluginMock }             from './index';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -43,10 +43,9 @@ export class PluginService {
 
     this.storage.get('plugins').then( (_plugins: string) => {
       if (!_plugins || _plugins.trim().length === 0) {
-        this.reset();
+        this.storage.set('plugins', JSON.stringify(pluginMock));
       }
     });
-
   }
 
   /*****************************************************************************

@@ -6,6 +6,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'boolean',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'PIN' },
         { 'name': 'INV' },
@@ -17,6 +19,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'PIN' },
         { 'name': 'INV' },
@@ -28,6 +32,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': '1WIRE',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'PIN' },
         { 'name': 'INV' },
@@ -40,6 +46,8 @@ export const pluginMock: any = {
       'group': 'SPI',
       'unit': '°C',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'CSEL' },
         { 'name': 'CLCK' },
@@ -52,6 +60,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'SPI',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'CSEL' },
         { 'name': 'CLCK' },
@@ -64,6 +74,8 @@ export const pluginMock: any = {
       'desc': '16-Bit Analog-to-Digital Converter with Internal Reference and Temperature Sensor',
       'group': 'SPI',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'SCLK' },
         { 'name': 'SDO' },
@@ -77,6 +89,8 @@ export const pluginMock: any = {
       'desc': 'Measures weight by reading the changes in load cell resistance. Handy for creating scales, process controls, thrust/force analyzer or simple presence detection',
       'group': 'I2C',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'SDA' },
         { 'name': 'SCL' },
@@ -89,6 +103,8 @@ export const pluginMock: any = {
       'name': 'PID Temperature Governor',
       'desc': '',
       'group': 'Temperature',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'TEMP' },
         { 'name': 'HEAT' },
@@ -103,6 +119,8 @@ export const pluginMock: any = {
       'name': 'PID Speed Governor',
       'desc': '',
       'group': 'Speed',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'RPM' },
         { 'name': 'K_P' },
@@ -118,6 +136,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'boolean',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'PIN' },
         { 'name': 'INV' },
@@ -129,6 +149,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'GPIO',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'PIN' },
         { 'name': 'INV' },
@@ -140,6 +162,8 @@ export const pluginMock: any = {
       'desc': 'To control pwm/servos',
       'group': 'I2C',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'CHN' },
         { 'name': 'FSW' },
@@ -153,6 +177,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'SPI',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'CHN' },
         { 'name': 'FSW' },
@@ -167,6 +193,8 @@ export const pluginMock: any = {
       'desc': '',
       'group': 'SPI',
       'type': 'float',
+      'color': 'rgba(191, 128, 6, 0.75)',
+      'icon': 'star',
       'conf': [
         { 'name': 'CHN' },
         { 'name': 'FSW' },
