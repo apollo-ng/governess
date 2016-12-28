@@ -2,7 +2,7 @@
 import { Injectable }             from '@angular/core';
 import { Storage }                from '@ionic/storage';
 import { PluginModel,
-         pluginMock }             from './index';
+         pluginMock }             from '.';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,10 @@ export class PluginService {
 
     this.storage.get('plugins').then( (_plugins: string) => {
       if (!_plugins || _plugins.trim().length === 0) {
-        this.storage.set('plugins', JSON.stringify(pluginMock));
+        // FIXME: Pull & update latest plugin list via websocket from server
+        //
+        // If no server list is available (i.e. test/offline), init from Mock
+        this.initFromMock();
       }
     });
   }
@@ -52,13 +55,13 @@ export class PluginService {
    * reset
    */
 
-  public reset(): void {
+  public initFromMock(): void {
     this.write(pluginMock);
   }
 
   /*****************************************************************************
    * getAll
-   * @return Promise
+   * @return Storage Promise
    */
 
   public getAll(): any {

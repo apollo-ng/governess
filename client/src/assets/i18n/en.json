@@ -31,5 +31,6 @@
   "INPUT": "INPUT",
   "CONTROL": "CONTROL",
   "OUTPUT": "OUTPUT",
-  "SELECT-PLATFORM": "Select a platform"
+  "SELECT-PLATFORM": "Select a platform",
+  "COLOR": "Color"
 }

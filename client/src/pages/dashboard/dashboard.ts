@@ -207,7 +207,7 @@ export class Dashboard {
           lineTension: 0,
           yAxisID: this.task.data[i].options.yAxisID,
           fill: this.task.data[i].options.fill,
-          backgroundColor: this.convertRGBA(this.task.data[i].options.color, 0.15),
+          backgroundColor: this.setColorAlpha(this.task.data[i].options.color, 0.15),
           borderColor: this.task.data[i].options.color,
           borderWidth: this.task.data[i].options.strokeWidth,
           pointRadius: this.task.data[i].options.pointRadius,
@@ -233,20 +233,15 @@ export class Dashboard {
   }
 
   /*****************************************************************************
-   * convertRGBA
-   * @param {event} task
-   * @return boolean
+   * setColorAlpha
    */
 
-  public convertRGBA(color: string, alpha: number): string {
-    let _color: string = color;
-    if (color.match(/rgb\(/i)) {
-      _color = color.replace(/rgb\(/i, 'rgba(');
-      _color = _color.replace(/\)/i, ',' + alpha + ')');
-    } else {
-      _color = _color.replace(/\d*(\.\d+)?\)/i, ',' + alpha + ')');
-    }
-    return _color;
+  public setColorAlpha(color: string, alpha: number): any {
+    const rgbaParser: any = {
+      re: /(rgb)a?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*%?,\s*(\d{1,3})\s*%?(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
+    };
+    let colors: any = rgbaParser.re.exec(color);
+    return ('rgba(' + colors[2] + ',' + colors[3] + ',' + colors[4] + ',' + alpha + ')');
   }
 
   /*****************************************************************************

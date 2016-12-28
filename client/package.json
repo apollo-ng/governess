@@ -22,7 +22,8 @@
     "postinstall": "ionic state restore && webdriver-manager update",
     "e2e": "protractor tests/e2e/protractor.conf.js",
     "electron": "electron . --enable-logging",
-    "electron-dist-linux-x64": "ionic build browser --prod && electron-packager . governess-app --out=platforms --app-version=1.0.0 --version-string.CompanyName=Apollo-NG --version-string.ProductName=GovernessApp --version-string.ProductVersion=1.0.0 --platform=linux --arch=x64 --icon=src/assets/icon/favicon.ico --prune --asar --overwrite --ignore=config --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=src --ignore=hooks"
+    "electron-dist-linux-x64": "ionic build browser --prod --release && electron-packager . governess-app --out=platforms --app-version=1.0.0 --version-string.CompanyName=Apollo-NG --version-string.ProductName=GovernessApp --version-string.ProductVersion=1.0.0 --platform=linux --arch=x64 --icon=src/assets/icon/favicon.ico --prune --asar --overwrite --ignore=config --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=src --ignore=hooks",
+    "electron-dist-all-x64": "ionic build browser --prod --release && electron-packager . governess-app --out=platforms --app-version=1.0.0 --version-string.CompanyName=Apollo-NG --version-string.ProductName=GovernessApp --version-string.ProductVersion=1.0.0 --category=Network --win --linux --target=deb --target=rpm --arch=x64 --icon=src/assets/icon/favicon.ico --prune --asar --overwrite --ignore=config --ignore=platforms --ignore=node_modules --ignore=coverage --ignore=resources --ignore=tests --ignore=plugins --ignore=src --ignore=hooks"
   },
   "dependencies": {
     "@angular/common": "2.2.1",
@@ -53,7 +54,7 @@
     "jasmine-spec-reporter": "2.7.0",
     "protractor": "4.0.14",
     "protractor-jasmine2-screenshot-reporter": "0.3.2",
-    "ts-node": "1.7.2",
+    "ts-node": "1.7.3",
     "typescript": "2.0.10"
   },
   "cordovaPlugins": [

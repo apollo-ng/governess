@@ -22,8 +22,7 @@ import { PlatformService }          from '../../providers/platforms/platforms';
 
 export class EditPluginModal {
 
-  @ViewChild('ConnectionVisualizer')
-    public connectionVisualizer:   any;
+  @ViewChild('ConnectionVisualizer') public connectionVisualizer: any;
 
   public viewCtrl:                  ViewController;
   public applianceService:          ApplianceService;
@@ -40,6 +39,8 @@ export class EditPluginModal {
   public hid:                       string;
   public pidx:                      number;
   public cv:                        CanvasRenderingContext2D;
+  public cpVisible:                 boolean;
+  public cpPresetColors:            Array<string>;
 
   constructor(
 
@@ -60,6 +61,12 @@ export class EditPluginModal {
 
     // Set settings viewPort as default
     this.viewPort =                 'settings';
+    this.cpVisible =                false;
+    this.cpPresetColors = [
+      'rgba(255,0,0,1)',
+      'rgba(0,255,0,1)',
+      'rgba(0,0,255,1)',
+    ];
 
     // Find the designated appliance for this plugin
     let appliance: any = this.applianceService.appliances.filter((_appliance) => {
@@ -69,6 +76,7 @@ export class EditPluginModal {
     // Roll it out
     this.appliance = appliance[0];
     this.plugin = this.appliance.plugins[this.type][this.pidx];
+    this.plugin.color = 'rgba(191, 128, 6, 0.76)';
     this.hid = this.appliance.conf.hid;
     this.hostHeaders = this.platformService.getHostHeaders(this.hid);
     this.hostGPIOs = this.platformService.getHostGPIOs(this.hid);

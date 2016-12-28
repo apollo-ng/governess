@@ -54,7 +54,7 @@ export class TaskService {
         console.log('Got NO Storage Data - creating from Mock:');
         let initTask: any = taskMock;
         initTask.id = this.hashID.create();
-        initTask.created = Math.round(new Date().getTime());
+        initTask.ctime = Math.round(new Date().getTime());
         this.storage.set('tasks', JSON.stringify(initTask));
         this.tasks = initTask;
         return initTask;
@@ -96,7 +96,7 @@ export class TaskService {
     let copy: any = JSON.parse(JSON.stringify(this.tasks[index]));
     copy.name = copy.name + ' Copy';
     copy.tid = this.hashID.create();
-    copy.created = Math.round(new Date().getTime());
+    copy.ctime = Math.round(new Date().getTime());
     this.tasks.push(copy);
     this.update(this.tasks);
   }

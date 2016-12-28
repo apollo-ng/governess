@@ -56,6 +56,11 @@ export let lineChartGlobals: any = {
           fontFamily: 'DIN',
           maxTicksLimit: 2,
         },
+        scaleLabel: {
+          display: true,
+          labelString: 'State On/Off',
+          fontColor: 'rgb(144, 73, 249)',
+        },
       },
     ],
   },

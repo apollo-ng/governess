@@ -1,15 +1,13 @@
 governess-app
 =============
 
-:construction: WIP (Work In Progress) :construction:
-
 Multi-Platform Hybrid-Client to monitor and control governess,
-based on Angular2/Ionic2. Since it's still early RC and many
-upstream angular modules aren't yet ng2/ts ready, it will serve
-as angular2/ionic learning ground, conceptual kitchen-sink and
-client work-flow optimizer while waiting for ng2/ionic2 release
-to settle for now. Many features have already been mocked and
-are currently in the process of implementation.
+based on Angular2/Ionic2. Since Ionic2 is still early RC and many
+upstream angular modules aren't yet ng2/ts ready, it serves as
+learning ground, conceptual kitchen-sink and client work-flow
+optimizer while waiting for ng2/ionic2 release to settle a little
+more. Many features have already been mocked and are currently in
+the process of implementation.
 
 Available Platforms
 -------------------
@@ -17,7 +15,7 @@ Available Platforms
 ### Browser
 
   * HTML5/Progressive Web-client - working
-  * Delivered by governess-server to any modern browser on any platform.
+  * Delivered by governess-server to any modern browser on any platform
 
 ### Mobile - Ionic2 build/bundle
 
@@ -137,13 +135,28 @@ Compiled production code is located below client/platforms/
 
 ### Android
 
-    $ ionic build android
+AoT release build with an optimized APK:
+
+    $ ionic build android --prod --release
 
 ### Electron
 
 #### Linux
 
     $ npm run electron-dist-linux-x64
+
+#### Windows
+
+Building for Windows requires the following packages:
+
+  * Wine-1.8+
+  * Mono-4.2+
+
+#### MacOSX
+
+MacOS Code Signing works only on MacOS,
+[cannot be fixed](http://http://stackoverflow.com/questions/11736368/how-to-sign-a-mac-os-x-application-in-linux/12156576#12156576)
+
 
 #### Other OS
 

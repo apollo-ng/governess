@@ -1,11 +1,13 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar dark>
     <ion-title>
-      <ion-icon name="logo-buffer"></ion-icon>
+      <ion-icon name="{{ plugin.icon }}"></ion-icon>
       {{ plugin.name }}
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="primary" (click)="dismissModal()">
+      <button
+        ion-button icon-only color="primary"
+        (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,36 +16,28 @@
   <ion-toolbar>
     <ion-grid no-padding class="mini-bar">
       <ion-row>
-        <ion-col width-10>
-          <button ion-button full class="rb-green"
-                  (click)="removePlugin(aid, type, plugin)">
-            <ion-icon name="color-palette"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col width-20>
-          <button ion-button full class="rb-glass">
-            <span class="minibar-button-txt">Icon</span>
-          </button>
-        </ion-col>
         <ion-col>
-          <button ion-button full class="rb-glass"
-                  (click)="viewPort = 'settings'"
-                  [ngClass]="{'active': viewPort === 'settings'}">
-            <ion-icon name="color-palette"></ion-icon>
+          <button
+            ion-button full class="rb-glass"
+            (click)="viewPort = 'settings'"
+            [ngClass]="{ 'active': viewPort === 'settings' }">
+            <ion-icon name="settings"></ion-icon>
             <span class="minibar-button-txt">Settings</span>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button full class="rb-glass"
-                  (click)="setWiringViewPort()"
-                  [ngClass]="{'active': viewPort === 'wiring'}">
-            <ion-icon name="eye"></ion-icon>
+          <button
+            ion-button full class="rb-glass"
+            (click)="setWiringViewPort()"
+            [ngClass]="{ 'active': viewPort === 'wiring' }">
+            <ion-icon name="outlet"></ion-icon>
             <span class="minibar-button-txt">Wiring</span>
           </button>
         </ion-col>
         <ion-col width-10>
-          <button ion-button full class="rb-red"
-                  (click)="removePlugin(aid, type, plugin)">
+          <button
+            ion-button full class="rb-red"
+            (click)="removePlugin(aid, type, plugin)">
             <ion-icon name="trash"></ion-icon>
           </button>
         </ion-col>
@@ -53,38 +47,60 @@
 </ion-header>
 
 <ion-content>
+
   <div *ngIf="viewPort === 'settings'">
-  <ion-list>
-    <ion-item>
-      <ion-icon name="logo-buffer" item-left></ion-icon>
-      <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
-      <ion-input value="{{ plugin.name }}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="at" item-left></ion-icon>
-      <ion-label><h2>Host-PIN</h2></ion-label>
-      <ion-select [(ngModel)]="appliance.conf.hid"
-                  [selectOptions]="{
-                    title: 'Host-PIN',
-                    subTitle: 'Pick available GPIO pin'
-                  }">
-        <ion-option *ngFor="let pin of hostGPIOs" [value]="pin.PIN">
-          PIN {{ pin.PIN }} ◀▶ {{ pin.TXT }}
-        </ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item-divider color="dark">
-      <ion-icon name="logo-buffer" item-left></ion-icon>
-      Driver Settings
-    </ion-item-divider>
-    <ion-item *ngFor="let conf of plugin.conf">
-      <ion-label><h2>{{ conf.name }}</h2></ion-label>
-      <ion-input value="{{ conf.value }}"></ion-input>
-    </ion-item>
-  </ion-list>
+    <span
+      class="cpModalHack"
+      [(colorPicker)]="plugin.color"
+      [cpInModal]="true"
+      [(cpToggle)]="cpToggle">
+    </span>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="logo-buffer" item-left></ion-icon>
+        <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
+        <ion-input value="{{ plugin.name }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="color-palette" item-left></ion-icon>
+        <ion-label><h2>{{ 'COLOR' | translate }}</h2></ion-label>
+        <button
+          (click)="cpToggle=!cpToggle"
+          [style.background-color]="plugin.color"
+          ion-button item-right
+          style="width: 50px !important"></button>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="at" item-left></ion-icon>
+        <ion-label><h2>Host-PIN</h2></ion-label>
+        <ion-select
+          [(ngModel)]="appliance.conf.hid"
+          [selectOptions]="{
+            title: 'Host-PIN',
+            subTitle: 'Pick available GPIO pin'
+          }">
+          <ion-option *ngFor="let pin of hostGPIOs" [value]="pin.PIN">
+            PIN {{ pin.PIN }} ◀▶ {{ pin.TXT }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item-divider color="dark">
+        <ion-icon name="logo-buffer" item-left></ion-icon>
+        Driver Settings
+      </ion-item-divider>
+      <ion-item *ngFor="let conf of plugin.conf">
+        <ion-label><h2>{{ conf.name }}</h2></ion-label>
+        <ion-input value="{{ conf.value }}"></ion-input>
+      </ion-item>
+    </ion-list>
   </div>
+
   <div *ngIf="viewPort === 'wiring'" class="cv-container">
-    <canvas #ConnectionVisualizer width="400" height="500" class="connectionVisualizer"></canvas>
+    <canvas
+      #ConnectionVisualizer
+      width="400" height="500"
+      class="connectionVisualizer">
+    </canvas>
   </div>
 
 </ion-content>

@@ -124,12 +124,13 @@ ion-navbar ion-buttons[end] {
   font-size: 3.4rem !important;
 }
 
-ion-content, .action-sheet-container {
-  background-color: #2f2e2a !important;;
-  background: #2f2e2a !important;;
-  background: linear-gradient(to bottom, #2f2e2a 0%,#1f1e1a 100%) !important;;
-  background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%) !important;;
-  background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%) !important;;
+ion-content,
+.action-sheet-container {
+  background-color: #2f2e2a !important;
+  background: #2f2e2a !important;
+  background: linear-gradient(to bottom, #2f2e2a 0%,#1f1e1a 100%) !important;
+  background: -moz-linear-gradient(top, #2f2e2a 0%, #1f1e1a 100%) !important;
+  background: -webkit-linear-gradient(top, #2f2e2a 0%,#1f1e1a 100%) !important;
 }
 
 .action-sheet-container {
@@ -470,8 +471,8 @@ chart  {
 .alert-wrapper {
   background-color: #2f2e2a !important;
 
- .alert-radio-label {
+  .alert-radio-label {
    color: #d8d3c5;
- }
+  }
 
 }

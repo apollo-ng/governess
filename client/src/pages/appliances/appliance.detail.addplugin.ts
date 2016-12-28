@@ -64,7 +64,7 @@ export class AddPluginModal {
 
   private init(): void {
     this.pluginService.getAll().then( (_plugins: any) => {
-      let plugins: any
+      let plugins: any;
       if (_plugins) {
         plugins = JSON.parse(_plugins);
 

@@ -3,7 +3,8 @@ export const taskMock: Array<any> = [{
     'aid': 'K4aMt1gLsT2e',
     'name': 'Reflow Lead-Free',
     'icon': 'star-outline',
-    'created': Math.round( new Date().getTime() / 1000 ),
+    'ctime': Math.round( new Date().getTime() / 1000 ),
+    'mtime': '',
     'notes': '',
     'type': 'profile',
     'constraints': true,
@@ -16,7 +17,7 @@ export const taskMock: Array<any> = [{
         'show': true,
         'options': {
           'yAxisID': 'y-axis-1',
-          'color': 'rgb(255, 152, 0)',
+          'color': 'rgba(255, 152, 0, 1)',
           'fill': false,
           'drawPoints': true,
           'pointRadius': 3,
@@ -41,7 +42,7 @@ export const taskMock: Array<any> = [{
         'show': true,
         'options': {
           'yAxisID': 'y-axis-2',
-          'color': 'rgb(144, 73, 249)',
+          'color': 'rgba(144, 73, 249, 1)',
           'fill': true,
           'drawPoints': true,
           'pointRadius': 0,

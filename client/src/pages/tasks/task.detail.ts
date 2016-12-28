@@ -1,6 +1,8 @@
-import { Component, ViewChild }     from '@angular/core';
+import { Component,
+         ViewChild }                from '@angular/core';
 
-import { Content,
+import { Events,
+         Content,
          NavParams,
          NavController,
          AlertController,
@@ -42,6 +44,7 @@ export class TaskDetailPage {
   public showMiniBar: boolean;
   public newPointData: any;
 
+  public events: Events;
   public alertCtrl: AlertController;
   public modalCtrl: ModalController;
   public navCtrl: NavController;
@@ -49,9 +52,15 @@ export class TaskDetailPage {
   public actionSheetCtrl: ActionSheetController;
   public navParams: NavParams;
   public taskService: TaskService;
+  public cpPresetColors: Array<Object>;
+
+  /*****************************************************************************
+   * constructor
+   */
 
   constructor(
 
+    events: Events,
     alertCtrl: AlertController,
     modalCtrl: ModalController,
     navCtrl: NavController,
@@ -74,89 +83,127 @@ export class TaskDetailPage {
     this.data = this.task.data;
     this.moduleView = 0;
     this.showMiniBar = false;
-    this.chartHeight = Math.floor(window.innerHeight / 2);
+    this.chartHeight = Math.floor(window.innerHeight / 1.61 / 1.61);
     this.lineChartData = { datasets: [] };
     this.lineChartOptions = lineChartGlobals;
 
-    console.log(this.lineChartOptions);
-    /*
-    this.lineChartOptions.scales.xAxes[0].ticks.callback = function(value: number, t: any, p: any, task: any = this.task): any {
-      console.log(task);
-      return value;
-    },*/
+    // console.log(this.lineChartOptions);
+    // console.log(this.chartHeight);
 
     this.updateChart();
-    console.log(this.chartHeight);
+
     this.newPointData = {
       time: '',
       target: '',
       note: '',
     };
+
+    // FIXME: Verify if there isn't a better way. This hack was needed
+    //        to update the chart's colors from the colorPicker reliably.
+    //        The publishing event is in components/color-picker.directive
+    //        Without this event updateCharts would not be fired, even though
+    //        the data in the model obviusly changed in the template itself.
+    //        The timeout was needed because the charts color would always lack
+    //        behind on click, creating undesirable color discrepancies in the UX.
+    events.subscribe('colorChanged', () => {
+      setTimeout( () => { this.updateChart(); }, 110 );
+    });
+
   }
+
+  /*****************************************************************************
+   * chartClicked
+   */
 
   public chartClicked(e: any): void {
     console.log(e);
   }
 
+  /*****************************************************************************
+   * chartHovered
+   */
+
   public chartHovered(e: any): void {
     console.log(e);
   }
+
+  /*****************************************************************************
+   * dragSplitbar
+   */
 
   public dragSplitbar(e: any): void {
     let newHeight: number = this.chartHeight + e.deltaY;
     if (newHeight < 150) newHeight = 150;
     if (newHeight > 800) newHeight = 800;
     this.chartHeight = newHeight;
-    console.log(this.chartHeight);
+    // console.log(this.chartHeight);
     if (this.chartc) this.chartc.chart.resize();
   }
 
-  public convertRGBA(color: string, alpha: number): string {
-    let _color: string = color;
-    if (color.match(/rgb\(/i)) {
-      _color = color.replace(/rgb\(/i, 'rgba(');
-      _color = _color.replace(/\)/i, ',' + alpha + ')');
-    } else {
-      _color = _color.replace(/\d*(\.\d+)?\)/i, ',' + alpha + ')');
-    }
-    return _color;
+  /*****************************************************************************
+   * setColorAlpha
+   */
+
+  public setColorAlpha(color: string, alpha: number): any {
+    const rgbaParser: any = {
+      re: /(rgb)a?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*%?,\s*(\d{1,3})\s*%?(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
+    };
+    let colors: any = rgbaParser.re.exec(color);
+    return ('rgba(' + colors[2] + ',' + colors[3] + ',' + colors[4] + ',' + alpha + ')');
   }
+
+  /*****************************************************************************
+   * taskActionSheet
+   */
 
   public updateChart(): void {
 
-    // Update the datapoints (y axis)
     let _lineChartData: any = new Array();
-    for (let i: number = 0; i < this.data.length; i++) {
-      if (this.data[i].show === true) {
+
+    for (let i: number = 0; i < this.task.data.length; i++) {
+      if (this.task.data[i].show === true) {
+
         _lineChartData[i] = {
-          label: this.data[i].control,
+          label: this.task.data[i].control,
           lineTension: 0,
-          yAxisID: this.data[i].options.yAxisID,
-          fill: this.data[i].options.fill,
-          backgroundColor: this.convertRGBA(this.data[i].options.color, 0.15),
-          borderColor: this.data[i].options.color,
-          borderWidth: this.data[i].options.strokeWidth,
-          pointRadius: this.data[i].options.pointRadius,
-          pointBorderWidth: this.data[i].options.pointBorderWidth,
+          yAxisID: this.task.data[i].options.yAxisID,
+          fill: this.task.data[i].options.fill,
+          backgroundColor: this.setColorAlpha(this.task.data[i].options.color, 0.15),
+          borderColor: this.task.data[i].options.color,
+          borderWidth: this.task.data[i].options.strokeWidth,
+          pointRadius: this.task.data[i].options.pointRadius,
+          pointBorderWidth: this.task.data[i].options.pointBorderWidth,
           pointBackgroundColor: '#fff',
-          pointBorderColor: this.data[i].options.color,
+          pointBorderColor: this.task.data[i].options.color,
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-          data: new Array(this.data[i].points.length),
+          data: new Array(this.task.data[i].points.length),
         };
-        for (let j: number = 0; j < this.data[i].points.length; j++) {
+
+        for (let j: number = 0; j < this.task.data[i].points.length; j++) {
           _lineChartData[i].data[j] = {
-            'x': this.data[i].points[j][0],
-            'y': this.data[i].points[j][1],
+            'x': this.task.data[i].points[j][0],
+            'y': this.task.data[i].points[j][1],
           };
         }
+
+        this.lineChartOptions.scales.yAxes[i].scaleLabel.fontColor = this.task.data[i].options.color;
+        this.lineChartOptions.scales.yAxes[i].ticks.fontColor = this.task.data[i].options.color;
+        // console.log(this.lineChartOptions);
+
       }
     }
 
     this.lineChartData.datasets = _lineChartData;
-    console.log('Updated chart:', this.lineChartData);
-    if (this.chartc) this.chartc.chart.update();
+    // console.log('Updated chart:', this.lineChartData);
+    if (this.chartc) {
+      this.chartc.chart.update();
+    }
   }
+
+  /*****************************************************************************
+   * taskActionSheet
+   */
 
   public taskActionSheet(): void {
     let actionSheet: any = this.actionSheetCtrl.create({
@@ -316,7 +363,7 @@ export class TaskDetailPage {
 
       deltaT = Math.round(
         ( d[p][1] - d[p - 1][1] ) /
-        ( d[p][0] - d[p - 1][0]) * 10
+        ( d[p][0] - d[p - 1][0] ) * 10
       ) / 10;
 
       if (deltaT > 0) {

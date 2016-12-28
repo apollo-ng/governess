@@ -140,7 +140,7 @@ export class GovernessApp implements OnInit {
 
   private initializeApp(): void {
     this.platform.ready().then(() => {
-      console.log('initializeApp called');
+      // console.log('initializeApp called');
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();

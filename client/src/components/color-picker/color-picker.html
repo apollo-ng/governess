@@ -1,0 +1,164 @@
+<div
+  class="color-picker"
+  [hidden]="!show"
+  [style.top.px]="top"
+  [style.left.px]="left"
+  #dialogPopup>
+
+  <div class="color-picker-content noise">
+
+    <div class="title">
+      Pick a Color
+    </div>
+
+    <div class="color-picker-component">
+
+      <div
+        [slider] [style.background-color]="hueSliderColor"
+        [rgX]="1" [rgY]="1" class="saturation-lightness"
+        (newValue)="setSaturationAndBrightness($event)">
+        <div
+          [style.left.px]="slider.s"
+          [style.top.px]="slider.v"
+          class="cursor">
+        </div>
+      </div>
+
+      <div class="slider-container">
+        <div class="box sliders">
+
+          <div class="left">
+            <div class="selected-color-background"></div>
+            <div
+              [style.background-color]="selectedColor"
+              class="selected-color"
+              (click)="formatPolicy()">
+            </div>
+          </div>
+
+          <div class="right">
+            <div *ngIf="cpAlphaChannel === 'disabled'"></div>
+
+            <div [slider] [rgX]="1" (newValue)="setHue($event)" class="hue" #hueSlider>
+              <div [style.left.px]="slider.h" class="cursor"></div>
+            </div>
+
+            <div
+              [hidden]="cpAlphaChannel === 'disabled'"
+              [slider] [style.background-color]="alphaSliderColor"
+              [rgX]="1" (newValue)="setAlpha($event)" class="alpha" #alphaSlider>
+              <div [style.left.px]="slider.a" class="cursor"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-container">
+
+      <ion-grid [hidden]="format !== 2">
+        <ion-row class="value">
+          <ion-col>
+            <input
+              [text] type="number" pattern="[0-9]*" min="0" max="360"
+              [rg]="360" (newValue)="setHue($event)" [value]="hslaText.h" />
+          </ion-col>
+          <ion-col>
+            <input
+              [text] type="number" pattern="[0-9]*" min="0" max="100"
+              [rg]="100" (newValue)="setSaturation($event)" [value]="hslaText.s" />
+          </ion-col>
+          <ion-col>
+            <input
+              [text] type="number" pattern="[0-9]*" min="0" max="100"
+              [rg]="100" (newValue)="setLightness($event)" [value]="hslaText.l" />
+          </ion-col>
+          <ion-col>
+            <input
+              *ngIf="cpAlphaChannel !== 'disabled'" [text] type="number"
+              pattern="[0-9]+([\.,][0-9]{1,2})?" min="0" max="1" step="0.1"
+              [rg]="1" (newValue)="setAlpha($event)" [value]="hslaText.a" />
+          </ion-col>
+        </ion-row>
+        <ion-row class="label">
+          <ion-col>H</ion-col>
+          <ion-col>S</ion-col>
+          <ion-col>L</ion-col>
+          <ion-col *ngIf="cpAlphaChannel !== 'disabled'">A</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid [hidden]="format !== 1">
+        <ion-row  class="value">
+          <ion-col>
+            <input
+              [text] type="number" pattern="[0-9]*" min="0" max="255"
+              [rg]="255" (newValue)="setR($event)" [value]="rgbaText.r" />
+          </ion-col>
+          <ion-col>
+            <input
+              [text] type="number" pattern="[0-9]*" min="0" max="255"
+              [rg]="255" (newValue)="setG($event)" [value]="rgbaText.g" />
+          </ion-col>
+          <ion-col>
+            <input
+              [text] type="number" pattern="[0-9]*" min="0" max="255"
+              [rg]="255" (newValue)="setB($event)" [value]="rgbaText.b" />
+          </ion-col>
+          <ion-col>
+            <input
+              *ngIf="cpAlphaChannel !== 'disabled'" [text]
+              type="number" pattern="[0-9]+([\.,][0-9]{1,2})?"
+              min="0" max="1" step="0.1" [rg]="1"
+              (newValue)="setAlpha($event)" [value]="rgbaText.a" />
+          </ion-col>
+        </ion-row>
+        <ion-row class="label">
+          <ion-col>R</ion-col>
+          <ion-col>G</ion-col>
+          <ion-col>B</ion-col>
+          <ion-col *ngIf="cpAlphaChannel !== 'disabled'">A</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid [hidden]="format !== 0">
+        <ion-row  class="value">
+          <ion-col>
+            <input
+              [text] [value]="hexText" autocorrect="off"
+              (newValue)="setColorFromString($event)" />
+          </ion-col>
+        </ion-row>
+        <ion-row class="label">
+          <ion-col>Hex</ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
+    </div>
+    <div class="color-picker-defaults">
+      <ul *ngIf="cpPresetColors && cpPresetColors.length > 0">
+        <li
+          *ngFor="let preset of cpPresetColors"
+          (click)="setColorFromString(preset.color)"
+          [style.backgroundColor]="preset.color">
+          {{ preset.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="button-area">
+    <button
+      class="rb-green"
+      (click)="oKColor()">
+      OK
+    </button>
+    <button
+      class="rb-glass"
+      (click)="cancelColor()">
+      Cancel
+    </button>
+  </div>
+
+</div>

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar dark>
-    <ion-title>{{task.name}}</ion-title>
+    <ion-title>{{ task.name }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="primary" (click)="taskActionSheet()">
         <ion-icon name="cube"></ion-icon>
@@ -10,18 +10,15 @@
 
   <div class="ion-segment-container">
     <ion-segment [(ngModel)]="moduleView" >
-      <ion-segment-button *ngFor="let module of data; let m = index" [value]="m"
-      [ngStyle]="{'color': data[m].options.color,
-                  'border-color':  m === moduleView ?
-                    data[m].options.color
-                  : 'transparent',
-                  'background': m === moduleView ?
-                    convertRGBA(data[m].options.color, 0.15)
-                  : 'rgba(10,9,4,0.3)'
-                 }">
-                 <ion-icon name="{{module.icon}}"></ion-icon>
-                 <span class="minibar-button-txt">{{module.control}}</span>
-
+      <ion-segment-button
+        *ngFor="let module of data; let m = index" [value]="m"
+        [ngStyle]="{
+          'color': data[m].options.color,
+          'border-color':  m === moduleView ? data[m].options.color: 'transparent',
+          'background': m === moduleView ? setColorAlpha(data[m].options.color, 0.15): 'rgba(10,9,4,0.3)'
+        }">
+        <ion-icon name="{{ module.icon }}"></ion-icon>
+        <span class="minibar-button-txt">{{ module.control }}</span>
       </ion-segment-button>
     </ion-segment>
   </div>
@@ -32,10 +29,11 @@
 <ion-content class="task-detail">
 
   <div class="chart-container">
-    <chart [type]="'line'"
-           [data]="lineChartData"
-           [options]="lineChartOptions"
-           [style.height]="chartHeight + 'px'">
+    <chart
+      [type]="'line'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [style.height]="chartHeight + 'px'">
     </chart>
   </div>
 
@@ -48,63 +46,74 @@
   <ion-grid *ngIf="showMiniBar" class="mini-bar">
     <ion-row>
       <ion-col>
-        <button ion-button full class="rb-glass"
-        (click)="data[moduleView].options.fill = !data[moduleView].options.fill; updateChart()"
-        [ngClass]="{'active': data[moduleView].options.fill}">
+        <button
+          ion-button full class="rb-glass"
+          (click)="data[moduleView].options.fill = !data[moduleView].options.fill; updateChart()"
+          [ngClass]="{ 'active': data[moduleView].options.fill }">
           <ion-icon name="color-fill"></ion-icon>
           <span class="minibar-button-txt">Fill</span>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button full class="rb-glass"
-        (click)="data[moduleView].show = !data[moduleView].show; updateChart()"
-        [ngClass]="{'active': data[moduleView].show}">
+        <button
+          ion-button full class="rb-glass"
+          (click)="data[moduleView].show = !data[moduleView].show; updateChart()"
+          [ngClass]="{ 'active': data[moduleView].show }">
           <ion-icon name="eye"></ion-icon>
           <span class="minibar-button-txt">Show</span>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button full class="rb-glass"
-        (click)="data[moduleView].options.yAxisID = data[moduleView].options.yAxisID === 'y-axis-1' ? 'y-axis-2' : 'y-axis-1'; updateChart()"
-        [ngClass]="{'active': data[moduleView].options.yAxisID === 'y-axis-2'}">
+        <button
+          ion-button full class="rb-glass"
+          (click)="data[moduleView].options.yAxisID = data[moduleView].options.yAxisID === 'y-axis-1' ? 'y-axis-2' : 'y-axis-1'; updateChart()"
+          [ngClass]="{ 'active': data[moduleView].options.yAxisID === 'y-axis-2' }">
           <b>y2</b>
           <span class="minibar-button-txt">Axis</span>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button full class="rb-glass"
-        (click)="editStrokeWidth = !editStrokeWidth"
-        [ngClass]="{'active': editStrokeWidth}">
+        <button
+          ion-button full class="rb-glass"
+          (click)="editStrokeWidth = !editStrokeWidth"
+          [ngClass]="{ 'active': editStrokeWidth }">
           <ion-icon name="brush"></ion-icon>
           <span class="minibar-button-txt">Size</span>
         </button>
       </ion-col>
       <ion-col *ngIf="editStrokeWidth" class="mb-input">
-        <input type="text" min="1" max="10" autocomplete="off"
-        [(ngModel)]="data[moduleView].options.strokeWidth"
-        (ngModelChange)="updateChart()"/>
+        <input
+          type="text" min="1" max="10" autocomplete="off"
+          [(ngModel)]="data[moduleView].options.strokeWidth"
+          (ngModelChange)="updateChart()" />
       </ion-col>
       <ion-col>
-        <button ion-button full class="rb-glass"
-        (click)="editPointSize = !editPointSize"
-        [ngClass]="{'active': editPointSize}">
+        <button
+          ion-button full class="rb-glass"
+          (click)="editPointSize = !editPointSize"
+          [ngClass]="{ 'active': editPointSize }">
           <ion-icon name="disc"></ion-icon>
           <span class="minibar-button-txt">Size</span>
         </button>
       </ion-col>
       <ion-col *ngIf="editPointSize" class="mb-input">
-        <input type="text" min="0" max="25" autocomplete="off"
-        [(ngModel)]="data[moduleView].options.pointRadius"
-        (ngModelChange)="updateChart()"/>
+        <input
+          type="text" min="0" max="25" autocomplete="off"
+          [(ngModel)]="data[moduleView].options.pointRadius"
+          (ngModelChange)="updateChart()" />
       </ion-col>
       <ion-col>
-        <ion-select [(ngModel)]="task.timeFormat"
-                    (ngModelChange)="updateChart()"
-                    class="rb-glass"
-                    placeholder="Time"
-                    [selectOptions]="{ title: 'Time Format', subTitle: 'Change your timeframe if auto doesnt do it for you'}"
-                    cancelText="Cancel"
-                    okText="Select">
+        <ion-select
+          [(ngModel)]="task.timeFormat"
+          (ngModelChange)="updateChart()"
+          class="rb-glass"
+          placeholder="Time"
+          [selectOptions]="{
+            title: 'Time Format',
+            subTitle: 'Select a suitable time format or leave on auto'
+          }"
+          cancelText="Cancel"
+          okText="Select">
           <ion-option value="auto">Auto</ion-option>
           <ion-option value="ssss">Miliseconds</ion-option>
           <ion-option value="ss">Seconds</ion-option>
@@ -119,16 +128,21 @@
   <ion-grid class="data-grid">
     <ion-row class="grid-head">
       <ion-col width-10>
-        <ion-icon full name="color-palette" class="icon-action"
-        (click)="taskActionSheet()"
-        [ngStyle]="{'color': data[moduleView].options.color}">
-        </ion-icon>
+        <span
+          [(colorPicker)]="task.data[moduleView].options.color"
+          [style.color]="task.data[moduleView].options.color">
+          <ion-icon
+            ion-icon full color="primary"
+            name="color-palette" class="icon-action"
+            [ngStyle]="{ 'color': task.data[moduleView].options.color }">
+          </ion-icon>
+        </span>
       </ion-col>
       <ion-col>
         <ion-icon name="time"> Time</ion-icon>
       </ion-col>
       <ion-col>
-        <ion-icon name="{{data[moduleView].icon}}"> Target</ion-icon>
+        <ion-icon name="{{ task.data[moduleView].icon }}"> Target</ion-icon>
       </ion-col>
       <ion-col width-10>
         <span>ΔT/s</span>
@@ -137,72 +151,84 @@
         <ion-icon name="create"> Notes</ion-icon>
       </ion-col>
       <ion-col width-10>
-        <ion-icon full color="primary" name="switch" class="icon-action"
-        (click)="showMiniBar = !showMiniBar">
+        <ion-icon
+          full color="primary" name="switch" class="icon-action"
+          (click)="showMiniBar = !showMiniBar">
         </ion-icon>
       </ion-col>
     </ion-row>
 
-    <ion-row class="data-points"
-             *ngFor="let point of data[moduleView].points; let p = index"
-             [ngClass]="{'odd-row': p % 2}">
-      <ion-col width-10 style="text-align: center"
-      [ngStyle]="{'color': data[moduleView].options.color}">
+    <ion-row
+      class="data-points"
+      *ngFor="let point of data[moduleView].points; let p = index"
+      [ngClass]="{ 'odd-row': p % 2 }">
+      <ion-col
+        width-10 style="text-align: center"
+        [ngStyle]="{ 'color': data[moduleView].options.color }">
         <span>{{ p }}</span>
       </ion-col>
       <ion-col>
-        <input type="text" required min="0" ng-min="data[moduleView].points[p-1][0]"
-        [(ngModel)]="point[0]"
-        (ngModelChange)="updateChart()"/>
+        <input
+          type="text" required min="0"
+          ng-min="data[moduleView].points[p-1][0]"
+          [(ngModel)]="point[0]"
+          (ngModelChange)="updateChart()" />
       </ion-col>
-      <ion-col *ngIf="data[moduleView].type === 'number'" >
-        <input type="text" required
-        [(ngModel)]="point[1]"
-        (ngModelChange)="updateChart()"/>
+      <ion-col *ngIf="data[moduleView].type === 'number'">
+        <input
+          type="text" required
+          [(ngModel)]="point[1]"
+          (ngModelChange)="updateChart()" />
       </ion-col>
-      <ion-col *ngIf="data[moduleView].type === 'boolean'" >
+      <ion-col *ngIf="data[moduleView].type === 'boolean'">
         <ion-toggle
-        [(ngModel)]="data[moduleView].points[p][1]"
-        (ngModelChange)="updateChart()"></ion-toggle>
+          [(ngModel)]="data[moduleView].points[p][1]"
+          (ngModelChange)="updateChart()">
+        </ion-toggle>
       </ion-col>
       <ion-col width-10 style="text-align: center">
-        <span>{{calcSlope(p, data[moduleView].points)}}</span>
+        <span>{{ calcSlope(p, data[moduleView].points) }}</span>
       </ion-col>
       <ion-col>
-        <input type="text"
-        [(ngModel)]="data[moduleView].note"
-        (ngModelChange)="updateChart()"/>
+        <input
+          type="text"
+          [(ngModel)]="data[moduleView].note"
+          (ngModelChange)="updateChart()" />
       </ion-col>
       <ion-col width-10 style="text-align: center">
-        <ion-icon full name="trash" color="danger" class="icon-action"
-        (click)="dropPoint(data[moduleView].points, point)"></ion-icon>
+        <ion-icon
+          full name="trash" color="danger" class="icon-action"
+          (click)="dropPoint(data[moduleView].points, point)">
+        </ion-icon>
       </ion-col>
     </ion-row>
 
     <ion-row class="new-points">
-      <ion-col width-10 style="text-align: center"
-      [ngStyle]="{'color': data[moduleView].options.color}">
+      <ion-col
+        width-10 style="text-align: center"
+        [ngStyle]="{'color': data[moduleView].options.color}">
         <ion-icon full name="arrow-dropright" class="icon-action">
         </ion-icon>
       </ion-col>
       <ion-col>
-        <input type="text" required min="0"
-        [(ngModel)]="newPointData.time" />
+        <input type="text" required min="0" [(ngModel)]="newPointData.time" />
       </ion-col>
       <ion-col>
-        <input type="text" required
-        [(ngModel)]="newPointData.target"/>
+        <input
+          type="text" required autocomplete=""
+          [(ngModel)]="newPointData.target" />
       </ion-col>
       <ion-col width-10 style="text-align: center">
         &nbsp;
       </ion-col>
       <ion-col>
-        <input type="text"
-          [(ngModel)]="newPointData.note"/>
+        <input type="text" [(ngModel)]="newPointData.note" />
       </ion-col>
       <ion-col width-10 style="text-align: center">
-        <ion-icon full name="add" color="primary" class="icon-action"
-        (click)="addPoint()"></ion-icon>
+        <ion-icon
+          full name="add" color="primary" class="icon-action"
+          (click)="addPoint()">
+        </ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>

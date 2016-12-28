@@ -1,3 +1,4 @@
+/* tslint:disable:use-strict */
 
 import { NgModule,
          ErrorHandler }           from '@angular/core';
@@ -9,7 +10,9 @@ import { IonicApp,
 
 import { Storage }                from '@ionic/storage';
 
-import { ChartModule }            from 'angular2-chartjs';
+// Root Component //////////////////////////////////////////////////////////////
+
+import { GovernessApp }           from './app.component';
 
 // Translation /////////////////////////////////////////////////////////////////
 
@@ -17,9 +20,14 @@ import { TranslateModule,
          TranslateLoader,
          TranslateStaticLoader }  from 'ng2-translate/ng2-translate';
 
-// Root Component //////////////////////////////////////////////////////////////
+// Charting ////////////////////////////////////////////////////////////////////
 
-import { GovernessApp }           from './app.component';
+import { ChartModule }            from 'angular2-chartjs';
+
+// ColorPicker /////////////////////////////////////////////////////////////////
+
+import { ColorPickerModule,
+         ColorPickerService }     from '../components/color-picker';
 
 // Dashboard ///////////////////////////////////////////////////////////////////
 
@@ -53,7 +61,7 @@ import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
 import { ApplianceService }       from '../providers/appliances/appliances';
 import { PlatformService }        from '../providers/platforms/platforms';
-import { PluginService }          from '../providers/plugins/plugins';
+import { PluginService }          from '../providers/plugins/';
 import { TaskService }            from '../providers/tasks/tasks';
 import { HashID }                 from '../providers/crypto/hashid';
 
@@ -70,8 +78,27 @@ import { TemperaturePipe }        from '../pipes/temperature';
  */
 
 export function createTranslateLoader(http: Http): any {
-  'use strict';
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
+
+/*******************************************************************************
+ * provideStorage - Set up & configure app storage provider
+ * @return {Storage Object}
+ */
+
+export function provideStorage(): any {
+  return new Storage(
+    [
+      'sqlite',
+      'indexeddb',
+      'websql',
+      'localstorage',
+    ],
+    {
+      name: 'governessdb',
+      storeName: 'governessdata',
+    }
+  );
 }
 
 /*******************************************************************************
@@ -99,10 +126,10 @@ export const declarations: any = [
 ];
 
 /*******************************************************************************
- * entryComponents
+ * pages
  */
 
-export const entryComponents: any = [
+export const pages: any = [
   GovernessApp,
   AboutPage,
   AppliancesPage,
@@ -125,20 +152,24 @@ export const entryComponents: any = [
  * providers
  */
 
-export const providers: any = [
-  Storage,
-  HashID,
-  StorageService,
-  ConfigService,
-  ApplianceService,
-  PlatformService,
-  PluginService,
-  StatusService,
-  TaskService,
-  WebSocketService,
-  // Enable Ionic's runtime error handling during development
-  { provide: ErrorHandler, useClass: IonicErrorHandler },
-];
+export function providers(): any {
+  return [
+    HashID,
+    ColorPickerService,
+    StorageService,
+    ConfigService,
+    ApplianceService,
+    PlatformService,
+    PluginService,
+    StatusService,
+    TaskService,
+    WebSocketService,
+    // Enable Ionic's storage engine
+    { provide: Storage, useFactory: provideStorage },
+    // Enable Ionic's runtime error handling during development
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+  ];
+}
 
 /*******************************************************************************
  * imports
@@ -146,10 +177,11 @@ export const providers: any = [
 
 export let imports: any = [
   ChartModule,
+  ColorPickerModule,
   TranslateModule.forRoot({
     provide: TranslateLoader,
     useFactory: (createTranslateLoader),
-    deps: [Http],
+    deps: [ Http ],
   }),
   IonicModule.forRoot(GovernessApp, {
     mode: 'md',
@@ -167,9 +199,9 @@ export let imports: any = [
 @NgModule({
   declarations: declarations,
   imports: imports,
-  bootstrap: [IonicApp],
-  entryComponents: entryComponents,
-  providers: providers,
+  bootstrap: [ IonicApp ],
+  entryComponents: pages,
+  providers: providers(),
 })
 
 export class AppModule {}
