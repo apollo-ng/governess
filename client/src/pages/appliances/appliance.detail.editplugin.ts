@@ -62,11 +62,6 @@ export class EditPluginModal {
     // Set settings viewPort as default
     this.viewPort =                 'settings';
     this.cpVisible =                false;
-    this.cpPresetColors = [
-      'rgba(255,0,0,1)',
-      'rgba(0,255,0,1)',
-      'rgba(0,0,255,1)',
-    ];
 
     // Find the designated appliance for this plugin
     let appliance: any = this.applianceService.appliances.filter((_appliance) => {

@@ -1,5 +1,6 @@
 import { Injectable }             from '@angular/core';
-import { ToastController }        from 'ionic-angular';
+import { Events,
+         ToastController }        from 'ionic-angular';
 import { HashID }                 from '../crypto/hashid';
 import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
@@ -19,6 +20,7 @@ import { applianceMock }          from './appliance.mock';
 export class ApplianceService {
 
   public appliances: any = [];
+  public events: Events;
   public storage: StorageService;
   public toastCtrl: ToastController;
   private hashID: HashID;
@@ -29,12 +31,14 @@ export class ApplianceService {
 
   constructor (
 
+    events: Events,
     storage: StorageService,
     toastCtrl: ToastController,
     hashID: HashID,
 
   ) {
 
+    this.events = events;
     this.storage = storage;
     this.toastCtrl = toastCtrl;
     this.hashID = hashID;
@@ -154,6 +158,7 @@ export class ApplianceService {
   public updateD(): void {
     console.log('Updating appliances...');
     this.write(this.appliances);
+    this.events.publish('applianceUpdated');
   }
 
   /*****************************************************************************

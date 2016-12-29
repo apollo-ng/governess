@@ -8,17 +8,21 @@
       <button ion-button icon-only *ngIf="isSending">
         <ion-spinner name="ios" color="secondary"></ion-spinner>
       </button>
-      <button ion-button icon-only color="primary" *ngIf="!isSending" (click)="openHelp()">
+      <button
+        ion-button icon-only color="primary"
+        *ngIf="!isSending"
+        (click)="openHelp()">
         <ion-icon name="logo-buffer"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-searchbar (ionInput)="filterAppliances($event)"
-                   (ionClear)="clearFilter($event)"
-                   placeholder="{{ 'FILTER' | translate }}"
-                   autocorrect="off">
+    <ion-searchbar
+      (ionInput)="filterAppliances($event)"
+      (ionClear)="clearFilter($event)"
+      placeholder="{{ 'FILTER' | translate }}"
+      autocorrect="off">
     </ion-searchbar>
     <ion-buttons end>
       <button ion-button (click)="addAppliance()">
@@ -30,36 +34,45 @@
 </ion-header>
 
 <ion-content class="appliances-list">
-  <ion-list *ngIf="appliances?.length > 0" reorder="true" (ionItemReorder)="reorderAppliances($event)">
-    <ion-item-sliding *ngFor="let appliance of appliances; let p = index"
-                      [ngClass]="{'odd-row': p % 2, 'active': appliance.aid === config.applianceActive}">
+  <ion-list
+    *ngIf="appliances?.length > 0"
+    (ionItemReorder)="reorderAppliances($event)"
+    reorder="true">
+    <ion-item-sliding
+      *ngFor="let appliance of appliances; let p = index"
+      [ngClass]="{'odd-row': p % 2, 'active': appliance.aid === config.applianceActive}">
       <div ion-item>
-        <ion-icon *ngIf="appliance.constraints && appliance.aid !== config.applianceActive"
-                  (click)="activateAppliance(appliance.aid)"
-                  [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)'}"
-                  item-left name="checkmark-circle-outline">
+        <ion-icon
+          *ngIf="appliance.constraints && appliance.aid !== config.applianceActive"
+          (click)="activateAppliance(appliance.aid)"
+          [ngStyle]="{ 'color': 'rgba(117, 137, 12, 0.65)' }"
+          item-left name="checkmark-circle-outline">
         </ion-icon>
-        <ion-icon *ngIf="appliance.constraints && appliance.aid === config.applianceActive"
-                  (click)="activateAppliance(appliance.aid)"
-                  [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)'}"
-                  item-left name="checkmark-circle">
+        <ion-icon
+          *ngIf="appliance.constraints && appliance.aid === config.applianceActive"
+          (click)="activateAppliance(appliance.aid)"
+          [ngStyle]="{ 'color': 'rgba(117, 137, 12, 1)' }"
+          item-left name="checkmark-circle">
         </ion-icon>
-        <ion-icon *ngIf="!appliance.constraints"
-                  (click)="activateAppliance(appliance.aid)"
-                  [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)'}"
-                  item-left name="radio-button-off">
+        <ion-icon
+          *ngIf="!appliance.constraints"
+          (click)="activateAppliance(appliance.aid)"
+          [ngStyle]="{ 'color': 'rgba(227, 85, 33, 0.61)' }"
+          item-left name="radio-button-off">
         </ion-icon>
-        <div (click)="goToApplianceDetail(appliance)" class="appliances-list-item">
+        <div
+          class="appliances-list-item"
+          (click)="goToApplianceDetail(appliance.aid)">
           <h2>{{appliance.name}}</h2>
           <table>
             <tr>
               <td>
-                <ion-icon name="time" item-left [ngStyle]="{ 'margin': '0'}">
+                <ion-icon name="time" item-left [ngStyle]="{ 'margin': '0' }">
                   1
                 </ion-icon>
               </td>
               <td>
-                <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0'}">
+                <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0' }">
                   {{ appliance.ctime | date: config.dateFormat }}
                 </ion-icon>
               </td>
@@ -68,20 +81,30 @@
         </div>
       </div>
       <ion-item-options side="right">
-        <button ion-button icon-only color="secondary" (click)="copyAppliance(p)" class="rb-white">
+        <button
+          ion-button icon-only
+          color="secondary" class="rb-white"
+          (click)="copyAppliance(p)">
           <ion-icon name="copy"></ion-icon>
         </button>
-        <button ion-button icon-only color="danger" (click)="removeAppliance(p,appliance.name)" class="rb-red">
+        <button
+          ion-button icon-only
+          color="danger" class="rb-red"
+          (click)="removeAppliance(p,appliance.name)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 
-  <div *ngIf="!filteredList && (!appliances || appliances.length === 0)" class="zero-res-list">
+  <div
+    *ngIf="!filteredList && (!appliances || appliances.length === 0)"
+    class="zero-res-list">
     {{ 'NO-APPLIANCE' | translate }}
   </div>
-  <div *ngIf="filteredList && (!appliances || appliances.length === 0)" class="zero-res-list">
+  <div
+    *ngIf="filteredList && (!appliances || appliances.length === 0)"
+    class="zero-res-list">
     {{ 'NO-APPLIANCE-MATCH' | translate }}
   </div>
 

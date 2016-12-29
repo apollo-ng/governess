@@ -45,11 +45,11 @@ export class ApplianceDetailPage {
 
   constructor(
 
+    navParams:                        NavParams,
+    navCtrl:                          NavController,
     alertCtrl:                        AlertController,
     modalCtrl:                        ModalController,
-    navCtrl:                          NavController,
     actionSheetCtrl:                  ActionSheetController,
-    navParams:                        NavParams,
     applianceService:                 ApplianceService,
     platformService:                  PlatformService,
 
@@ -59,12 +59,18 @@ export class ApplianceDetailPage {
     this.modalCtrl =                  modalCtrl;
     this.navCtrl =                    navCtrl;
     this.actionSheetCtrl =            actionSheetCtrl;
-    this.navParams =                  navParams;
     this.applianceService =           applianceService;
     this.platformService =            platformService;
 
-    this.appliance =                  this.navParams.data;
-    this.data =                       this.appliance.data;
+    // Get appliance data by aid
+    let appliance: any = this.applianceService.appliances.filter (
+      (_appliance) => {
+        return (_appliance.aid.indexOf(navParams.data) > -1);
+      }
+    );
+
+    // Roll it out
+    this.appliance =                  appliance[0];
     this.platforms =                  this.platformService.getHostPlatforms();
 
   }

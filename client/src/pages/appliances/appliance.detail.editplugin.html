@@ -50,7 +50,6 @@
 
   <div *ngIf="viewPort === 'settings'">
     <span
-      class="cpModalHack"
       [(colorPicker)]="plugin.color"
       [cpInModal]="true"
       [(cpToggle)]="cpToggle">
@@ -67,8 +66,11 @@
         <button
           (click)="cpToggle=!cpToggle"
           [style.background-color]="plugin.color"
+          [ngStyle]="{ 'border': '1px solid #0f0e0a' }"
           ion-button item-right
-          style="width: 50px !important"></button>
+          style="width: 50px !important">
+          <ion-icon name="create" full-icon></ion-icon>
+        </button>
       </ion-item>
       <ion-item>
         <ion-icon name="at" item-left></ion-icon>
