@@ -19,6 +19,7 @@
 
   <ion-toolbar>
     <ion-searchbar
+      [debounce]="500"
       (ionInput)="filterAppliances($event)"
       (ionClear)="clearFilter($event)"
       placeholder="{{ 'FILTER' | translate }}"
@@ -40,7 +41,7 @@
     reorder="true">
     <ion-item-sliding
       *ngFor="let appliance of appliances; let p = index"
-      [ngClass]="{'odd-row': p % 2, 'active': appliance.aid === config.applianceActive}">
+      [ngClass]="{ 'active': appliance.aid === config.applianceActive }">
       <div ion-item>
         <ion-icon
           *ngIf="appliance.constraints && appliance.aid !== config.applianceActive"
