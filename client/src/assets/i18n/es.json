@@ -32,5 +32,12 @@
   "CONTROL": "CONTROLAR",
   "OUTPUT": "SALIDA",
   "SELECT-PLATFORM": "Seleccione una plataforma",
-  "COLOR": "Color"
+  "COLOR": "Color",
+  "CONNECTIONS": "Connections",
+  "INVERTED": "Inverted",
+  "SAMPLE-BIN-SIZE": "Sample Bin Size",
+  "SAMPLE-INTERVAL": "Sample Intervall",
+  "STORE-INTERVAL": "Store Intervall",
+  "DB-ICON-SHOW": "Show Dashboad Icon",
+  "DB-DISPLAY-SHOW": "Show Dashboard Display"
 }

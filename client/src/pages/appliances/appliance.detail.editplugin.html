@@ -16,22 +16,39 @@
   <ion-toolbar>
     <ion-grid no-padding class="mini-bar">
       <ion-row>
+        <ion-col width-10>
+          <button
+            ion-button full class="rb-glass"
+            [ngClass]="{ 'active': showInfoPanel }"
+            (click)="showInfoPanel = !showInfoPanel">
+            <ion-icon name="information-circle"></ion-icon>
+          </button>
+        </ion-col>
         <ion-col>
           <button
             ion-button full class="rb-glass"
             (click)="viewPort = 'settings'"
             [ngClass]="{ 'active': viewPort === 'settings' }">
             <ion-icon name="settings"></ion-icon>
-            <span class="minibar-button-txt">Settings</span>
+            <span class="minibar-button-txt">{{ 'SETTINGS' | translate }}</span>
           </button>
         </ion-col>
         <ion-col>
           <button
             ion-button full class="rb-glass"
-            (click)="setWiringViewPort()"
-            [ngClass]="{ 'active': viewPort === 'wiring' }">
+            (click)="viewPort = 'connections'"
+            [ngClass]="{ 'active': viewPort === 'connections' }">
             <ion-icon name="outlet"></ion-icon>
-            <span class="minibar-button-txt">Wiring</span>
+            <span class="minibar-button-txt">{{ 'CONNECTIONS' | translate }}</span>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button
+            ion-button full class="rb-glass"
+            (click)="setSchemaViewPort()"
+            [ngClass]="{ 'active': viewPort === 'schema' }">
+            <ion-icon name="map"></ion-icon>
+            <span class="minibar-button-txt">{{ 'SCHEMA' | translate }}</span>
           </button>
         </ion-col>
         <ion-col width-10>
@@ -48,56 +65,81 @@
 
 <ion-content>
 
+  <div *ngIf="showInfoPanel">
+    <h2>{{plugin.driver}}</h2>
+    <p>{{plugin.desc}}</p>
+  </div>
   <div *ngIf="viewPort === 'settings'">
     <span
       [(colorPicker)]="plugin.color"
-      [cpInModal]="true"
-      [(cpToggle)]="cpToggle">
+      [(cpToggle)]="cpToggle"
+      [cpInModal]="true">
     </span>
     <ion-list>
       <ion-item>
         <ion-icon name="logo-buffer" item-left></ion-icon>
         <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
-        <ion-input value="{{ plugin.name }}"></ion-input>
+        <ion-input [(ngModel)]="plugin.name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-icon name="color-palette" item-left></ion-icon>
         <ion-label><h2>{{ 'COLOR' | translate }}</h2></ion-label>
         <button
-          (click)="cpToggle=!cpToggle"
-          [style.background-color]="plugin.color"
-          [ngStyle]="{ 'border': '1px solid #0f0e0a' }"
           ion-button item-right
-          style="width: 50px !important">
+          (click)="cpToggle = !cpToggle"
+          [style.background-color]="plugin.color"
+          [style.border]="'1px solid #0f0e0a'"
+          [style.width]="'50px'">
           <ion-icon name="create" full-icon></ion-icon>
         </button>
       </ion-item>
-      <ion-item>
-        <ion-icon name="at" item-left></ion-icon>
-        <ion-label><h2>Host-PIN</h2></ion-label>
-        <ion-select
-          [(ngModel)]="appliance.conf.hid"
-          [selectOptions]="{
-            title: 'Host-PIN',
-            subTitle: 'Pick available GPIO pin'
-          }">
-          <ion-option *ngFor="let pin of hostGPIOs" [value]="pin.PIN">
-            PIN {{ pin.PIN }} ◀▶ {{ pin.TXT }}
-          </ion-option>
-        </ion-select>
-      </ion-item>
       <ion-item-divider color="dark">
         <ion-icon name="logo-buffer" item-left></ion-icon>
-        Driver Settings
+        {{ 'DRIVER-SETTINGS' | translate }}
       </ion-item-divider>
       <ion-item *ngFor="let conf of plugin.conf">
-        <ion-label><h2>{{ conf.name }}</h2></ion-label>
-        <ion-input value="{{ conf.value }}"></ion-input>
+        <ion-label><h2>{{ conf.name | translate }}</h2></ion-label>
+        <ion-input
+          *ngIf="conf.type === 'numeric'"
+          value="{{ conf.value }}">
+        </ion-input>
+        <ion-toggle
+          *ngIf="conf.type === 'boolean'"
+          [(ngModel)]="conf.value">
+        </ion-toggle>
       </ion-item>
     </ion-list>
   </div>
 
-  <div *ngIf="viewPort === 'wiring'" class="cv-container">
+  <div *ngIf="viewPort === 'connections'">
+    <ion-list>
+      <ion-item *ngFor="let input of plugin.input">
+        <ion-icon name="at" item-left></ion-icon>
+        <ion-label><h2>{{ input.name }}</h2></ion-label>
+        <ion-select
+          *ngIf="input.type === 'hostGPIO'"
+          [(ngModel)]="input.value"
+          [selectOptions]="{
+            title: 'Host-PIN',
+            subTitle: 'Pick available GPIO pin'
+          }">
+          <ion-option
+            *ngFor="let pin of hostGPIOs"
+            [value]="pin.PIN">
+            PIN {{ pin.PIN }} ◀▶ {{ pin.TXT }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngFor="let output of plugin.output">
+      <ion-item >
+        <ion-label><h2>{{ output.name }}</h2></ion-label>
+        <ion-input value="{{ output.value }}"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="viewPort === 'schema'" class="cv-container">
     <canvas
       #ConnectionVisualizer
       width="400" height="500"

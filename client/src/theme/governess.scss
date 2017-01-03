@@ -499,3 +499,10 @@ chart  {
   }
 
 }
+
+
+  @media (max-width: 480px) {
+    .minibar-button-txt {
+      display: none !important;
+    }
+  }

@@ -41,6 +41,7 @@ export class EditPluginModal {
   public cv:                        CanvasRenderingContext2D;
   public cpVisible:                 boolean;
   public cpPresetColors:            Array<string>;
+  public showInfoPanel:             boolean;
 
   constructor(
 
@@ -62,6 +63,7 @@ export class EditPluginModal {
     // Set settings viewPort as default
     this.viewPort =                 'settings';
     this.cpVisible =                false;
+    this.showInfoPanel =            false;
 
     // Find the designated appliance for this plugin
     let appliance: any = this.applianceService.appliances.filter((_appliance) => {
@@ -82,9 +84,9 @@ export class EditPluginModal {
    * setWiringViewPort
    */
 
-  public setWiringViewPort(): void {
+  public setSchemaViewPort(): void {
 
-    this.viewPort = 'wiring';
+    this.viewPort = 'schema';
     setTimeout(
       () => {
         this.cv = this.connectionVisualizer.nativeElement.getContext('2d');
