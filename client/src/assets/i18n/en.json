@@ -36,8 +36,10 @@
   "CONNECTIONS": "Connections",
   "INVERTED": "Inverted",
   "SAMPLE-BIN-SIZE": "Sample Bin Size",
-  "SAMPLE-INTERVAL": "Sample Intervall",
-  "STORE-INTERVAL": "Store Intervall",
+  "SAMPLE-INTERVAL": "Sample Interval",
+  "STORE-INTERVAL": "Store Interval",
   "DB-ICON-SHOW": "Show Icon on Dashboard",
-  "DB-DISPLAY-SHOW": "Show Display on Dashboard"
+  "DB-DISPLAY-SHOW": "Show Display on Dashboard",
+  "SCHEMA": "Schema",
+  "SELECT-PIN": "Select a PIN"
 }

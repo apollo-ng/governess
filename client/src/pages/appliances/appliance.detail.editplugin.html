@@ -65,7 +65,7 @@
 
 <ion-content>
 
-  <div *ngIf="showInfoPanel">
+  <div *ngIf="showInfoPanel" class="plugin-info">
     <h2>{{plugin.driver}}</h2>
     <p>{{plugin.desc}}</p>
   </div>
@@ -119,6 +119,7 @@
         <ion-select
           *ngIf="input.type === 'hostGPIO'"
           [(ngModel)]="input.value"
+          [placeholder]="'SELECT-PIN' | translate"
           [selectOptions]="{
             title: 'Host-PIN',
             subTitle: 'Pick available GPIO pin'
@@ -126,7 +127,7 @@
           <ion-option
             *ngFor="let pin of hostGPIOs"
             [value]="pin.PIN">
-            PIN {{ pin.PIN }} ◀▶ {{ pin.TXT }}
+            PIN {{ pin.PIN }} ({{ pin.TXT }})
           </ion-option>
         </ion-select>
       </ion-item>

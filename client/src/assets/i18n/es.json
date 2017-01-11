@@ -33,11 +33,13 @@
   "OUTPUT": "SALIDA",
   "SELECT-PLATFORM": "Seleccione una plataforma",
   "COLOR": "Color",
-  "CONNECTIONS": "Connections",
-  "INVERTED": "Inverted",
-  "SAMPLE-BIN-SIZE": "Sample Bin Size",
-  "SAMPLE-INTERVAL": "Sample Intervall",
-  "STORE-INTERVAL": "Store Intervall",
-  "DB-ICON-SHOW": "Show Dashboad Icon",
-  "DB-DISPLAY-SHOW": "Show Dashboard Display"
+  "CONNECTIONS": "Conexiones",
+  "INVERTED": "Invertido",
+  "SAMPLE-BIN-SIZE": "Tamaño de la bandeja de muestra",
+  "SAMPLE-INTERVAL": "Intervalo de muestra",
+  "STORE-INTERVAL": "Intervalo de tienda",
+  "DB-ICON-SHOW": "Mostrar icono del panel de control",
+  "DB-DISPLAY-SHOW": "Mostrar pantalla del panel de control",
+  "SCHEMA": "Esquema",
+  "SELECT-PIN": "Seleccione un PIN"
 }
