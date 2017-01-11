@@ -2,7 +2,7 @@
 // https://github.com/angular/protractor/blob/master/docs/referenceConf.js
 
 /*global jasmine */
-var SpecReporter = require('jasmine-spec-reporter');
+var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 exports.config = {
@@ -36,7 +36,14 @@ exports.config = {
     var height = 640;
     browser.driver.manage().window().setSize(width, height);
 
-    jasmine.getEnv().addReporter(new SpecReporter());
+    // Actual Tests
+    jasmine.getEnv().addReporter(new SpecReporter({
+      spec: {
+        displayStacktrace: false
+      }
+    }));
+
+    // Screenshots
     jasmine.getEnv().addReporter(new HtmlScreenshotReporter({
       dest: 'tests/e2e/screenshots',
       filename: 'index.html',
