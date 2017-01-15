@@ -4,10 +4,13 @@ governess
 :construction: WIP (Work In Progress) :construction:
 
 A modular stack to create, manage and share Software Defined Appliances (SDA)
-with ease. governess can be deployed on platforms like the Raspberry Pi or the
-Odroid family (more to come) and use cheaply available PCB Break-out boards to
-create any kind of DIY appliance. From there, governess serves as an autonomous
-bot, watching over the appliance and running tasks from schedules, RPC or users.
+with ease. Governess can be deployed on platforms like the popular Raspberry Pi,
+Beaglebone Black or the Odroid family (more to come) and use cheaply available
+PCB Break-out boards to create and control any kind of DIY appliance.
+
+From there, governess serves as an autonomous bot, monitoring the appliance
+and running tasks from schedules, RPC or interactively with users, who are
+connecting via governess client for local and remote operation scenarios.
 
 Proving ground targets:
 
