@@ -511,6 +511,23 @@ appliance-detail-editplugin {
       color: rgb(117, 137, 12);
     }
 
+    .item-input:last-child {
+        border-bottom: 1px solid #0f0e0a;
+    }
+
+    input {
+      text-align: right;
+      font-size: 20px;
+      height: 36px;
+      padding-right: 6px;
+    }
+
+    input:focus {
+      background: #1f1e1a;
+      border: 1px solid rgba(117, 137, 12, 0.5);
+      box-shadow: inset 0 0 42px 0 #0f0e0a, 0 0 16px 0 rgba(117, 137, 12, 0.3);
+    }
+
     .select-text {
       color: rgb(117, 137, 12);
     }

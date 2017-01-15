@@ -41,5 +41,8 @@
   "DB-ICON-SHOW": "Mostrar icono del panel de control",
   "DB-DISPLAY-SHOW": "Mostrar pantalla del panel de control",
   "SCHEMA": "Esquema",
-  "SELECT-PIN": "Seleccione un PIN"
+  "SELECT-PIN": "Seleccione un PIN",
+  "CHAN": "Canal",
+  "F_SW": "Frecuencia de conmutación",
+  "MAN-CTRL-AV": "Control manual disponible"
 }

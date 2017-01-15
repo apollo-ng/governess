@@ -100,8 +100,9 @@
       <ion-item *ngFor="let conf of plugin.conf">
         <ion-label><h2>{{ conf.name | translate }}</h2></ion-label>
         <ion-input
-          *ngIf="conf.type === 'numeric'"
-          value="{{ conf.value }}">
+          *ngIf="conf.type === 'int' || conf.type === 'float' || conf.type === 'numeric'"
+          value="{{ conf.value }}"
+          type="number">
         </ion-input>
         <ion-toggle
           *ngIf="conf.type === 'boolean'"

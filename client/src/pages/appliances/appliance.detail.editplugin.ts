@@ -73,7 +73,6 @@ export class EditPluginModal {
     // Roll it out
     this.appliance = appliance[0];
     this.plugin = this.appliance.plugins[this.type][this.pidx];
-    this.plugin.color = 'rgba(191, 128, 6, 0.76)';
     this.hid = this.appliance.conf.hid;
     this.hostHeaders = this.platformService.getHostHeaders(this.hid);
     this.hostGPIOs = this.platformService.getHostGPIOs(this.hid);

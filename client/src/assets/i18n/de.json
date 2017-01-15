@@ -41,5 +41,8 @@
   "DB-ICON-SHOW": "Aktiviere Dashboad Icon",
   "DB-DISPLAY-SHOW": "Aktiviere Dashboard Display",
   "SCHEMA": "Schema",
-  "SELECT-PIN": "PIN auswählen"
+  "SELECT-PIN": "PIN auswählen",
+  "CHAN": "Kanal",
+  "F_SW": "Schaltfrequenz",
+  "MAN-CTRL-AV": "Manuelle Steuerung verfügbar"
 }
