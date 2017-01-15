@@ -265,6 +265,20 @@ export const hostPlatforms: Array<any> = [
     ],
   },
   {
+    'hid': 'f6tZsSE4Q9oB',
+    'name': 'BeagleBone Black',
+    'tolerance': 3.3,
+    'headers': [
+      {
+        'name': 'P1',
+        'rows': '2',
+        'pins' : [
+          // FIXME
+        ],
+      },
+    ],
+  },
+  {
     'hid': '6UzG7oNJmRLV',
     'name': 'Gl.Inet AR300M',
     'tolerance': 3.3,
