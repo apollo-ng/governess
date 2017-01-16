@@ -44,5 +44,7 @@
   "SELECT-PIN": "PIN auswählen",
   "CHAN": "Kanal",
   "F_SW": "Schaltfrequenz",
-  "MAN-CTRL-AV": "Manuelle Steuerung verfügbar"
+  "MAN-CTRL-AV": "Manuelle Steuerung verfügbar",
+  "UNIT": "Einheit",
+  "ADV-DRV-SETTINGS": "Erweiterte Treibereinstellungen"
 }

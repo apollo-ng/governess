@@ -503,12 +503,13 @@ appliance-detail-editplugin {
     }
 
     ion-label {
-      color: #d8d3c5 !important;
+      color: #d8d3c5;
     }
 
     .text-input {
       text-align: right;
       color: rgb(117, 137, 12);
+      margin: 0;
     }
 
     .item-input:last-child {

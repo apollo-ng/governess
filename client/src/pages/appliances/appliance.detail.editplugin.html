@@ -94,8 +94,8 @@
         </button>
       </ion-item>
       <ion-item-divider color="dark">
-        <ion-icon name="logo-buffer" item-left></ion-icon>
-        {{ 'DRIVER-SETTINGS' | translate }}
+        <ion-icon name="construct" item-left></ion-icon>
+        {{ 'ADV-DRV-SETTINGS' | translate }}
       </ion-item-divider>
       <ion-item *ngFor="let conf of plugin.conf">
         <ion-label><h2>{{ conf.name | translate }}</h2></ion-label>
@@ -108,12 +108,23 @@
           *ngIf="conf.type === 'boolean'"
           [(ngModel)]="conf.value">
         </ion-toggle>
+        <ion-select
+          *ngIf="conf.type === 'select'"
+          [(ngModel)]="conf.value"
+          [placeholder]="'SELECT-UNIT' | translate"
+          [selectOptions]="{ title: 'SELECT-UNIT' | translate }">
+          <ion-option
+            *ngFor="let option of conf.options"
+            [value]="option">
+            {{ option }}
+          </ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
   </div>
 
   <div *ngIf="viewPort === 'connections'">
-    <ion-list>
+    <ion-list *ngIf="type === 'input'">
       <ion-item *ngFor="let input of plugin.input">
         <ion-icon name="at" item-left></ion-icon>
         <ion-label><h2>{{ input.name }}</h2></ion-label>
@@ -133,10 +144,24 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <ion-list *ngFor="let output of plugin.output">
-      <ion-item >
+    <ion-list *ngIf="type === 'output'">
+      <ion-item *ngFor="let output of plugin.output">
+        <ion-icon name="at" item-left></ion-icon>
         <ion-label><h2>{{ output.name }}</h2></ion-label>
-        <ion-input value="{{ output.value }}"></ion-input>
+        <ion-select
+          *ngIf="output.type === 'hostGPIO'"
+          [(ngModel)]="output.value"
+          [placeholder]="'SELECT-PIN' | translate"
+          [selectOptions]="{
+            title: 'Host-PIN',
+            subTitle: 'Pick available GPIO pin'
+          }">
+          <ion-option
+            *ngFor="let pin of hostGPIOs"
+            [value]="pin.PIN">
+            PIN {{ pin.PIN }} ({{ pin.TXT }})
+          </ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
   </div>

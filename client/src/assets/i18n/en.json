@@ -44,5 +44,7 @@
   "SELECT-PIN": "Select a PIN",
   "CHAN": "Channel",
   "F_SW": "Switching Frequency",
-  "MAN-CTRL-AV": "Enable Manual Control"
+  "MAN-CTRL-AV": "Enable Manual Control",
+  "UNIT": "Unit",
+  "ADV-DRV-SETTINGS": "Advanced Driver Settings"
 }
