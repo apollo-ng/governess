@@ -1,8 +1,8 @@
 import { Injectable }             from '@angular/core';
+import { Storage }                from '@ionic/storage';
 import { Events,
          ToastController }        from 'ionic-angular';
 import { HashID }                 from '../crypto/hashid';
-import { StorageService }         from '../storage/storage';
 import { applianceMock }          from './appliance.mock';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -21,8 +21,9 @@ export class ApplianceService {
 
   public appliances: any = [];
   public events: Events;
-  public storage: StorageService;
+//  public storage: StorageService;
   public toastCtrl: ToastController;
+  private storage: Storage;
   private hashID: HashID;
 
   /*****************************************************************************
@@ -32,7 +33,8 @@ export class ApplianceService {
   constructor (
 
     events: Events,
-    storage: StorageService,
+//    storage: StorageService,
+    storage: Storage,
     toastCtrl: ToastController,
     hashID: HashID,
 
@@ -42,51 +44,29 @@ export class ApplianceService {
     this.storage = storage;
     this.toastCtrl = toastCtrl;
     this.hashID = hashID;
-    this.init().then(data => {
-      this.appliances = data;
+    this.storage.ready().then( () => {
+      this.init();
     });
 
   }
 
   /*****************************************************************************
    * init
-   * @return {Appliance} Object Promise
    */
 
-  private init(): Promise<{}> {
-    console.log('Initializing Appliance Service');
+  public init(): any {
 
-    return this.storage.get('appliances').then((data: string) => {
-      if (!data) {
-        console.log('Got NO Storage Data - creating from Mock:');
-        let initAppliance: any = applianceMock;
-        this.write(initAppliance);
-        this.appliances = initAppliance;
-        return initAppliance;
+    // FIXME: Pull & update latest appliances list via websocket from server
+
+    return this.storage.get('appliances').then( (_appliances: string) => {
+      if (!_appliances || _appliances.trim().length === 0) {
+        // If no local tasks are available (i.e. test/offline), init from Mock
+        this.initFromMock();
+      } else {
+        this.appliances = JSON.parse(_appliances);
       }
-      // console.log('Got Storage Data:', data);
-      this.appliances = JSON.parse(data);
-      return JSON.parse(data);
     });
-  }
 
-  /*****************************************************************************
-   * get
-   * @return
-   */
-
-  public get(): Promise<{}> {
-    return this.storage.get('appliances');
-  }
-
-  /*****************************************************************************
-   * pull
-   */
-
-  public pull(): any {
-    this.get().then((data: string) => {
-      this.appliances = JSON.parse(data);
-    });
   }
 
   /*****************************************************************************
@@ -110,7 +90,7 @@ export class ApplianceService {
   }
 
   /*****************************************************************************
-   * pull
+   * add
    */
 
   public add(): any {
@@ -189,7 +169,7 @@ export class ApplianceService {
   public removePlugin(aid: string, type: string, pidx: any): void {
 
     // Find the designated appliance for this plugin
-    let appliance: any = this.appliances.filter((_appliance) => {
+    let appliance: any = this.appliances.filter( (_appliance) => {
       return (_appliance.aid.indexOf(aid) > -1);
     });
 
@@ -206,6 +186,18 @@ export class ApplianceService {
   public reset(): void {
     console.log('Resetting appliances...');
     this.write(applianceMock);
+  }
+
+  /*****************************************************************************
+   * initFromMock
+   */
+
+  private initFromMock(): void {
+    let initAppliance: any = applianceMock;
+    initAppliance.id = this.hashID.create();
+    initAppliance.ctime = Math.round(new Date().getTime());
+    this.write(initAppliance);
+    this.appliances = initAppliance;
   }
 
   /*****************************************************************************

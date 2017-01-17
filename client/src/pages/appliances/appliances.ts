@@ -69,9 +69,10 @@ export class AppliancesPage {
     this.applianceService = applianceService;
     this.hashID = hashID;
 
-    this.initConfig().then(() => {
-      this.applianceService.pull();
-      this.appliances = this.applianceService.appliances;
+    this.initConfig().then( () => {
+      this.applianceService.init().then( () => {
+        this.appliances = this.applianceService.appliances;
+      });
     });
 
   }

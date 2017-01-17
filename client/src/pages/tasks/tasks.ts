@@ -24,7 +24,7 @@ import { TaskDetailPage }     from '../tasks/task.detail';
 
 export class TasksPage {
 
-  public tasks: any;
+  public tasks: any = [];
   public config: any = {};
   public filteredList: boolean = false;
 
@@ -55,8 +55,9 @@ export class TasksPage {
     this.configService = configService;
 
     this.initConfig().then( () => {
-      this.taskService.pull();
-      this.tasks = this.taskService.tasks;
+      this.taskService.init().then( () => {
+        this.tasks = this.taskService.tasks;
+      });
     });
 
   }
@@ -67,9 +68,9 @@ export class TasksPage {
    */
 
   public initConfig(): Promise<void> {
-    return this.configService.get().then((data: string) => {
-      this.config = JSON.parse(data);
-      console.log(this.config);
+    return this.configService.get().then( (_data: string) => {
+      this.config = JSON.parse(_data);
+      // console.log(this.config);
     });
   }
 
@@ -88,10 +89,10 @@ export class TasksPage {
    */
 
   public activateTask(tid: string): void {
-    console.log('Activate task:', tid);
+    // console.log('Activate task:', tid);
     this.config.taskActive = tid;
     this.configService.update(this.config);
-    console.log(this.config);
+    // console.log(this.config);
   }
 
   /*****************************************************************************

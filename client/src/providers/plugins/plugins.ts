@@ -31,7 +31,9 @@ export class PluginService {
   ) {
 
     this.storage = storage;
-    this.init();
+    this.storage.ready().then(() => {
+      this.init();
+    });
 
   }
 

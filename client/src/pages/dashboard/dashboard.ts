@@ -84,18 +84,20 @@ export class Dashboard {
     // This seems to work to get all the async promis/observable stuff
     // going without throwing undefined foo...
     this.initConfig().then(() => {
-      this.taskService.pull();
-      this.tasks = this.taskService.tasks;
-      this.task = this.tasks.filter(
-        task => task.tid.includes(
-          this.config.taskActive
-        )
-      )[0];
 
-      // Crude hack to prevent exception during init with no app/task selected
-      if (this.task) {
-        this.updateChart();
-      }
+      this.taskService.init().then( () => {
+        this.tasks = this.taskService.tasks;
+        this.task = this.tasks.filter(
+          task => task.tid.includes(
+            this.config.taskActive
+          )
+        )[0];
+
+        // Crude hack to prevent exception during init with no app/task selected
+        if (this.task) {
+          this.updateChart();
+        }
+      });
     });
 
     // Subscribe and assign the websocket data handlers

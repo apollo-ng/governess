@@ -1,5 +1,5 @@
 import { Injectable }             from '@angular/core';
-import { StorageService }         from '../storage/storage';
+import { Storage }                from '@ionic/storage';
 import { HashID }                 from '../crypto/hashid';
 import { taskMock }               from './task.mock';
 
@@ -18,7 +18,8 @@ import { taskMock }               from './task.mock';
 export class TaskService {
 
   public tasks: any = [];
-  private storage: StorageService;
+
+  private storage: Storage;
   private hashID: HashID;
 
   /*****************************************************************************
@@ -27,62 +28,36 @@ export class TaskService {
 
   constructor (
 
-    storage: StorageService,
-    hashID: HashID
+  storage: Storage,
+  hashID: HashID
 
   ) {
 
-    this.storage = storage;
     this.hashID = hashID;
-    this.init().then(data => {
-      // console.log('All promises returned', data)
-      this.tasks = data;
+    this.storage = storage;
+    this.storage.ready().then( () => {
+      this.init();
     });
 
   }
 
   /*****************************************************************************
    * init
-   * @return {Tasks} Object Promise
    */
 
-  public init(): Promise<{}> {
-    console.log('Initializing Task Service');
+  public init(): any {
 
-    return this.storage.get('tasks').then((data: string) => {
-      if (!data) {
-        console.log('Got NO Storage Data - creating from Mock:');
-        let initTask: any = taskMock;
-        initTask.id = this.hashID.create();
-        initTask.ctime = Math.round(new Date().getTime());
-        this.storage.set('tasks', JSON.stringify(initTask));
-        this.tasks = initTask;
-        return initTask;
+    // FIXME: Pull & update latest task list via websocket from server
+
+    return this.storage.get('tasks').then( (_tasks: string) => {
+      if (!_tasks || _tasks.trim().length === 0) {
+        // If no local tasks are available (i.e. test/offline), init from Mock
+        this.initFromMock();
+      } else {
+        this.tasks = JSON.parse(_tasks);
       }
-      // console.log('Got Storage Data:', data);
-      this.tasks = JSON.parse(data);
-      return JSON.parse(data);
     });
-  }
 
-  /*****************************************************************************
-   * get
-   * @return {Tasks} Object Promise
-   */
-
-  public get(): Promise<{}> {
-    return this.storage.get('tasks');
-  }
-
-  /*****************************************************************************
-   * pull
-   * @return {Tasks} Object Promise
-   */
-
-  public pull(): any {
-    this.get().then((data: string) => {
-      this.tasks = JSON.parse(data);
-    });
   }
 
   /*****************************************************************************
@@ -91,7 +66,6 @@ export class TaskService {
    */
 
   public copy(index: number): void {
-    console.log('copy called to clone', this.tasks);
     // crude hack to copy the array after lodash deepClone refused to work
     let copy: any = JSON.parse(JSON.stringify(this.tasks[index]));
     copy.name = copy.name + ' Copy';
@@ -99,6 +73,24 @@ export class TaskService {
     copy.ctime = Math.round(new Date().getTime());
     this.tasks.push(copy);
     this.update(this.tasks);
+  }
+
+  /*****************************************************************************
+   * update
+   * @param {Tasks} Object
+   * @return boolean
+   */
+
+  public update(tasks: Object): any {
+    this.write(tasks);
+  }
+
+  /*****************************************************************************
+   * updateD
+   */
+
+  public updateD(): void {
+    this.write(this.tasks);
   }
 
   /*****************************************************************************
@@ -112,33 +104,32 @@ export class TaskService {
   }
 
   /*****************************************************************************
-   * update
-   * @param {Tasks} Object
-   * @return boolean
-   */
-
-  public update(tasks: Object): any {
-    console.log('Updating tasks...');
-    this.tasks = tasks;
-    this.storage.set('tasks', JSON.stringify(tasks));
-  }
-
-  /*****************************************************************************
-   * updateD
-   */
-
-  public updateD(): void {
-    console.log('Updating tasks...');
-    this.storage.set('tasks', JSON.stringify(this.tasks));
-  }
-
-  /*****************************************************************************
    * reset
    */
 
   public reset(): void {
-    console.log('Resetting tasks...');
-    this.storage.set('tasks', JSON.stringify(taskMock));
+    this.write(taskMock);
+  }
+
+  /*****************************************************************************
+   * initFromMock
+   */
+
+  private initFromMock(): void {
+    let initTask: any = taskMock;
+    initTask.id = this.hashID.create();
+    initTask.ctime = Math.round(new Date().getTime());
+    this.write(initTask);
+    this.tasks = initTask;
+  }
+
+  /*****************************************************************************
+   * write
+   * @param Plugins Object
+   */
+
+  private write(tasks: any): void {
+    this.storage.set('tasks', JSON.stringify(tasks));
   }
 
 }

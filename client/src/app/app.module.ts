@@ -56,7 +56,6 @@ import { TasksHelp }              from '../pages/tasks/tasks.help';
 // Providers ///////////////////////////////////////////////////////////////////
 
 import { WebSocketService }       from '../providers/websocket/websocket';
-import { StorageService }         from '../providers/storage/storage';
 import { ConfigService }          from '../providers/config/config';
 import { StatusService }          from '../providers/status/status';
 import { ApplianceService }       from '../providers/appliances/appliances';
@@ -156,7 +155,6 @@ export function providers(): any {
   return [
     HashID,
     ColorPickerService,
-    StorageService,
     ConfigService,
     ApplianceService,
     PlatformService,

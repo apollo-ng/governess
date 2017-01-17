@@ -1,5 +1,5 @@
 import { Injectable }             from '@angular/core';
-import { StorageService }         from '../storage/storage';
+import { Storage }                from '@ionic/storage';
 import { HashID }                 from '../crypto/hashid';
 import { appConfigMock }          from './config.mock';
 
@@ -18,7 +18,8 @@ import { appConfigMock }          from './config.mock';
 export class ConfigService {
 
   public config:  any;
-  public storage: StorageService;
+
+  private storage: Storage;
   private hashID: HashID;
 
   /*****************************************************************************
@@ -27,16 +28,17 @@ export class ConfigService {
 
   constructor(
 
-    storage: StorageService,
+    storage: Storage,
     hashID: HashID
 
   ) {
 
     this.storage = storage;
     this.hashID = hashID;
-    this.init().then( () => {
-      // console.log('All promises returned', data)
+    this.storage.ready().then( () => {
+      this.init();
     });
+
   }
 
   /*****************************************************************************
@@ -45,7 +47,6 @@ export class ConfigService {
    */
 
   public init(): Promise<{}> {
-    console.log('Initializing Storage');
 
     return this.storage.get('config').then((data: any) => {
       if (!data) {
@@ -79,6 +80,10 @@ export class ConfigService {
     this.config = config;
     this.storage.set('config', JSON.stringify(config));
   }
+
+  /*****************************************************************************
+   * updateD
+   */
 
   public updateD(): void {
     // console.log('UpdatingD config...');

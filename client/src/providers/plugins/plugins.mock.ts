@@ -150,7 +150,7 @@ export const pluginMock: any = {
       'icon': 'arrow-round-down',
       'conf': [
         { 'name': 'DB-DISPLAY-SHOW', 'type': 'boolean', 'value': true },
-        { 'name': 'UNIT', 'type': 'select', 'value': 'g', 'options': ['mg','g','Kg'] },
+        { 'name': 'UNIT', 'type': 'select', 'value': 'g', 'options': ['mg', 'g', 'Kg'] },
         { 'name': 'SAMPLE-BIN-SIZE', 'type': 'int', 'value': 1, 'min': 1, 'max': 16 },
         { 'name': 'SAMPLE-INTERVAL', 'type': 'float', 'unit': 's', 'value': 1, 'min': 0.1, 'max': '' },
         { 'name': 'STORE-INTERVAL', 'type': 'float', 'unit': 's', 'value': 1, 'min': 1, 'max': '' },
