@@ -2,7 +2,7 @@
 
 dashboard {
 
-  background: #1f1e1aurl("../../assets/images/stripes.svg") repeat !important;
+  background: #1f1e1aurl("../assets/images/stripes.svg") repeat !important;
 
   ion-toolbar.control {
     border-top: 1px solid #444;
@@ -35,13 +35,13 @@ dashboard {
       border-top: 1px solid #3c3b38 !important;
       border-bottom: 1px solid #0f0e0a !important;
       text-shadow: -1px -1px 1px #1f1e1a, 1px -1px 1px #1f1e1a, -1px 1px 0 #1f1e1a, 1px 1px 0 #1f1e1a;
-      background: #2f2e2a url("../../assets/images/noise.png") repeat;
+      background: #2f2e2a url("../assets/images/noise.png") repeat;
     }
 
     ion-item:nth-of-type(even) {
       border-top: 1px solid #343330 !important;
       border-bottom: 1px solid #110f0b !important;
-      background: #262521 url("../../assets/images/noise.png") repeat;
+      background: #262521 url("../assets/images/noise.png") repeat;
     }
 
     .item-inner {
@@ -73,7 +73,7 @@ ion-grid.control-display {
   padding: 0;
 
   ion-row {
-    background: rgba(10, 9, 6, 0.2) url("../../assets/images/noise.png") repeat;
+    background: rgba(10, 9, 6, 0.2) url("../assets/images/noise.png") repeat;
     padding-top: 4px;
     padding-bottom: 5px;
     padding-left: 5px;
@@ -269,7 +269,7 @@ ion-toolbar.control-bottombar {
   }
 
   ion-segment {
-    background: rgba(10, 9, 6, 0.2) url("../../assets/images/noise.png") repeat;
+    background: rgba(10, 9, 6, 0.2) url("../assets/images/noise.png") repeat;
     //background-color: rgba(10, 9, 6, 0.51);
     height: 50px;
   }

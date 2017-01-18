@@ -1,6 +1,6 @@
 @font-face {
   font-family: "DIN";
-  src: url("../../assets/fonts/DIN.woff") format('woff');
+  src: url("../assets/fonts/DIN.woff") format('woff');
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -8,7 +8,7 @@
 }
 
 .noise {
-  background: transparent url("../../assets/images/noise.png") repeat;
+  background: transparent url("../assets/images/noise.png") repeat;
 }
 
 ::-webkit-scrollbar,
@@ -27,7 +27,7 @@ ion-content {
     text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
     border-top: 1px solid #3c3b38;
     border-bottom: 1px solid #0f0e0a;
-    background: #2f2e2a url("../../assets/images/noise.png") repeat;
+    background: #2f2e2a url("../assets/images/noise.png") repeat;
     box-shadow: none;
 
     .item-inner {
@@ -39,7 +39,7 @@ ion-content {
   ion-item:nth-of-type(even), ion-item-sliding:nth-of-type(even) .item {
     border-top: 1px solid #343330;
     border-bottom: 1px solid #110f0b;
-    background: #262521 url("../../assets/images/noise.png") repeat;
+    background: #262521 url("../assets/images/noise.png") repeat;
   }
 
   ion-item-divider {
@@ -133,7 +133,7 @@ ion-menu {
 ion-navbar .toolbar-background,
 ion-navbar[dark],
 .action-sheet-title {
-  background: #1f1e1aurl("../../assets/images/stripes.svg") repeat;
+  background: #1f1e1aurl("../assets/images/stripes.svg") repeat;
   color: #d8d3c5 !important;
 }
 
@@ -256,7 +256,7 @@ ion-navbar ion-buttons[end] {
   color: rgba(117, 137, 12, 0.9) !important;
   border-top: 1px solid #3c3b38 !important;
   border-bottom: 1px solid #0f0e0a !important;
-  background: transparent url("../../assets/images/noise.png") repeat !important;
+  background: transparent url("../assets/images/noise.png") repeat !important;
   text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
 }
 
@@ -463,7 +463,7 @@ button.rb-glass.active {
 }
 
 .chart-container {
-  background: #1f1e1aurl("../../assets/images/stripes.svg") repeat;
+  background: #1f1e1aurl("../assets/images/stripes.svg") repeat;
 }
 
 chart  {

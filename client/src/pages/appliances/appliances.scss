@@ -8,7 +8,7 @@ appliances-page {
     background: linear-gradient(to bottom, rgba(117, 137, 12, 0.5) 0%,#0f0e0a 100%);
 
     .toolbar-background {
-      background: rgba(117, 137, 12, 0.5) url("../../assets/images/noise.png") repeat;
+      background: rgba(117, 137, 12, 0.5) url("../assets/images/noise.png") repeat;
     }
 
     .toolbar-content {
@@ -54,7 +54,7 @@ appliances-page {
 
     ion-label {
       margin: 8px 8px 8px 0;
-      background: #1f1e1aurl("../../assets/images/stripes.svg") repeat;
+      background: #1f1e1aurl("../assets/images/stripes.svg") repeat;
       border: 1px solid #3f3e3a;
       box-shadow: inset 0 0 24px 0 #000, 0 0 7px 0 rgba(0,0,0,0.4);
 
@@ -130,7 +130,7 @@ appliance-detail-page {
     background: linear-gradient(to bottom, rgba(117, 137, 12, 0.5) 0%,#0f0e0a 100%);
 
     .toolbar-background {
-      background: rgba(117, 137, 12, 0.5) url("../../assets/images/noise.png") repeat;
+      background: rgba(117, 137, 12, 0.5) url("../assets/images/noise.png") repeat;
     }
 
     .toolbar-content {
@@ -159,7 +159,7 @@ appliance-detail-page {
   }
 
   ion-segment {
-    background: rgba(10, 9, 6, 0.2) url("../../assets/images/noise.png") repeat;
+    background: rgba(10, 9, 6, 0.2) url("../assets/images/noise.png") repeat;
     height: 50px;
   }
 
@@ -274,7 +274,7 @@ appliance-detail-page {
 
     ion-row {
       margin: 8px 8px 8px 0;
-      background: #1f1e1aurl("../../assets/images/stripes.svg") repeat;
+      background: #1f1e1aurl("../assets/images/stripes.svg") repeat;
       border: 1px solid #3f3e3a;
       box-shadow: inset 0 0 24px 0 #000, 0 0 7px 0 rgba(0,0,0,0.4);
     }
@@ -346,7 +346,7 @@ appliance-detail-addplugin {
     padding: 2px !important;
 
     .toolbar-background {
-      background: rgba(117, 137, 12, 0.5) url("../../assets/images/noise.png") repeat;
+      background: rgba(117, 137, 12, 0.5) url("../assets/images/noise.png") repeat;
     }
 
     .searchbar-input {
@@ -376,7 +376,7 @@ appliance-detail-addplugin {
       font-size: 1.5rem;
       text-shadow: 0 1px 1px #000;
       border: 1px solid #6b7b28;
-      background: rgba(#1f1e1a, 0.9) url("../../assets/images/noise.png") repeat;
+      background: rgba(#1f1e1a, 0.9) url("../assets/images/noise.png") repeat;
 
       .select-placeholder {
         color: #d8d3c5;
@@ -453,7 +453,7 @@ appliance-detail-editplugin {
     padding: 0 !important;
 
     .toolbar-background {
-      background: rgba(34, 33, 26, 0.5) url("../../assets/images/noise.png") repeat;
+      background: rgba(34, 33, 26, 0.5) url("../assets/images/noise.png") repeat;
     }
 
     .mini-bar {
@@ -548,7 +548,7 @@ appliance-detail-editplugin {
   }
 
   .cv-container {
-    background: #2f2e2aurl("../../assets/images/stripes.svg") repeat;
+    background: #2f2e2aurl("../assets/images/stripes.svg") repeat;
     height: 100%;
     box-shadow: inset 0 0 42px 0 #000;
     .connectionVisualizer {

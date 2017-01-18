@@ -53,7 +53,9 @@ Known to work NodeJS & NPM versions:
 
 #### Android SDK
 
-In order to build apks, the Android-SDK has to be installed.
+In order to build apks, the Android-SDK has to be installed. Additionally to
+the SDK Build Tools, the Android Support Repository (SDK Update Manager > Extras)
+will be needed to compile successfully.
 
 ##### Gentoo
 
