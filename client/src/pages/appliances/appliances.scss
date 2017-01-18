@@ -90,8 +90,8 @@ appliances-page {
       border-left: 1px solid #1f1e1a;
     }
 
-    .item-inner {
-      border-bottom: 0 !important;
+    ion-item-sliding.item-wrapper.active .item {
+      border-top: 1px solid #4f4e4a;
     }
 
     .active {
@@ -108,6 +108,10 @@ appliances-page {
 
     .item-md ion-icon[item-left] {
       font-size: 1.6em;
+    }
+
+    .list-md > .item-wrapper:last-child ion-label {
+      border-bottom: 1px solid #3f3e3a;
     }
 
   }
@@ -304,6 +308,10 @@ appliance-detail-page {
       width: 100%;
       text-align: center;
       justify-content: center;
+    }
+
+    .button-inner ion-icon.icon.icon-md.ion-md-add {
+      width: 100%;
     }
 
   }

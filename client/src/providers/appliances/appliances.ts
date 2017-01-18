@@ -21,8 +21,8 @@ export class ApplianceService {
 
   public appliances: any = [];
   public events: Events;
-//  public storage: StorageService;
   public toastCtrl: ToastController;
+
   private storage: Storage;
   private hashID: HashID;
 
@@ -33,10 +33,9 @@ export class ApplianceService {
   constructor (
 
     events: Events,
-//    storage: StorageService,
     storage: Storage,
-    toastCtrl: ToastController,
     hashID: HashID,
+    toastCtrl: ToastController,
 
   ) {
 
@@ -126,7 +125,6 @@ export class ApplianceService {
    */
 
   public update(appliances: Object): any {
-    console.log('Updating appliances...');
     this.appliances = appliances;
     this.write(this.appliances);
   }
@@ -136,7 +134,6 @@ export class ApplianceService {
    */
 
   public updateD(): void {
-    console.log('Updating appliances...');
     this.write(this.appliances);
     this.events.publish('applianceUpdated');
   }
@@ -184,7 +181,6 @@ export class ApplianceService {
    */
 
   public reset(): void {
-    console.log('Resetting appliances...');
     this.write(applianceMock);
   }
 
@@ -206,7 +202,6 @@ export class ApplianceService {
    */
 
   private write(appliances: Object): void {
-    console.log('Writing Appliances to LocalStorage', appliances);
     this.storage.set('appliances', JSON.stringify(appliances));
   }
 

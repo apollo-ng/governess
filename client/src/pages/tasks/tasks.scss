@@ -90,8 +90,8 @@ tasks-page {
       border-left: 1px solid #1f1e1a;
     }
 
-    .item-inner {
-      border-bottom: 0 !important;
+    ion-item-sliding.item-wrapper.active .item {
+      border-top: 1px solid #4f4e4a;
     }
 
     .active {
@@ -103,11 +103,17 @@ tasks-page {
       ion-label {
         box-shadow: inset 0 0 24px 0 #000, 0 0 16px 0 rgba(#9f9e9a,0.2);
         border: 1px solid #5f5e5a;
+        border-bottom: 1px solid #5f5e5a !important;
       }
+
     }
 
     .item-md ion-icon[item-left] {
       font-size: 1.6em;
+    }
+
+    .list-md > .item-wrapper:last-child ion-label {
+      border-bottom: 1px solid #3f3e3a;
     }
 
   }

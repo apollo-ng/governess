@@ -138,7 +138,7 @@ export class AppliancesPage {
     copy.ctime = Math.round(new Date().getTime());
 
     this.appliances.push(copy);
-    this.applianceService.update(this.appliances);
+    this.applianceService.updateD();
 
   }
 
@@ -210,7 +210,6 @@ export class AppliancesPage {
    */
 
   public goToApplianceDetail(appliance: any): void {
-    console.log('Go to appliance detail:', appliance);
     this.navCtrl.push(ApplianceDetailPage, appliance);
   }
 

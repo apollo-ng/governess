@@ -21,10 +21,9 @@ ion-app {
   color: #d8d3c5;
 }
 
-
 ion-content {
 
-  ion-item, .item {
+  ion-item, .item, input {
     text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
     border-top: 1px solid #3c3b38;
     border-bottom: 1px solid #0f0e0a;
@@ -34,6 +33,7 @@ ion-content {
     .item-inner {
       border-bottom: 0 !important;
     }
+
   }
 
   ion-item:nth-of-type(even), ion-item-sliding:nth-of-type(even) .item {
@@ -45,6 +45,15 @@ ion-content {
   ion-item-divider {
     background: #1f1e1a !important;
     border-top: none !important;
+
+    ion-label {
+      color: #fff !important;
+      font-size: 1.8rem;
+    }
+  }
+
+  ion-item-options {
+    border-bottom: 1px solid #0f0e0a !important;
   }
 
 }

@@ -80,7 +80,7 @@ export class ApplianceDetailPage {
    */
 
   public updateAppliance(): void {
-    console.log('FIXME: Do something here like saving...');
+    this.applianceService.updateD();
   }
 
   /*****************************************************************************
@@ -137,10 +137,8 @@ export class ApplianceDetailPage {
     );
 
     addPluginModal.onDidDismiss( (_data: any) => {
-      console.log('addPluginModal dismissed');
       if (_data) {
-        console.log('Post addpluginmodal data', _data);
-        // Do something here...
+        // console.log('Post addpluginmodal data', _data);
       }
     });
 
@@ -165,10 +163,8 @@ export class ApplianceDetailPage {
     );
 
     editPluginModal.onDidDismiss( (_data) => {
-      console.log('editPluginModal dismissed');
       if (_data) {
-        console.log('Post editpluginmodal data', _data);
-        // Do something here...
+        // console.log('Post editpluginmodal data', _data);
       }
     });
 
