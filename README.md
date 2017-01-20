@@ -8,6 +8,8 @@ with ease. Governess can be deployed on platforms like the popular Raspberry Pi,
 Beaglebone Black or the Odroid family (more to come) and use cheaply available
 PCB Break-out boards to create and control any kind of DIY appliance.
 
+![Governess Schema](https://github.com/apollo-ng/governess/blob/master/doc/architecture.png?raw=true)
+
 From there, governess serves as an autonomous bot, monitoring the appliance
 and running tasks from schedules, RPC or interactively with users, who are
 connecting via governess client for local and remote operation scenarios.
