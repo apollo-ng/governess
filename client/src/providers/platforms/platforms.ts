@@ -50,7 +50,7 @@ export class PlatformService {
 
     // FIXME: There must be a better way to get this data with ng2/map tools.
     //        Couldn't figure it out, so this crude loop does it for now.
-    // console.log('HID:', hid);
+
     let combined: any = [];
 
     // Query platform data with hid
@@ -74,7 +74,7 @@ export class PlatformService {
 
     // FIXME: There must be a better way to get this data with ng2/map tools.
     //        Couldn't figure it out, so this crude loop does it for now.
-    console.log('HID:', hid);
+
     let combined: any = [];
 
     // Query platform data with hid

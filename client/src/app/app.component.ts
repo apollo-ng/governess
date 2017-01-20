@@ -89,9 +89,9 @@ export class GovernessApp implements OnInit {
 
     // Wrapping into configService.init to make sure that we have a config
     // FIXME: This seems kinda messy, isn't there a more elegant way?
-    this.configService.init().then( (config) => {
+    this.configService.init().then( () => {
 
-      this.config = config;
+      this.config = this.configService.config;
       this.translate.use(this.config.language);
 
       // Populate the side menu

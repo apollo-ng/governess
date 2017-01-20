@@ -34,7 +34,7 @@
           <ion-label><h2>{{ 'NAME' | translate }}</h2></ion-label>
           <ion-input
             [(ngModel)]="appliance.name"
-            (ionChange)="updateAppliance()"
+            (ionChange)="appliance.mtime = tsNow(); updateAppliance()"
             placeholder="{{ 'MY-APPLIANCE-NAME' | translate }}">
           </ion-input>
         </ion-item>
@@ -43,7 +43,7 @@
           <ion-label><h2>Host-Platform</h2></ion-label>
           <ion-select
             [(ngModel)]="appliance.conf.hid"
-            (ionChange)="updateAppliance()"
+            (ionChange)="appliance.mtime = tsNow(); updateAppliance()"
             [selectOptions]="{
               title: 'Host-Platform',
               subTitle: 'SELECT-PLATFORM' | translate
@@ -64,7 +64,7 @@
           <ion-label><h2>Hostname/IP</h2></ion-label>
           <ion-input
             [(ngModel)]="appliance.conf.host"
-            (ionChange)="updateAppliance()"
+            (ionChange)="appliance.mtime = tsNow(); updateAppliance()"
             placeholder="192.168.1.66">
           </ion-input>
         </ion-item>
@@ -76,7 +76,7 @@
           </ion-label>
           <ion-toggle
             [(ngModel)]="appliance.conf.hud"
-            (ionChange)="updateAppliance()">
+            (ionChange)="appliance.mtime = tsNow(); updateAppliance()">
           </ion-toggle>
         </ion-item>
         <ion-item *ngIf="appliance.conf.hud === true">
@@ -84,7 +84,7 @@
           <ion-label><h2>MJPG-Streamer URL</h2></ion-label>
           <ion-input
             [(ngModel)]="appliance.conf.hud_url"
-            (ionChange)="updateAppliance()"
+            (ionChange)="appliance.mtime = tsNow(); updateAppliance()"
             placeholder="http://{{appliance.conf.host}}/mjpg-streamer">
           </ion-input>
         </ion-item>

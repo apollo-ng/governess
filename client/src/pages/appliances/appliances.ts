@@ -69,25 +69,13 @@ export class AppliancesPage {
     this.applianceService = applianceService;
     this.hashID = hashID;
 
-    this.initConfig().then( () => {
+    this.configService.init().then( () => {
+      this.config = this.configService.config;
       this.applianceService.init().then( () => {
         this.appliances = this.applianceService.appliances;
       });
     });
 
-  }
-
-  /*****************************************************************************
-   * initConfig
-   * @return
-   */
-
-  public initConfig(): Promise<void> {
-    return this.configService.get().then((data: string) => {
-      // console.log('settings ngoninit configdata', data);
-      this.config = JSON.parse(data);
-      // console.log(this.config);
-    });
   }
 
   /*****************************************************************************

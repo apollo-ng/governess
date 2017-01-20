@@ -17,6 +17,8 @@
     "ionic_bundler": "webpack"
   },
   "scripts": {
+    "build": "ionic-app-scripts build",
+    "clean": "ionic-app-scripts clean",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "postinstall": "ionic state restore && webdriver-manager update",

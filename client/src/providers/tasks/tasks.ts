@@ -28,13 +28,14 @@ export class TaskService {
 
   constructor (
 
-  storage: Storage,
-  hashID: HashID
+    storage: Storage,
+    hashID: HashID
 
   ) {
 
     this.hashID = hashID;
     this.storage = storage;
+
     this.storage.ready().then( () => {
       this.init();
     });

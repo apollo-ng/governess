@@ -77,6 +77,11 @@
                   {{ appliance.ctime | date: config.dateFormat }}
                 </ion-icon>
               </td>
+              <td>
+                <ion-icon name="document" item-left [ngStyle]="{ 'margin': '0' }">
+                  {{ appliance.mtime | date: config.dateFormat }}
+                </ion-icon>
+              </td>
             </tr>
           </table>
         </div>

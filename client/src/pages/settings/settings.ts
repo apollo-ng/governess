@@ -63,22 +63,8 @@ export class SettingsPage {
     this.translate = translate;
     this.reftime = new Date();
 
-    this.init().then( () => {
-      // console.log('I seem to be needed to get the promise');
-    });
-
-  }
-
-  /*****************************************************************************
-   * init
-   * @return {Appliance} Object Promise
-   */
-
-  public init(): Promise<void> {
-    return this.configService.get().then((data: string) => {
-      console.log('settings ngoninit configdata', data);
-      this.config = JSON.parse(data);
-      // console.log(this.config);
+    this.configService.init().then( () => {
+      this.config = this.configService.config;
     });
   }
 
@@ -94,17 +80,11 @@ export class SettingsPage {
   /*****************************************************************************
    * updateConfig
    */
-/*
-  public updateConfigD(): void {
-    console.log('updateConfig called', this.config);
-    this.configService.update(this.config);
-    this.config = this.configService.config;
-  }
-*/
+
   public updateConfig(): void {
-    console.log('updateConfig called...', this.config);
     this.translate.use(this.config.language);
     this.configService.update(this.config);
+    // console.log('Update config', this.config);
   }
 
   /*****************************************************************************

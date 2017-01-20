@@ -221,8 +221,12 @@ export class ApplianceDetailPage {
    * @param
    */
 
-  public setAppView(_view: string): void {
-    this.view = _view;
+  public setAppView(view: string): void {
+    this.view = view;
+  }
+
+  public tsNow(): number {
+    return Math.round(new Date().getTime());
   }
 
 }

@@ -83,8 +83,9 @@ export class Dashboard {
 
     // This seems to work to get all the async promis/observable stuff
     // going without throwing undefined foo...
-    this.initConfig().then(() => {
 
+    this.configService.init().then( () => {
+      this.config = this.configService.config;
       this.taskService.init().then( () => {
         this.tasks = this.taskService.tasks;
         this.task = this.tasks.filter(
@@ -105,17 +106,6 @@ export class Dashboard {
       this.statusUpdate(data);
     });
 
-  }
-
-  /*****************************************************************************
-   * initConfig
-   * @return boolean
-   */
-
-  public initConfig(): Promise<void> {
-    return this.configService.get().then((data: string) => {
-      this.config = JSON.parse(data);
-    });
   }
 
   /*****************************************************************************
