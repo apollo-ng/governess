@@ -212,6 +212,11 @@ appliance-detail-page {
       color: rgb(117, 137, 12);
     }
 
+    .item-input:last-child {
+        border-bottom: 1px solid #0f0e0a !important;
+        box-shadow: none !important;
+    }
+
     .select-text {
       color: rgb(117, 137, 12);
     }

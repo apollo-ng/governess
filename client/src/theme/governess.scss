@@ -44,7 +44,6 @@ ion-content {
 
   ion-item-divider {
     background: #1f1e1a !important;
-    border-top: none !important;
 
     ion-label {
       color: #fff !important;
@@ -510,6 +509,36 @@ chart  {
 
   .alert-radio-label {
    color: #d8d3c5;
+  }
+
+  .alert-radio-group,
+  .alert-checkbox-group {
+
+    button {
+      text-shadow: -1px -1px 1px #0f0e0a, 1px -1px 1px #0f0e0a, -1px 1px 0 #0f0e0a, 1px 1px 0 #0f0e0a;
+      border-top: 1px solid #3c3b38;
+      border-bottom: 1px solid #0f0e0a;
+      background: #2f2e2a url("../assets/images/noise.png") repeat;
+    }
+
+    button:nth-of-type(even) {
+      border-top: 1px solid #343330;
+      border-bottom: 1px solid #110f0b;
+      background: #262521 url("../assets/images/noise.png") repeat;
+    }
+
+    .alert-radio-icon {
+      border-color: #4f4e4a;
+      box-shadow: inset 0 0 10px 0 rgba(#000000, 0.6), 0 0 3px 0 rgba(#000000, 0.8);
+    }
+
+  }
+
+  .alert-button-group {
+    background: #1f1e1a;
+    button {
+      background: #4f4e4a;
+    }
   }
 
 }
