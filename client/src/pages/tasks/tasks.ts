@@ -54,23 +54,11 @@ export class TasksPage {
     this.taskService = taskService;
     this.configService = configService;
 
-    this.initConfig().then( () => {
+    this.configService.init().then( () => {
+      this.config = this.configService.config;
       this.taskService.init().then( () => {
         this.tasks = this.taskService.tasks;
       });
-    });
-
-  }
-
-  /*****************************************************************************
-   * initConfig - as init is async separate logic here so it's testable
-   * @return Promise
-   */
-
-  public initConfig(): Promise<void> {
-    return this.configService.get().then( (_data: string) => {
-      this.config = JSON.parse(_data);
-      // console.log(this.config);
     });
   }
 
@@ -89,10 +77,8 @@ export class TasksPage {
    */
 
   public activateTask(tid: string): void {
-    // console.log('Activate task:', tid);
     this.config.taskActive = tid;
-    this.configService.update(this.config);
-    // console.log(this.config);
+    this.configService.updateD();
   }
 
   /*****************************************************************************
@@ -109,7 +95,6 @@ export class TasksPage {
    */
 
   public goToTaskDetail(task: any): void {
-    // console.log('Go to task detail:', task);
     this.navCtrl.push(TaskDetailPage, task);
   }
 
@@ -119,9 +104,7 @@ export class TasksPage {
    */
 
   public copyTask(index: number): void {
-    console.log('Duplicate task:', index);
     this.taskService.copy(index);
-    this.tasks = this.taskService.tasks;
   }
 
   /*****************************************************************************
@@ -157,7 +140,7 @@ export class TasksPage {
 
   public reorderTasks(move: any): void {
     this.tasks = reorderArray(this.tasks, move);
-    this.taskService.update(this.tasks);
+    this.taskService.updateD();
   }
 
   /*****************************************************************************
