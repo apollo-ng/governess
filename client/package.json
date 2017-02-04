@@ -39,6 +39,7 @@
     "@angular/platform-server": "2.2.1",
     "@ionic/storage": "1.1.7",
     "angular2-chartjs": "0.1.6",
+    "chart.js": "https://github.com/chartjs/Chart.js.git#master",
     "conventional-changelog-cli": "1.2.0",
     "ionic-angular": "2.0.0",
     "ionic-native": "2.4.1",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",
+    "@types/chartjs": "0.0.29",
     "@types/jasmine": "2.5.40",
     "electron": "1.4.14",
     "electron-packager": "8.5.0",
