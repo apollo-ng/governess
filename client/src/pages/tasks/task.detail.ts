@@ -10,7 +10,7 @@ import { Events,
          PopoverController,
          ActionSheetController }    from 'ionic-angular';
 
-import { ChartComponent }           from 'angular2-chartjs';
+import { ChartComponent }           from '../../components/chart';
 
 import { TaskService }              from '../../providers/tasks/tasks';
 import { lineChartGlobals }         from '../../components/chart-globals';

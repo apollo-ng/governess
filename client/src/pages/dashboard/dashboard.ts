@@ -10,7 +10,7 @@ import { TaskDetailPage }       from '../tasks/task.detail';
 
 import { DashboardHelp }        from './dashboard.help';
 
-import { ChartComponent }       from 'angular2-chartjs';
+import { ChartComponent }       from '../../components/chart';
 import { lineChartGlobals }     from '../../components/chart-globals';
 
 ////////////////////////////////////////////////////////////////////////////////
