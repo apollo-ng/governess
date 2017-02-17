@@ -11,7 +11,7 @@ import { Splashscreen,
 // Providers ///////////////////////////////////////////////////////////////////
 
 import { TranslateService }         from 'ng2-translate';
-import { ConfigService }            from '../providers/config/config';
+import { ConfigService }            from '../providers/config';
 
 // Dashboard ///////////////////////////////////////////////////////////////////
 

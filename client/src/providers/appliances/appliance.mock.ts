@@ -4,7 +4,7 @@ export const applianceMock: Array<any> = [{
   'desc': 'Small convection-heat lab-oven',
   'ctime': '1482003345327',
   'mtime': '',
-  'constraints': false,
+  'constraints': true,
   'conf': {
     'hid': 'Tj5d7oNJmRLV',
     'host': 'localhost',

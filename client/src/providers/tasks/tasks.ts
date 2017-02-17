@@ -52,7 +52,7 @@ export class TaskService {
 
     return this.storage.get('tasks').then( (_tasks: string) => {
       if (!_tasks || _tasks.trim().length === 0) {
-        // If no local tasks are available (i.e. test/offline), init from Mock
+        // No local tasks are available (i.e. test/new), init from Mock
         this.initFromMock();
       } else {
         this.tasks = JSON.parse(_tasks);

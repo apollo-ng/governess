@@ -55,18 +55,19 @@ import { TasksHelp }              from '../pages/tasks/tasks.help';
 
 // Providers ///////////////////////////////////////////////////////////////////
 
-import { WebSocketService }       from '../providers/websocket/websocket';
-import { ConfigService }          from '../providers/config/config';
-import { StatusService }          from '../providers/status/status';
-import { ApplianceService }       from '../providers/appliances/appliances';
-import { PlatformService }        from '../providers/platforms/platforms';
-import { PluginService }          from '../providers/plugins/';
-import { TaskService }            from '../providers/tasks/tasks';
-import { HashID }                 from '../providers/crypto/hashid';
+import { WebSocketService }       from '../providers/websocket';
+import { ConfigService }          from '../providers/config';
+import { StatusService }          from '../providers/status';
+import { ApplianceService }       from '../providers/appliances';
+import { PlatformService }        from '../providers/platforms';
+import { PluginService }          from '../providers/plugins';
+import { TaskService }            from '../providers/tasks';
+import { HashID }                 from '../providers/crypto';
 
 // Pipes ///////////////////////////////////////////////////////////////////////
 
-import { TemperaturePipe }        from '../pipes/temperature';
+import { ReversePipe,
+         TemperaturePipe }        from '../pipes';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -121,6 +122,7 @@ export const declarations: any = [
   TasksPage,
   TasksHelp,
   TaskDetailPage,
+  ReversePipe,
   TemperaturePipe,
 ];
 
