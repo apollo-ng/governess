@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+
+import { NgModule }       from '@angular/core';
 import { ChartComponent } from './chart.component';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -17,3 +18,4 @@ import { ChartComponent } from './chart.component';
 export class ChartModule {}
 
 export * from './chart.component';
+export * from './chart.options';

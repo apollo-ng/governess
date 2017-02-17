@@ -1,4 +1,4 @@
-export let lineChartGlobals: any = {
+export let lineChartOptions: any = {
   animation: false,
   responsive: true,
   bezierCurve : false,
