@@ -12,28 +12,52 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-searchbar
-      [debounce]="500"
-      (ionInput)="filterTasks($event)"
-      (ionClear)="clearFilter($event)"
-      placeholder="{{ 'FILTER' | translate }}"
-      autocorrect="off">
-    </ion-searchbar>
-    <ion-buttons end>
-      <button ion-button (click)="addTask()">
-        <ion-icon name="add" ></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col class="button-col">
+          <ion-icon name="ios-funnel" ></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-searchbar
+            [debounce]="350"
+            (ionInput)="filterTasksByName($event)"
+            (ionClear)="clearNameFilter($event)"
+            placeholder="{{ 'FILTER' | translate }}"
+            autocorrect="off">
+          </ion-searchbar>
+        </ion-col>
+        <ion-col style="padding-left: 2px;">
+          <ion-select
+            [(ngModel)]="taskFilter"
+            (ngModelChange)="filterTasksByAppliance()"
+            [selectOptions]="{ title: 'FILTER-BY-GROUP' | translate }"
+            interface="action-sheet"
+            placeholder="Select an Appliance">
+            <ion-option selected="true" value="All">
+              All Appliances
+            </ion-option>
+            <ion-option
+              *ngFor="let appliance of appliances"
+              value="{{ appliance.aid }}">
+              {{ appliance.name }}
+            </ion-option>
+          </ion-select>
+        </ion-col>
+        <ion-col class="button-col">
+          <ion-icon name="add" (click)="addTask()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 
 </ion-header>
 
 <ion-content class="task-list">
   <ion-list
-    *ngIf="tasks?.length > 0" reorder="true"
+    *ngIf="filteredTasks?.length > 0" reorder="true"
     (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding
-      *ngFor="let task of tasks; let p = index"
+      *ngFor="let task of filteredTasks | reverse; let p = index"
       [ngClass]="{ 'active': task.tid === config.taskActive }">
       <div ion-item>
         <ion-icon
@@ -91,12 +115,12 @@
   </ion-list>
 
   <div
-    *ngIf="!filteredList && (!tasks || tasks.length === 0)"
+    *ngIf="nameFilter?.length === 0 && (!filteredTasks || filteredTasks?.length === 0)"
     class="zero-res-list">
     {{ 'NO-TASKS' | translate }}
   </div>
   <div
-    *ngIf="filteredList && (!tasks || tasks.length === 0)"
+    *ngIf="nameFilter?.length > 0 && (!filteredTasks || filteredTasks?.length === 0)"
     class="zero-res-list">
     {{ 'NO-TASKS-MATCH' | translate }}
   </div>

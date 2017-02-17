@@ -7,8 +7,8 @@ import { Vibration }        from 'ionic-native';
 
 import { TranslateService } from 'ng2-translate';
 
-import { ConfigService }    from '../../providers/config/config';
-import { TaskService }      from '../../providers/tasks/tasks';
+import { ConfigService }    from '../../providers/config';
+import { TaskService }      from '../../providers/tasks';
 
 import { SettingsHelp }     from './settings.help';
 

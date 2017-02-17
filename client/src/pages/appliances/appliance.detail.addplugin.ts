@@ -3,9 +3,9 @@ import { Component }                from '@angular/core';
 import { NavParams,
          ViewController }           from 'ionic-angular';
 
-import { ApplianceService }         from '../../providers/appliances/appliances';
+import { ApplianceService }         from '../../providers/appliances';
 import { PluginService,
-         pluginMock }               from '../../providers/plugins/';
+         pluginMock }               from '../../providers/plugins';
 
 ////////////////////////////////////////////////////////////////////////////////
 

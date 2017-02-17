@@ -10,10 +10,10 @@ import { Events,
          PopoverController,
          ActionSheetController }    from 'ionic-angular';
 
-import { ChartComponent }           from '../../components/chart';
+import { ChartComponent,
+         lineChartOptions }         from '../../components/chart';
 
-import { TaskService }              from '../../providers/tasks/tasks';
-import { lineChartGlobals }         from '../../components/chart-globals';
+import { TaskService }              from '../../providers/tasks';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +85,7 @@ export class TaskDetailPage {
     this.showMiniBar = false;
     this.chartHeight = Math.floor(window.innerHeight / 1.61 / 1.61);
     this.lineChartData = { datasets: [] };
-    this.lineChartOptions = lineChartGlobals;
+    this.lineChartOptions = lineChartOptions;
 
     // console.log(this.lineChartOptions);
     // console.log(this.chartHeight);

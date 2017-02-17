@@ -7,9 +7,9 @@ import { ActionSheetController,
 
 // Providers ///////////////////////////////////////////////////////////////////
 
-import { ConfigService }            from '../../providers/config/config';
-import { ApplianceService }         from '../../providers/appliances/appliances';
-import { HashID }                   from '../../providers/crypto/hashid';
+import { ConfigService }            from '../../providers/config';
+import { ApplianceService }         from '../../providers/appliances';
+import { HashID }                   from '../../providers/crypto';
 
 // Sub-Pages/Modals ////////////////////////////////////////////////////////////
 
@@ -85,17 +85,18 @@ export class AppliancesPage {
 
   public activateAppliance(aid: string): void {
     console.log('Activate appliance:', aid);
+    /*
     let constraintAlert: any = this.alertCtrl.create({
       title: 'constraintAlert!',
       subTitle: 'This Appliance cannot be activated since not all constraints are met',
       buttons: ['OK'],
     });
     constraintAlert.present();
-    /*
+    */
     this.config.applianceActive = aid;
     this.configService.update(this.config);
-    console.log(this.config);
-    */
+    // console.log(this.config);
+
   }
 
   /*****************************************************************************

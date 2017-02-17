@@ -4,10 +4,11 @@ import { reorderArray,
          AlertController,
          ModalController }    from 'ionic-angular';
 
-import { ConfigService }      from '../../providers/config/config';
-import { TaskService }        from '../../providers/tasks/tasks';
+import { ConfigService }      from '../../providers/config';
+import { ApplianceService }   from '../../providers/appliances';
+import { TaskService }        from '../../providers/tasks';
 import { TasksHelp }          from './tasks.help';
-import { TaskDetailPage }     from '../tasks/task.detail';
+import { TaskDetailPage }     from './task.detail';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -26,13 +27,17 @@ export class TasksPage {
 
   public tasks: any = [];
   public config: any = {};
-  public filteredList: boolean = false;
+  public appliances: any = [];
+  public filteredTasks: any;
+  public applianceFilter: string = 'All';
+  public nameFilter: string;
 
   public navCtrl: NavController;
   public alertCtrl: AlertController;
   public modalCtrl: ModalController;
   public taskService: TaskService;
   public configService: ConfigService;
+  public applianceService: ApplianceService;
 
   /*****************************************************************************
    * constructor
@@ -45,6 +50,7 @@ export class TasksPage {
     modalCtrl: ModalController,
     taskService: TaskService,
     configService: ConfigService,
+    applianceService: ApplianceService,
 
   ) {
 
@@ -53,11 +59,17 @@ export class TasksPage {
     this.modalCtrl = modalCtrl;
     this.taskService = taskService;
     this.configService = configService;
+    this.applianceService = applianceService;
 
     this.configService.init().then( () => {
       this.config = this.configService.config;
       this.taskService.init().then( () => {
         this.tasks = this.taskService.tasks;
+        this.filteredTasks = this.tasks;
+      });
+      this.applianceService.init().then( () => {
+        this.appliances = this.applianceService.appliances;
+
       });
     });
   }
@@ -144,33 +156,69 @@ export class TasksPage {
   }
 
   /*****************************************************************************
-   * filterTasks
-   * @param
+   * filterPluginsByGroup - Populate filteredPlugins by group filtering
    */
 
-  public filterTasks(name: any): void {
-    this.tasks = this.taskService.tasks;
-    let val: string = name.target.value;
-    if (val && val.trim() !== '') {
-      this.filteredList = true;
-      this.tasks = this.tasks.filter( (task) => {
-        return (
-          task.name.toLowerCase().
-          indexOf(val.toLowerCase()) > -1
-        );
-      });
-    }
+  public filterTasksByAppliance(): void {
+    this.filterTasks();
   }
 
   /*****************************************************************************
-   * clearFilter - Disengage Search Filter
+   * filterPluginsByName - Populate filteredPlugins by name search
    * @param
    */
 
-  public clearFilter(event: any): void {
-    this.filteredList = false;
-    this.tasks = this.taskService.tasks;
+  public filterTasksByName(event: any): void {
+
+    if (event.target.value) {
+      this.nameFilter = event.target.value.trim();
+      this.filterTasks();
+    } else {
+      this.clearNameFilter(event);
+    }
+
+  }
+
+  /*****************************************************************************
+   * filterPlugins - Run the actual filtering
+   */
+
+  public filterTasks(): void {
+
+    let tasks: any;
+
+    // Filter by Group first
+    if (this.applianceFilter === 'All') {
+      tasks = this.tasks;
+    } else {
+      tasks = this.tasks.filter( (_task: any) => {
+        return (_task.aid.indexOf(this.applianceFilter.trim()) > -1);
+      });
+    }
+
+    // Apply name filter to group filtered list
+    if (!this.nameFilter || this.nameFilter.length === 0) {
+      this.filteredTasks = tasks;
+    } else {
+      this.filteredTasks = tasks.filter( (_task: any) => {
+        return (
+          _task.name.toLowerCase().
+          indexOf(this.nameFilter.toLowerCase()) > -1
+        );
+      });
+    }
+
+  }
+
+  /*****************************************************************************
+   * clearNameFilter - Disengage the Name Filter and show the full list again
+   * @param event Object
+   */
+
+  public clearNameFilter(event: any): void {
     event.stopPropagation();
+    this.nameFilter = '';
+    this.filterTasks();
   }
 
   /*****************************************************************************

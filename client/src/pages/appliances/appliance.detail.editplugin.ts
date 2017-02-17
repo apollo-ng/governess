@@ -4,8 +4,8 @@ import { Component,
 import { NavParams,
          ViewController }           from 'ionic-angular';
 
-import { ApplianceService }         from '../../providers/appliances/appliances';
-import { PlatformService }          from '../../providers/platforms/platforms';
+import { ApplianceService }         from '../../providers/appliances';
+import { PlatformService }          from '../../providers/platforms';
 
 ////////////////////////////////////////////////////////////////////////////////
 

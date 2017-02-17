@@ -5,8 +5,8 @@ import { NavParams,
          ModalController,
          ActionSheetController }    from 'ionic-angular';
 
-import { ApplianceService }         from '../../providers/appliances/appliances';
-import { PlatformService }          from '../../providers/platforms/platforms';
+import { ApplianceService }         from '../../providers/appliances';
+import { PlatformService }          from '../../providers/platforms';
 
 import { AddPluginModal }           from './appliance.detail.addplugin';
 import { EditPluginModal }          from './appliance.detail.editplugin';

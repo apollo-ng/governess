@@ -2,16 +2,16 @@ import { Component, ViewChild } from '@angular/core';
 import { ModalController,
          NavController }        from 'ionic-angular';
 
-import { ConfigService }        from '../../providers/config/config';
-import { StatusService }        from '../../providers/status/status';
-import { TaskService }          from '../../providers/tasks/tasks';
+import { ConfigService }        from '../../providers/config';
+import { StatusService }        from '../../providers/status';
+import { TaskService }          from '../../providers/tasks';
 
 import { TaskDetailPage }       from '../tasks/task.detail';
 
 import { DashboardHelp }        from './dashboard.help';
 
-import { ChartComponent }       from '../../components/chart';
-import { lineChartGlobals }     from '../../components/chart-globals';
+import { ChartComponent,
+         lineChartOptions }     from '../../components/chart';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -71,7 +71,7 @@ export class Dashboard {
 
     this.chartHeight =          Math.floor(window.innerHeight - 210);
     this.lineChartData =        { datasets: [] };
-    this.lineChartOptions =     lineChartGlobals;
+    this.lineChartOptions =     lineChartOptions;
 
     this.config =               {};
     this.task =                 {};
