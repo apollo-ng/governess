@@ -11,10 +11,10 @@ import { Pipe,
 )
 
 /*******************************************************************************
-*
-*   ReversePipe
-*
-*/
+ *
+ *   ReversePipe
+ *
+ */
 
 export class ReversePipe implements PipeTransform {
 
