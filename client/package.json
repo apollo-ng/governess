@@ -47,7 +47,7 @@
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "1.1.0",
+    "@ionic/app-scripts": "1.1.3",
     "@types/chartjs": "0.0.29",
     "@types/jasmine": "2.5.40",
     "electron": "1.4.14",
