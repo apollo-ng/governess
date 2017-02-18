@@ -87,7 +87,7 @@ export class TaskDetailPage {
     this.lineChartData = { datasets: [] };
     this.lineChartOptions = lineChartOptions;
 
-    // console.log(this.lineChartOptions);
+    console.log(this.lineChartOptions);
     // console.log(this.chartHeight);
 
     this.updateChart();
@@ -106,7 +106,7 @@ export class TaskDetailPage {
     //        The timeout was needed because the charts color would always lack
     //        behind on click, creating undesirable color discrepancies in the UX.
     events.subscribe('colorChanged', () => {
-      setTimeout( () => { this.updateChart(); }, 110 );
+      setTimeout( () => { this.updateChart(); }, 30 );
     });
 
   }
@@ -189,15 +189,16 @@ export class TaskDetailPage {
 
         this.lineChartOptions.scales.yAxes[i].scaleLabel.fontColor = this.task.data[i].options.color;
         this.lineChartOptions.scales.yAxes[i].ticks.fontColor = this.task.data[i].options.color;
-        // console.log(this.lineChartOptions);
 
       }
     }
 
+    console.log(this.lineChartOptions);
     this.lineChartData.datasets = _lineChartData;
     // console.log('Updated chart:', this.lineChartData);
     if (this.chartc) {
-      this.chartc.chart.update();
+      //this.chartc.chart.update();
+      this.chartc.createChart();
     }
   }
 

@@ -23,32 +23,36 @@ import { Component,
 
 export class ChartComponent implements OnInit, OnChanges {
 
-  public chart: any;
-
   @Input() public type: string;
   @Input() public data: any;
-  @Input() public options: any;
+  @Input() public options: any = {};
 
-  constructor(private elementRef: ElementRef) { }
+  public chart: any;
+  private element: ElementRef;
+
+  constructor(element: ElementRef) {
+    this.element = element;
+  }
 
   public ngOnInit(): void {
+    this.createChart();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    console.log('ChartComponent ngOnChanges fired', changes);
+  }
+
+  public createChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
     this.chart = new Chart(
-      this.elementRef.nativeElement.querySelector('canvas'), {
+      this.element.nativeElement.querySelector('canvas'), {
         type: this.type,
         data: this.data,
         options: this.options,
       }
     );
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (this.chart && changes['data']) {
-      let currentValue: any = changes['data'].currentValue;
-      ['datasets', 'labels', 'xLabels', 'yLabels'].forEach(property => {
-        this.chart.data[property] = currentValue[property];
-      });
-      this.chart.update();
-    }
   }
 
 }
