@@ -106,7 +106,7 @@ export class TaskDetailPage {
     //        The timeout was needed because the charts color would always lack
     //        behind on click, creating undesirable color discrepancies in the UX.
     events.subscribe('colorChanged', () => {
-      setTimeout( () => { this.updateChart(); }, 30 );
+      setTimeout( () => { this.updateChart(); }, 60 );
     });
 
   }
@@ -193,11 +193,12 @@ export class TaskDetailPage {
       }
     }
 
-    console.log(this.lineChartOptions);
     this.lineChartData.datasets = _lineChartData;
-    // console.log('Updated chart:', this.lineChartData);
     if (this.chartc) {
       //this.chartc.chart.update();
+      // This hack was neccessary to update options/scales as well. Technically,
+      // as of chart.js 2.5.0, a regular update should also call the new updateConfig
+      // but it has had no effect so far.
       this.chartc.createChart();
     }
   }

@@ -16,7 +16,7 @@
   display: none;
 }
 
-ion-app {
+body, ion-app {
   font-family: "DIN" !important;
   color: #d8d3c5;
 }
@@ -468,6 +468,7 @@ button.rb-glass.active {
 chart  {
   display: block;
   padding: 15px;
+  padding-bottom: 5px;
   background: rgba(15, 14, 10, 0.8);
   box-shadow: inset 0 0 42px 0 #000;
 }

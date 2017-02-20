@@ -9,7 +9,11 @@
   </ion-navbar>
 
   <div class="ion-segment-container">
-    <ion-segment [(ngModel)]="moduleView" >
+    <ion-segment [(ngModel)]="moduleView">
+      <ion-segment-button value="settings">
+        <ion-icon name="settings"></ion-icon>
+        <span class="minibar-button-txt">{{ 'SETTINGS' | translate }}</span>
+      </ion-segment-button>
       <ion-segment-button
         *ngFor="let module of data; let m = index" [value]="m"
         [ngStyle]="{
@@ -139,16 +143,27 @@
         </span>
       </ion-col>
       <ion-col>
-        <ion-icon name="time"> Time</ion-icon>
+        <div class="gradient-bg">
+          <ion-icon name="time"></ion-icon>
+          <span>Time</span>
+        </div>
       </ion-col>
       <ion-col>
-        <ion-icon name="{{ task.data[moduleView].icon }}"> Target</ion-icon>
+        <div class="gradient-bg">
+          <ion-icon name="{{ task.data[moduleView].icon }}"></ion-icon>
+          <span>Target</span>
+        </div>
       </ion-col>
       <ion-col width-10>
-        <span>ΔT/s</span>
+        <div class="gradient-bg">
+          <span>ΔT/s</span>
+        </div>
       </ion-col>
       <ion-col>
-        <ion-icon name="create"> Notes</ion-icon>
+        <div class="gradient-bg">
+          <ion-icon name="create"></ion-icon>
+          <span>Notes</span>
+        </div>
       </ion-col>
       <ion-col width-10>
         <ion-icon

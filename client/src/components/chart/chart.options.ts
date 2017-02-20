@@ -12,7 +12,7 @@ export let lineChartOptions: any = {
         position: 'bottom',
         gridLines: {
           color: 'rgba(255,255,255,0.15)',
-          drawTicks: false,
+          drawTicks: true,
         },
         ticks: {
           beginAtZero: false,
@@ -28,7 +28,7 @@ export let lineChartOptions: any = {
         position: 'left',
         gridLines: {
           color: 'rgba(255,255,255,0.15)',
-          drawTicks: false,
+          drawTicks: true,
         },
         ticks: {
           beginAtZero: false,
@@ -48,7 +48,7 @@ export let lineChartOptions: any = {
         position: 'right',
         gridLines: {
           color: 'rgba(255,255,255,0.15)',
-          drawTicks: false,
+          drawTicks: true,
         },
         ticks: {
           beginAtZero: false,
