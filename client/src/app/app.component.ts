@@ -5,12 +5,12 @@ import { Component,
 import { Platform,
          Nav }                      from 'ionic-angular';
 
-import { Splashscreen,
-         StatusBar }                from 'ionic-native';
+import { StatusBar }                from '@ionic-native/status-bar';
+import { SplashScreen }             from '@ionic-native/splash-screen';
 
 // Providers ///////////////////////////////////////////////////////////////////
 
-import { TranslateService }         from 'ng2-translate';
+import { TranslateService }         from '@ngx-translate/core';
 import { ConfigService }            from '../providers/config';
 
 // Dashboard ///////////////////////////////////////////////////////////////////
@@ -58,6 +58,8 @@ export class GovernessApp implements OnInit {
   public rootPage: any;
 
   private platform: Platform;
+  public statusBar: StatusBar;
+  public splashScreen: SplashScreen;
 
   /*****************************************************************************
    * constructor
@@ -67,11 +69,15 @@ export class GovernessApp implements OnInit {
 
     platform: Platform,
     configService: ConfigService,
-    translate: TranslateService
+    translate: TranslateService,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen
 
   ) {
 
     this.platform = platform;
+    this.statusBar = statusBar;
+    this.splashScreen = splashScreen;
     this.translate = translate;
     this.configService = configService;
 
@@ -142,9 +148,8 @@ export class GovernessApp implements OnInit {
     this.platform.ready().then(() => {
       // console.log('initializeApp called');
       // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.hide();
-      Splashscreen.hide();
+      this.statusBar.hide();
+      this.splashScreen.hide();
     });
   }
 

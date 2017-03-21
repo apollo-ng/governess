@@ -48,10 +48,6 @@
               title: 'Host-Platform',
               subTitle: 'SELECT-PLATFORM' | translate
             }">
-            <ion-option *
-              ngIf="!appliance.conf.hid" value="">
-              {{ 'SELECT-PLATFORM' | translate }}
-            </ion-option>
             <ion-option
               *ngFor="let platform of platforms"
               [value]="platform.hid">

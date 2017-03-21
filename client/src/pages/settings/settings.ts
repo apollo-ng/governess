@@ -5,7 +5,7 @@ import { NavController,
          AlertController }  from 'ionic-angular';
 import { Vibration }        from 'ionic-native';
 
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ConfigService }    from '../../providers/config';
 import { TaskService }      from '../../providers/tasks';

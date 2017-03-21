@@ -194,13 +194,16 @@ export class TaskDetailPage {
     }
 
     this.lineChartData.datasets = _lineChartData;
+
     if (this.chartc) {
-      //this.chartc.chart.update();
+      // this.chartc.chart.update();
+
       // This hack was neccessary to update options/scales as well. Technically,
       // as of chart.js 2.5.0, a regular update should also call the new updateConfig
       // but it has had no effect so far.
       this.chartc.createChart();
     }
+
   }
 
   /*****************************************************************************

@@ -8,7 +8,10 @@ import { IonicApp,
          IonicModule,
          IonicErrorHandler }      from 'ionic-angular';
 
-import { Storage }                from '@ionic/storage';
+import { IonicStorageModule }     from '@ionic/storage';
+
+import { StatusBar }              from '@ionic-native/status-bar';
+import { SplashScreen }           from '@ionic-native/splash-screen';
 
 // Root Component //////////////////////////////////////////////////////////////
 
@@ -17,8 +20,8 @@ import { GovernessApp }           from './app.component';
 // Translation /////////////////////////////////////////////////////////////////
 
 import { TranslateModule,
-         TranslateLoader,
-         TranslateStaticLoader }  from 'ng2-translate/ng2-translate';
+         TranslateLoader }        from '@ngx-translate/core';
+import { TranslateHttpLoader}     from '@ngx-translate/http-loader';
 
 // Charting ////////////////////////////////////////////////////////////////////
 
@@ -78,27 +81,7 @@ import { ReversePipe,
  */
 
 export function createTranslateLoader(http: Http): any {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
-}
-
-/*******************************************************************************
- * provideStorage - Set up & configure app storage provider
- * @return {Storage Object}
- */
-
-export function provideStorage(): any {
-  return new Storage(
-    [
-      'sqlite',
-      'indexeddb',
-      'websql',
-      'localstorage',
-    ],
-    {
-      name: 'governessdb',
-      storeName: 'governessdata',
-    }
-  );
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 /*******************************************************************************
@@ -164,8 +147,9 @@ export function providers(): any {
     StatusService,
     TaskService,
     WebSocketService,
-    // Enable Ionic's storage engine
-    { provide: Storage, useFactory: provideStorage },
+    // Ionic native components
+    StatusBar,
+    SplashScreen,
     // Enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ];
@@ -179,9 +163,16 @@ export let imports: any = [
   ChartModule,
   ColorPickerModule,
   TranslateModule.forRoot({
-    provide: TranslateLoader,
-    useFactory: (createTranslateLoader),
-    deps: [ Http ],
+    loader: {
+      provide: TranslateLoader,
+      useFactory: (createTranslateLoader),
+      deps: [ Http ],
+    },
+  }),
+  IonicStorageModule.forRoot({
+    name: 'governessdb',
+    storeName: 'governessdata',
+    driverOrder: ['indexeddb', 'sqlite', 'websql'],
   }),
   IonicModule.forRoot(GovernessApp, {
     mode: 'md',
